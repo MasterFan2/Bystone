@@ -6,3 +6,6 @@
 .DS_Store
 /build
 /captures
+proguard-rules.pro
+src/androidTest/
+src/test/
