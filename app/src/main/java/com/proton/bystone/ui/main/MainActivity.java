@@ -43,6 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
+ * 主界面
  * create by masterfan
  */
 @MTFActivityFeature(layout = R.layout.activity_main)
@@ -74,6 +75,13 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     RelativeLayout meLayout;
 
     Activity mActivity;
+
+    /**
+     * 测试方法
+     */
+    public void testMethod() {
+        System.out.println("Test.");
+    }
 
     @Override
     public void initialize(Bundle savedInstanceState) {
