@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.proton.bystone">
+
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+
+    <!-- 读取缓存数据 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".BystoneApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="9f194bad1469ede261fdbfdfaaf57cef" />
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.test.TestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.maintenance.RollCarInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.maintenance.CarBrandActivity" />
+        <activity android:name=".ui.maintenance.BespeakActivity" />
+        <activity
+            android:name=".ui.maintenance.OrderStateActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.maintenance.ServiceDetailActivity" />
+        <activity android:name=".ui.maintenance.TestListActivity" />
+        <activity android:name=".ui.maintenance.MaintenancePictureActivity" />
+        <activity android:name=".ui.maintenance.ComboActivity" />
+        <activity
+            android:name=".ui.login.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.HomePagesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.WjActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.GgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.NewpwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.RegisterActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.tab.home.Homeserch"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.tab.home.Search_service"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.Shop_Detail"
+            android:screenOrientation="portrait" />
+        D
+        <activity
+            android:name=".ui.shop.Shop_Ok"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.App"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.Shop_Orderdetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.Shop_Select_Address"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.All_Pl"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.shopcar.ShopCarActivity" />
+        <activity android:name=".ui.common.MyCarActivity" />
+        <activity android:name=".ui.common.MyCarDetailActivity" />
+        <activity android:name=".ui.common.EnableMaintenanceAlertActivity"></activity>
+        <activity android:name=".ui.shop.My_Exit" />
+
+        <activity android:name=".ui.shop.Shop_Sort"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".ui.shop.Shop_Commodity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.shop.My_Indext"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.My_Privilege"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.shop.My_Jinbi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.My_fk"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.shop.My_Shop_Pay"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>

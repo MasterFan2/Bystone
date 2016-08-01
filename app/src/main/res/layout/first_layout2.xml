@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/shop_vPager"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+
+            />
+
+
+        <GridView
+            android:id="@+id/shop_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mai_line"
+            android:layout_marginTop="10dp"
+            />
+        <RelativeLayout
+            android:visibility="gone"
+             android:layout_width="wrap_content"
+             android:layout_height="35dp"
+            >
+
+             <TextView
+                 android:id="@+id/bt5"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="符合君越XXX的，我们精心推荐"
+                 android:layout_marginTop="10dp"
+                 android:textSize="15sp"
+                 android:layout_marginLeft="10dp"
+                 android:textColor="@color/black"
+                 />
+             <TextView
+                 android:id="@+id/tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="更多"
+                 android:layout_alignParentRight="true"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginRight="25dp"
+                 android:layout_centerVertical="true"
+                 />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_right"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+
+         </RelativeLayout>
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="2dp"
+             android:background="@color/somber"
+             />
+
+    </LinearLayout>
+    <GridView
+        android:visibility="gone"
+        android:id="@+id/shop_gridView2"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:numColumns="1"
+        android:stretchMode="columnWidth"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/somber"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日特价"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:layout_marginLeft="18dp"
+            android:textColor="@color/black"
+            />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更多"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@mipmap/icon_right"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/somber"
+        />
+
+
+</LinearLayout>
+
+
+

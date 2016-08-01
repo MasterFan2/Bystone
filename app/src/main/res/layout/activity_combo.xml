@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonText="上传"
+        app:titleText="上门保养"
+        app:rightButtonHide="true"
+        app:titleTxtColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        >
+
+        <RelativeLayout
+            android:id="@+id/combo_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="奥迪A6推荐套餐" />
+
+            <TextView
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:text="查看更多车型 >" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/combo_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <View
+                style="@style/DivideLine"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="8dp"
+                />
+            <TextView
+                android:id="@+id/combo_hour_charge_txt"
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:text="工时费:￥0.00" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/combo_confirm_btn"
+                >
+                <TextView
+                    android:id="@+id/combo_now_price_txt"
+                    style="@style/TextBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计:￥25.00" />
+                <TextView
+                    android:id="@+id/combo_old_price_txt"
+                    style="@style/TextDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="原价：￥30.00" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/combo_confirm_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="确认" />
+        </RelativeLayout>
+
+        <ExpandableListView
+            android:id="@+id/combo_expand_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/combo_bottom_layout"
+            android:layout_below="@id/combo_header_layout"
+            android:childDivider="@color/mtf_gray_400"
+            android:dividerHeight="0.15dp"
+            android:groupIndicator="@null" />
+    </RelativeLayout>
+</LinearLayout>

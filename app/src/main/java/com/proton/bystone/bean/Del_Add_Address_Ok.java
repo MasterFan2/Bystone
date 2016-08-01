@@ -1,0 +1,92 @@
+package com.proton.bystone.bean;
+
+/**
+ * Created by Administrator on 2016/7/22.
+ * del地址
+ */
+public class Del_Add_Address_Ok {
+
+    /**
+     * User_Code : 会员主表编号
+     * Ad_ContactNumber : 联系电话
+     * Ad_Name : 联系人
+     * Ad_Address : 地区地址
+     * IsDefault : 是否默认(0：否，1：是,2:删除)
+     * AddressDetaile : 详细地址
+     *
+     * 添加到服务器收货地址
+     */
+    int id;
+    private String User_Code;
+    private String Ad_ContactNumber;
+    private String Ad_Name;
+    private String Ad_Address;
+    private int IsDefault;
+    private String AddressDetaile;
+
+    public Del_Add_Address_Ok(int id, String user_Code, String ad_ContactNumber, String ad_Name, String ad_Address, int isDefault, String addressDetaile) {
+        this.id = id;
+        User_Code = user_Code;
+        Ad_ContactNumber = ad_ContactNumber;
+        Ad_Name = ad_Name;
+        Ad_Address = ad_Address;
+        IsDefault = isDefault;
+        AddressDetaile = addressDetaile;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUser_Code() {
+        return User_Code;
+    }
+
+    public void setUser_Code(String user_Code) {
+        User_Code = user_Code;
+    }
+
+    public String getAd_ContactNumber() {
+        return Ad_ContactNumber;
+    }
+
+    public void setAd_ContactNumber(String ad_ContactNumber) {
+        Ad_ContactNumber = ad_ContactNumber;
+    }
+
+    public String getAd_Address() {
+        return Ad_Address;
+    }
+
+    public void setAd_Address(String ad_Address) {
+        Ad_Address = ad_Address;
+    }
+
+    public String getAd_Name() {
+        return Ad_Name;
+    }
+
+    public void setAd_Name(String ad_Name) {
+        Ad_Name = ad_Name;
+    }
+
+    public int getIsDefault() {
+        return IsDefault;
+    }
+
+    public void setIsDefault(int isDefault) {
+        IsDefault = isDefault;
+    }
+
+    public String getAddressDetaile() {
+        return AddressDetaile;
+    }
+
+    public void setAddressDetaile(String addressDetaile) {
+        AddressDetaile = addressDetaile;
+    }
+}

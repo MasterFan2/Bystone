@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AAAAAAAAAAAA -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/item_maintain_keepfit_logo_img"
+        android:layout_width="176px"
+        android:layout_height="152px"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_maintain_keepfit_title_txt"
+                style="@style/TextHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="价格一样" />
+
+            <TextView
+                android:id="@+id/item_maintain_keepfit_desc_txt"
+                style="@style/TextDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="到店价格一样，还有免费测试" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

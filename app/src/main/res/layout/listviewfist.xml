@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/home_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="机油滤心"
+                android:textSize="12sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+
+                />
+           <!-- <TextView
+                android:id="@+id/home_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保养必备"
+                android:layout_marginLeft="29dp"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                />-->
+            <ImageView
+                android:id="@+id/home_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+
+                />
+<!--            <TextView
+                android:layout_width="2dp"
+                android:layout_height="120dp"
+                android:textColor="#ebebeb"
+                android:layout_marginLeft="120dp"
+
+                />-->
+
+        </RelativeLayout>
+    </LinearLayout>
+    <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@mipmap/icon_mai_line"
+    />
+
+
+</LinearLayout>

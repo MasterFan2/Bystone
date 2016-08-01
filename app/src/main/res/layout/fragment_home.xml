@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.proton.bystone.ui.main.tab.HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+        >
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="黄泥磅"
+            android:background="@null"
+            android:drawableRight="@mipmap/icon_menu"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="221dp"
+            android:layout_height="28dp"
+            android:hint="搜索地名或、服务"
+            android:background="@drawable/edtextyuan"
+            android:textSize="14dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_search"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="115dp"
+
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_tracing"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ebebeb"
+            />
+
+       <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+  </LinearLayout>
+</FrameLayout>

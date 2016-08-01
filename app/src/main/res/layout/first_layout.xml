@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vPager"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mai_line"
+            />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/icon_mai_hot1"
+                android:layout_centerVertical="true"
+
+
+                />
+            <TextView
+                android:id="@+id/home_smby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上门保养"
+                android:textColor="#292929"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="150dp"
+                android:text="到店价格一样，还有免费检测"
+                android:textColor="#878787"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="40dp"
+                android:textSize="12sp"
+
+                />
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/icon_mai_hot2"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="182dp"
+                />
+            <TextView
+                android:id="@+id/Home_ddby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="到店保养"
+                android:textColor="#292929"
+                android:layout_marginLeft="280dp"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"
+                />
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="150dp"
+                android:text="厂家直销专业汽车配件"
+                android:textColor="#878787"
+                android:layout_marginLeft="280dp"
+                android:layout_marginTop="40dp"
+                android:textSize="12sp"
+
+                />
+            <TextView
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#ebebeb"
+                android:layout_marginLeft="180dp"
+                />
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mai_line"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="40dp"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最新推荐"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更多"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="30dp"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_right"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/somber"
+                android:layout_marginTop="46dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        <GridView
+            android:id="@+id/home_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            />
+        <!--   <TextView
+                android:layout_width="2dp"
+                android:layout_height="250dp"
+                android:background="#ebebeb"
+                android:layout_marginLeft="110dp"
+                />
+
+        <TextView
+                android:layout_width="2dp"
+                android:layout_height="250dp"
+                android:background="#ebebeb"
+                android:layout_marginLeft="240dp"
+                />-->
+
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mai_line"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+
+            <TextView
+                android:id="@+id/bt5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="五月特惠"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更多"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="30dp"
+
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_right"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+
+                />
+
+
+        </RelativeLayout>
+
+       <TextView
+
+           android:layout_width="match_parent"
+           android:layout_height="2dp"
+           android:background="@color/somber"
+
+           />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <GridView
+                android:id="@+id/home_gridView2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                />
+           <!-- <TextView
+                android:layout_width="2dp"
+                android:layout_height="110dp"
+                android:background="#ebebeb"
+                android:layout_marginLeft="110dp"
+                />
+
+            <TextView
+                android:layout_width="2dp"
+                android:layout_height="110dp"
+                android:background="#ebebeb"
+                android:layout_marginLeft="230dp"
+                />-->
+
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mai_line"
+            />
+
+
+        <!--<include layout="@layout/listviewfist"/>-->
+    </LinearLayout>
+
+</ScrollView>
+</LinearLayout>

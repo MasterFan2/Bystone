@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonText="上传"
+        app:titleText="我的爱车"
+        app:titleTxtColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/mtf_gray_300" />
+
+        <RelativeLayout
+            android:id="@+id/roll_car_info_choose_car_brand_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="品牌" />
+
+            <TextView
+                android:id="@+id/roll_car_info_selected_txt"
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="请点击选择" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/mtf_gray_300" />
+
+        <RelativeLayout
+            android:id="@+id/roll_car_info_choose_car_year_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="年款" />
+
+            <TextView
+                android:id="@+id/roll_car_info_choose_car_year_txt"
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="请点击选择" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/mtf_gray_300" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="车牌" />
+
+            <EditText
+                android:id="@+id/roll_car_info_car_no_edit"
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:gravity="right"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:hint="请输入车牌号" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/mtf_gray_300" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="发动机号" />
+
+            <EditText
+                android:id="@+id/roll_car_info_car_engine_edit"
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:gravity="right"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:hint="请输入发动机号" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/mtf_gray_300" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                style="@style/TextHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="车辆识别号" />
+
+            <EditText
+                android:id="@+id/roll_car_info_car_recognition_no_edit"
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:gravity="right"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                android:hint="请输入车辆识别号" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/mtf_gray_300" />
+
+        <Button
+            android:id="@+id/roll_car_info_upload_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="上传" />
+    </LinearLayout>
+</LinearLayout>

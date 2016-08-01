@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+ <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_return"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单详情"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="#292929"
+            android:layout_centerHorizontal="true"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_mine_cart"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentRight="true"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ebebeb"
+            android:layout_marginTop="55dp"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+
+        <TextView
+            android:id="@+id/shop_Receiving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收货人:"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:textColor="#292929"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXX"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="#292929"
+            android:layout_toRightOf="@id/shop_Receiving"
+            />
+        <TextView
+            android:id="@+id/shop_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收货地址:"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="50dp"
+            android:textSize="15sp"
+            android:textColor="#292929"
+            />
+        <TextView
+            android:id="@+id/shop_addr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重庆市沙坪坝区XXX路"
+            android:layout_marginTop="50dp"
+            android:textSize="15sp"
+            android:textColor="#292929"
+            android:layout_toRightOf="@id/shop_address"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_right"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="每天都是"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="80dp"
+            android:textSize="15sp"
+            android:textColor="#292929"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mai_line"
+        />
+    <ListView
+       android:id="@+id/shop_lv"
+       android:layout_width="match_parent"
+       android:layout_height="308dp"
+       />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总运费:"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总金额:"
+            android:textSize="15sp"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/shop_jine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-￥"
+            android:textSize="15sp"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="250dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2377.00"
+            android:textSize="15sp"
+            android:layout_marginTop="34dp"
+
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/shop_jine"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用金币:"
+            android:textSize="15sp"
+            android:layout_marginTop="54dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/shop_jinbi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textSize="15sp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="270dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="27.00"
+            android:textSize="15sp"
+
+            android:layout_marginTop="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/shop_jinbi"
+
+            />
+
+        <TextView
+            android:id="@+id/shop_yuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="270dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="32.00"
+            android:textSize="15sp"
+            android:layout_marginTop="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/shop_yuan"
+
+            />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mai_line"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray">
+
+        <TextView
+            android:id="@id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:text="@string/phone"
+            android:drawableLeft="@mipmap/icon_mai_phone"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ebebeb"
+            android:layout_marginTop="55dp"
+            />
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,49 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mtf_gray_300</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="TextHeader">
+        <item name="android:textSize">@dimen/header_font_size</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextDesc">
+        <item name="android:textSize">@dimen/desc_font_size</item>
+        <item name="android:textColor">@color/tab_gray_text</item>
+    </style>
+    <style name="TextBlue">
+        <item name="android:textSize">@dimen/header_font_size</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <style name="DivideLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.25dp</item>
+        <item name="android:background">@color/mtf_gray_400</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="DivideLine_B">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@color/mtf_gray_300</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+</resources>

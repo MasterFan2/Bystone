@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="品牌选择"
+        app:titleTxtColor="@android:color/white" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-2dp"
+        android:fitsSystemWindows="true"
+        android:background="@color/mtf_gray_200"
+        >
+
+        <!-- 主显示列表 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/mtf_gray_200">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="30dp">
+
+                <ListView
+                    android:id="@+id/lv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/mtf_gray_400"
+                    android:dividerHeight="0.15dp"></ListView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+            <com.proton.library.widget.indexer.FancyIndexer
+                android:id="@+id/bar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                app:additionalTipOffset="40dip"
+                app:fontColor="@color/blue"
+                app:maxBezierHeight="150dip"
+                app:maxBezierWidth="180dip"
+                app:maxFontSize="60"
+                app:minFontSize="32"
+                app:tipFontSize="72"
+                app:widthOffset="15dip" />
+
+            <TextView
+                android:id="@+id/tv_index_center"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:text="A"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+        <!-- 主显示列表 end-->
+
+        <!--右滑整个菜单 设置宽、高为match_patent，否则会显示不全 android:layout_gravity="end" -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:orientation="vertical"
+            android:background="@color/mtf_gray_200"
+            >
+
+            <!-- 右滑菜单一级 -->
+            <LinearLayout
+                android:id="@+id/car_brand_right_menu_layout_level_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mtf_gray_200"
+                android:orientation="vertical"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    >
+                    <com.proton.library.widget.MaterialRippleLayout
+                        android:id="@+id/car_brand_right_menu_layout_level_one_rpl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        app:rippleAlpha="0.1"
+                        app:rippleColor="#585858"
+                        app:rippleDelayClick="false"
+                        app:rippleHover="true"
+                        app:rippleOverlay="true">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="16dp"
+                            android:src="@mipmap/ic_arrow_back_black"
+                            android:textColor="@color/mtf_gray_400"
+                            android:textSize="16sp"/>
+                    </com.proton.library.widget.MaterialRippleLayout>
+                    <ImageView
+                        android:id="@+id/car_brand_second_logo_img"
+                        android:layout_toRightOf="@id/car_brand_right_menu_layout_level_one_rpl"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:id="@+id/car_brand_second_name_txt"
+                        android:layout_toRightOf="@id/car_brand_second_logo_img"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="奥迪"
+                        android:singleLine="true"
+                        />
+                </RelativeLayout>
+                <ListView
+                    android:id="@+id/car_brand_right_menu_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/mtf_gray_400"
+                    android:dividerHeight="0.25dp"
+                    android:background="@color/mtf_gray_100" />
+            </LinearLayout>
+            <!-- 右滑菜单一级 end -->
+
+            <!-- 右滑菜单二级 显示年款 -->
+            <LinearLayout
+                android:id="@+id/car_brand_right_menu_layout_level_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:background="@color/mtf_gray_200"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <com.proton.library.widget.MaterialRippleLayout
+                        android:id="@+id/car_brand_right_menu_layout_level_two_rpl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        app:rippleAlpha="0.1"
+                        app:rippleColor="#585858"
+                        app:rippleDelayClick="false"
+                        app:rippleHover="true"
+                        app:rippleOverlay="true">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="16dp"
+                            android:src="@mipmap/ic_arrow_back_black"
+                            android:textColor="@color/mtf_gray_400"
+                            android:textSize="16sp"/>
+                    </com.proton.library.widget.MaterialRippleLayout>
+
+                    <TextView
+                        android:id="@+id/filter_foot_title_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="选择年款"
+                        android:textColor="@color/blue"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/filter_foot_confirm_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="确定"
+                        android:textColor="@color/mtf_gray_700"
+                        android:textSize="16sp"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+                <ListView
+                    android:id="@+id/car_brand_right_menu_listview_level2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/mtf_gray_400"
+                    android:dividerHeight="0.25dp"
+                    android:background="@color/mtf_gray_100" />
+            </LinearLayout>
+            <!-- 右滑菜单二级 显示年款 end -->
+
+        </LinearLayout>
+        <!--右滑菜单 end-->
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>

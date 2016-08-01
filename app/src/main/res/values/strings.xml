@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Bystone</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="blog">我已阅读并同意<a href="http://blog.csdn.net/jonahzheng">车市通用户协议</a></string>
+    <string name="consignee"><a href="http://blog.csdn.net/jonahzheng">或者选择收货地址</a></string>
+    <string name="phone"><a href="http://blog.csdn.net/jonahzheng">客服电话</a></string>
+</resources>
+
+
+
+
+
+

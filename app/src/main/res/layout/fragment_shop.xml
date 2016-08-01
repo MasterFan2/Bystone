@@ -1,0 +1,67 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.proton.bystone.ui.main.tab.ShopFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+            >
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="黄泥磅"
+                android:background="@null"
+                android:drawableRight="@mipmap/icon_menu"
+
+                android:textSize="15sp"
+                />
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="221dp"
+                android:layout_height="28dp"
+                android:hint="搜索地名或、服务"
+                android:background="@drawable/edtextyuan"
+                android:textSize="14dp"
+                android:layout_marginLeft="95dp"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_search"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="115dp"
+
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_tracing"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="330dp"
+
+                />
+        </RelativeLayout>
+
+
+        <com.proton.bystone.ui.view.RefreshListView
+            android:id="@+id/shop_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+
+</FrameLayout>

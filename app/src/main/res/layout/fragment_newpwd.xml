@@ -1,0 +1,152 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context="com.proton.bystone.ui.main.tab.MeFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="vertical"
+            android:id="@+id/re"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_return"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#ebebeb"
+                android:layout_marginTop="80dp"
+                />
+
+        </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#ebebeb"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:orientation="vertical"
+                android:id="@+id/re2"
+                >
+                <EditText
+                    android:layout_width="240sp"
+                    android:layout_height="wrap_content"
+                    android:hint="设置你的新密码"
+                    android:textSize="15sp"
+                    android:id="@+id/et2"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="10dp"
+                    android:background="@null"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#ebebeb"
+                    />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_eyes"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#ebebeb"
+                    android:layout_marginTop="80dp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:orientation="vertical"
+                android:id="@+id/re3"
+                >
+
+                <EditText
+                    android:layout_width="240sp"
+                    android:layout_height="wrap_content"
+                    android:hint="重新输入一遍"
+                    android:textSize="15sp"
+                    android:id="@+id/et3"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="10dp"
+                    android:background="@null" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#ebebeb"
+
+                    />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_eyes"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#ebebeb"
+
+                />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+
+            >
+            <Button
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:text="完成"
+                android:id="@+id/bt3"
+                android:textSize="15sp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/yuanjiao2"
+                android:textColor="#ffff"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="10dp"
+                />
+          </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+</FrameLayout>
+
+

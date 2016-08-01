@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_test_list_expand_child_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="@android:color/white"
+    >
+
+    <View
+        android:id="@+id/item_test_list_expand_child_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="@mipmap/icon_radio_blue_nor"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toLeftOf="@+id/item_test_list_expand_child_price_txt"
+            >
+            <ImageView
+                android:id="@+id/item_test_list_expand_child_logo_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/ic_launcher"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/item_test_list_expand_child_name_txt"
+                    android:layout_toLeftOf="@+id/item_test_list_expand_child_price_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:ellipsize="end"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    style="@style/TextHeader"
+                    android:text="车事通机油SNOW-405" />
+                <TextView
+                    android:id="@+id/item_test_list_expand_child_desc_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="少做一次保养"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    style="@style/TextDesc"
+                    android:layout_marginTop="8dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            >
+            <TextView
+                android:id="@+id/item_test_list_expand_child_price_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="￥0.00"
+                android:textColor="@color/blue_pressed" />
+            <TextView
+                android:id="@+id/item_test_list_expand_child_old_price_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="￥0.00"
+                android:textColor="@color/mtf_gray_400" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,80 @@
+<!--维保页-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.tab.MaintenanceFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/home_maintain_pager_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                    <com.proton.library.widget.CircleIndicator
+                        android:id="@+id/view_pager_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="#25000000"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/home_maintain_img_txt_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:id="@+id/home_maintain_static_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/icon_maintenance_main" />
+
+                    <TextView
+                        android:id="@+id/home_maintain_input_txt"
+                        style="@style/TextBlue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="right|center_vertical"
+                        android:padding="10dp"
+                        android:text="输入车辆信息，马上匹配" />
+                </LinearLayout>
+            </LinearLayout>
+            <com.proton.library.widget.MyListView
+                android:id="@+id/home_maintain_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:divider="@color/mtf_gray_300"
+                android:dividerHeight="8dp"
+                />
+            <!--<com.proton.library.widget.listview.MTFListView-->
+                <!--android:id="@+id/list_view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:visibility="gone"-->
+                <!--/>-->
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="93dp"
+            >
+            <ImageView
+                android:id="@+id/shop_listview_item"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tvmvv1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="美孚 金美孚/1号全合成机油SmmYYYYSNOW"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="110dp"
+
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="让你的爱车少做一次保养"
+                android:textSize="12sp"
+                android:textColor="@color/zift"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="110dp"
+                />
+            <TextView
+                android:id="@+id/rmb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员￥"
+                android:textSize="13sp"
+                android:textColor="#77a6f2"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="110dp"
+                />
+            <TextView
+                android:id="@+id/money2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="330.00"
+                android:textSize="13sp"
+                android:textColor="#77a6f2"
+                android:layout_marginTop="70dp"
+                android:layout_toRightOf="@id/rmb"
+
+                />
+
+            <TextView
+                android:id="@+id/member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="原价￥430.00"
+                android:textSize="13sp"
+                android:textColor="@color/zift"
+                android:layout_marginTop="70dp"
+                android:layout_toRightOf="@id/rmb"
+                android:layout_marginLeft="60dp"
+                />
+
+        </RelativeLayout>
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:textColor="@color/black"
+        />
+
+    </LinearLayout>
+
+
+
+
+

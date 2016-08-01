@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_return"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="优惠活动"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ebebeb"
+            android:layout_marginTop="52dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="五月大回馈活动"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:textColor="#292929"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="（5月4日 14:20）"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:textColor="#ebebeb"
+
+            android:layout_centerVertical="true"
+
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/icon_home_gohome"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text="五月买回馈dsfgdfgdfgdfg水电费是水电费水电费诗圣杜甫vsdfgdgdsgdgdfgdfgg电饭锅电饭锅是电饭锅个电饭锅电饭锅电饭锅电饭锅电饭锅电饭锅电饭锅电饭锅电饭锅打得过是的法国德国的法国电饭锅大哥电饭锅"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:textColor="#292929"
+
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+
+        />
+
+</LinearLayout>

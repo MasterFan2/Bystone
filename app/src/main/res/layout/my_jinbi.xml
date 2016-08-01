@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_return"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的积分"
+            android:paddingLeft="150dp"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:textColor="#878787"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金币"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+
+            android:textSize="18sp"
+            android:textColor="#878787"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="恭喜你金币超过了57%的车友"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="60dp"
+            android:textSize="14sp"
+            android:textColor="#878787"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="390"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:textColor="#3c85ee"
+            />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mai_line"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="224dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金币"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+
+            android:textSize="18sp"
+            android:textColor="#878787"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="恭喜你金币超过了57%的车友"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="60dp"
+            android:textSize="14sp"
+            android:textColor="#878787"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="390"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:textColor="#3c85ee"
+            />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mai_line"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金币规则"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="多邀请好友加入就能获得更多积分哟,是不是很划算，
+            赶紧行动，多邀请好友加入就能获得"
+            android:paddingLeft="60dp"
+            android:layout_marginTop="20dp"
+
+            android:textSize="12sp"
+            android:textColor="@color/zift"
+            />
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="立即获得金币"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邀请好友"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好友和你各得50积分"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:textColor="@color/zift"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好友消费提成"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好友和你各得50积分"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:textColor="@color/zift"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+
+
+
+</LinearLayout>

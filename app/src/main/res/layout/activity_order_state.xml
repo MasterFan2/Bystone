@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="保养订单"
+        app:titleTxtColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:id="@+id/order_state_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/order_state_custom_service_txt"
+                style="@style/TextDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:padding="10dp"
+                android:text="客服电话"
+                android:drawableLeft="@mipmap/icon_micrro_phone"
+                android:drawablePadding="8dp"
+                android:layout_gravity="right|center_vertical"
+                />
+
+            <Button
+                android:id="@+id/order_state_service_detail_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="服务详情" />
+        </LinearLayout>
+        <ScrollView
+            android:id="@+id/order_state_scroll_layout"
+            android:layout_above="@id/order_state_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/order_state_content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/icon_order"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="您的订单已受理" />
+
+                    <TextView
+                        android:id="@+id/order_state_number_txt"
+                        style="@style/TextDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="(保养ID号:xxxxxxxxxxxxxxxxx)" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/order_state_all_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:lineSpacingMultiplier="1.5"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="姓名:张大二\n电话:13512368745\n地址:重庆市渝中区\n时间:5月26日 23:00 ~ 00:00"
+                    android:textColor="@color/mtf_gray_800" />
+
+                <View style="@style/DivideLine_B" />
+
+                <RelativeLayout
+                    android:id="@+id/order_state_test_list_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/TextHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="爱车检测单" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+
+                        android:text="暂无 > " />
+                </RelativeLayout>
+
+                <View style="@style/DivideLine_B" />
+
+                <RelativeLayout
+                    android:id="@+id/order_state_maintenance_picture_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/TextHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="爱车保养图片" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="暂无 > " />
+                </RelativeLayout>
+
+                <View style="@style/DivideLine_B" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前状态:" />
+
+                    <com.proton.library.widget.MyListView
+                        android:id="@+id/order_state_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:divider="@color/mtf_gray_400"
+                        android:dividerHeight="0.15dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</LinearLayout>
