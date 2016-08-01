@@ -111,24 +111,20 @@
         <activity android:name=".ui.shopcar.ShopCarActivity" />
         <activity android:name=".ui.common.MyCarActivity" />
         <activity android:name=".ui.common.MyCarDetailActivity" />
-        <activity android:name=".ui.common.EnableMaintenanceAlertActivity"></activity>
+        <activity android:name=".ui.common.EnableMaintenanceAlertActivity" />
         <activity android:name=".ui.shop.My_Exit" />
-
-        <activity android:name=".ui.shop.Shop_Sort"
-            android:screenOrientation="portrait"
-            />
-
+        <activity
+            android:name=".ui.shop.Shop_Sort"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.shop.Shop_Commodity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.shop.My_Indext"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.shop.My_Privilege"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.shop.My_Jinbi"
             android:screenOrientation="portrait" />
@@ -138,7 +134,7 @@
         <activity
             android:name=".ui.shop.My_Shop_Pay"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".ui.common.UpVersionActivity"></activity>
     </application>
 
 </manifest>
