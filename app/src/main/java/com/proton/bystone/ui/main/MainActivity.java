@@ -42,7 +42,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+/**
+ * create by masterfan
+ */
 @MTFActivityFeature(layout = R.layout.activity_main)
 public class MainActivity extends MTFBaseActivity implements OnClickListener {
 
