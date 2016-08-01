@@ -76,6 +76,13 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
 
     Activity mActivity;
 
+    /**
+     * 测试方法
+     */
+    public void testMethod() {
+        System.out.println("Test.");
+    }
+
     @Override
     public void initialize(Bundle savedInstanceState) {
 
