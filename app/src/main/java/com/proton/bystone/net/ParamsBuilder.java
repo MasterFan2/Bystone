@@ -7,6 +7,7 @@ import com.proton.bystone.bean.Base;
 import com.proton.bystone.bean.TypeValue;
 import com.proton.bystone.exception.BuildException;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -22,18 +23,17 @@ public class ParamsBuilder<E> {
     private ArrayList<TypeValue> typeValues = new ArrayList<>();
     private ArrayList<E> objList = new ArrayList<>();
     private Base base = new Base();
-    private Gson gson ;
+    private Gson gson;
     private boolean notParams = false;
 
     /**
      * default constructor
      */
     public ParamsBuilder() {
-       // gson     = new Gson();
+        // gson     = new Gson();
     }
 
     /**
-     *
      * @return
      */
     public static ParamsBuilder getInstance() {
@@ -45,6 +45,7 @@ public class ParamsBuilder<E> {
 
     /**
      * set Gson
+     *
      * @param gson
      * @return
      */
@@ -60,6 +61,7 @@ public class ParamsBuilder<E> {
 
     /**
      * set key
+     *
      * @param key
      * @return
      */
@@ -70,6 +72,7 @@ public class ParamsBuilder<E> {
 
     /**
      * set method name
+     *
      * @param methodName
      * @return
      */
@@ -80,6 +83,7 @@ public class ParamsBuilder<E> {
 
     /**
      * 添加 类型/值  对  一般选择其中一种 [typeValue(String type, Object value) 或  Object(E obj)]
+     *
      * @param type
      * @param value
      * @return
@@ -91,6 +95,7 @@ public class ParamsBuilder<E> {
 
     /**
      * 添加参数对象  一般选择其中一种 [typeValue(String type, Object value) 或  Object(E obj)]
+     *
      * @param obj
      * @return
      */
@@ -102,27 +107,30 @@ public class ParamsBuilder<E> {
 
     /**
      * 构建参数
+     *
      * @return
      */
-    public RequestBody build(){
+    public RequestBody build() {
 
         if (gson == null) {
             throw new BuildException("gson not set!");
         }
 
-        if (TextUtils.isEmpty(base.getKey()) || TextUtils.isEmpty(base.getMethodName())) {
-            throw new BuildException("key or methodName is null");
+        if (TextUtils.isEmpty(base.getKey())) {
+            throw new BuildException("key cant be null");
         }
 
-        if (objList != null && objList.size() > 0){//有对象参数 ， 添加到TypeValue中
-            for (E e : objList) {
-                try {
-                    String str = gson.toJson(e);
-                    typeValues.add(new TypeValue("string", str));
-                }catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
+        if (objList != null && objList.size() > 0) {//有对象参数 ， 添加到TypeValue中
+//            for (E e : objList) {
+//                try {
+//                    String str = gson.toJson(e);
+//                    typeValues.add(new TypeValue("string", str));
+//                } catch (Exception ex) {
+//                    System.out.println(ex.getMessage());
+//                }
+//            }
+            String str = gson.toJson(objList);
+            typeValues.add(new TypeValue("string", str));
         }
 
         if (notParams) {//没有参数
@@ -130,8 +138,8 @@ public class ParamsBuilder<E> {
             String strBase = gson.toJson(base);
             return RequestBody.create(MediaType.parse("application/json;charset=utf-8"), strBase);
 
-        }else {        //有参数
-            if (typeValues != null && typeValues.size() > 0 ){
+        } else {        //有参数
+            if (typeValues != null && typeValues.size() > 0) {
                 String para = gson.toJson(typeValues);
                 base.setPara(para);
                 return RequestBody.create(MediaType.parse("application/json;charset=utf-8"), gson.toJson(base));
@@ -139,5 +147,16 @@ public class ParamsBuilder<E> {
                 throw new BuildException("typeValues not set!");
             }
         }
+    }
+
+    /**
+     * 构建图片body
+     *
+     * @param file
+     * @return
+     */
+    public static RequestBody buildImageBody(File file) {
+
+        return RequestBody.create(MediaType.parse("image/*"), file);
     }
 }
