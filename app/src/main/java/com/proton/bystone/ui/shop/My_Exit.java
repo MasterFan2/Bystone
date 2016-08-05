@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.proton.bystone.R;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.ui.login.NewpwdActivity;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
@@ -43,6 +44,14 @@ public class My_Exit extends MTFBaseActivity {
             public void onClick(View v) {
                Intent t=new Intent(My_Exit.this, NewpwdActivity.class);
                 startActivity(t);
+            }
+        });
+
+        my_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().delLoginInfo();
+                finish();
             }
         });
 
