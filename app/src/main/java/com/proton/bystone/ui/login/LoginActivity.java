@@ -41,220 +41,106 @@ import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/7/6.
- *
+ * <p>
  * 网络测试成功可以用
  */
-@MTFActivityFeature(layout = R.layout.login)
+@MTFActivityFeature(layout = R.layout.activity_login)
 public class LoginActivity extends MTFBaseActivity {
-    Button wj;
-    Button gg;
-    EditText  ed;
 
-    EditText ed2;
+    @Bind(R.id.login_uname_edit)
+    EditText nameEdit;
 
-    CheckBox cb;
-    int  pass;
-    Object mb_pwd;
-    public int code2;
-    List<login>  listevent;
-    TextView tvyuedu;
-    Button btdenglu;
-    String mb_code;
-    String edone;
-    login login;
-    String mb_loginName;
-    String mb_name;
+    @Bind(R.id.login_pwd_edit)
+    EditText pwdEdit;
 
-    //is need result
-    private boolean needResult = false;
+    @Bind(R.id.login_btn)
+    Button loginEdit;
+
+    @Bind(R.id.login_forget_txt)
+    TextView forgetTxt;
+
+    @Bind(R.id.login_modify_pwd_txt)
+    TextView modifyPwdTxt;
+
+    private DbManager db;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
-        needResult = getIntent().getBooleanExtra("needResult", false);
-
-        initview();
-    }
-
-    @Override
-    public void backPressed() {
-        animFinish();
-    }
-
-    private void initview() {
-        //请输入手机号
-        ed = (EditText)findViewById(R.id.editText);
-        ed2 = (EditText)findViewById(R.id.et2);
-
-        btdenglu = (Button)findViewById(R.id.btdenglu);
-
-        wj=(Button)findViewById(R.id.wj);
-        gg=(Button)findViewById(R.id.gg);
-        Listener();
-
+        db = x.getDb(MDbUtils.getDaoConfig());
 
     }
-    //各种监听
-    public void Listener()
-    {
 
-        //忘记密码
-        wj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,WjActivity.class));
+    /**
+     * 登录检查
+     */
+    @OnClick(R.id.login_btn)
+    public void checkLogin() {
+        String uname = nameEdit.getText().toString();
+        String pwd = pwdEdit.getText().toString();
 
-            }
-        });
-        //更改密码
-        gg.setOnClickListener(new View.OnClickListener() {
-            //更改密码
-            @Override
-            public void onClick(View v) {
+        if (TextUtils.isEmpty(uname)) {
+            T.s(context, "请输入手机号");
+            return;
+        }
+        if (!MatcherUtil.isPhone(uname)) {
+            T.s(context, "手机号格式错误,请检查");
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)) {
+            T.s(context, "请输入密码");
+            return;
+        }
 
-                startActivity(new Intent(LoginActivity.this,GgActivity.class));
-            }
-        });
-
-
-
-        btdenglu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String et2o=ed2.getText().toString().trim();
-                if(et2o.equals(""))
-                {
-                    Toast.makeText(LoginActivity.this,"验证码不能为null",Toast.LENGTH_SHORT).show();
-                }else {
-                    ;
-                   data2();
-
-                }
-            }
-        });
-
-        ed2.addTextChangedListener(new TextWatcher(){
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-
-
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                btdenglu.setBackground(LoginActivity.this.getResources().getDrawable(R.drawable.yuanjiao));
-                if(ed2.getText().toString().trim().equals(""))
-                {
-                    btdenglu.setBackground(LoginActivity.this.getResources().getDrawable(R.drawable.yuanjiao2));
-                }
-            }
-
-        });
+        login(uname, pwd);
     }
 
-
-  //点账号密码登陆
-    public void data2()
-    {
-      /* LoginParams loginParams = new LoginParams("18225026697","666888","xxaabbc085412556sxx",1 );*/
-        LoginParams loginParams = new LoginParams(ed.getText().toString().trim(),ed2.getText().toString().trim(),"xxaabbc085412556sxx",1 );
-        RequestBody requestBody = new ParamsBuilder<>()
+    /**
+     * 登录
+     *
+     * @param name
+     * @param pwd
+     */
+    private void login(String name, String pwd) {
+        LoginParams loginParams = new LoginParams(name, pwd, "xxaabbc085412556sxx", 1);
+        final RequestBody requestBody = new ParamsBuilder<>()
                 .key("pbevyvHkf1sFtyGL35gFfQ==")
                 .methodName("Login")
                 .gson(new Gson())
-               // .noParams()
                 .object(loginParams)
-              /*  .typeValue("string","13629770633")
-                .typeValue("string","958496")
-                .typeValue("string","xxaabbc085412556sxxx")
-                .typeValue("int",1)*/
                 .build();
-//        ParamsBuilder<LoginParams> builder = new ParamsBuilder<LoginParams>().
-//                .key("")
-//                .build();
 
         Call<JsonResp> call = HttpClients.getInstance().login(requestBody);
-
         call.enqueue(new Callback<JsonResp>() {
             @Override
             public void onResponse(Call<JsonResp> call, Response<JsonResp> response) {
 
-                String data = response.body().getData();
-               // Log.e("333",data);
-                jiexi2(data);
-
+                if (response.body().getCode() == 1) {///登录成功
+                    LoginResp loginResp = new Gson().fromJson(response.body().getData(), new TypeToken<LoginResp>() {}.getType());
+                    LoginManager.getInstance().cacheLogin(loginResp);
+                    T.s(context, "登录成功");
+                    setResult(RESULT_OK);
+                    animFinish();
+                } else {
+                    L.e("登录失败");
+                }
             }
 
             @Override
             public void onFailure(Call<JsonResp> call, Throwable t) {
-                Log.e("111","失败");
+                L.e("登录失败");
             }
         });
-
-
     }
 
-   public void jiexi2(String data)
-    {
-        Gson  g=new Gson();
-        login = g.fromJson(data, login.class);
-        mb_code = login.getMb_Code();
-        mb_name = login.getMb_Name();//拿到姓名
-        mb_loginName = login.getMb_LoginName();//拿到用户名，也有可能是手机号
-        mb_pwd = login.getMb_Pwd();//拿到密码
-
-        SharedPreferences sp = this.getSharedPreferences("info",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("mb_code", mb_code);
-        editor.commit();
-
-       // if(mb_loginName.equals(ed.getText().toString().trim())/*&&mb_pwd.equals(ed2.getText().toString().trim())*/)
-        if(data!=null)
-        {//login success
-
-//            Intent t= new Intent(this, HomePagesActivity.class);
-//            startActivity(t);
-
-            LoginUtil.saveLogin(this, true);
-            if (needResult) {//master fan call
-                setResult(RESULT_OK);
-                finish();
-            }else {//self
-                String landing = getIntent().getStringExtra("landing");
-                if(landing.equals("mya"))
-                {
-                    SharedPreferences spp = context.getSharedPreferences("NameAndPhone", Context.MODE_PRIVATE);
-                    spp.edit().putString("biaoji","11")
-                            .putString("name",mb_name)
-                            .putString("phone",mb_loginName).commit();
-                    finish();
-                }else if(landing.equals("log")){
-                    //跳转订单确认
-                    Intent t= new Intent(LoginActivity.this,Shop_Ok.class);
-                    startActivity(t);
-                }
-            }
-
-
-        } else {//login error
-
-        }
-
-
-
-
+    @Override
+    public void backPressed() {
+        setResult(RESULT_CANCELED);
+        animFinish();
     }
 
-
-
-
-
+    @OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        setResult(RESULT_CANCELED);
+        animFinish();
+    }
 }

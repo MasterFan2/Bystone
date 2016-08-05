@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/search_header_city_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:text="黄泥"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawablePadding="8dp"
+        android:drawableRight="@mipmap/icon_menu"
+        />
+    <ImageView
+        android:id="@+id/search_header_scan_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_tracing"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:padding="10dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/search_header_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/search_header_scan_img"
+        android:layout_toRightOf="@+id/search_header_city_txt"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:background="@drawable/edtextyuan"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:text="搜索地名或服务"
+            android:drawablePadding="8dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:drawableLeft="@mipmap/icon_search"
+
+            />
+    </LinearLayout>
+</RelativeLayout>

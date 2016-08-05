@@ -3,36 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <TextView
+
+    <com.proton.library.widget.tiles.ClipRevealFrame xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title information"
-        android:padding="8dp"
-        android:textSize="25sp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="hello. this is content"
-        android:padding="8dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="XXX"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="XXX"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+        android:layout_height="300dp">
+
+        <com.proton.library.widget.tiles.TilesFrameLayout
+            android:id="@+id/tiles_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:sw_animationDuration="1500"
+            app:sw_numberOfTilesX="35">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Title information"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="hello. this is content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/dialog_ok_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ok" />
+
+                    <Button
+                        android:id="@+id/dialog_cancel_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="cancel" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.proton.library.widget.tiles.TilesFrameLayout>
+    </com.proton.library.widget.tiles.ClipRevealFrame>
 </LinearLayout>

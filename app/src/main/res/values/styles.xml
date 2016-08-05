@@ -14,6 +14,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="FloatActivity" parent="Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <!--点击窗口外的屏幕不关闭-->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
 
     <style name="TextHeader">
         <item name="android:textSize">@dimen/header_font_size</item>
@@ -25,6 +32,7 @@
         <item name="android:textSize">@dimen/desc_font_size</item>
         <item name="android:textColor">@color/tab_gray_text</item>
     </style>
+
     <style name="TextBlue">
         <item name="android:textSize">@dimen/header_font_size</item>
         <item name="android:textColor">@color/blue</item>

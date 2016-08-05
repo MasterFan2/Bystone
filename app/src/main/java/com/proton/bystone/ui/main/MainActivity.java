@@ -19,6 +19,7 @@ import com.proton.bystone.bean.ReservationParam;
 import com.proton.bystone.bean.Version;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
+import com.proton.bystone.ui.common.UpVersionActivity;
 import com.proton.bystone.ui.main.tab.HomeFragment;
 import com.proton.bystone.ui.main.tab.MaintenanceFragment;
 import com.proton.bystone.ui.main.tab.MeFragment;
@@ -84,8 +85,20 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //Fragment重叠的临时解决办法。
+        //super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void initialize(Bundle savedInstanceState) {
 
+        if (savedInstanceState != null) {
+            L.e("<<<X>>>MainActivity>>>>savedInstanceState != null");
+        } else {
+            L.e(">>>X<<<MainActivity>>>>savedInstanceState is null");
+
+        }
         //fragment init
         homeFragment = new HomeFragment();
         maintainFragment = new MaintenanceFragment();
@@ -94,65 +107,18 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
 
         fragments = new MTFBaseFragment[]{homeFragment, maintainFragment, shopFragment, meFragment};
 
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, homeFragment)
-                .add(R.id.fragment_container, maintainFragment)
-                .add(R.id.fragment_container, shopFragment)
-                .add(R.id.fragment_container, meFragment)
+                .add(R.id.fragment_container, homeFragment, "home")
+                .add(R.id.fragment_container, maintainFragment, "maintenance")
+                .add(R.id.fragment_container, shopFragment, "shop")
+                .add(R.id.fragment_container, meFragment, "me")
                 .hide(maintainFragment).hide(shopFragment)
                 .hide(meFragment).show(homeFragment).commit();
 
         //layout
         layouts = new RelativeLayout[]{homeLayout, maintainLayout, shopLayout, meLayout};
         layouts[0].setBackgroundColor(getResources().getColor(R.color.mtf_gray_700));
-
-        checkVersion();
-    }
-
-    private void checkVersion() {
-        final RequestBody requestBody = new ParamsBuilder<ReservationParam>()
-                .key("pbevyvHkf1sFtyGL35gFfQ==")
-                .methodName("GetAppTheLatestVersion")
-                .gson(new Gson())
-                .typeValue("int", 1)
-                .typeValue("string", PackageUtil.getVersionName(context))
-                .build();
-        Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
-        call.enqueue(new Callback<BaseResp>() {
-            @Override
-            public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
-                if (response.body().getCode() == 1) {
-                    Version versionInfo = new Gson().fromJson(response.body().getData(), new TypeToken<Version>() {}.getType());
-
-                    showDialog(versionInfo);
-//                    T.s(context, "预约成功");
-//                    Intent intent = new Intent(context, OrderStateActivity.class);
-//                    intent.putExtra("code", orderStateResps.get(0).getCode());//orderStateResps.get(0).getCode()201605091528083056
-//                    animStart(intent);
-                } else {
-//                    T.s(context, "预约失败");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BaseResp> call, Throwable t) {
-                L.e("getThirdLevelYear::" + t.getMessage());
-            }
-        });
-    }
-
-    /**
-     * 显示升级提示框
-     * @param version
-     */
-    private void showDialog(Version version) {
-        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_upload, null);
-        AlertDialog tipsDialog = new AlertDialog.Builder(context)
-                .setTitle("新版本更新提示")
-                .setView(contentView)
-                .setCancelable(false)
-                .create();
-//        tipsDialog.show();
     }
 
     @Override

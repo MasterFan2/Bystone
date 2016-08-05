@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ import com.proton.bystone.ui.shop.Shop_Detail;
 import com.proton.bystone.ui.shop.Shop_Sort;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
+import com.proton.library.zxing.activity.CaptureActivity;
 
 /*import org.apache.http.entity.StringEntity;*/
 import org.apache.http.entity.StringEntity;
@@ -61,14 +63,28 @@ public class HomeFragment extends MTFBaseFragment {
     @Bind(R.id.but)
     Button but;*/
 
+    ///search header
+    @Bind(R.id.search_header_search_layout)
+    LinearLayout searchLayout;
+    @Bind(R.id.search_header_scan_img)
+    ImageView scanImg;
+    @Bind(R.id.search_header_city_txt)
+    TextView cityTxt;
+
+    @OnClick(R.id.search_header_scan_img)
+    public void goScan(View view) {
+        animStart(CaptureActivity.class);
+    }
+
+
     @Bind(R.id.lv)
     ListView listview;
-    //搜索
-    @Bind(R.id.search)
-    EditText search;
-    //黄泥磅
-    @Bind(R.id.btn)
-    Button btn;
+//    //搜索
+//    @Bind(R.id.search)
+//    EditText search;
+//    //黄泥磅
+//    @Bind(R.id.btn)
+//    Button btn;
     ViewPager vp;
     BitmapUtils utils;
     String vccode;
@@ -197,20 +213,20 @@ public class HomeFragment extends MTFBaseFragment {
 
     //广告轮播
     public void Listener() {
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                  startActivity(new Intent(HomeFragment.this.getActivity(),Homeserch.class));
-            }
-        });
-
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeFragment.this.getActivity(),"1234",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(HomeFragment.this.getActivity(),Search_service.class));
-            }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                  startActivity(new Intent(HomeFragment.this.getActivity(),Homeserch.class));
+//            }
+//        });
+//
+//        search.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(HomeFragment.this.getActivity(),"1234",Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(HomeFragment.this.getActivity(),Search_service.class));
+//            }
+//        });
 
     }
 

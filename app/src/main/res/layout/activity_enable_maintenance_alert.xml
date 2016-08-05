@@ -13,7 +13,7 @@
         app:titleText="开启保养提醒"
         app:titleTxtColor="@android:color/white"
         app:rightButtonText="确定"
-        app:rightButtonBackground="@mipmap/icon_mine_pluscar"
+        app:rightButtonIcon="@mipmap/icon_mine_pluscar"
         />
 
     <LinearLayout

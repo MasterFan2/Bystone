@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.proton.library.R;
 
+/**
+ * 公共title
+ * create by masterFan on 20160802
+ */
 public class MTFTitleView extends RelativeLayout {
 
     private TextView leftBtn;
@@ -21,8 +25,6 @@ public class MTFTitleView extends RelativeLayout {
     private TextView contentTxt;
 
     private View titleView;
-
-    private int rightButtonBackground = -1;
 
     public MTFTitleView(Context context) {
         super(context);
@@ -65,26 +67,31 @@ public class MTFTitleView extends RelativeLayout {
 
         int titleTextColor = a.getColor(R.styleable.MasterTitleView_titleTxtColor, -1);
         int titleBackgroundColor = a.getColor(R.styleable.MasterTitleView_titleBackgroundColor, -1);
-        int titleBackgroundResource = a.getResourceId(R.styleable.MasterTitleView_titleBackground, -1);
 
+        //left
         int leftBtnColor = a.getColor(R.styleable.MasterTitleView_leftButtonColor, -1);
         if(leftBtnColor != -1) leftBtn.setTextColor(leftBtnColor);
-
-        rightButtonBackground = a.getResourceId(R.styleable.MasterTitleView_rightButtonBackground, -1);
-
-        if(rightButtonBackground != -1){
-            rightBtn.setCompoundDrawables(null, null, getResources().getDrawable(rightButtonBackground), null);
-        }
-
         if(TextUtils.isEmpty(strLeftText)) {
             leftBtn.setText(strLeftText);
+        }
+
+        //right button  [设置的时候 以图片优先]
+        int rightButtonIcon      = a.getResourceId(R.styleable.MasterTitleView_rightButtonIcon, -1);//图片
+        int rightButtonTextColor = a.getResourceId(R.styleable.MasterTitleView_rightButtonTextColor, -1);//
+        if(rightButtonIcon != -1){
+            rightBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(rightButtonIcon), null);
+        } else if (!TextUtils.isEmpty(strRightButtonText)) {
+            rightBtn.setText(strRightButtonText);
+            rightBtn.setTextColor(getResources().getColor(rightButtonTextColor));
+        } else {
+            rightBtn.setVisibility(View.INVISIBLE);
         }
 
         if(titleBackgroundColor != -1)
             view.findViewById(R.id.title_root_view).setBackgroundColor(titleBackgroundColor);
 //        else                              view.findViewById(R.id.title_root_view).setBackgroundColor(titleBackgroundColor);
 
-        //
+        //left
         int leftResourceId = a.getResourceId(R.styleable.MasterTitleView_leftButtonResource, -1);
         if(-1 != leftResourceId){
             //leftBtn.setImageResource(leftResourceId);
