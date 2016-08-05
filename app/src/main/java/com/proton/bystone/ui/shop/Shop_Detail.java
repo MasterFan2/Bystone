@@ -31,6 +31,7 @@ import com.proton.bystone.bean.Fist;
 import com.proton.bystone.bean.Shop_Liebiao;
 import com.proton.bystone.bean.Shop_RecoResp;
 import com.proton.bystone.bean.Shop_Two;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.ui.login.SendCallBack;
 import com.proton.bystone.ui.login.LoginActivity;
 import com.proton.bystone.ui.shopcar.MyShoppingCar;
@@ -274,9 +275,12 @@ public class Shop_Detail extends MTFBaseActivity {
         shpp_bye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean check=LoginUtil.checkLogin(Shop_Detail.this);
-                if(check)
-                {
+               // Boolean check=LoginUtil.checkLogin(Shop_Detail.this);
+                boolean login = LoginManager.getInstance().isLogin();
+                if(!login) {
+                    animStartForResult(9528, LoginActivity.class);
+                }else{
+
                     //跳转订单确认
                     Intent t= new Intent(Shop_Detail.this,Shop_Ok.class);
                     t.putExtra("vcparams",vcparams);
@@ -293,12 +297,12 @@ public class Shop_Detail extends MTFBaseActivity {
 
 
                     startActivity(t);
-                }else{
+                }/*else{
                     //跳转到登陆页
                     Intent t= new Intent(Shop_Detail.this,LoginActivity.class);
                     t.putExtra("landing","log");
                     startActivity(t);
-                }
+                }*/
 
 
             }

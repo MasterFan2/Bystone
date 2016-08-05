@@ -68,7 +68,7 @@ public class My_Privilege extends MTFBaseActivity {
         call.enqueue(new Callback<BaseResp>() {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
-                 String data = response.body().getContent();
+                 String data = response.body().getData();
                  Log.e("优惠活动",data);
                 //jiexi2(data);
 
@@ -89,15 +89,7 @@ public class My_Privilege extends MTFBaseActivity {
       /*  Gson g=new Gson();
         Jbnum jbnum = g.fromJson(Data, Jbnum.class);*/
 
-        List<Jbnum> jbnum=new Gson().fromJson(Data, new TypeToken<List<Jbnum>>() {}.getType());
-      /*  String code = jbnum.get(0).getGoldBalance();//拿到金币数量
-        int InviteFriendsGold = jbnum.get(0).getInviteFriendsGold();//邀请好友祖册所得
-        int ConsumPtionGold = jbnum.get(0).getConsumPtionGold();//好友消费提成
-        String Exceed = jbnum.get(0).getExceed();//超过车友比例
+       // List<Jbnum> jbnum=new Gson().fromJson(Data, new TypeToken<List<Jbnum>>() {}.getType());
 
-        but.setText(code);
-        my_bl.setText(Exceed);
-        my_mi.setText(InviteFriendsGold+"");
-        my_tc.setText(ConsumPtionGold+"");*/
     }
 }

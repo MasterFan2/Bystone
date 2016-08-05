@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proton.bystone.R;
+import com.proton.bystone.bean.LoginResp;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.ui.login.LoginActivity;
 
 
@@ -84,17 +87,44 @@ public class MeFragment extends MTFBaseFragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9527) {
+            //
+            boolean login = LoginManager.getInstance().isLogin();
+            if(login) {
+                LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
+                my_humname.setText(loginInfo.getMb_Name());
+                my_phone.setText(loginInfo.getMb_LoginName());
+                my_login.setVisibility(View.GONE);
+                my_humname.setVisibility(View.VISIBLE);
+                my_phone.setVisibility(View.VISIBLE);
+
+            }
+
+        }
+    }
+
+    @Override
     public void initialize() {
 
       Refresh();
+        boolean login = LoginManager.getInstance().isLogin();
+        LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
+        my_humname.setText(loginInfo.getMb_Name());
+        my_phone.setText(loginInfo.getMb_LoginName());
+        my_login.setVisibility(View.GONE);
+        my_humname.setVisibility(View.VISIBLE);
+        my_phone.setVisibility(View.VISIBLE);
+
 
 
     my_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent t = new Intent(getActivity(), LoginActivity.class);
-                t.putExtra("landing", "mya");
-                startActivity(t);
+                boolean login = LoginManager.getInstance().isLogin();
+                if(!login) {
+                    animStartForResult(9527, LoginActivity.class);
+                }
 
             }
         });
