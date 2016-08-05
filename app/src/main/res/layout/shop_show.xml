@@ -17,7 +17,7 @@
                 />
 
             <TextView
-                android:id="@+id/tvmvv1"
+                android:id="@+id/shop_tv"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="美孚 金美孚/1号全合成机油SmmYYYYSNOW"
@@ -30,6 +30,7 @@
                 />
 
             <TextView
+                android:id="@+id/shop_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="让你的爱车少做一次保养"
@@ -49,7 +50,7 @@
                 android:layout_marginLeft="110dp"
                 />
             <TextView
-                android:id="@+id/money2"
+                android:id="@+id/shop_money2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="330.00"
@@ -64,12 +65,23 @@
                 android:id="@+id/member"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="原价￥430.00"
+                android:text="原价￥"
                 android:textSize="13sp"
                 android:textColor="@color/zift"
                 android:layout_marginTop="70dp"
                 android:layout_toRightOf="@id/rmb"
                 android:layout_marginLeft="60dp"
+                />
+            <TextView
+                android:id="@+id/member2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="430"
+                android:textSize="13sp"
+                android:textColor="@color/zift"
+                android:layout_marginTop="70dp"
+                android:layout_toRightOf="@id/rmb"
+                android:layout_marginLeft="100dp"
                 />
 
         </RelativeLayout>
