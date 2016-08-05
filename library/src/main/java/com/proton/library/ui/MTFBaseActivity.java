@@ -13,6 +13,9 @@ import android.view.WindowManager;
 import com.proton.library.R;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
 
 
@@ -23,6 +26,7 @@ import butterknife.ButterKnife;
 public abstract class MTFBaseActivity extends AppCompatActivity {
 
     public Activity context;
+    private List<Activity> activityList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
