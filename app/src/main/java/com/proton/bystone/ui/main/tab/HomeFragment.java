@@ -124,7 +124,7 @@ public class HomeFragment extends MTFBaseFragment {
         list3=new ArrayList<TextView>();
         for (int i = 0; i <3 ; i++) {
              TextView  tv=new TextView(HomeFragment.this.getActivity());
-            tv.setText("测试"+i);
+           // tv.setText("测试"+i);
             list3.add(tv);
 
         }
@@ -237,7 +237,7 @@ public class HomeFragment extends MTFBaseFragment {
             @Override
             public void onFailure(HttpException arg0, String arg1) {
                 scb.onFailure(arg0.getExceptionCode());
-                Log.e("o", "没找到");
+           //     Log.e("o", "没找到");
             }
 
             @Override
@@ -254,7 +254,7 @@ public class HomeFragment extends MTFBaseFragment {
         Gson json = new Gson();
 
         Fist fi = json.fromJson(result, Fist.class);
-        Log.e("o", "解析了哦" + fi.getData());
+       // Log.e("o", "解析了哦" + fi.getData());
 
 
         try {
@@ -314,7 +314,7 @@ public class HomeFragment extends MTFBaseFragment {
             e.printStackTrace();
         }
 
-        Log.e("123","list:"+list_a);
+       // Log.e("123","list:"+list_a);
         vp.setAdapter(new MyPagerAdapter());
 
     }
@@ -400,7 +400,7 @@ public class HomeFragment extends MTFBaseFragment {
             /*tv2.setText("青木");*/
             utils2.display(image2,aa+list2.get(position));
            // Picasso.with(context).load(aa+s).into(tuanti);
-            Log.e("测试",aa+list2.get(position));
+         //   Log.e("测试",aa+list2.get(position));
 
             return view;
 

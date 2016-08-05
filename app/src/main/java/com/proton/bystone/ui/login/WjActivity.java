@@ -208,7 +208,7 @@ public class WjActivity extends MTFBaseActivity {
     {
         Gson g=new Gson();
         Duanxin duanxin = g.fromJson(result, Duanxin.class);
-        System.out.println("5555555555555555555555555555"+duanxin);
+      //  System.out.println("5555555555555555555555555555"+duanxin);
         int code = duanxin.getcode();
         if(code==102)
         {

@@ -59,7 +59,7 @@ public class All_Pl extends MTFBaseActivity {
     {
         SharedPreferences share=getSharedPreferences("info",Activity.MODE_WORLD_READABLE);
         str=share.getString("mb_code","");
-        Log.e("str",str);
+        //Log.e("str",str);
 
 
         listview =(ListView) findViewById(R.id.shop_pjlist);
@@ -88,7 +88,7 @@ public class All_Pl extends MTFBaseActivity {
             @Override
             public void onResponse(Call<JsonResp> call, Response<JsonResp> response) {
                 String data = response.body().getData();
-                Log.e("1312323",data+"");
+               // Log.e("1312323",data+"");
                 eventjiexi(data);
             }
 
@@ -109,7 +109,7 @@ public class All_Pl extends MTFBaseActivity {
         String path = shop_list.get(0).getPath();
         ary = path.split(",");
         for (int i = 0; i < ary.length; i++) {
-            Log.e("111111111111",ary[i]+"");
+          //  Log.e("111111111111",ary[i]+"");
         }
 
 

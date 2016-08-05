@@ -279,6 +279,19 @@ public class Shop_Detail extends MTFBaseActivity {
                 {
                     //跳转订单确认
                     Intent t= new Intent(Shop_Detail.this,Shop_Ok.class);
+                    t.putExtra("vcparams",vcparams);
+                    t.putExtra("shop_member",N_HYJ);
+                    t.putExtra("shop_money",N_FHYJ);
+                    t.putExtra("shop_prompt",PadctBrief);
+                    t.putExtra("list",list.get(0));
+                    Log.e("listlist",list.get(0));
+
+                    t.putExtra("I_Company",commodity.getI_Company());//商家编号
+                    t.putExtra("VC_XH",commodity.getVC_XH());//商家规格型号
+                    t.putExtra("getVC_Name",commodity.getVC_Name());//商品名称
+                    t.putExtra("getVC_Code",commodity.getVC_Code());//商品编号
+
+
                     startActivity(t);
                 }else{
                     //跳转到登陆页
@@ -381,11 +394,21 @@ public class Shop_Detail extends MTFBaseActivity {
         bean.key = "pbevyvHkf1sFtyGL35gFfQ==";
         bean.methodName = "GetCommodityDetail";
         ArrayList<String> list=new ArrayList<String>();
+       // String vccode = getIntent().getStringExtra("vccode");
+
+       /* list.add("{Type:'String'");
+        list.add("Value:"+vccode+"}");
+
+        Log.e("list",list+"");
+*/
+        /*bean.para = "[{Type:'string',Value:'14629770639'}]";*/
+  //      bean.para=list+"";
 
         list.add("{Type:'string'");
         list.add("Value:"+"2016052317205144748}");
+        //list.add("Value:"+"2016052317205143311}");
 
-        Log.e("list",list+"");
+       // Log.e("list",list+"");
         bean.para = list+"";
         String json = new GsonBuilder().disableHtmlEscaping().create().toJson(bean);
 
@@ -431,7 +454,7 @@ public class Shop_Detail extends MTFBaseActivity {
             @Override
             public void onFailure(HttpException arg0, String arg1) {
                 scb.onFailure(arg0.getExceptionCode());
-                Log.e("o", "没找到");
+             //   Log.e("o", "没找到");
             }
 
             @Override
@@ -441,7 +464,7 @@ public class Shop_Detail extends MTFBaseActivity {
                 jiexi(result);
 
 
-                Log.e("eeeee",result);
+              //  Log.e("eeeee555",result);
 
             }
 
@@ -562,14 +585,14 @@ public class Shop_Detail extends MTFBaseActivity {
 
            ary = Path.split(",");
            for (int i = 0; i < ary.length; i++) {
-               Log.e("111111111111",ary[i]+"");
+             //  Log.e("111111111111",ary[i]+"");
            }
 
 
            //加载各种数据
            get_data();
 
-           Log.e("ary",ary+"");
+        //   Log.e("ary",ary+"");
 
 
            viewpager.setAdapter(new MyPagerAdapter());

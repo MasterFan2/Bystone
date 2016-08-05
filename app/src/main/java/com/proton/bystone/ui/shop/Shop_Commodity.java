@@ -557,7 +557,7 @@ public class Shop_Commodity extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-                Log.e("111100000",data);
+              //  Log.e("111100000",data);
                 htpjiexi(data);
             }
 

@@ -187,7 +187,7 @@ public class LoginActivity extends MTFBaseActivity {
             public void onResponse(Call<JsonResp> call, Response<JsonResp> response) {
 
                 String data = response.body().getData();
-                Log.e("333",data);
+               // Log.e("333",data);
                 jiexi2(data);
 
             }
@@ -224,7 +224,6 @@ public class LoginActivity extends MTFBaseActivity {
 //            startActivity(t);
 
             LoginUtil.saveLogin(this, true);
-
             if (needResult) {//master fan call
                 setResult(RESULT_OK);
                 finish();

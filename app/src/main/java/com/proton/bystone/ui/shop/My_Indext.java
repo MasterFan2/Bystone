@@ -72,7 +72,7 @@ public class My_Indext extends MTFBaseActivity {
         SharedPreferences sp = this.getSharedPreferences("info",
                 Context.MODE_PRIVATE);
         mb_code = sp.getString("mb_code", "");
-        Log.e("全部订单获取会员编号",mb_code);
+      //  Log.e("全部订单获取会员编号",mb_code);
 
 
         String number = getIntent().getStringExtra("number");
@@ -174,7 +174,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-                Log.e("待评价",data);
+         //      Log.e("待评价",data);
                 maintain2(data);
             }
 
@@ -273,7 +273,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-                Log.e("待收货",data);
+             //   Log.e("待收货",data);
                 maintain2(data);
             }
 
@@ -371,7 +371,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-                Log.e("待付款",data);
+              //  Log.e("待付款",data);
                 maintain2(data);
             }
 
@@ -467,7 +467,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-                Log.e("待保养订单",data);
+              //  Log.e("待保养订单",data);
                 maintain(data);
             }
 
@@ -565,7 +565,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-                Log.e("全部订单",data);
+          //      Log.e("全部订单",data);
                 renqi(data);
             }
 

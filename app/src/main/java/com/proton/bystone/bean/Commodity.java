@@ -6,7 +6,7 @@ package com.proton.bystone.bean;
 public class Commodity {
 
     private String Type_CODE;
-    private String I_Company;
+    public String I_Company;
     private String Packing;
     private int  SaleNum;
     private String  Pc_Code;

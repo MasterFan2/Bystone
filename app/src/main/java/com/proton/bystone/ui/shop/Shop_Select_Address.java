@@ -1,6 +1,8 @@
 package com.proton.bystone.ui.shop;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +47,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
     ListView lv;
     SharedPreferences sharedata;
     Button shop_newaddress;
+    ImageView shop_iv;
 
     String str;
 
@@ -52,11 +56,15 @@ public class Shop_Select_Address extends MTFBaseActivity {
     ArrayList<String> list4 = new ArrayList<String>();
     ArrayList<String> list5 = new ArrayList<String>();
     List<Shouhuodizhi> list;
+    List<Shouhuodizhi> lis;
     TextView shop_delo;
+    TextView  shop_compile;
     View view;
     listviewdapter adapter;
+    listviewdapter adapter2;
     String data;
-
+    String data3;
+    int num;
 
     int id ;
     String user_code ;
@@ -64,6 +72,8 @@ public class Shop_Select_Address extends MTFBaseActivity {
     String Ad_Name ;
     String Ad_Address ;
     String AddressDetaile ;
+    TextView shop_select;
+    int isDefault;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
@@ -82,17 +92,36 @@ public class Shop_Select_Address extends MTFBaseActivity {
         shop_newaddress= (Button)findViewById(R.id.shop_newaddress );
         SharedPreferences share=getSharedPreferences("info",Activity.MODE_WORLD_READABLE);
         str=share.getString("mb_code","");
-        Log.e("Mb_Code3",str);
+       // Log.e("Mb_Code3",str);
         add_address2();
 
         shop_newaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent t= new Intent(Shop_Select_Address.this,App.class);
+                t.putExtra("bj","add");
                 startActivity(t);
             }
         });
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+
+
+
+
+
+
     }
+
+
+
 
     //会员收货地址删除。。。。。。。
     public void del_address()
@@ -132,7 +161,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 String content = response.body().getData();
-                Log.e("data",content);
+             //   Log.e("data",content);
                 jiexi2(content);
 
 
@@ -151,12 +180,8 @@ public class Shop_Select_Address extends MTFBaseActivity {
     //删除
     public void jiexi2(String content)
     {
-        if(content.equals("success"))
-        {
-           Toast.makeText(this,"删除地址成功"+id,Toast.LENGTH_SHORT).show();
 
-        }
-
+        add_address2();
 
     }
 
@@ -178,7 +203,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
             @Override
             public void onResponse(Call<JsonResp> call, Response<JsonResp> response) {
               data = response.body().getData();
-                Log.e("取所有未删除的地址",data+"");
+             //   Log.e("取所有未删除的地址",data+"");
                 eventjiexi(data);
             }
 
@@ -197,9 +222,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
         list=new Gson().fromJson(data, new TypeToken<List<Shouhuodizhi>>() {}.getType());
         adapter= new listviewdapter();
         lv.setAdapter(adapter);
-        Log.e("取出收货地址",list+"");
-
-
+       // Log.e("取出收货地址",list+"");
 
     }
 
@@ -235,41 +258,189 @@ public class Shop_Select_Address extends MTFBaseActivity {
             TextView shop_dizhi= (TextView) view.findViewById(R.id.shop_dizhi );
             TextView shop_phone= (TextView) view.findViewById(R.id.shop_phone );
             shop_delo= (TextView) view.findViewById(R.id.shop_delo );
+            shop_compile= (TextView) view.findViewById(R.id.shop_compile );
+            shop_select= (TextView) view.findViewById(R.id.shop_select );
+            shop_iv= (ImageView) view.findViewById(R.id.shop_iv );
 
 
             phone = list.get(position).getAd_ContactNumber();//联系电话
             Ad_Name = list.get(position).getAd_Name();//联系人
             Ad_Address = list.get(position).getAd_Address();//地区地址
 
+
             shop_shouhuoren.setText(Ad_Name);
             shop_dizhi.setText(Ad_Address);
             shop_phone.setText(phone);
 
-                   //点击删除
-        shop_delo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //传到服务器删除
-                id=list.get(position).getID();
-                Log.e("id",id+"");
-                user_code = list.get(position).getUser_Code();
-                Log.e("user_code",user_code);
-                phone = list.get(position).getAd_ContactNumber();//联系电话
-                Ad_Name = list.get(position).getAd_Name();//联系人
-                Ad_Address = list.get(position).getAd_Address();//地区地址
-                AddressDetaile = list.get(position).getAddressDetaile();//
-                 del_address();
-
+            num=list.get(position).getIsDefault();
+            if(num==1)
+            {
+                shop_iv.setImageResource(R.mipmap.icon_mai_select);
+            }else if(num==0)
+            {
+                shop_iv.setImageResource(R.mipmap.icon_mai_disabled);
             }
-        });
+
+            if(num==1)
+            {
+                SharedPreferences settings = getSharedPreferences("fn", 0);
+                SharedPreferences.Editor edit = settings.edit();
+
+                edit.putString("Ad_Name",Ad_Name);
+                edit.putString("phone",phone);
+                edit.putString("Ad_Address",Ad_Address);
+                edit.putString("num","wuge");
+
+                edit.commit();
+                Log.e("num","aaa"+Ad_Name+"bbb"+phone+Ad_Address+"888"+num);
+            }
 
 
+            shop_select.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("position",position+"");
+
+                    if(num==1)
+                    {
+                        shop_iv.setImageResource(R.mipmap.icon_mai_disabled);
+                        num=0;
+                    }else if(num==0)
+                    {
+                        shop_iv.setImageResource(R.mipmap.icon_mai_select);
+                        num=1;
+                    }
+
+
+
+
+                }
+            });
+
+
+
+                   //重新编辑
+            shop_compile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    new AlertDialog.Builder(Shop_Select_Address.this).setTitle("系统提示")
+                            .setMessage("确定要重新编辑该地址嘛？")
+                            .setPositiveButton("返回",new DialogInterface.OnClickListener() {//添加确定按钮
+
+
+
+                                @Override
+
+                                public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+
+                                    // TODO Auto-generated method stub
+
+
+
+                                }
+
+                            }).setNegativeButton("确定",new DialogInterface.OnClickListener() {//添加返回按钮
+
+
+
+                        @Override
+
+                        public void onClick(DialogInterface dialog, int which) {//响应事件
+
+                            // TODO Auto-generated method stub
+
+
+                            id=list.get(position).getID();
+
+                      //      Log.e("id",id+"");
+                            user_code = list.get(position).getUser_Code();
+                      //      Log.e("user_code",user_code);
+                            phone = list.get(position).getAd_ContactNumber();//联系电话
+                            Ad_Name = list.get(position).getAd_Name();//联系人
+                            Ad_Address = list.get(position).getAd_Address();//地区地址
+                            AddressDetaile = list.get(position).getAddressDetaile();//详细地址
+                            isDefault = list.get(position).getIsDefault();//详细地址
+
+                            Intent t=new Intent(Shop_Select_Address.this,App.class);//跳转到编辑该地址页面（添加地址页面）
+                            t.putExtra("bj","bj");
+                            t.putExtra("id",id+"");
+                            t.putExtra("user_code",user_code);
+                            t.putExtra("Ad_Name",Ad_Name);
+                            t.putExtra("phone",phone);
+                            t.putExtra("Ad_Address",Ad_Address);
+                            t.putExtra("AddressDetaile",AddressDetaile);
+                            t.putExtra("isDefault",isDefault);
+
+                            startActivity(t);
+
+                        }
+
+                    }).show();
+
+
+
+                }
+            });
+
+
+            //点击删除
+            shop_delo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    new AlertDialog.Builder(Shop_Select_Address.this).setTitle("系统提示")
+                            .setMessage("确定要删除该地址嘛？")
+                            .setPositiveButton("返回",new DialogInterface.OnClickListener() {//添加确定按钮
+
+
+
+                                @Override
+
+                                public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+
+                                    // TODO Auto-generated method stub
+
+
+
+                                }
+
+                            }).setNegativeButton("确定",new DialogInterface.OnClickListener() {//添加返回按钮
+
+
+
+                        @Override
+
+                        public void onClick(DialogInterface dialog, int which) {//响应事件
+
+                            // TODO Auto-generated method stub
+
+                            //传到服务器删除
+                            id=list.get(position).getID();
+                       //     Log.e("id",id+"");
+                            user_code = list.get(position).getUser_Code();
+                       //     Log.e("user_code",user_code);
+                            phone = list.get(position).getAd_ContactNumber();//联系电话
+                            Ad_Name = list.get(position).getAd_Name();//联系人
+                            Ad_Address = list.get(position).getAd_Address();//地区地址
+                            AddressDetaile = list.get(position).getAddressDetaile();//
+                            del_address();
+
+                        }
+
+                    }).show();
+
+
+
+                }
+            });
 
 
             return view;
 
         }
     }
+
 
 
 

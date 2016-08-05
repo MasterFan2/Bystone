@@ -1,21 +1,10 @@
 package com.proton.bystone.bean;
 
 /**
- * Created by Administrator on 2016/7/22.
+ * Created by Administrator on 2016/8/1.
  */
-public class Add_Address_Ok {
-
-    /**
-     * User_Code : 会员主表编号
-     * Ad_ContactNumber : 联系电话
-     * Ad_Name : 联系人
-     * Ad_Address : 地区地址
-     * IsDefault : 是否默认(0：否，1：是,2:删除)
-     * AddressDetaile : 详细地址
-     *
-     * 添加到服务器收货地址
-     */
-
+public class shop_bjadd {
+    private String id;
     private String User_Code;
     private String Ad_ContactNumber;
     private String Ad_Name;
@@ -23,16 +12,13 @@ public class Add_Address_Ok {
     private String IsDefault;
     private String AddressDetaile;
 
-    public Add_Address_Ok( String user_Code, String ad_ContactNumber, String ad_Name, String ad_Address, String isDefault, String addressDetaile) {
-
-        User_Code = user_Code;
-        Ad_ContactNumber = ad_ContactNumber;
-        Ad_Name = ad_Name;
-        Ad_Address = ad_Address;
-        IsDefault = isDefault;
-        AddressDetaile = addressDetaile;
+    public String getId() {
+        return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUser_Code() {
         return User_Code;
@@ -79,6 +65,16 @@ public class Add_Address_Ok {
     }
 
     public void setAddressDetaile(String addressDetaile) {
+        AddressDetaile = addressDetaile;
+    }
+
+    public shop_bjadd(String id, String user_Code, String ad_ContactNumber, String ad_Name, String ad_Address, String isDefault, String addressDetaile) {
+        this.id = id;
+        User_Code = user_Code;
+        Ad_ContactNumber = ad_ContactNumber;
+        Ad_Name = ad_Name;
+        Ad_Address = ad_Address;
+        IsDefault = isDefault;
         AddressDetaile = addressDetaile;
     }
 }

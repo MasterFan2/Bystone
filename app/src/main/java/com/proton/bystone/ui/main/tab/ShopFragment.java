@@ -264,7 +264,7 @@ public class ShopFragment extends MTFBaseFragment {
             @Override
             public void onSuccess(String res) {
 
-                Log.e("123", "res=" + res);
+      //          Log.e("123", "res=" + res);
             }
 
             @Override
@@ -298,7 +298,7 @@ public class ShopFragment extends MTFBaseFragment {
             @Override
             public void onFailure(HttpException arg0, String arg1) {
                 scb.onFailure(arg0.getExceptionCode());
-                Log.e("o", "没找到");
+        //        Log.e("o", "没找到");
             }
 
             @Override
@@ -316,9 +316,9 @@ public class ShopFragment extends MTFBaseFragment {
 
     public void jiexi(String result) {
         Gson json = new Gson();
-        Log.e("o", "OK" + result);
+    //    Log.e("o", "OK" + result);
         Fist fi = json.fromJson(result, Fist.class);
-        Log.e("o", "jiexi++++" + fi.getData());
+    //    Log.e("o", "jiexi++++" + fi.getData());
 
 
         try {
@@ -359,7 +359,7 @@ public class ShopFragment extends MTFBaseFragment {
                 two.add(VC_Name);
                 three.add(VC_Url);
 
-                Log.e("多少个",three+"");
+       //         Log.e("多少个",three+"");
 
             }
 
@@ -525,7 +525,7 @@ public class ShopFragment extends MTFBaseFragment {
 
                 String content = response.body().getContent();
 
-                Log.e("能否32222332获取......",data+"");
+              //  Log.e("能否32222332获取......",data+"");
                 htpjiexi(data);
             }
 
@@ -560,7 +560,7 @@ public class ShopFragment extends MTFBaseFragment {
 
             lis2.add(l2);
         }
-        Log.e("aa",listfor+"");
+     //   Log.e("aa",listfor+"");
 
 
     }
@@ -590,7 +590,7 @@ public class ShopFragment extends MTFBaseFragment {
             public void onResponse(Call<JsonResp> call, Response<JsonResp> response) {
                 String data = response.body().getData();
 
-                Log.e("活动2", data +"");
+         //       Log.e("活动2", data +"");
                eventjiexi(data);
             }
 
