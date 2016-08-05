@@ -75,7 +75,7 @@ public class LoginManager {
      * 获取缓存的登录信息
      * @return
      */
-    public LoginResp getCacheLoginInfo() {
+    private LoginResp getCacheLoginInfo() {
         try {
             return db.findFirst(LoginResp.class);
         } catch (DbException e) {
