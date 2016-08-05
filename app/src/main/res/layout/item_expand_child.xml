@@ -28,7 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_toLeftOf="@+id/item_test_list_expand_child_price_txt"
             >
             <ImageView
                 android:id="@+id/item_test_list_expand_child_logo_img"

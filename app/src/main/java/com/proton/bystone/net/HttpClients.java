@@ -4,16 +4,31 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.proton.bystone.bean.BaseResp;
-import com.proton.bystone.bean.MaintainResp;
 import com.proton.bystone.bean.JsonResp;
+import com.proton.bystone.bean.RecognizeResp;
+import com.proton.bystone.bean.UploadResp;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 
 /**
@@ -50,9 +65,31 @@ public class HttpClients {
         mContext = context;
         gson = new Gson();
 
+        //
+        Interceptor mTokenInterceptor = new Interceptor() {
+            @Override public Response intercept(Interceptor.Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+//                if (Your.sToken == null || alreadyHasAuthorizationHeader(originalRequest)) {
+//                    return chain.proceed(originalRequest);
+//                }
+                Request authorised = originalRequest.newBuilder()
+                        .header("Authorization", "")
+                        .build();
+                return chain.proceed(authorised);
+            }
+        };
+
+        //client
+        OkHttpClient client = new OkHttpClient.Builder()
+                .retryOnConnectionFailure(true)
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .addNetworkInterceptor(mTokenInterceptor)
+                .build();
+
         // 创建适配器
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
                 .addConverterFactory( GsonConverterFactory.create())
                 .build();
 
@@ -63,6 +100,11 @@ public class HttpClients {
 
     //接口
     interface NetInterface {
+
+        @POST("http://netocr.com/api/recog.do")//识别
+        @Multipart
+        Call<RecognizeResp> recognize(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part file);
+
         @Headers({"Content-Type:application/json","Accept:application/json"})
         @POST("MemberInfoInterface")//用户管理相关接口
         Call<BaseResp> memberInfo(@Body RequestBody requestBody);
@@ -80,10 +122,14 @@ public class HttpClients {
         Call<BaseResp> orderInfo(@Body  RequestBody requestBody);
 
         @Headers({"Content-Type:application/json","Accept:application/json"})
+        @Multipart
         @POST("UploadInterFace")//文件上传相关接口
-        Call<BaseResp> upload(@Body  RequestBody requestBody);
+        Call<BaseResp> upload(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part file);
 
-
+        //@Part() List<MultipartBody.Part> parts
+        @Multipart
+        @POST("UploadListInterFace?FileBusinessType=1")//文件上传相关接口
+        Call<BaseResp> upload2(@Part() List<MultipartBody.Part> parts);
 
 
 
@@ -143,6 +189,15 @@ public class HttpClients {
 
     }
 
+    /**
+     * 图片识别
+     * @param params
+     * @param file
+     * @return
+     */
+    public Call<RecognizeResp> recognize(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part file){
+        return netInterface.recognize(params, file);
+    }
 
     /**
      * 查询所有未删除的地址
@@ -308,11 +363,17 @@ public class HttpClients {
 
     /**
      * 文件上传相关
-     * @param requestBody
+     *
+     * @param params
+     * @param file
      * @return
      */
-    public Call<BaseResp> upload(RequestBody requestBody) {
-        return netInterface.upload(requestBody);
+    public Call<BaseResp> upload(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part file) {
+        return netInterface.upload(params, file);
+    }
+
+    public Call<BaseResp> upload2(List<MultipartBody.Part> parts) {
+        return netInterface.upload2(parts);
     }
 
 }

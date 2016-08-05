@@ -279,7 +279,7 @@ public class MyCarActivity extends MTFBaseActivity {
 
             //维保首页
             if (where != null && where.equals(WHERE_FRAGMENT_MAINTENANCE_HOME)) {
-                holder.goMaintanenceBtn.setText("确定1111111");
+                holder.goMaintanenceBtn.setText("确定");
                 holder.goMaintanenceBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -383,7 +383,7 @@ public class MyCarActivity extends MTFBaseActivity {
 
     @OnClick(R.id.m_title_right_btn)
     public void rightBtnClick(View view) {
-        T.s(context, "添加爱车");
+        animStart(AddMyCarActivity.class);
     }
 
     @Override

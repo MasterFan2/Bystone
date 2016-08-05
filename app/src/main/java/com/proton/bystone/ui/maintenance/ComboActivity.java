@@ -79,6 +79,7 @@ public class ComboActivity extends MTFBaseActivity {
 
     @Override
     public void initialize(Bundle savedInstanceState) {
+
         ///
         adapter = new MyAdapter();
         expandableListView.setAdapter(adapter);

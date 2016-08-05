@@ -25,6 +25,15 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--camera-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.front" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.landscape"/>
+    <!--end camera-->
+
     <application
         android:name=".BystoneApplication"
         android:allowBackup="true"
@@ -39,14 +48,7 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".ui.main.MainActivity" android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.test.TestActivity"
             android:screenOrientation="portrait" />
@@ -134,7 +136,18 @@
         <activity
             android:name=".ui.shop.My_Shop_Pay"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.common.UpVersionActivity"></activity>
+        <activity android:name=".ui.common.UpVersionActivity" />
+        <activity android:name="com.proton.library.widget.photopicker.PhotoPickerActivity" />
+        <activity android:name=".ui.common.LaunchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.common.AddMyCarActivity" />
+        <activity android:name=".ui.common.AddCarConfirmActivity"></activity>
+        <activity android:name="com.proton.library.zxing.activity.CaptureActivity" />
     </application>
 
 </manifest>

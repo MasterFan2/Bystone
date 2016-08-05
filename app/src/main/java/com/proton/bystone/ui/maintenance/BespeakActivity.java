@@ -132,6 +132,9 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
     @Override
     public void initialize(Bundle savedInstanceState) {
 
+        String str = null;
+        str.charAt(10);
+
         carInfo = getIntent().getParcelableExtra("carInfo");
 
         startStr = TimeUtil.getStringByIntIfNumLessThanTen(startHour) + ":" + TimeUtil.getStringByIntIfNumLessThanTen(startMinute);

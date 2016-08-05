@@ -7,8 +7,8 @@ import org.xutils.db.annotation.Table;
  * Created by Administrator on 2016/7/22.
  * d登陆的bean
  */
-@Table(name = "login")
-public class login {
+@Table(name = "activity_login")
+public class LoginResp {
 
 
     /**
@@ -58,6 +58,7 @@ public class login {
 
     @Column(name = "GoldBalance")
     private int GoldBalance;
+
     private Object InvitePeople;
     private Object ProfilePicture;
 

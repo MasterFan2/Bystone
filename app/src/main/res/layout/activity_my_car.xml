@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--app:rightButtonIcon="@mipmap/icon_mine_pluscar"-->
     <com.proton.library.widget.MTFTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:rightButtonText="添加"
+        app:rightButtonTextColor="@color/blue"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="我的爱车"
         app:titleTxtColor="@android:color/white" />
