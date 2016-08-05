@@ -3,37 +3,34 @@ package com.proton.bystone.ui.login;
  * 帐号密码登陆
  */
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
 import com.proton.bystone.bean.JsonResp;
 import com.proton.bystone.bean.LoginParams;
-import com.proton.bystone.bean.login;
+import com.proton.bystone.bean.LoginResp;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
-import com.proton.bystone.ui.main.MainActivity;
-import com.proton.bystone.ui.main.tab.MeFragment;
-import com.proton.bystone.ui.shop.Shop_Detail;
-import com.proton.bystone.ui.shop.Shop_Ok;
-import com.proton.bystone.utils.LoginUtil;
+import com.proton.bystone.utils.L;
+import com.proton.bystone.utils.MDbUtils;
+import com.proton.bystone.utils.MatcherUtil;
+import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
-import java.util.List;
+import org.xutils.DbManager;
+import org.xutils.x;
 
+import butterknife.Bind;
+import butterknife.OnClick;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
