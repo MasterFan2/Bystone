@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -69,6 +70,7 @@ public class Shop_Detail extends MTFBaseActivity {
     ArrayList<String>  list=new ArrayList<String>();
     Button  shpp_bye;
     List<Shop_Two> list_a = new ArrayList<Shop_Two>();
+    List<Commodity> commodityList;
     ImageView   shop_cs;
     ImageView   shop_cx;
     ImageView   shop_jj;
@@ -222,7 +224,7 @@ public class Shop_Detail extends MTFBaseActivity {
     }
     public void get_data()
     {
-        shop_headline.setText(vcparams);
+        shop_headline.setText(vcparams);//Viewpager
         shop_member.setText(N_HYJ);
         shop_money.setText(N_FHYJ);
         shop_print.setText(Packing);
@@ -311,7 +313,8 @@ public class Shop_Detail extends MTFBaseActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               MyShoppingCar.getShoppingCar().add(commodity);
+
+                MyShoppingCar.getShoppingCar().add(commodityList.get(0));
 
             }
         });
@@ -321,7 +324,7 @@ public class Shop_Detail extends MTFBaseActivity {
             public void onClick(View v) {
 
                // String lista = getIntent().getStringExtra("list");
-                MyShoppingCar.getShoppingCar().add(commodity);
+
                 //跳转到登陆页
                 Intent t= new Intent(Shop_Detail.this,ShopCarActivity.class);
                 startActivity(t);
@@ -468,7 +471,7 @@ public class Shop_Detail extends MTFBaseActivity {
                 jiexi(result);
 
 
-              //  Log.e("eeeee555",result);
+             Log.e("eeeee555",result);
 
             }
 
@@ -476,6 +479,19 @@ public class Shop_Detail extends MTFBaseActivity {
     }
 
     public void jiexi(String result) {
+
+        try {
+            JSONObject obj = new JSONObject(result);
+            String strJsonArray = obj.getString("data");
+            JSONArray jsonArray = new JSONArray(strJsonArray);
+           commodityList = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<Commodity>>() {}.getType());
+
+            /*MyShoppingCar.getShoppingCar().add(commodityList.get(0));*/
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         Gson g = new Gson();
         Fist duanxin = g.fromJson(result, Fist.class);
         commodity = g.fromJson(result, Commodity.class);
@@ -521,8 +537,6 @@ public class Shop_Detail extends MTFBaseActivity {
                 String  VC_Url = (String) jsonObject.get("VC_Url");
                 int  PostagePrice = (int) jsonObject.get("PostagePrice");
 
-
-
                 commodity.setN_HYJ(N_HYJ);
                 commodity.setN_FHYJ(N_FHYJ);
                 commodity.setVC_Params(vcparams);
@@ -546,6 +560,11 @@ public class Shop_Detail extends MTFBaseActivity {
 
 
             }
+
+
+
+
+
 
 
            Shop_Liebiao three = new Shop_Liebiao();//第一个实体
