@@ -255,10 +255,10 @@ public class Shop_Detail extends MTFBaseActivity {
         shop_date.setText(CommTime);//日期
         shop_pingjia.setText(CommContent);
 
-       BitmapUtils   bit=new BitmapUtils(this);
-        bit.display(shop_pingjiaimage1, aa+ary[0] );
+        BitmapUtils   bit=new BitmapUtils(this);
+       /* bit.display(shop_pingjiaimage1, aa+ary[0] );
         bit.display(shop_pingjiaimage2, aa+ary[1] );
-        bit.display(shop_pingjiaimage3, aa+ary[2] );
+        bit.display(shop_pingjiaimage3, aa+ary[2] );*/
 
     }
 
@@ -401,18 +401,18 @@ public class Shop_Detail extends MTFBaseActivity {
         bean.key = "pbevyvHkf1sFtyGL35gFfQ==";
         bean.methodName = "GetCommodityDetail";
         ArrayList<String> list=new ArrayList<String>();
-       // String vccode = getIntent().getStringExtra("vccode");
+       String vccode = getIntent().getStringExtra("vccode");
 
-       /* list.add("{Type:'String'");
+       list.add("{Type:'String'");
         list.add("Value:"+vccode+"}");
 
         Log.e("list",list+"");
-*/
+
         /*bean.para = "[{Type:'string',Value:'14629770639'}]";*/
   //      bean.para=list+"";
 
-        list.add("{Type:'string'");
-        list.add("Value:"+"2016052317205144748}");
+      /*  list.add("{Type:'string'");
+        list.add("Value:"+"2016052317205144748}");*/
         //list.add("Value:"+"2016052317205143311}");
 
        // Log.e("list",list+"");
@@ -606,10 +606,10 @@ public class Shop_Detail extends MTFBaseActivity {
 
            }
 
-           ary = Path.split(",");
+         /*  ary = Path.split(",");
            for (int i = 0; i < ary.length; i++) {
              //  Log.e("111111111111",ary[i]+"");
-           }
+           }*/
 
 
            //加载各种数据
@@ -671,7 +671,7 @@ class JuleBuhomeadapter89 extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return M_Model.size();
+        return M_Model == null ? 0 : M_Model.size();
     }
 
     @Override
