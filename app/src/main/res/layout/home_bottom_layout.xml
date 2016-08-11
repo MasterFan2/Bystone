@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/mtf_gray_600"
     android:orientation="vertical">
 
     <LinearLayout
@@ -29,23 +28,22 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/ib_weixin"
+                    android:id="@+id/tab_home_img"
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_centerHorizontal="true"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/github_circle"/>
+                    android:src="@mipmap/icon_tab_home_sel"/>
 
                 <TextView
                     android:id="@+id/home_index_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ib_weixin"
+                    android:layout_below="@id/tab_home_img"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:text="首页"
-                    android:textColor="@android:color/white"
                     android:textSize="12sp"/>
 
                 <TextView
@@ -78,23 +76,22 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/ib_contact_list"
+                    android:id="@+id/tab_maint_img"
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_centerHorizontal="true"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_book_black_24dp"/>
+                    android:src="@mipmap/icon_tab_maint_nor"/>
 
                 <TextView
                     android:id="@+id/tv_contact_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ib_contact_list"
+                    android:layout_below="@id/tab_maint_img"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
-                    android:text="维保"
-                    android:textColor="@android:color/white"
+                    android:text="保养"
                     android:textSize="12sp"/>
 
                 <TextView
@@ -127,23 +124,22 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/ib_find"
+                    android:id="@+id/tab_shop_img"
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
                     android:layout_centerHorizontal="true"
                     android:focusable="false"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_favorite_black_24dp"/>
+                    android:src="@mipmap/icon_tab_shop_nor"/>
 
                 <TextView
                     android:id="@+id/tv_find"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ib_find"
+                    android:layout_below="@id/tab_shop_img"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:text="商城"
-                    android:textColor="@android:color/white"
                     android:textSize="12sp"/>
 
                 <TextView
@@ -157,7 +153,7 @@
                     android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="12sp"
-                    android:visibility="visible"/>
+                    android:visibility="invisible"/>
             </RelativeLayout>
         </RelativeLayout>
 
@@ -170,23 +166,22 @@
             android:padding="3dp">
 
             <ImageView
-                android:id="@+id/ib_profile"
+                android:id="@+id/tab_mine_img"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_mic_black_24dp"/>
+                android:src="@mipmap/icon_tab_min_nor"/>
 
             <TextView
                 android:id="@+id/tv_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ib_profile"
+                android:layout_below="@id/tab_mine_img"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="3dp"
-                android:text="我"
-                android:textColor="@android:color/white"
+                android:text="我的"
                 android:textSize="12sp"/>
         </RelativeLayout>
     </LinearLayout>

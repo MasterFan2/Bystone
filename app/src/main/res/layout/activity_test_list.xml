@@ -12,7 +12,7 @@
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="爱车检测单"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

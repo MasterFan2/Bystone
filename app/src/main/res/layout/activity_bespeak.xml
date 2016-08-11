@@ -12,7 +12,7 @@
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="上门保养"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,7 +46,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    >
 
                     <TextView
                         android:id="@+id/bespeak_year_month_day_txt"
@@ -191,6 +194,7 @@
                         android:hint="方便服务人员与您联系"
                         android:singleLine="true"
                         android:text="张三"
+                        android:padding="10dp"
                         android:imeOptions="actionNext"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -215,6 +219,7 @@
                         android:hint="请输入电话"
                         android:text="13512365892"
                         android:imeOptions="actionNext"
+                        android:padding="10dp"
                         android:singleLine="true"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -240,8 +245,7 @@
                     android:background="@null"
                     android:hint="填写备注信息"
                     android:maxLines="2"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:padding="10dp"
                     android:textSize="14sp" />
             </LinearLayout>
         </ScrollView>

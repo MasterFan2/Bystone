@@ -25,15 +25,18 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--camera-->
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.front" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
-    <uses-feature android:name="android.hardware.screen.landscape"/>
-    <!--end camera-->
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.screen.landscape" />
 
+    <!-- end camera -->
     <application
         android:name=".BystoneApplication"
         android:allowBackup="true"
@@ -48,7 +51,8 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name=".ui.main.MainActivity" android:screenOrientation="portrait"/>
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.test.TestActivity"
             android:screenOrientation="portrait" />
@@ -146,8 +150,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.common.AddMyCarActivity" />
-        <activity android:name=".ui.common.AddCarConfirmActivity"></activity>
+        <activity android:name=".ui.common.AddCarConfirmActivity" />
         <activity android:name="com.proton.library.zxing.activity.CaptureActivity" />
+        <activity android:name=".ui.shopcar.OrderConfirmActivity"></activity>
     </application>
 
 </manifest>

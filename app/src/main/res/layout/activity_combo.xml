@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         app:titleText="上门保养"
         app:rightButtonHide="true"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

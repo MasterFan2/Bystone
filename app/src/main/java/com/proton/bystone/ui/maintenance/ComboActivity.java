@@ -18,8 +18,12 @@ import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
 import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.CarCombo;
+import com.proton.bystone.bean.CarInfo;
 import com.proton.bystone.bean.ComboKey;
 import com.proton.bystone.bean.LoginParams;
+import com.proton.bystone.bean.LoginResp;
+import com.proton.bystone.bean.ReservationParams2;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.LoginActivity;
@@ -28,6 +32,7 @@ import com.proton.bystone.utils.LoginUtil;
 import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
+import com.proton.library.utils.ActivityManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -72,6 +77,7 @@ public class ComboActivity extends MTFBaseActivity {
 
     private int hourCharge = 0;//工时费
 
+    private CarInfo carInfo = null;
 
     ///保存组装后的数据  重复的添加到一个key中。
     ArrayList<ComboKey> keys = new ArrayList<>();
@@ -80,6 +86,7 @@ public class ComboActivity extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
 
+        carInfo = getIntent().getParcelableExtra("carInfo");
         ///
         adapter = new MyAdapter();
         expandableListView.setAdapter(adapter);
@@ -91,15 +98,21 @@ public class ComboActivity extends MTFBaseActivity {
         });
         ///
         getData();
+
+        ActivityManager.getInstance().addActivity(this);//预约成功时， 关闭Activity
     }
 
     private void getData() {
+        if (carInfo == null) {
+            T.s(context, "无法获取车辆信息");
+            return;
+        }
         //获取车辆热门品牌
         final RequestBody requestBody = new ParamsBuilder<LoginParams>()
                 .key("pbevyvHkf1sFtyGL35gFfQ==")
                 .methodName("GetApplicableModelsGoods")
                 .gson(new Gson())
-                .typeValue("string", "2016053018491859")//2016053018491859临时写死
+                .typeValue("string", carInfo.getI_CarDetail())//2016053018491859临时写死
                 .build();
         Call<BaseResp> call = HttpClients.getInstance().maintenance(requestBody);
         call.enqueue(new Callback<BaseResp>() {
@@ -123,6 +136,7 @@ public class ComboActivity extends MTFBaseActivity {
 
                                 if (key.getType_CODE().equals("201607011037086328")) {//必选项
                                     value.setDisable(true);
+                                    value.setChecked(true);
                                 }
 
                                 if (key.getType_CODE().equals("201605231700199538")) {//可选项
@@ -393,7 +407,22 @@ public class ComboActivity extends MTFBaseActivity {
      */
     @OnClick(R.id.combo_confirm_btn)
     public void confirmClick(View v) {
-        animStart(BespeakActivity.class);
+
+        ArrayList<ReservationParams2> params2List = new ArrayList<>();
+
+        for (Map.Entry<ComboKey, ArrayList<CarCombo>> entry : maps.entrySet()) {
+            ArrayList<CarCombo> vList = entry.getValue();
+            for (CarCombo combo : vList) {
+                if (combo.isChecked()) {
+                    ReservationParams2 params2 = new ReservationParams2(LoginManager.getInstance().getLoginInfo().getMb_Code(), combo.getType_CODE(), combo.getPt_Code());
+                    params2List.add(params2);
+                }
+            }
+        }
+        Intent intent = new Intent(context, BespeakActivity.class);
+        intent.putExtra("carInfo", carInfo);
+        intent.putParcelableArrayListExtra("params2", params2List);
+        animStart(intent);
 //        if (LoginUtil.checkLogin(context)) {
 //            animStart(BespeakActivity.class);
 //        }else {
@@ -416,11 +445,13 @@ public class ComboActivity extends MTFBaseActivity {
 
     @Override
     public void backPressed() {
+        ActivityManager.getInstance().delActivity(this);//预约成功时， 关闭Activity
         animFinish();
     }
 
     @OnClick(R.id.m_title_left_btn)
     public void back(View view) {
+        ActivityManager.getInstance().delActivity(this);//预约成功时， 关闭Activity
         animFinish();
     }
 }

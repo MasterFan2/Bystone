@@ -12,7 +12,7 @@
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="保养订单"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

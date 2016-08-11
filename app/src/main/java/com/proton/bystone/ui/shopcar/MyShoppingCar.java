@@ -32,7 +32,11 @@ public class MyShoppingCar {
      * @param commodity 添加的商品
      */
     public synchronized void add(Commodity commodity) {
-        if (commodity == null) return;
+
+        if (commodity == null) return;//数据为空直接结束
+
+        commodity.setChecked(true);//设置默认选中状态
+
         if (commodities .size() == 0) {//第一次向购物车添加数据
             commodity.increment();
             commodities.add(commodity);
@@ -48,6 +52,7 @@ public class MyShoppingCar {
             if (findCommodity != null){//购物车中已经存在相同的商品
                 findCommodity.increment();
             }else {                   //准备添加的商品在购物车中不存在， 直接添加 到购物车
+                commodity.increment();
                 commodities.add(commodity);
             }
         }

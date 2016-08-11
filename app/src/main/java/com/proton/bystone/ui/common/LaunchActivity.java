@@ -98,12 +98,13 @@ public class LaunchActivity extends MTFBaseActivity {
 //                    showDialog(versionInfo);
 //                } else {
 //                    animStart(MainActivity.class);
+//                    finish();
 //                }
 //            }
 //
 //            @Override
 //            public void onFailure(Call<BaseResp> call, Throwable t) {
-//                L.e("getThirdLevelYear::" + t.getMessage());
+//                L.e("checkVersion::" + t.getMessage());
 //            }
 //        });
     }

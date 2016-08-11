@@ -10,9 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:rightButtonHide="true"
+
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="购物车"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,21 +36,37 @@
             android:paddingRight="8dp"
             >
 
-            <CheckBox
-                android:id="@+id/shopping_car_cbx"
+            <LinearLayout
+                android:id="@+id/shop_car_ckb_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_centerVertical="true"
-                android:paddingLeft="8dp"
-                android:button="@drawable/checkbox_state"
-                android:text="全选" />
+                >
+                <View
+                    android:id="@+id/shopping_car_cbx"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="8dp"
+                    android:background="@mipmap/icon_checkbox_sel"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全选"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    style="@style/TextHeader"
+                    />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/shopping_car_pay_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="结算(3)" />
+                android:text="结算(0)" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -70,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="￥111.00" />
+                    android:text="￥0.00" />
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>

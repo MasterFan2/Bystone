@@ -110,11 +110,13 @@ public class MeFragment extends MTFBaseFragment {
       Refresh();
         boolean login = LoginManager.getInstance().isLogin();
         LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
-        my_humname.setText(loginInfo.getMb_Name());
-        my_phone.setText(loginInfo.getMb_LoginName());
-        my_login.setVisibility(View.GONE);
-        my_humname.setVisibility(View.VISIBLE);
-        my_phone.setVisibility(View.VISIBLE);
+        if (loginInfo != null) {
+            my_humname.setText(loginInfo.getMb_Name());
+            my_phone.setText(loginInfo.getMb_LoginName());
+            my_login.setVisibility(View.GONE);
+            my_humname.setVisibility(View.VISIBLE);
+            my_phone.setVisibility(View.VISIBLE);
+        }
 
 
 

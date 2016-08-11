@@ -11,7 +11,7 @@
         android:layout_height="?attr/actionBarSize"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="我的爱车详情"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <ScrollView
         android:layout_width="match_parent"
