@@ -3,7 +3,7 @@ package com.proton.bystone.bean;
 /**
  * Created by Administrator on 2016/8/10.
  */
-public class Mb_Code {
+public class Mb_code {
     private   String UserCode;
 
     public String getUserCode() {
@@ -14,7 +14,7 @@ public class Mb_Code {
         UserCode = userCode;
     }
 
-    public Mb_Code(String userCode) {
+    public Mb_code(String userCode) {
         UserCode = userCode;
     }
 }

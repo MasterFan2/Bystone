@@ -3,12 +3,12 @@ package com.proton.bystone.bean;
 /**
  * Created by Administrator on 2016/8/10.
  */
-public class Fankui {
+public class fankui {
     private  String UserCode;
     private  String OpinionsContent;
     private  int MobileType;
 
-    public Fankui(String userCode, String opinionsContent, int mobileType) {
+    public fankui(String userCode, String opinionsContent, int mobileType) {
         UserCode = userCode;
         OpinionsContent = opinionsContent;
         MobileType = mobileType;
