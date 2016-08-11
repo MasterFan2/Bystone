@@ -78,7 +78,7 @@ public class MeFragment extends MTFBaseFragment {
     RelativeLayout my_exite;//点此可退出
     LoginResp loginInfo;
 
-    boolean login;
+    boolean login;///aaaaaaa
 
     public MeFragment() {
         // Required empty public constructor
