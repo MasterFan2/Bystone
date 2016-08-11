@@ -148,6 +148,55 @@
         <activity android:name=".ui.common.AddMyCarActivity" />
         <activity android:name=".ui.common.AddCarConfirmActivity"></activity>
         <activity android:name="com.proton.library.zxing.activity.CaptureActivity" />
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+
+        <activity
+            android:name=".pay.PayActivity"
+            android:label="@string/app_name"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="wx80cb910cfa56f7a6"/> //写入你的appid
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".pay.app.PayDemoActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".pay.app.H5PayDemoActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+
+        <activity
+            android:name=".ui.shop.My_Tuihuo"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".ui.shop.Shop_Ckwu"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".ui.shop.shop_Sh"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+
+
+
     </application>
 
 </manifest>
