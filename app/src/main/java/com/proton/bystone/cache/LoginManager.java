@@ -92,7 +92,7 @@ public class LoginManager {
         this.loginInfo = null;
         try {
             LoginResp loginInfo = db.findFirst(LoginResp.class);
-            if (null != null) {
+            if (null != loginInfo) {
                 db.delete(loginInfo);
             }
             return true;

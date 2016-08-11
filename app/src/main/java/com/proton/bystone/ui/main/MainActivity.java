@@ -1,48 +1,27 @@
 package com.proton.bystone.ui.main;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
-import com.proton.bystone.bean.BaseResp;
-import com.proton.bystone.bean.OrderStateCodeResp;
-import com.proton.bystone.bean.ReservationParam;
-import com.proton.bystone.bean.Version;
-import com.proton.bystone.net.HttpClients;
-import com.proton.bystone.net.ParamsBuilder;
-import com.proton.bystone.ui.common.UpVersionActivity;
 import com.proton.bystone.ui.main.tab.HomeFragment;
 import com.proton.bystone.ui.main.tab.MaintenanceFragment;
 import com.proton.bystone.ui.main.tab.MeFragment;
 import com.proton.bystone.ui.main.tab.ShopFragment;
-import com.proton.bystone.ui.maintenance.OrderStateActivity;
-import com.proton.bystone.ui.shopcar.ShopCarActivity;
 import com.proton.bystone.utils.L;
-import com.proton.bystone.utils.PackageUtil;
-import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.widget.mtfdialog.MTDialog;
 import com.proton.library.widget.mtfdialog.OnClickListener;
-import com.proton.library.widget.mtfdialog.ViewHolder;
-
-import java.util.List;
 
 import butterknife.Bind;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * 主界面
@@ -51,7 +30,7 @@ import retrofit2.Response;
 @MTFActivityFeature(layout = R.layout.activity_main)
 public class MainActivity extends MTFBaseActivity implements OnClickListener {
 
-    private int index = 0;       //touched index
+    private int index = -1;       //touched index
     private int currentIndex = 0;//current selected
 
 
@@ -61,20 +40,20 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     private ShopFragment shopFragment;
     private MeFragment meFragment;
     private MTFBaseFragment[] fragments;
-    private RelativeLayout[] layouts;//set background
+    private ImageView[] imageViews;//set background
 
     //click area
-    @Bind(R.id.home_home_layout)
-    RelativeLayout homeLayout;
+    @Bind(R.id.tab_home_img)
+    ImageView homeImg;
 
-    @Bind(R.id.home_maintain_layout)
-    RelativeLayout maintainLayout;
+    @Bind(R.id.tab_maint_img)
+    ImageView maintImg;
 
-    @Bind(R.id.home_shop_layout)
-    RelativeLayout shopLayout;
+    @Bind(R.id.tab_shop_img)
+    ImageView shopImg;
 
-    @Bind(R.id.home_me_layout)
-    RelativeLayout meLayout;
+    @Bind(R.id.tab_mine_img)
+    ImageView mineImg;
 
     Activity mActivity;
 
@@ -118,8 +97,7 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
                 .hide(meFragment).show(homeFragment).commit();
 
         //layout
-        layouts = new RelativeLayout[]{homeLayout, maintainLayout, shopLayout, meLayout};
-        layouts[0].setBackgroundColor(getResources().getColor(R.color.mtf_gray_700));
+        imageViews = new ImageView[]{homeImg, maintImg, shopImg, mineImg};
     }
 
     @Override
@@ -128,8 +106,23 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private long exitTime = 0L;
+
+    @Override
     public void backPressed() {
-        animFinish();
     }
 
     /**
@@ -141,29 +134,37 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
         switch (view.getId()) {
             case R.id.home_home_layout:
                 index = 0;
-//                titleView.setTitleText("首页");
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_sel);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
                 break;
             case R.id.home_maintain_layout:
                 index = 1;
-//                titleView.setTitleText("维保");
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_sel);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
                 break;
             case R.id.home_shop_layout:
                 index = 2;
-//                titleView.setTitleText("商城");
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_sel);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
                 break;
             case R.id.home_me_layout:
                 index = 3;
-//                titleView.setTitleText("我");
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_sel);
                 break;
         }
-
-        //
         if (index != currentIndex) {
             getSupportFragmentManager().beginTransaction()
                     .hide(fragments[currentIndex])
                     .show(fragments[index]).commit();
-            layouts[currentIndex].setBackgroundColor(getResources().getColor(android.R.color.transparent));
-            layouts[index].setBackgroundColor(getResources().getColor(R.color.mtf_gray_700));
             fragments[index].load();//加载数据
             currentIndex = index;
         }
@@ -173,11 +174,5 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     @Override
     public void onClick(MTDialog dialog, View view) {
 
-    }
-
-    public void tiaozhuan()
-    {
-        Intent t= new Intent(this,ShopCarActivity.class);
-        startActivity(t);
     }
 }

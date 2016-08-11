@@ -26,6 +26,8 @@ import com.proton.bystone.bean.CarInfo;
 import com.proton.bystone.bean.MyLocation;
 import com.proton.bystone.bean.OrderStateCodeResp;
 import com.proton.bystone.bean.ReservationParam;
+import com.proton.bystone.bean.ReservationParams2;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.config.Config;
 import com.proton.bystone.location.LocationManager;
 import com.proton.bystone.net.HttpClients;
@@ -38,11 +40,13 @@ import com.proton.bystone.utils.T;
 import com.proton.bystone.utils.TimeUtil;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
+import com.proton.library.utils.ActivityManager;
 import com.proton.library.widget.dialog.KProgressHUD;
 import com.proton.library.widget.picker.date.DatePickerDialog;
 import com.proton.library.widget.picker.time.RadialPickerLayout;
 import com.proton.library.widget.picker.time.TimePickerDialog;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -124,6 +128,8 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
     private boolean isGetting = false;//如果正在获取, 则路过当前获取
 
+    private ArrayList<ReservationParams2> params2List = null;
+
     /**
      * init
      *
@@ -132,10 +138,8 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
     @Override
     public void initialize(Bundle savedInstanceState) {
 
-        String str = null;
-        str.charAt(10);
-
         carInfo = getIntent().getParcelableExtra("carInfo");
+        params2List = getIntent().getParcelableArrayListExtra("params2");
 
         startStr = TimeUtil.getStringByIntIfNumLessThanTen(startHour) + ":" + TimeUtil.getStringByIntIfNumLessThanTen(startMinute);
         endStr = TimeUtil.getStringByIntIfNumLessThanTen(endHour) + ":" + TimeUtil.getStringByIntIfNumLessThanTen(endMinute);
@@ -158,8 +162,7 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
             previousAddrTxt.setText("上次地址:" + previousLoc.getAddr());
         }
 
-//        LocationManager.getInstance().stopLocation();  //结束定位
-//        LocationManager.getInstance().destroy();       //销毁   在activity的onDestroy中调用
+        ActivityManager.getInstance().addActivity(this);//预约成功时， 关闭Activity
     }
 
     public void gotoShopcar(View view) {
@@ -308,7 +311,8 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
         //bookuser 就是昵称
         ReservationParam param = new ReservationParam("", temp.getAddr(), temp.getLongitude() + "", temp.getLatitude() + "", "1", remark,
-                Config.USER_CODE, carInfo.getM_Model(), "小强", name, "1", phone, carInfo.getVC_CarNO(), startTime, endTime);
+                LoginManager.getInstance().getLoginInfo().getMb_Code(), carInfo.getM_Model(),  LoginManager.getInstance().getLoginInfo().getMb_Name(),
+                LoginManager.getInstance().getLoginInfo().getMb_LoginName(), "1", phone, carInfo.getVC_CarNO(), startTime, endTime);
 
         //提交预定信息
         final RequestBody requestBody = new ParamsBuilder<ReservationParam>()
@@ -316,18 +320,20 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
                 .methodName("MaintenanceReservation")
                 .gson(new Gson())
                 .object(param)
+                .object(params2List)
                 .build();
         Call<BaseResp> call = HttpClients.getInstance().maintenance(requestBody);
         call.enqueue(new Callback<BaseResp>() {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 if (response.body().getCode() == 1) {
-                    List<OrderStateCodeResp> orderStateResps = new Gson().fromJson(response.body().getData(), new TypeToken<List<OrderStateCodeResp>>() {
-                    }.getType());
+                    List<OrderStateCodeResp> orderStateResps = new Gson().fromJson(response.body().getData(), new TypeToken<List<OrderStateCodeResp>>(){}.getType());
                     T.s(context, "预约成功");
                     Intent intent = new Intent(context, OrderStateActivity.class);
                     intent.putExtra("code", orderStateResps.get(0).getCode());//orderStateResps.get(0).getCode()201605091528083056
                     animStart(intent);
+
+                    ActivityManager.getInstance().finishAllActivity();//预约成功， 结束 之前 的activity
                 } else {
                     T.s(context, "预约失败");
                 }
@@ -413,11 +419,13 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
     @Override
     public void backPressed() {
+        ActivityManager.getInstance().delActivity(this);//预约成功时， 关闭Activity
         animFinish();
     }
 
     @OnClick(R.id.m_title_left_btn)
     public void back(View view) {
+        ActivityManager.getInstance().delActivity(this);//预约成功时， 关闭Activity
         animFinish();
     }
 

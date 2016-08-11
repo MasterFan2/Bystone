@@ -137,23 +137,26 @@ public class UpVersionActivity extends MTFBaseActivity {
         if (version.getWhetherToForce() == 1) {//强制更新
             new AlertDialog.Builder(context).setTitle("提示您")
                     .setMessage("您的版本过旧, 放弃更新将不能正常使用， 确定退出?")
-//                    .setView(view)
+                    .setCancelable(false)
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-
-//                            tilesFrameLayout.startAnimation();
                             setResult(FORCE_UPDATE_CANCEL);
                             animFinish();
-//                            popField.popView(percentTxt);
                         }
                     })
-                    .setNegativeButton("取消", null)
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            animStart(MainActivity.class);
+                            finish();
+                        }
+                    })
                     .create()
                     .show();
         } else {//可选更新
             animStart(MainActivity.class);
+            finish();
         }
     }
 

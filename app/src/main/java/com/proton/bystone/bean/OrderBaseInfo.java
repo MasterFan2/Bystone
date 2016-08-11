@@ -10,7 +10,7 @@ public class OrderBaseInfo {
      * BookCode : 201607231653584604
      * UserName : 张三
      * Mobile : 13512365892
-     * Address : 重庆市江北区
+     * AddressMTF : 重庆市江北区
      * BookBeginTime : 2016-07-23 08:54:00至2016-07-23 09:54:00
      * BookStaus : 0
      */

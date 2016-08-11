@@ -16,6 +16,7 @@ public class Add_Address_Ok {
      * 添加到服务器收货地址
      */
 
+    private int ID;
     private String User_Code;
     private String Ad_ContactNumber;
     private String Ad_Name;
@@ -33,6 +34,13 @@ public class Add_Address_Ok {
         AddressDetaile = addressDetaile;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public String getUser_Code() {
         return User_Code;

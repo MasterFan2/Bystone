@@ -5,44 +5,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.BitmapUtils;
 import com.proton.bystone.R;
-import com.proton.bystone.bean.Address;
-import com.proton.bystone.bean.BaseResp;
-import com.proton.bystone.bean.Ddxq;
-import com.proton.bystone.bean.JsonResp;
 import com.proton.bystone.bean.Jwul;
 import com.proton.bystone.bean.Wldh;
-import com.proton.bystone.net.HttpClients;
-import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.pay.KdniaoTrackQueryAPI;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/8/9.

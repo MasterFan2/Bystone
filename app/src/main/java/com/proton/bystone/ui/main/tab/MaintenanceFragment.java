@@ -44,6 +44,7 @@ import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
 import com.proton.library.widget.CircleIndicator;
 import com.proton.library.widget.MyListView;
+import com.proton.library.zxing.activity.CaptureActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -115,6 +116,11 @@ public class MaintenanceFragment extends MTFBaseFragment {
      */
     public MaintenanceFragment() {
         // Required empty public constructor
+    }
+
+    @OnClick(R.id.m_title_right_btn)
+    public void scanClick(View view) {
+        animStart(CaptureActivity.class);
     }
 
 //    @Override
@@ -221,8 +227,7 @@ public class MaintenanceFragment extends MTFBaseFragment {
                     if (response.body() != null && !TextUtils.isEmpty(response.body().getData())) {
                         try {
                             JSONArray jsonArray = new JSONArray(response.body().getData());
-                            List<CarCombo> carCombos = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<CarCombo>>() {
-                            }.getType());
+                            List<CarCombo> carCombos = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<CarCombo>>() {}.getType());
                             CarComboMaintenance comboMaintenance = null;
                             if (isDefault) {//保存默认套餐
                                 comboMaintenance = new CarComboMaintenance(defaultCarInfo.getB_Name(), defaultCarInfo.getI_CarDetail(), carCombos);
@@ -389,8 +394,7 @@ public class MaintenanceFragment extends MTFBaseFragment {
 
         @Override
         public int getCount() {
-            int size = adverts == null ? 0 : adverts.size();
-            return size;
+            return adverts == null ? 0 : adverts.size();
         }
 
         @Override
@@ -512,7 +516,9 @@ public class MaintenanceFragment extends MTFBaseFragment {
             holder.comboLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    animStart(ComboActivity.class);
+                    Intent intent = new Intent(context, ComboActivity.class);
+                    intent.putExtra("carInfo", defaultCarInfo == null ? chooseCarInfo : defaultCarInfo);
+                    animStart(intent);
                 }
             });
 
@@ -584,12 +590,10 @@ public class MaintenanceFragment extends MTFBaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        L.e("Maintain:onAttach>>>");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        L.e("Maintain:onDetach>>>");
     }
 }

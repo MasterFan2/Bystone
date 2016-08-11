@@ -4,7 +4,7 @@ package com.proton.bystone.bean;
  * Created by Administrator on 2016/8/8.
  * 退货
  */
-public class Cbms {
+public class cbms {
 
     /**
      * OrderCode : 订单编号
@@ -23,7 +23,7 @@ public class Cbms {
     private String Path;
 
 
-    public Cbms(String orderCode, String returnTheReason, String path, String busCode, String userCode, String cmtyCode) {
+    public cbms(String orderCode, String returnTheReason, String path, String busCode, String userCode, String cmtyCode) {
         OrderCode = orderCode;
         ReturnTheReason = returnTheReason;
         Path = path;

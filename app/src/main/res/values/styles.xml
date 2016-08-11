@@ -25,7 +25,7 @@
     <style name="TextHeader">
         <item name="android:textSize">@dimen/header_font_size</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:singleLine">true</item>
+        <!--<item name="android:singleLine">true</item>-->
     </style>
 
     <style name="TextDesc">
@@ -42,16 +42,16 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.25dp</item>
         <item name="android:background">@color/mtf_gray_400</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <!--<item name="android:layout_marginTop">5dp</item>-->
+        <!--<item name="android:layout_marginBottom">5dp</item>-->
     </style>
 
     <style name="DivideLine_B">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">10dp</item>
         <item name="android:background">@color/mtf_gray_300</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+        <!--<item name="android:layout_marginTop">5dp</item>-->
+        <!--<item name="android:layout_marginBottom">5dp</item>-->
     </style>
 
     <style name="MMLineActionButton" parent="@style/MMLineButton"/>

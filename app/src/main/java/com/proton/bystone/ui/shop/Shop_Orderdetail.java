@@ -1,16 +1,12 @@
 package com.proton.bystone.ui.shop;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.BitmapUtils;
 import com.proton.bystone.R;
-import com.proton.bystone.bean.Address;
+import com.proton.bystone.bean.AddressMTF;
 import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.Ddxq;
 import com.proton.bystone.net.HttpClients;
@@ -29,9 +25,6 @@ import com.proton.bystone.ui.shopcar.ShopCarActivity;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -52,7 +45,7 @@ public class Shop_Orderdetail extends MTFBaseActivity {
     TextView shop_zje;
     TextView dikou;
     TextView shop_shr;
-    Address shop_pay;
+    AddressMTF shop_pay;
     String data;
     TextView shop_addr;
     TextView shop_phone;
@@ -159,7 +152,7 @@ public class Shop_Orderdetail extends MTFBaseActivity {
 
 
 
-        shop_pay = new Gson().fromJson(address, new TypeToken<Address>() {
+        shop_pay = new Gson().fromJson(address, new TypeToken<AddressMTF>() {
         }.getType());
         shop_shr.setText(shop_pay.getAd_Name());//收货人
         shop_addr.setText(shop_pay.getAd_Address());//地址

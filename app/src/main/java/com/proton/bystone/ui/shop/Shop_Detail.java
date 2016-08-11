@@ -156,12 +156,12 @@ public class Shop_Detail extends MTFBaseActivity {
         initview();
     }
 
-    @OnClick(R.id.shop_shopping_cart)
-    public void addToShoppingCar(View view) {
-        //DataBean
-        MyShoppingCar.getShoppingCar().add(null);//add shopping car
-//        animStart(ShopCarActivity.class);go to Shopping car
-    }
+//    @OnClick(R.id.shop_shopping_cart)
+//    public void addToShoppingCar(View view) {
+//        //DataBean
+//        MyShoppingCar.getShoppingCar().add(null);//add shopping car
+////        animStart(ShopCarActivity.class);go to Shopping car
+//    }
 
 
     @OnClick(R.id.Home_fh)

@@ -7,19 +7,12 @@ import java.util.ArrayList;
  */
 public class CarCombo {
 
-    /**
-     * I_ProCode : 2016052317205144748
-     * Type_CODE : 201605231700199538
-     * Ps_NAME : 空气滤清器
-     * VC_Name : 空气滤芯
-     * N_FHYJ : 0.0100
-     * N_HYJ : 2.0000
-     * VC_Note : PHA+5Z+65pys6YCC5ZCI5omA5pyJ6L2m5Z6LPC9wPg==
-     * I_CarDetail : 2016053018491859
-     * VC_Url : /Uplaod/Attachment/20160713/20160713145112344.jpg
-     * VC_XH : 适配所有型号
-     */
 
+    private String Pt_Code;
+    private String SeckilPrice;
+    private int IsSeckill;
+    private String VC_Rule;
+    private String VC_PP;
     private String I_ProCode;
     private String Type_CODE;
     private String Ps_NAME;
@@ -37,6 +30,46 @@ public class CarCombo {
     private boolean disable;//是否禁用
     private boolean checked;//是否选中
     private boolean canCanceled;
+
+    public String getPt_Code() {
+        return Pt_Code;
+    }
+
+    public void setPt_Code(String pt_Code) {
+        Pt_Code = pt_Code;
+    }
+
+    public String getSeckilPrice() {
+        return SeckilPrice;
+    }
+
+    public void setSeckilPrice(String seckilPrice) {
+        SeckilPrice = seckilPrice;
+    }
+
+    public int getIsSeckill() {
+        return IsSeckill;
+    }
+
+    public void setIsSeckill(int isSeckill) {
+        IsSeckill = isSeckill;
+    }
+
+    public String getVC_Rule() {
+        return VC_Rule;
+    }
+
+    public void setVC_Rule(String VC_Rule) {
+        this.VC_Rule = VC_Rule;
+    }
+
+    public String getVC_PP() {
+        return VC_PP;
+    }
+
+    public void setVC_PP(String VC_PP) {
+        this.VC_PP = VC_PP;
+    }
 
     public ArrayList<CarCombo> getData() {
         return Data;

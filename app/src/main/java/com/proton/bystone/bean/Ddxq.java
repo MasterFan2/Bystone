@@ -8,7 +8,7 @@ public class Ddxq {
 
     /**
      * ChildOrderNumber : 201605091528083056
-     * Address : {"Ad_ContactNumber":"18225026697","Ad_Name":"邓强","Ad_Address":"重庆市-九龙坡区-华奥小区"}
+     * AddressMTF : {"Ad_ContactNumber":"18225026697","Ad_Name":"邓强","Ad_Address":"重庆市-九龙坡区-华奥小区"}
      * OCode : 201605091528083056
      * UserCode : 201605261656057265
      * VCCode : 201605231720514338

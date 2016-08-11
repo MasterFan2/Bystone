@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/icon_local" />
+
+        <LinearLayout
+            android:id="@+id/header_order_confirm_right_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/header_order_confirm_name_txt"
+                    style="@style/TextHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收货人：-"
+                    />
+
+                <TextView
+                    android:id="@+id/header_order_confirm_phone_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="-"
+                    android:textColor="@color/mtf_gray_900"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/header_order_confirm_addr_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableRight="@mipmap/icon_right"
+                android:drawablePadding="8dp"
+                android:text="-" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/DivideLine_B"/>
+    <TextView
+        android:id="@+id/header_order_confirm_goldcoin_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="你共有280金币"
+        android:padding="10dp"
+        android:textColor="@color/blue"
+        />
+    <View style="@style/DivideLine_B"/>
+</LinearLayout>

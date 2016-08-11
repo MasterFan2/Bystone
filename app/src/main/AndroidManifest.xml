@@ -148,6 +148,7 @@
         <activity android:name=".ui.common.AddMyCarActivity" />
         <activity android:name=".ui.common.AddCarConfirmActivity"></activity>
         <activity android:name="com.proton.library.zxing.activity.CaptureActivity" />
+        <activity android:name=".ui.shopcar.OrderConfirmActivity"></activity>
 
         <activity
             android:name=".wxapi.WXPayEntryActivity"

@@ -12,7 +12,7 @@
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="爱车照片"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

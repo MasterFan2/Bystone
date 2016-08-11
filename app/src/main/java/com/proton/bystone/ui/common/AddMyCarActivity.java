@@ -107,7 +107,7 @@ public class AddMyCarActivity extends MTFBaseActivity {
 
     @Override
     public void backPressed() {
-
+        animFinish();
     }
 
     /**

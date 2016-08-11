@@ -60,7 +60,8 @@ public class ActivityManager {
     public void finishAllActivity(){
         if (activityList == null || activityList.size() == 0) return;
         for (Activity activity : activityList){
-            activity.finish();
+            if (!activity.isFinishing())
+                activity.finish();
         }
         activityList.clear();
     }

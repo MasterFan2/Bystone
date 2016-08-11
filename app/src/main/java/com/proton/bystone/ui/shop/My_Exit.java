@@ -32,12 +32,12 @@ public class My_Exit extends MTFBaseActivity {
     RelativeLayout shop_setting;
     @Override
     public void initialize(Bundle savedInstanceState) {
-        my_exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.exit(0);
-            }
-        });
+//        my_exit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.exit(0);
+//            }
+//        });
 
         shop_setting.setOnClickListener(new View.OnClickListener() {
             @Override

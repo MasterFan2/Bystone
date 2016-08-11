@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="上传行驶确认"
-        app:titleTxtColor="@android:color/white" />
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

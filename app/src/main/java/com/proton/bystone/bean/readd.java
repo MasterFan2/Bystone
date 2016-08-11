@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/8/5.
  */
-public class Readd {
+public class readd {
 
     /**
      * ret_code : 0

@@ -1,33 +1,61 @@
 package com.proton.bystone.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by MasterFan on 2016/7/26.
  */
-public class Commodity {
+public class Commodity implements Parcelable {
 
-    private String Type_CODE;
-    public String I_Company;
-    private String Packing;
-    private int  SaleNum;
+    private String Type_CODE;//商品分类编号
+    public String I_Company;//商家编号
+    private String Packing;//商品包装规格
+    private int  SaleNum;//商品销量
     private String  Pc_Code;
     private String  N_JXS;
-    private String  VC_Params;
-    private int Stock;
+    private String  VC_Params;//商品简短介绍
+    private int Stock;//库存
     private String  Ps_Name;
     private int PostagePrice;
 
 
     private String Title;
     private String N_HYJ;
-    private String N_FHYJ;
-    private String VC_Code;
-    private String VC_Name;
-    private String PadctBrief;
-    private String VC_Rule;
+    private String N_FHYJ;//原价
+    private String VC_Code;//商品编号
+    private String VC_Name;//商品名称
+    private String PadctBrief;//商品简要
+    private String VC_Rule;//商品容量
     private String VC_XH;
     private String VC_PP;
     private String VC_Url;
 
+    ///购物车用
+    private int     count;//数量，
+    private boolean checked;//是否选中
+
+    ///订单用
+    private boolean canUseGoldCoin;//是否使用金币
+    private String  remark;         //备注
+    private int usedGoldCoin;       //使用的金币
+    private int needGoldCoin;       //需要使用的金币 = 单价 * 数量 + 邮费;
+
+    public int getNeedGoldCoin() {
+        return needGoldCoin;
+    }
+
+    public void setNeedGoldCoin(int needGoldCoin) {
+        this.needGoldCoin = needGoldCoin;
+    }
+
+    public int getUsedGoldCoin() {
+        return usedGoldCoin;
+    }
+
+    public void setUsedGoldCoin(int usedGoldCoin) {
+        this.usedGoldCoin = usedGoldCoin;
+    }
 
     public Commodity(String type_CODE, String i_Company, String packing, int saleNum, String pc_Code, String n_JXS, String VC_Params, int stock, String ps_Name, int postagePrice, String title, String n_HYJ, String n_FHYJ, String VC_Code, String VC_Name, String padctBrief, String VC_Rule, String VC_XH, String VC_PP, String VC_Url, int count, boolean checked) {
         Type_CODE = type_CODE;
@@ -54,9 +82,21 @@ public class Commodity {
         this.checked = checked;
     }
 
-    ///购物车用
-    private int count;//数量，
-    private boolean checked;//是否选中
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public boolean isCanUseGoldCoin() {
+        return canUseGoldCoin;
+    }
+
+    public void setCanUseGoldCoin(boolean canUseGoldCoin) {
+        this.canUseGoldCoin = canUseGoldCoin;
+    }
 
     public String getType_CODE() {
         return Type_CODE;
@@ -227,7 +267,11 @@ public class Commodity {
     }
 
     public void increment() {
-        this.count = this.count++;
+        this.count = this.count + 1;
+    }
+
+    public void subtract() {
+        this.count = this.count - 1;
     }
 
     public boolean isChecked() {
@@ -237,4 +281,72 @@ public class Commodity {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.Type_CODE);
+        dest.writeString(this.I_Company);
+        dest.writeString(this.Packing);
+        dest.writeInt(this.SaleNum);
+        dest.writeString(this.Pc_Code);
+        dest.writeString(this.N_JXS);
+        dest.writeString(this.VC_Params);
+        dest.writeInt(this.Stock);
+        dest.writeString(this.Ps_Name);
+        dest.writeInt(this.PostagePrice);
+        dest.writeString(this.Title);
+        dest.writeString(this.N_HYJ);
+        dest.writeString(this.N_FHYJ);
+        dest.writeString(this.VC_Code);
+        dest.writeString(this.VC_Name);
+        dest.writeString(this.PadctBrief);
+        dest.writeString(this.VC_Rule);
+        dest.writeString(this.VC_XH);
+        dest.writeString(this.VC_PP);
+        dest.writeString(this.VC_Url);
+        dest.writeInt(this.count);
+        dest.writeByte(this.checked ? (byte) 1 : (byte) 0);
+    }
+
+    protected Commodity(Parcel in) {
+        this.Type_CODE = in.readString();
+        this.I_Company = in.readString();
+        this.Packing = in.readString();
+        this.SaleNum = in.readInt();
+        this.Pc_Code = in.readString();
+        this.N_JXS = in.readString();
+        this.VC_Params = in.readString();
+        this.Stock = in.readInt();
+        this.Ps_Name = in.readString();
+        this.PostagePrice = in.readInt();
+        this.Title = in.readString();
+        this.N_HYJ = in.readString();
+        this.N_FHYJ = in.readString();
+        this.VC_Code = in.readString();
+        this.VC_Name = in.readString();
+        this.PadctBrief = in.readString();
+        this.VC_Rule = in.readString();
+        this.VC_XH = in.readString();
+        this.VC_PP = in.readString();
+        this.VC_Url = in.readString();
+        this.count = in.readInt();
+        this.checked = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<Commodity> CREATOR = new Parcelable.Creator<Commodity>() {
+        @Override
+        public Commodity createFromParcel(Parcel source) {
+            return new Commodity(source);
+        }
+
+        @Override
+        public Commodity[] newArray(int size) {
+            return new Commodity[size];
+        }
+    };
 }
