@@ -18,11 +18,13 @@ import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.ui.login.LoginActivity;
 
 
+import com.proton.bystone.ui.main.MainActivity;
 import com.proton.bystone.ui.shop.My_Exit;
 import com.proton.bystone.ui.shop.My_Indext;
 import com.proton.bystone.ui.shop.My_Jinbi;
 import com.proton.bystone.ui.shop.My_Privilege;
 import com.proton.bystone.ui.shop.My_fk;
+import com.proton.bystone.ui.shopcar.ShopCarActivity;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
 
@@ -69,8 +71,14 @@ public class MeFragment extends MTFBaseFragment {
     @Bind(R.id.my_minefor5)
     ImageView my_minefor5;//待评价
 
+    @Bind(R.id.my_gwc)
+    ImageView my_gwc;//购物车
+
     @Bind(R.id.my_exite)
     RelativeLayout my_exite;//点此可退出
+    LoginResp loginInfo;
+
+    boolean login;
 
     public MeFragment() {
         // Required empty public constructor
@@ -90,14 +98,26 @@ public class MeFragment extends MTFBaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 9527) {
             //
-            boolean login = LoginManager.getInstance().isLogin();
+            login = LoginManager.getInstance().isLogin();
             if(login) {
-                LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
+                loginInfo = LoginManager.getInstance().getLoginInfo();
                 my_humname.setText(loginInfo.getMb_Name());
                 my_phone.setText(loginInfo.getMb_LoginName());
                 my_login.setVisibility(View.GONE);
                 my_humname.setVisibility(View.VISIBLE);
                 my_phone.setVisibility(View.VISIBLE);
+
+
+                //跳转到退出页
+                my_exite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent t = new Intent(getActivity(), My_Exit.class);
+
+                        startActivity(t);
+                    }
+                });
+
 
             }
 
@@ -107,9 +127,9 @@ public class MeFragment extends MTFBaseFragment {
     @Override
     public void initialize() {
 
-      Refresh();
-        boolean login = LoginManager.getInstance().isLogin();
-        LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
+        Refresh();
+         login = LoginManager.getInstance().isLogin();
+        loginInfo = LoginManager.getInstance().getLoginInfo();
         my_humname.setText(loginInfo.getMb_Name());
         my_phone.setText(loginInfo.getMb_LoginName());
         my_login.setVisibility(View.GONE);
@@ -154,6 +174,7 @@ public class MeFragment extends MTFBaseFragment {
             public void onClick(View v) {
                 //跳转到活动优惠
                 Intent t = new Intent(getActivity(), My_Jinbi.class);
+                t.putExtra("mbcode",loginInfo.getMb_Code());
                 startActivity(t);
             }
         });
@@ -164,6 +185,7 @@ public class MeFragment extends MTFBaseFragment {
             public void onClick(View v) {
 
                Intent t = new Intent(getActivity(), My_fk.class);
+                t.putExtra("mbcode",loginInfo.getMb_Code());
                 startActivity(t);
             }
         });
@@ -219,20 +241,18 @@ public class MeFragment extends MTFBaseFragment {
             }
         });
 
-//跳转到退出页
+
+        //跳转到退出页
         my_exite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent t = new Intent(getActivity(), My_Exit.class);
+                if(login) {
+                    Intent t = new Intent(getActivity(), My_Exit.class);
 
-                startActivity(t);
+                    startActivity(t);
+                }
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -286,15 +306,12 @@ public class MeFragment extends MTFBaseFragment {
        my_login.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent t = new Intent(getActivity(), LoginActivity.class);
-               t.putExtra("landing", "mya");
-               startActivity(t);
 
+               Intent t = new Intent(getActivity(), LoginActivity.class);
+                   t.putExtra("landing", "mya");
+                   startActivity(t);
            }
        });
 
    }
-
-
-
 }

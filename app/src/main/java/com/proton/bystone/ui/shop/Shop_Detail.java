@@ -26,13 +26,19 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.proton.bystone.R;
+import com.proton.bystone.bean.BaseResp;
+import com.proton.bystone.bean.Category_nameResp;
 import com.proton.bystone.bean.Commodity;
 import com.proton.bystone.bean.EventResp;
 import com.proton.bystone.bean.Fist;
+
+import com.proton.bystone.bean.JsonResp;
 import com.proton.bystone.bean.Shop_Liebiao;
 import com.proton.bystone.bean.Shop_RecoResp;
 import com.proton.bystone.bean.Shop_Two;
 import com.proton.bystone.cache.LoginManager;
+import com.proton.bystone.net.HttpClients;
+import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.SendCallBack;
 import com.proton.bystone.ui.login.LoginActivity;
 import com.proton.bystone.ui.shopcar.MyShoppingCar;
@@ -54,6 +60,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/7/19.
@@ -62,7 +72,7 @@ import butterknife.OnClick;
 @MTFActivityFeature(layout = R.layout.shop_bye)
 public class Shop_Detail extends MTFBaseActivity {
 
-    String vccode;
+    List<Commodity>   commList;
     BitmapUtils utils;
     ViewPager viewpager;
     List<Fist> list_shop_recoResp;
@@ -72,6 +82,7 @@ public class Shop_Detail extends MTFBaseActivity {
     List<Shop_Two> list_a = new ArrayList<Shop_Two>();
     List<Commodity> commodityList;
     ImageView   shop_cs;
+
     ImageView   shop_cx;
     ImageView   shop_jj;
     List<String> vc_params = new ArrayList<String>();
@@ -103,11 +114,14 @@ public class Shop_Detail extends MTFBaseActivity {
     TextView shop_zhi6;
     TextView shop_zhi7;
 
+    String vccode;
+
     TextView shop_jianjie;
     Boolean  flag;
     GridView  m_Modem;
     RelativeLayout  shop_chexing;
     RelativeLayout shop_canshu;
+    RelativeLayout shop_js;
     RelativeLayout   shop_jainjie;
     Boolean fal=false;
     Boolean cs=false;
@@ -135,6 +149,8 @@ public class Shop_Detail extends MTFBaseActivity {
     @Bind(R.id.shop_gwu)
     ImageView img;
 
+    RelativeLayout shop_dian;
+
     @Override
     public void initialize(Bundle savedInstanceState) {
         initview();
@@ -160,8 +176,12 @@ public class Shop_Detail extends MTFBaseActivity {
 
     private void initview() {
         viewpa();
+
         viewpager = (ViewPager) findViewById(R.id.shop2_vPager);
         shpp_bye = (Button) findViewById(R.id.shop_bye);//点击购买
+
+        shop_dian = (RelativeLayout) findViewById(R.id.shop_dian);
+       shop_js = (RelativeLayout) findViewById(R.id.shop_js);
 
         shop_headline=(TextView)findViewById(R.id.shop_headline);
         //会员价
@@ -217,18 +237,18 @@ public class Shop_Detail extends MTFBaseActivity {
         shop_zhi7=(TextView)findViewById(R.id.shop_zhi7);
 
         m_Modem=(GridView)findViewById(R.id.M_Model);
-       // m_Modem.setAdapter(new JuleBuhomeadapter89());
+     //   m_Modem.setAdapter(new JuleBuhomeadapter89());
         Listener();
 
 
     }
     public void get_data()
     {
-        shop_headline.setText(vcparams);//Viewpager
-        shop_member.setText(N_HYJ);
-        shop_money.setText(N_FHYJ);
-        shop_print.setText(Packing);
-        shop_prompt.setText(PadctBrief);
+        shop_headline.setText(commodityList.get(0).getVC_Name());//Viewpager
+        shop_member.setText(commodityList.get(0).getN_HYJ());
+        shop_money.setText(commodityList.get(0).getN_FHYJ());
+        shop_print.setText(commodityList.get(0).getPacking());
+        shop_prompt.setText(commodityList.get(0).getPadctBrief());
 
         shop_money.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
 
@@ -258,8 +278,8 @@ public class Shop_Detail extends MTFBaseActivity {
         BitmapUtils   bit=new BitmapUtils(this);
        /* bit.display(shop_pingjiaimage1, aa+ary[0] );
         bit.display(shop_pingjiaimage2, aa+ary[1] );
-        bit.display(shop_pingjiaimage3, aa+ary[2] );*/
-
+        bit.display(shop_pingjiaimage3, aa+ary[2] );
+*/
     }
 
     public void Listener()
@@ -332,7 +352,6 @@ public class Shop_Detail extends MTFBaseActivity {
         });
 
 
-
         shop_cs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -346,8 +365,6 @@ public class Shop_Detail extends MTFBaseActivity {
                     shop_canshu.setVisibility(View.GONE);
                     cs=false;
                 }
-
-
             }
         });
 
@@ -390,10 +407,39 @@ public class Shop_Detail extends MTFBaseActivity {
         });
 
 
+        shop_dian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cs==false) {
+                    shop_cs.setImageResource(R.mipmap.icon_menu);
+                    shop_canshu.setVisibility(View.VISIBLE);
+                    cs=true;
+                }else{
+                    shop_cs.setImageResource(R.mipmap.icon_right);
+                    shop_canshu.setVisibility(View.GONE);
+                    cs=false;
+                }
+
+            }
+        });
+
+        shop_js.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(jj==false) {
+                    shop_jj.setImageResource(R.mipmap.icon_menu);
+                    shop_jainjie.setVisibility(View.VISIBLE);
+                    jj=true;
+                }else{
+                    shop_jj.setImageResource(R.mipmap.icon_right);
+                    shop_jainjie.setVisibility(View.GONE);
+                    jj=false;
+                }
+            }
+        });
+
+
     }
-
-    //活动
-
 
     public void viewpa()
     {
@@ -401,7 +447,7 @@ public class Shop_Detail extends MTFBaseActivity {
         bean.key = "pbevyvHkf1sFtyGL35gFfQ==";
         bean.methodName = "GetCommodityDetail";
         ArrayList<String> list=new ArrayList<String>();
-       String vccode = getIntent().getStringExtra("vccode");
+       vccode = getIntent().getStringExtra("vccode");
 
        list.add("{Type:'String'");
         list.add("Value:"+vccode+"}");
@@ -425,7 +471,7 @@ public class Shop_Detail extends MTFBaseActivity {
             @Override
             public void onSuccess(String res) {
 
-                Log.e("123", "res=" + res);
+
             }
 
             @Override
@@ -471,12 +517,14 @@ public class Shop_Detail extends MTFBaseActivity {
                 jiexi(result);
 
 
-             Log.e("eeeee555",result);
+                Log.e("拿到结果",result);
 
             }
 
         });
     }
+
+
 
     public void jiexi(String result) {
 
@@ -486,7 +534,7 @@ public class Shop_Detail extends MTFBaseActivity {
             JSONArray jsonArray = new JSONArray(strJsonArray);
            commodityList = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<Commodity>>() {}.getType());
 
-            /*MyShoppingCar.getShoppingCar().add(commodityList.get(0));*/
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -537,7 +585,7 @@ public class Shop_Detail extends MTFBaseActivity {
                 String  VC_Url = (String) jsonObject.get("VC_Url");
                 int  PostagePrice = (int) jsonObject.get("PostagePrice");
 
-                commodity.setN_HYJ(N_HYJ);
+             /*   commodity.setN_HYJ(N_HYJ);
                 commodity.setN_FHYJ(N_FHYJ);
                 commodity.setVC_Params(vcparams);
                 commodity.setPacking(Packing);
@@ -556,7 +604,7 @@ public class Shop_Detail extends MTFBaseActivity {
                 commodity.setStock(Stock);
                 commodity.setPs_Name(Ps_Name);
                 commodity.setVC_Url(VC_Url);
-                commodity.setPostagePrice(PostagePrice);
+                commodity.setPostagePrice(PostagePrice);*/
 
 
             }
@@ -705,4 +753,16 @@ class JuleBuhomeadapter89 extends BaseAdapter {
 }
 
 
+
+
+
+
+
+
+
+
+
 }
+
+
+

@@ -25,6 +25,7 @@ import com.proton.bystone.ui.main.tab.MaintenanceFragment;
 import com.proton.bystone.ui.main.tab.MeFragment;
 import com.proton.bystone.ui.main.tab.ShopFragment;
 import com.proton.bystone.ui.maintenance.OrderStateActivity;
+import com.proton.bystone.ui.shopcar.ShopCarActivity;
 import com.proton.bystone.utils.L;
 import com.proton.bystone.utils.PackageUtil;
 import com.proton.bystone.utils.T;
@@ -172,5 +173,11 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     @Override
     public void onClick(MTDialog dialog, View view) {
 
+    }
+
+    public void tiaozhuan()
+    {
+        Intent t= new Intent(this,ShopCarActivity.class);
+        startActivity(t);
     }
 }

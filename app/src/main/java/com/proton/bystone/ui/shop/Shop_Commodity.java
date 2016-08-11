@@ -192,7 +192,7 @@ public class Shop_Commodity extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-//                Log.e("3333",data);
+              Log.e("3333",data);
                 renqi(data);
             }
 

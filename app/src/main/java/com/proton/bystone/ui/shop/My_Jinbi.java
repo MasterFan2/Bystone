@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.proton.bystone.bean.Category_nameResp;
 import com.proton.bystone.bean.Duanxin;
 import com.proton.bystone.bean.Jbnum;
 import com.proton.bystone.bean.JsonResp;
+import com.proton.bystone.bean.Mb_Code;
 import com.proton.bystone.bean.Modified_Pwd;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
@@ -65,19 +67,17 @@ public class My_Jinbi extends MTFBaseActivity {
 
    public void data2()
    {
-       SharedPreferences sp = this.getSharedPreferences("info",
-               Context.MODE_PRIVATE);
-       mb_code = sp.getString("mb_code", "");
-     //  Log.e("mb_code2",mb_code);
+       String mbcode = getIntent().getStringExtra("mbcode");
 
        // Modified_Pwd pwd=new Modified_Pwd(et2.getText().toString().trim(),et3.getText().toString().trim());
+      // Mb_Code  mb=new Mb_Code(mb_code);
        RequestBody requestBody = new ParamsBuilder<>()
                .key("pbevyvHkf1sFtyGL35gFfQ==")
                .methodName("GetIntegral")
                .gson(new Gson())
                 /*.noParams()*/
                //.object(pwd)
-            .typeValue("string",mb_code)//会员积分金币数
+            .typeValue("string",/*mb_code*/"201605261656057265")//会员积分金币数
                /* .typeValue("string","958496")
                 .typeValue("int",2)*/
                .build();
@@ -108,10 +108,9 @@ public class My_Jinbi extends MTFBaseActivity {
 
     public void jiexi2(String Data)
     {
-      /*  Gson g=new Gson();
-        Jbnum jbnum = g.fromJson(Data, Jbnum.class);*/
 
-        List<Jbnum>  jbnum=new Gson().fromJson(Data, new TypeToken<List<Jbnum>>() {}.getType());
+
+      List<Jbnum>  jbnum=new Gson().fromJson(Data, new TypeToken<List<Jbnum>>() {}.getType());
         String code = jbnum.get(0).getGoldBalance();//拿到金币数量
         int InviteFriendsGold = jbnum.get(0).getInviteFriendsGold();//邀请好友祖册所得
         int ConsumPtionGold = jbnum.get(0).getConsumPtionGold();//好友消费提成
@@ -122,6 +121,9 @@ public class My_Jinbi extends MTFBaseActivity {
         my_mi.setText(InviteFriendsGold+"");
         my_tc.setText(ConsumPtionGold+"");
     }
-
+    @butterknife.OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        animFinish();
+    }
 
 }

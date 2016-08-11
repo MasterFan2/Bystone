@@ -89,6 +89,7 @@ public class Shop_Ok extends MTFBaseActivity {
     double v;
     String I_Company;
     String getVC_Code;
+    TextView  shop_hj;
 
     String mb_code;//会员编号
     String VC_XH ;//商家规格型号
@@ -167,6 +168,7 @@ public class Shop_Ok extends MTFBaseActivity {
         TextView shop_dizi  = (TextView) findViewById(R.id.shop_dizi);
         TextView shop_dz  = (TextView) findViewById(R.id.shop_dz);
         shop_address = (TextView) findViewById(R.id.shop_address);
+
 
         SharedPreferences settings = getSharedPreferences("fn", 0);
          nu = settings.getString("num","");
@@ -381,8 +383,9 @@ public class Shop_Ok extends MTFBaseActivity {
         //拿到订单编号
        //orderCode = shop.getOrderCode();
        Intent t = new Intent(Shop_Ok.this, My_Shop_Pay.class);
-       //t.putExtra("ddbh",order);//订单编号*/
-       //Log.e("orderCode",orderCode);
+       t.putExtra("orderNum",order);//订单编号*/
+       t.putExtra("money",v);
+
        startActivity(t);
     }
 

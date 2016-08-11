@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ import com.proton.bystone.bean.Fist;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.SendCallBack;
+import com.proton.bystone.ui.main.tab.home.Homeserch;
+import com.proton.bystone.ui.main.tab.home.Search_service;
 import com.proton.bystone.ui.shop.Shop_Commodity;
 import com.proton.bystone.ui.shop.Shop_Detail;
 import com.proton.bystone.ui.shop.Shop_Sort;
@@ -83,6 +86,12 @@ public class ShopFragment extends MTFBaseFragment {
 
     @Bind(R.id.shop_listview)
     RefreshListView listview;
+
+    @Bind(R.id.home_btn)
+    Button home_btn;//黄泥磅
+
+    @Bind(R.id.home_search)
+    EditText home_search;//搜索
 
     ViewPager  viewpager;
     String data;
@@ -190,13 +199,32 @@ public class ShopFragment extends MTFBaseFragment {
 
 //                Bundle mBundle = new Bundle();
 //                mBundle.putString("list",listevent+"");
-               t.putExtra("vccode",vccode);
+               t.putExtra("vccode",vccode);//商品编号
 //                mBundle.putString("vccode",vccode);
 //                t.putExtras(mBundle);
                 startActivity(t);
 
             }
 
+        });
+
+
+
+
+        //黄泥磅
+        home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animStartForResult(1000,Homeserch.class);
+            }
+        });
+        //搜索
+        home_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                animStartForResult(1000,Search_service.class);
+            }
         });
 
 
@@ -384,7 +412,7 @@ public class ShopFragment extends MTFBaseFragment {
         }
         @Override
         public int getCount() {
-            return list.size();
+            return  list == null ? 0 : list.size();
         }
 
         @Override
@@ -423,7 +451,7 @@ public class ShopFragment extends MTFBaseFragment {
             @Override
             public int getCount() {
                 // TODO Auto-generated method stub
-                return 3;
+                return  database == null ? 0 : database.size();
             }
 
             @Override
@@ -624,7 +652,7 @@ public class ShopFragment extends MTFBaseFragment {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return 4;
+            return  lis == null ? 0 : lis.size();
         }
 
         @Override
@@ -673,7 +701,7 @@ public class ShopFragment extends MTFBaseFragment {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return 3;
+           return  lis == null ? 0 : lis.size();
         }
 
         @Override

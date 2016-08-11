@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,24 @@ public class My_Shop_Pay extends MTFBaseActivity {
     @Bind(R.id.shop_pay)
     Button bt;//点击确认付款
 
+  @Bind(R.id.shop_yhkzf)
+    TextView shop_yhkzf;//银联支付
+
+    @Bind(R.id.shop_wxzf)
+    TextView shop_wxzf;//微信支付
+
+    @Bind(R.id.shop_zhifu)
+    ImageView shop_zhifu;//支付宝图标变化
+
+    @Bind(R.id.shop_weixin)
+    ImageView shop_weixin;//微信图标变化
+
+
+
+    @Bind(R.id.shop_iv)
+    ImageView shop_iv;//银联图标变化
+
+
     @Bind(R.id.shop_py)
     TextView shop_p;//支付宝客户端支付
     String ddbh;
@@ -64,6 +83,11 @@ public class My_Shop_Pay extends MTFBaseActivity {
     String Noncestr;
     int Timestamp;
     String sign;
+    Boolean flag=false;
+    Boolean ff=false;
+    Boolean yl=false;
+    String   order_number;
+    String   money;
 
     @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
@@ -105,24 +129,100 @@ public class My_Shop_Pay extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
 
-      // ddbh = getIntent().getStringExtra("ddbh");//拿到订单编号
-
+     order_number = getIntent().getStringExtra("orderNum");//拿到订单编号
+      money = getIntent().getStringExtra("money");//合计多少钱
+        Log.e("dfg",money+order_number);
+        TextView  shop_heji  = (TextView) findViewById(R.id.shop_hj);//合计
+        shop_heji.setText(money+"");
         //点击确认付款
+
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent t= new Intent(My_Shop_Pay.this,Shop_Orderdetail.class);
-                startActivity(t);
+
+                    if(flag) {
+                    // wechat_payment();//支付宝
+                        Intent t= new Intent(My_Shop_Pay.this,Shop_Orderdetail.class);
+                        startActivity(t);
+
+                    }
+
+                    if(ff)
+                    {
+                        wechat_payment2();//微信，
+                    }
+                //银联
+                  if(yl)
+                  {
+                      // wechat_payment();//支付宝
+                  }
+
+
             }
         });
         //支付宝客户端支付
         shop_p.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                wechat_payment();
+                if(!flag)
+                {
+                    shop_zhifu.setImageResource(R.mipmap.icon_mai_true);
+                    bt.setBackground(My_Shop_Pay.this.getResources().getDrawable(R.drawable.yuanjiao));
+                    flag=true;
+                }else{
+                    shop_zhifu.setImageResource(R.mipmap.icon_mai_disabled);
+                    bt.setBackground(My_Shop_Pay.this.getResources().getDrawable(R.drawable.yuanjiao2));
+                    flag=false;
+                }
             }
         });
+
+        //微信支付
+        shop_wxzf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!ff)
+                {
+                    shop_weixin.setImageResource(R.mipmap.icon_mai_true);
+                    bt.setBackground(My_Shop_Pay.this.getResources().getDrawable(R.drawable.yuanjiao));
+                    ff=true;
+
+                }else{
+                    shop_weixin.setImageResource(R.mipmap.icon_mai_disabled);
+                    bt.setBackground(My_Shop_Pay.this.getResources().getDrawable(R.drawable.yuanjiao2));
+                    ff=false;
+
+                }
+
+
+
+            }
+        });
+//银联支付
+        shop_yhkzf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!yl)
+                {
+                    shop_iv.setImageResource(R.mipmap.icon_mai_true);
+                    bt.setBackground(My_Shop_Pay.this.getResources().getDrawable(R.drawable.yuanjiao));
+                    yl=true;
+
+                }else{
+                    shop_iv.setImageResource(R.mipmap.icon_mai_disabled);
+                    bt.setBackground(My_Shop_Pay.this.getResources().getDrawable(R.drawable.yuanjiao2));
+                    yl=false;
+
+                }
+
+            }
+        });
+
+
+
+
+
+
     }
 
     @Override
@@ -130,7 +230,7 @@ public class My_Shop_Pay extends MTFBaseActivity {
    animFinish();
     }
 
-    @OnClick(R.id.Home_fh)
+    @OnClick(R.id.m_title_left_btn)
     public void back(View view) {
         animFinish();
     }
@@ -161,6 +261,43 @@ public class My_Shop_Pay extends MTFBaseActivity {
                 Log.e("微信支付参数",data+"");
              //jiexi(data);这解析微信
                  jiexi2(data);//这解析支付宝
+            }
+            @Override
+            public void onFailure(Call<BaseResp> call, Throwable t) {
+                Log.e("111","失败");
+            }
+        });
+
+
+    }
+
+
+    //调服务器微信支付获取的信息(微信)
+    public void wechat_payment2()
+    {
+
+        RequestBody requestBody = new ParamsBuilder<>()
+                .key("pbevyvHkf1sFtyGL35gFfQ==")
+                .methodName("OrderSignedInspection")
+                .gson(new Gson())
+                /*.noParams()*/
+                //.object(loginParams)
+                .typeValue("string","201607281300525158")//订单编号
+                .typeValue("int",1)
+                .typeValue("int",1)
+
+                .build();
+//
+
+        Call<BaseResp> call = HttpClients.getInstance().orderInfo(requestBody);
+
+        call.enqueue(new Callback<BaseResp>() {
+            @Override
+            public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
+                String data = response.body().getData();
+                Log.e("微信支付参数",data+"");
+                jiexi(data);//这解析微信
+
             }
             @Override
             public void onFailure(Call<BaseResp> call, Throwable t) {
@@ -239,17 +376,8 @@ public class My_Shop_Pay extends MTFBaseActivity {
         }
 
 
+
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
