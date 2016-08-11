@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,7 +25,7 @@ import retrofit2.Response;
 
 /**
  * Created by Administrator on 2016/7/27.
- * 跳转我的
+ * 跳转我的优惠活动
  */
 
 @MTFActivityFeature(layout = R.layout.my_account)
@@ -53,9 +54,9 @@ public class My_Privilege extends MTFBaseActivity {
                 .key("pbevyvHkf1sFtyGL35gFfQ==")
                 .methodName("GetAllActivityList")
                 .gson(new Gson())
-               // .noParams()
+                .noParams()
                 //.object(pwd)
-            .typeValue("","")
+           // .typeValue("","")
                /* .typeValue("string","958496")
                 .typeValue("int",2)*/
                 .build();
@@ -91,5 +92,12 @@ public class My_Privilege extends MTFBaseActivity {
 
        // List<Jbnum> jbnum=new Gson().fromJson(Data, new TypeToken<List<Jbnum>>() {}.getType());
 
+    }
+
+
+
+    @butterknife.OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        animFinish();
     }
 }

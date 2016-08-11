@@ -442,6 +442,13 @@ public class Shop_Select_Address extends MTFBaseActivity {
     }
 
 
+    @butterknife.OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        animFinish();
+    }
+
+
+
 
 
 }

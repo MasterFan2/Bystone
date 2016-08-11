@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="退货"
+        app:titleTxtColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:id="@+id/shop_ksth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速退货"
+        android:textSize="16sp"
+        android:textColor="#282828"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(跟客服沟通一下，能帮你更快退货)"
+            android:textSize="16sp"
+            android:textColor="#878787"
+            android:layout_toRightOf="@+id/shop_ksth"
+            android:layout_marginTop="15dp"
+            />
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="客户电话"
+        android:textColor="@android:color/white"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mai_line"
+        android:layout_marginTop="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/shop_ii"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退货原因"
+            android:textSize="16sp"
+            android:textColor="#282828"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <EditText
+            android:id="@+id/shop_tuihuo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ffffff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/zp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="照片说明"
+            android:textSize="16sp"
+            android:textColor="#282828"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(选择能说明退货原因的照片)"
+            android:textSize="16sp"
+            android:textColor="#878787"
+            android:layout_toRightOf="@id/zp"
+            android:layout_marginTop="15dp"
+            />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mine_pluspic"
+        android:layout_marginLeft="10dp"
+        />
+
+
+    <Button
+        android:id="@+id/shop_qd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_blue_selector"
+        android:text="确认"
+        android:textColor="@android:color/white"
+        />
+
+   </LinearLayout>
+
+</ScrollView>
+</LinearLayout>

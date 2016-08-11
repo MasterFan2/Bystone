@@ -90,14 +90,26 @@ public class MeFragment extends MTFBaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 9527) {
             //
-            boolean login = LoginManager.getInstance().isLogin();
+            login = LoginManager.getInstance().isLogin();
             if(login) {
-                LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
+                loginInfo = LoginManager.getInstance().getLoginInfo();
                 my_humname.setText(loginInfo.getMb_Name());
                 my_phone.setText(loginInfo.getMb_LoginName());
                 my_login.setVisibility(View.GONE);
                 my_humname.setVisibility(View.VISIBLE);
                 my_phone.setVisibility(View.VISIBLE);
+
+
+                //跳转到退出页
+                my_exite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent t = new Intent(getActivity(), My_Exit.class);
+
+                        startActivity(t);
+                    }
+                });
+
 
             }
 
@@ -107,16 +119,14 @@ public class MeFragment extends MTFBaseFragment {
     @Override
     public void initialize() {
 
-      Refresh();
-        boolean login = LoginManager.getInstance().isLogin();
-        LoginResp loginInfo = LoginManager.getInstance().getLoginInfo();
-        if (loginInfo != null) {
-            my_humname.setText(loginInfo.getMb_Name());
-            my_phone.setText(loginInfo.getMb_LoginName());
-            my_login.setVisibility(View.GONE);
-            my_humname.setVisibility(View.VISIBLE);
-            my_phone.setVisibility(View.VISIBLE);
-        }
+        Refresh();
+         login = LoginManager.getInstance().isLogin();
+        loginInfo = LoginManager.getInstance().getLoginInfo();
+        my_humname.setText(loginInfo.getMb_Name());
+        my_phone.setText(loginInfo.getMb_LoginName());
+        my_login.setVisibility(View.GONE);
+        my_humname.setVisibility(View.VISIBLE);
+        my_phone.setVisibility(View.VISIBLE);
 
 
 
@@ -156,6 +166,7 @@ public class MeFragment extends MTFBaseFragment {
             public void onClick(View v) {
                 //跳转到活动优惠
                 Intent t = new Intent(getActivity(), My_Jinbi.class);
+                t.putExtra("mbcode",loginInfo.getMb_Code());
                 startActivity(t);
             }
         });
@@ -166,6 +177,7 @@ public class MeFragment extends MTFBaseFragment {
             public void onClick(View v) {
 
                Intent t = new Intent(getActivity(), My_fk.class);
+                t.putExtra("mbcode",loginInfo.getMb_Code());
                 startActivity(t);
             }
         });
@@ -221,20 +233,18 @@ public class MeFragment extends MTFBaseFragment {
             }
         });
 
-//跳转到退出页
+
+        //跳转到退出页
         my_exite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent t = new Intent(getActivity(), My_Exit.class);
+                if(login) {
+                    Intent t = new Intent(getActivity(), My_Exit.class);
 
-                startActivity(t);
+                    startActivity(t);
+                }
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -288,15 +298,12 @@ public class MeFragment extends MTFBaseFragment {
        my_login.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent t = new Intent(getActivity(), LoginActivity.class);
-               t.putExtra("landing", "mya");
-               startActivity(t);
 
+               Intent t = new Intent(getActivity(), LoginActivity.class);
+                   t.putExtra("landing", "mya");
+                   startActivity(t);
            }
        });
 
    }
-
-
-
 }

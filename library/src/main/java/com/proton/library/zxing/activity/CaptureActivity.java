@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 import com.proton.library.R;
+import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.zxing.camera.CameraManager;
 import com.proton.library.zxing.decode.DecodeThread;
 import com.proton.library.zxing.utils.BeepManager;
@@ -46,6 +47,7 @@ import java.lang.reflect.Field;
 /**
  * 二维码 扫描
  */
+
 public class CaptureActivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener{
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
@@ -75,6 +77,14 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback,
         // Install the callback and wait for surfaceCreated() to init the
         // camera.
         scanPreview.getHolder().addCallback(this);
+
+        //关闭
+        findViewById(R.id.m_title_left_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         initCamera();
 //        cameraTask();

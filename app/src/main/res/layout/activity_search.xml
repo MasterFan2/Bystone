@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF" >
+
+    <LinearLayout
+        android:id="@+id/ly_search"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/et_search_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@mipmap/icon_search"
+                android:drawablePadding="10dp"
+                android:hint="请输入商户名、地点"
+                android:singleLine="true"
+                android:textColor="#696969"
+                android:textColorHint="#bbbaba"
+                android:textSize="14sp" >
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/iv_delete_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+
+                android:src="@mipmap/icon_delete"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#FF605C"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ly_search"
+        android:background="#bbbaba" />
+
+    <LinearLayout
+        android:id="@+id/ly_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_line"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp" >
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@mipmap/icon_timer"
+            android:drawablePadding="5dp"
+            android:text="历史记录"
+            android:textColor="#bbbaba"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#bbbaba" />
+    </LinearLayout>
+
+    <com.xiaoxi.search.widget.CustomerScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ly_history"
+        android:layout_marginBottom="10dp"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <com.xiaoxi.search.widget.CustomerListView
+                android:id="@+id/lv_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:cacheColorHint="#00000000"
+                android:divider="#bbbaba"
+                android:dividerHeight="1dp"
+                android:fadingEdge="none"
+                android:listSelector="#00000000"
+                android:overScrollMode="never"
+                android:paddingLeft="24dp" />
+
+            <Button
+                android:id="@+id/btn_clear_history"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/btn_search_bg"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="清除搜索记录"
+                android:textColor="#a4a4a4"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </com.xiaoxi.search.widget.CustomerScrollView>
+
+</RelativeLayout>

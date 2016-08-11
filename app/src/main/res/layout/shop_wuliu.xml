@@ -7,13 +7,26 @@
         android:layout_width="match_parent"
         android:layout_height="30dp">
         <TextView
+            android:id="@+id/shop_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="订单ID号XXXXXXXXXXXXX"
+            android:text="订单ID号"
             android:layout_marginLeft="10dp"
             android:textSize="13sp"
             android:textColor="#292929"
             android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/shop_Nid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXXXXXXXXXXX"
+            android:layout_marginLeft="10dp"
+            android:textSize="13sp"
+            android:textColor="#292929"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/shop_id"
             />
     </RelativeLayout>
     <TextView
@@ -54,16 +67,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginLeft="110dp"
             />
-        <TextView
-            android:id="@+id/rmb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="原价￥"
-            android:textSize="12sp"
-            android:textColor="#77a6f2"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="110dp"
-            />
+
         <TextView
             android:id="@+id/money"
             android:layout_width="wrap_content"
@@ -73,7 +77,7 @@
             android:textColor="#77a6f2"
             android:layout_marginTop="70dp"
             android:layout_toRightOf="@id/rmb"
-
+            android:layout_marginLeft="110dp"
             />
 
 
@@ -121,6 +125,7 @@
             />
 
         <TextView
+            android:id="@+id/shop_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2016.5.26   14:56"
@@ -197,33 +202,35 @@
         android:layout_width="match_parent"
         android:layout_height="48dp">
         <Button
-            android:id="@+id/shop_wuliu"
+
+            android:id="@+id/shop_th"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:text="退货"
-
             android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
             android:textColor="#878787"
-            android:layout_marginLeft="75dp"/>
+            android:layout_marginLeft="75dp"
+            android:gravity="center"/>
         <Button
+            android:id="@+id/ckwl"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:text="查看物流"
             android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
+
             android:textColor="#878787"
             android:layout_marginLeft="170dp"
-            android:layout_toRightOf="@id/shop_wuliu"/>
+           />
         <Button
+            android:id="@+id/shop_shuijing"
             android:layout_width="80dp"
             android:layout_height="30dp"
             android:text="确认收获"
             android:background="@null"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
+
             android:textColor="#878787"
             android:layout_marginLeft="265dp"
             />

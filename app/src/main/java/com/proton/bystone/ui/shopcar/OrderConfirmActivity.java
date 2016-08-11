@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
-import com.proton.bystone.bean.Address;
+import com.proton.bystone.bean.AddressMTF;
 import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.Commodity;
 import com.proton.bystone.bean.GoldCoin;
@@ -74,7 +74,7 @@ public class OrderConfirmActivity extends MTFBaseActivity {
     @Bind(R.id.order_confirm_list_view)
     ListView listView;
     private OrderConfirmAdapter adapter;
-    private Address address;
+    private AddressMTF address;
 
     private View headerView;            //头布局
     private LinearLayout headerRightLayout;
@@ -156,7 +156,7 @@ public class OrderConfirmActivity extends MTFBaseActivity {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 if (response.body().getCode() == 1) {
-                    List<Address> addressList = new Gson().fromJson(response.body().getData(), new TypeToken<List<Address>>() {}.getType());
+                    List<AddressMTF> addressList = new Gson().fromJson(response.body().getData(), new TypeToken<List<AddressMTF>>() {}.getType());
                     if (addressList != null && addressList.size() > 0) {
                         address = addressList.get(0);
                         if (address != null) {

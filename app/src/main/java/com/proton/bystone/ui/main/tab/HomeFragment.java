@@ -1,8 +1,11 @@
 package com.proton.bystone.ui.main.tab;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +20,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -27,11 +33,21 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.proton.bystone.R;
+import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.Bean_a;
 import com.proton.bystone.bean.Bean_b;
 import com.proton.bystone.bean.Bean_c;
+import com.proton.bystone.bean.Commodity;
 import com.proton.bystone.bean.Fist;
+import com.proton.bystone.bean.Home_Weather;
 import com.proton.bystone.bean.NewRecommendResp;
+import com.proton.bystone.bean.Readd;
+import com.proton.bystone.bean.Shop_Fenlei;
+import com.proton.bystone.bean.Shop_List;
+import com.proton.bystone.bean.home_yj;
+import com.proton.bystone.location.LocationManager;
+import com.proton.bystone.net.HttpClients;
+import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.SendCallBack;
 import com.proton.bystone.ui.main.tab.home.Homeserch;
 import com.proton.bystone.ui.main.tab.home.Search_service;
@@ -54,6 +70,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 @MTFFragmentFeature(layout = R.layout.fragment_home)
 public class HomeFragment extends MTFBaseFragment {
@@ -70,6 +90,8 @@ public class HomeFragment extends MTFBaseFragment {
     ImageView scanImg;
     @Bind(R.id.search_header_city_txt)
     TextView cityTxt;
+    List<Home_Weather.ResultsBean.IndexBean> index;
+    String s;
 
     @OnClick(R.id.search_header_scan_img)
     public void goScan(View view) {
@@ -79,6 +101,7 @@ public class HomeFragment extends MTFBaseFragment {
 
     @Bind(R.id.lv)
     ListView listview;
+    Shop_Fenlei tq;
 //    //搜索
 //    @Bind(R.id.search)
 //    EditText search;
@@ -110,7 +133,11 @@ public class HomeFragment extends MTFBaseFragment {
     BitmapUtils utils3;
     GridView gridView;
     GridView gridView2;
+    TextView yzq;
+    TextView  home_ssd;
+    TextView   home_byxc;
     ArrayList  <TextView>list3;
+    List<Home_Weather.ResultsBean.WeatherDataBean> weather_data;
 
     /**
      * Use this factory method to create a new instance of
@@ -129,13 +156,19 @@ public class HomeFragment extends MTFBaseFragment {
     @Override
     public void initialize() {
 
-       // 加载头布局
+
+
+        // 加载头布局
         View headerView = View.inflate(HomeFragment.this.getActivity(), R.layout.first_layout,
                 null);
         vp = (ViewPager) headerView.findViewById(R.id.vPager);
         but = (Button) headerView.findViewById(R.id.but);
         gridView = (GridView) headerView.findViewById(R.id.home_gridView);
         gridView2 = (GridView) headerView.findViewById(R.id.home_gridView2);
+       yzq = (TextView) headerView.findViewById(R.id.home_yzq);//阴转晴
+       home_byxc = (TextView) headerView.findViewById(R.id.home_byxc);//不易洗车
+        home_ssd = (TextView) headerView.findViewById(R.id.home_ssd);//摄氏度
+
 
         list3=new ArrayList<TextView>();
         for (int i = 0; i <3 ; i++) {
@@ -178,6 +211,11 @@ public class HomeFragment extends MTFBaseFragment {
         listview.setAdapter(new JuleBuhomeadapter2() );
 
         Listener();
+
+        Category_name();//天气
+        price();
+
+
     }
 
     @Override
@@ -211,22 +249,66 @@ public class HomeFragment extends MTFBaseFragment {
 
     }
 
-    //广告轮播
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences sp = context.getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+        s = sp.getString("s","");
+        if(!TextUtils.isEmpty(s))
+        {
+            cityTxt.setText(s);
+        }
+        Log.e("sssss",s);
+    }
+    //定位
+    public void dingwei()
+    {
+        //定位
+        LocationManager.getInstance().init(context);
+        LocationManager.getInstance().setAMapLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation location) {
+                LocationManager.getInstance().stopLocation();
+                Toast.makeText(context,"地址定位中",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        LocationManager.getInstance().startLocation();
+    }
+
     public void Listener() {
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                  startActivity(new Intent(HomeFragment.this.getActivity(),Homeserch.class));
-//            }
-//        });
-//
-//        search.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(HomeFragment.this.getActivity(),"1234",Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(HomeFragment.this.getActivity(),Search_service.class));
-//            }
-//        });
+
+        SharedPreferences sp = context.getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+        s = sp.getString("s","");
+        if(!TextUtils.isEmpty(s))
+        {
+            cityTxt.setText(s);
+        }
+
+
+
+
+        //黄泥磅
+        cityTxt.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              animStartForResult(1000,Homeserch.class);
+              dingwei();
+
+          }
+      });
+
+        searchLayout.setOnClickListener(new View.OnClickListener() {
+         @Override
+           public void onClick(View v) {
+
+             animStartForResult(1000,Search_service.class);
+
+           }
+       });
+
+
 
     }
 
@@ -343,7 +425,7 @@ public class HomeFragment extends MTFBaseFragment {
         }
         @Override
         public int getCount() {
-            return list.size();
+            return list == null ? 0 : list.size();
         }
 
         @Override
@@ -358,6 +440,10 @@ public class HomeFragment extends MTFBaseFragment {
             image.setScaleType(ImageView.ScaleType.FIT_XY);
             String aa = "http://192.168.0.119";
             utils.display(image, aa  + list.get(position));
+           yzq.setText(weather_data.get(position).getWeather());
+            home_byxc.setText(index.get(position).getTitle());
+            home_ssd.setText(weather_data.get(position).getTemperature());
+
 
             container.addView(image);
             return image;
@@ -444,7 +530,10 @@ public class HomeFragment extends MTFBaseFragment {
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return vc_code2.size();
+
+            return vc_code2 == null ? 0 : vc_code2.size();
+
+
         }
 
         @Override
@@ -499,7 +588,8 @@ public class HomeFragment extends MTFBaseFragment {
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return vc_code.size();
+
+            return  vc_code == null ? 0 : vc_code.size();
         }
 
         @Override
@@ -545,11 +635,132 @@ public class HomeFragment extends MTFBaseFragment {
 
 
 
+    //获取天气
+
+    public void Category_name() {
+        // LoginParams loginParams = new LoginParams(ed.getText().toString().trim(), "666888", "xxaabbc085412556sxxx", 1);
+    //    Log.e("s",s);
+        RequestBody requestBody = new ParamsBuilder<>()
+                .key("pbevyvHkf1sFtyGL35gFfQ==")
+                .methodName("FunGetWeather")
+                .gson(new Gson())
+                //.noParams()
+                // .object(loginParams)
+                .typeValue("string", "重庆")
+
+                .build();
+//        ParamsBuilder<LoginParams> builder = new ParamsBuilder<LoginParams>().
+//                .key("")
+//                .build();
+        //分类名称
+        Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
+
+        call.enqueue(new Callback<BaseResp>() {
+            @Override
+            public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
+
+
+                String data = response.body().getData();
+                Log.e("data",data);
+                htpjiexi(data);
+            }
+
+            @Override
+            public void onFailure(Call<BaseResp> call, Throwable t) {
+                Log.e("111", "失败");
+            }
+        });
+    }
+
+    //解析
+    public void htpjiexi(String data)
+    {
+        Home_Weather  o = new Gson().fromJson(data, new TypeToken<Home_Weather>() {
+        }.getType());
+        weather_data = o.getResults().get(0).getWeather_data();
+        index = o.getResults().get(0).getIndex();
+
+    }
+
+
+
+    //油价
+    public void price() {
+        // LoginParams loginParams = new LoginParams(ed.getText().toString().trim(), "666888", "xxaabbc085412556sxxx", 1);
+
+        RequestBody requestBody = new ParamsBuilder<>()
+                .key("pbevyvHkf1sFtyGL35gFfQ==")
+                .methodName("FunGetOilPrice")
+                .gson(new Gson())
+                /*.noParams()*/
+                // .object(loginParams)
+                .typeValue("string", "重庆")
+                .build();
+//        ParamsBuilder<LoginParams> builder = new ParamsBuilder<LoginParams>().
+//                .key("")
+//                .build();
+        //分类名称
+        Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
+
+        call.enqueue(new Callback<BaseResp>() {
+            @Override
+            public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
+
+
+                String data6 = response.body().getData();
+
+                price(data6);
+            }
+
+            @Override
+            public void onFailure(Call<BaseResp> call, Throwable t) {
+                Log.e("111", "失败");
+            }
+        });
+    }
+    //解析价格从低搞到数据
+    public void price(String data)
+    {
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(data);
+            String strJsonArray = obj.getString("data");
+            JSONArray jsonArray = new JSONArray(strJsonArray);
+            List<home_yj>   commodityList = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<home_yj>>() {}.getType());
+            String showapi_res_body = commodityList.get(0).getShowapi_res_body();
+            String strJsonArray1 = obj.getString("showapi_res_body");
+            JSONArray jsonArray1 = new JSONArray(strJsonArray1);
+            List<Readd>   list = new Gson().fromJson(jsonArray1.get(0).toString(), new TypeToken<List<Readd>>() {}.getType());
+            List<Readd.ListBean> list1 = list.get(0).getList();
+
+            Toast.makeText(getActivity(),list1.get(0).getP90(),Toast.LENGTH_LONG).show();
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 }
+
+
+
 
 
 

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.proton.bystone.R;
 import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.JsonResp;
@@ -52,6 +53,8 @@ public class App extends MTFBaseActivity {
     String id ;
     String isDefault ;
     String user_code ;
+   Boolean flag=false;
+    Boolean fla=false;
 
 
 
@@ -89,11 +92,19 @@ public class App extends MTFBaseActivity {
     public void Listener2()
     {
         mark="0";//标记是否选择了默认
+
         shopmoren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mark="1";
-                shopmoren.setImageResource(R.mipmap.icon_mai_select);
+                if(flag==false) {
+                    mark = "1";
+                    shopmoren.setImageResource(R.mipmap.icon_mai_select);
+                    flag=true;
+                }else {
+                    mark = "0";
+                    shopmoren.setImageResource(R.mipmap.icon_mai_disabled);
+                    flag=false;
+                }
             }
         });
 
@@ -208,11 +219,20 @@ public class App extends MTFBaseActivity {
     public void Listener()
     {
         mark="0";//标记是否选择了默认
+
         shopmoren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mark="1";
-                shopmoren.setImageResource(R.mipmap.icon_mai_select);
+
+                if(fla==false) {
+                    mark = "1";
+                    shopmoren.setImageResource(R.mipmap.icon_mai_select);
+                    fla=true;
+                }else {
+                    mark = "0";
+                    shopmoren.setImageResource(R.mipmap.icon_mai_disabled);
+                    fla=false;
+                }
             }
         });
 
@@ -293,6 +313,14 @@ public class App extends MTFBaseActivity {
 
 
     }
+
+
+    @butterknife.OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        animFinish();
+    }
+
+
 
 }
 

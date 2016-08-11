@@ -3,7 +3,7 @@ package com.proton.bystone.bean;
 /**
  * Created by MasterFan on 2016/8/9.
  */
-public class Address {
+public class AddressMTF {
 
     /**
      * ID : 236
