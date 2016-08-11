@@ -2,6 +2,7 @@ package com.proton.bystone.ui.shop;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,10 +11,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,6 +27,7 @@ import com.proton.bystone.bean.Shop_All_Order;
 import com.proton.bystone.bean.Shop_List;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
+import com.proton.bystone.ui.maintenance.OrderStateActivity;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
@@ -65,6 +69,7 @@ public class My_Indext extends MTFBaseActivity {
     List<Shop_All_Order>   hp;
     String mb_code;
     BitmapUtils   utils2;
+    String bookCode;
 
 
     @Override
@@ -80,21 +85,28 @@ public class My_Indext extends MTFBaseActivity {
         if(number.equals("0"))
         {
             rq();
+
         }else if(number.equals("1"))
         {
             maintain();
+
         }else if(number.equals("2"))
         {
             maintain4();
         }else if(number.equals("3"))
         {
             maintain2();
+
+
+
         }else if(number.equals("4"))
         {
             maintain5();
         }
 
         Listener();
+
+
 
 
 
@@ -108,7 +120,7 @@ public class My_Indext extends MTFBaseActivity {
 
     public void Listener() {
 
-        //全部订单
+       //全部订单
         my_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,11 +132,16 @@ public class My_Indext extends MTFBaseActivity {
         my_all3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 maintain();
+
+
+
+
             }
         });
 
-        //待收货
+       //待收货
         my_all4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,13 +157,24 @@ public class My_Indext extends MTFBaseActivity {
             }
         });
 
-        //待评价
+       //待评价
         my_all5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 maintain5();
             }
         });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent t=new Intent(My_Indext.this,OrderStateActivity.class);
+                    t.putExtra("code",htt.get(position).getBookCode());
+                    startActivity(t);
+
+            }
+        });
+
+
     }
     //查询待评价
     public void maintain5() {
@@ -387,6 +415,8 @@ public class My_Indext extends MTFBaseActivity {
         httq=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy2());
 
+
+
     }
     //查询待付款订单
     class maintainmy2 extends BaseAdapter
@@ -451,7 +481,7 @@ public class My_Indext extends MTFBaseActivity {
                 .gson(new Gson())
                 /*.noParams()*/
                 // .object(loginParams)
-                .typeValue("string", mb_code)
+                .typeValue("string", /*mb_code*/"201605261656057265")
                 .typeValue("int", 4)
 
                 .build();
@@ -467,8 +497,11 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-              //  Log.e("待保养订单",data);
+                Log.e("待保养订单",data);
+
                 maintain(data);
+
+
             }
 
             @Override
@@ -482,6 +515,9 @@ public class My_Indext extends MTFBaseActivity {
     {
         htt=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy());
+
+
+
 
     }
 
@@ -532,6 +568,9 @@ public class My_Indext extends MTFBaseActivity {
 //            holder.my_minefor.setText(yj);
             holder.my_car_number.setText(htt.get(position).getBookCode());
 
+
+
+
             return convertView;
         }
     }
@@ -565,7 +604,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-          //      Log.e("全部订单",data);
+            Log.e("全部订单",data);
                 renqi(data);
             }
 
