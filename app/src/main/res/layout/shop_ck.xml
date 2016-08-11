@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="查看物流"
+        app:titleTxtColor="@android:color/white" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        >
+        <ImageView
+
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物流状态"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已签收"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="140dp"
+            android:textColor="#3c85ee"
+            />
+
+           <TextView
+
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="承运来源:"
+                  android:layout_marginLeft="80dp"
+                  android:layout_marginTop="40dp"
+                  />
+
+              <TextView
+                  android:id="@+id/shop_id"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="中通快递"
+                  android:layout_marginTop="40dp"
+                  android:layout_marginLeft="140dp"
+                  />
+
+
+      <TextView
+
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="运单编号:"
+             android:layout_marginLeft="80dp"
+             android:layout_marginTop="60dp"
+             />
+
+         <TextView
+             android:id="@+id/shop_y"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="406982560876"
+             android:layout_marginTop="60dp"
+             android:layout_marginLeft="140dp"
+
+
+             />
+
+         <TextView
+
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="官方电话:"
+             android:layout_marginLeft="80dp"
+             android:layout_marginTop="80dp"
+             />
+
+         <TextView
+             android:id="@+id/shop_il"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="95311"
+             android:layout_marginTop="80dp"
+             android:layout_marginLeft="140dp"
+
+             />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_mai_line"
+        />
+
+    <ListView
+        android:id="@+id/shop_listvie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+
+
+
+</LinearLayout>

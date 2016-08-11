@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_return"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="反馈"
-            android:paddingLeft="150dp"
-            android:layout_centerVertical="true"
-            android:textSize="18sp"
-            android:textColor="#878787"
-            />
-
-    </RelativeLayout>
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="反馈"
+        app:titleTxtColor="@android:color/white" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -35,6 +19,7 @@
         />
 
     <EditText
+        android:id="@+id/shop_code"
         android:layout_width="350dp"
         android:layout_height="250dp"
         android:background="@color/somber"
@@ -46,7 +31,7 @@
         android:layout_width="337dp"
         android:layout_height="48dp"
         android:text="提交"
-        android:id="@+id/button3"
+        android:id="@+id/fankui"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:textColor="#ffff"

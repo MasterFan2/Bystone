@@ -1,67 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
-            <ImageView
-                android:id="@+id/Home_fh"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_return"
-
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="选择地区"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="18sp"
-                android:textColor="#292929"
-                android:layout_centerHorizontal="true"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#ebebeb"
-                android:layout_marginTop="52dp"
-                />
-
-        </RelativeLayout>
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:rightButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="选择地区"
+        app:titleTxtColor="@android:color/white" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#ebebeb"
 
         />
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="330dp"
-            android:layout_height="28dp"
-            android:hint="搜索地名或、服务"
-            android:background="@drawable/edtextyuan"
-            android:textSize="14dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:layout_centerVertical="true"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="区"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
+            android:textColor="#292929"
+            android:layout_centerHorizontal="true"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="沙坪坝"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
 
             />
-        <ImageView
-        android:layout_width="wrap_content"
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="九龙坡"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北碚"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_search"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"/>
-    </RelativeLayout>
+        >
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="渝北"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="60dp"
+
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="南岸"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大渡口"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/et2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="县"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"
+            android:textColor="#292929"
+            android:layout_centerHorizontal="true"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="梁平县"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="潼南县"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="铜梁县"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="荣昌县"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="60dp"
+
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="城口县"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="丰都县"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ebebeb"
+        android:layout_marginTop="20dp"
+
+        android:layout_below="@id/et2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定位"
+            android:background="@null"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="10dp"
+            />
+
+
+        <Button
+            android:id="@+id/home_shi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重庆"
+            android:background="#878787"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="#292929"
+            android:layout_marginLeft="20dp"
+            />
+
+
+    </LinearLayout>
+
 
 
 
