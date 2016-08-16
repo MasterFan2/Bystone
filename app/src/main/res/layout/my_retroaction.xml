@@ -11,20 +11,35 @@
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="反馈"
-        app:titleTxtColor="@android:color/white" />
+                                                      />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/somber"
         />
 
-    <EditText
+<!--    <EditText
         android:id="@+id/shop_code"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:background="@color/somber"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
+        android:inputType="textMultiLine"
+        android:minLines="17"
+        />-->
+
+    <EditText
+        android:id="@+id/shop_code"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:minLines="8"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:background="@android:drawable/edit_text"
         />
 
     <Button

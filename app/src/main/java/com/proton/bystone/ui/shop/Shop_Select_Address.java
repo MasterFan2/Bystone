@@ -26,6 +26,7 @@ import com.proton.bystone.bean.Del_Add_Address_Ok;
 import com.proton.bystone.bean.Shouhuodizhi;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
+import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
@@ -64,7 +65,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
     listviewdapter adapter2;
     String data;
     String data3;
-    int num;
+    int num=0;
 
     int id ;
     String user_code ;
@@ -74,6 +75,8 @@ public class Shop_Select_Address extends MTFBaseActivity {
     String AddressDetaile ;
     TextView shop_select;
     int isDefault;
+
+    Boolean flag=false;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
@@ -103,19 +106,6 @@ public class Shop_Select_Address extends MTFBaseActivity {
                 startActivity(t);
             }
         });
-
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-
-
-
-
-
 
 
     }
@@ -180,9 +170,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
     //删除
     public void jiexi2(String content)
     {
-
         add_address2();
-
     }
 
     //取出收货地址
@@ -223,7 +211,6 @@ public class Shop_Select_Address extends MTFBaseActivity {
         adapter= new listviewdapter();
         lv.setAdapter(adapter);
        // Log.e("取出收货地址",list+"");
-
     }
 
 
@@ -261,7 +248,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
             shop_compile= (TextView) view.findViewById(R.id.shop_compile );
             shop_select= (TextView) view.findViewById(R.id.shop_select );
             shop_iv= (ImageView) view.findViewById(R.id.shop_iv );
-
+            shop_iv.setTag(position);
 
             phone = list.get(position).getAd_ContactNumber();//联系电话
             Ad_Name = list.get(position).getAd_Name();//联系人
@@ -275,14 +262,15 @@ public class Shop_Select_Address extends MTFBaseActivity {
             num=list.get(position).getIsDefault();
             if(num==1)
             {
-                shop_iv.setImageResource(R.mipmap.icon_mai_select);
+               shop_iv.setImageResource(R.mipmap.icon_mai_select);
+
             }else if(num==0)
             {
-                shop_iv.setImageResource(R.mipmap.icon_mai_disabled);
+              shop_iv.setImageResource(R.mipmap.icon_mai_disabled);
+
             }
 
-            if(num==1)
-            {
+
                 SharedPreferences settings = getSharedPreferences("fn", 0);
                 SharedPreferences.Editor edit = settings.edit();
 
@@ -293,33 +281,9 @@ public class Shop_Select_Address extends MTFBaseActivity {
 
                 edit.commit();
                 Log.e("num","aaa"+Ad_Name+"bbb"+phone+Ad_Address+"888"+num);
-            }
 
 
-            shop_select.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.e("position",position+"");
-
-                    if(num==1)
-                    {
-                        shop_iv.setImageResource(R.mipmap.icon_mai_disabled);
-                        num=0;
-                    }else if(num==0)
-                    {
-                        shop_iv.setImageResource(R.mipmap.icon_mai_select);
-                        num=1;
-                    }
-
-
-
-
-                }
-            });
-
-
-
-                   //重新编辑
+            //重新编
             shop_compile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -392,11 +356,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
                     new AlertDialog.Builder(Shop_Select_Address.this).setTitle("系统提示")
                             .setMessage("确定要删除该地址嘛？")
                             .setPositiveButton("返回",new DialogInterface.OnClickListener() {//添加确定按钮
-
-
-
                                 @Override
-
                                 public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
 
                                     // TODO Auto-generated method stub
@@ -431,6 +391,16 @@ public class Shop_Select_Address extends MTFBaseActivity {
                     }).show();
 
 
+                    shop_iv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            shop_iv.setImageResource(R.mipmap.icon_mai_true);
+
+                        }
+                    });
+
+
 
                 }
             });
@@ -446,7 +416,6 @@ public class Shop_Select_Address extends MTFBaseActivity {
     public void back(View view) {
         animFinish();
     }
-
 
 
 

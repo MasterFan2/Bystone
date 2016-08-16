@@ -89,6 +89,7 @@ animFinish();
                 if("1".equals(data))
                 {
                     Toast.makeText(My_fk.this,"提交反馈成功",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
             }

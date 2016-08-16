@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -209,6 +210,7 @@ public class HomeFragment extends MTFBaseFragment {
         gridView2.setAdapter(new JuleBuhomeadapter4());
 
         listview.setAdapter(new JuleBuhomeadapter2() );
+        listview.setChoiceMode(listview.CHOICE_MODE_SINGLE);
 
         Listener();
 
@@ -342,79 +344,80 @@ public class HomeFragment extends MTFBaseFragment {
             public void onSuccess(ResponseInfo<String> arg0) {
                 // scb.onSuccess(arg0.result);
                 String result = arg0.result;
-                jiexi(result);
+                if(result!=null) {
+                    jiexi(result);
+                }
             }
 
         });
     }
 
     public void jiexi(String result) {
-        Gson json = new Gson();
-
-        Fist fi = json.fromJson(result, Fist.class);
-       // Log.e("o", "解析了哦" + fi.getData());
-
-
-        try {
-            //ConstantMy.MJSON为dota对应的字符串。就是那3个数组类型的数组
-            JSONArray jsonArray = new JSONArray(fi.getData());
-            JSONArray jsonArray1 = jsonArray.getJSONArray(0);
-            JSONArray jsonArray2 = jsonArray.getJSONArray(1);
-            JSONArray jsonArray3 = jsonArray.getJSONArray(2);
+              if(!TextUtils.isEmpty(result)) {
+                  Gson json = new Gson();
+                  Fist fi = json.fromJson(result, Fist.class);
+                  try {
+                      //ConstantMy.MJSON为dota对应的字符串。就是那3个数组类型的数组
+                      JSONArray jsonArray = new JSONArray(fi.getData());
+                      JSONArray jsonArray1 = jsonArray.getJSONArray(0);
+                      JSONArray jsonArray2 = jsonArray.getJSONArray(1);
+                      JSONArray jsonArray3 = jsonArray.getJSONArray(2);
 
 
-            Bean_a bean_a; //第一个实体
-            for (int i = 0; i < jsonArray1.length(); i++) {
-                bean_a = new Bean_a();
-                JSONObject jsonObject = jsonArray1.getJSONObject(i);
-                bean_a.setAdvPath((String) jsonObject.get("AdvPath"));
-                String advPath =(String) jsonObject.get("AdvPath");
-                list_a.add(bean_a);
-                list.add(advPath);
-            }
+                      Bean_a bean_a; //第一个实体
+                      for (int i = 0; i < jsonArray1.length(); i++) {
+                          bean_a = new Bean_a();
+                          JSONObject jsonObject = jsonArray1.getJSONObject(i);
+                          bean_a.setAdvPath((String) jsonObject.get("AdvPath"));
+                          String advPath = (String) jsonObject.get("AdvPath");
+                          list_a.add(bean_a);
+                          list.add(advPath);
+                      }
 
-            for (int i = 0; i < jsonArray2.length(); i++) {
-                Bean_b  bean_b = new Bean_b();
-                JSONObject jsonObject = jsonArray2.getJSONObject(i);
+                      for (int i = 0; i < jsonArray2.length(); i++) {
+                          Bean_b bean_b = new Bean_b();
+                          JSONObject jsonObject = jsonArray2.getJSONObject(i);
 
-                String VC_Url =(String) jsonObject.get("VC_Url");
-                String VC_Code =(String) jsonObject.get("VC_Code");
-                String VC_Name =(String) jsonObject.get("VC_Name");
+                          String VC_Url = (String) jsonObject.get("VC_Url");
+                          String VC_Code = (String) jsonObject.get("VC_Code");
+                          String VC_Name = (String) jsonObject.get("VC_Name");
 
-                 vc_code2.add(VC_Code);
-                 vc_name2.add(VC_Name);
-                 vc_url2.add(VC_Url);
+                          vc_code2.add(VC_Code);
+                          vc_name2.add(VC_Name);
+                          vc_url2.add(VC_Url);
 
-                list_b.add(bean_b);
-                list2.add(VC_Url);
-            }
+                          list_b.add(bean_b);
+                          list2.add(VC_Url);
+                      }
 
-            Log.e("list2",list2+"");
-            //最新推荐
+                      Log.e("list2", list2 + "");
+                      //最新推荐
 
-            for (int i = 0; i < jsonArray3.length(); i++) {
-                NewRecommendResp nr = new NewRecommendResp();
-                JSONObject jsonObject = jsonArray3.getJSONObject(i);
-                String VC_Code =(String) jsonObject.get("VC_Code");
-                String VC_Name =(String) jsonObject.get("VC_Name");
-                String VC_Url =(String) jsonObject.get("VC_Url");
+                      for (int i = 0; i < jsonArray3.length(); i++) {
+                          NewRecommendResp nr = new NewRecommendResp();
+                          JSONObject jsonObject = jsonArray3.getJSONObject(i);
+                          String VC_Code = (String) jsonObject.get("VC_Code");
+                          String VC_Name = (String) jsonObject.get("VC_Name");
+                          String VC_Url = (String) jsonObject.get("VC_Url");
 
-                vc_code.add(VC_Code);
-                vc_name.add(VC_Name);
-                vc_url.add(VC_Url);
+                          vc_code.add(VC_Code);
+                          vc_name.add(VC_Name);
+                          vc_url.add(VC_Url);
 
 
-            }
+                      }
 
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-       // Log.e("123","list:"+list_a);
-        vp.setAdapter(new MyPagerAdapter());
+                  } catch (JSONException e) {
+                      e.printStackTrace();
+                  }
 
+                  // Log.e("123","list:"+list_a);
+                  vp.setAdapter(new MyPagerAdapter());
+
+              }
     }
 
     class MyPagerAdapter extends PagerAdapter
@@ -440,9 +443,17 @@ public class HomeFragment extends MTFBaseFragment {
             image.setScaleType(ImageView.ScaleType.FIT_XY);
             String aa = "http://192.168.0.119";
             utils.display(image, aa  + list.get(position));
-           yzq.setText(weather_data.get(position).getWeather());
-            home_byxc.setText(index.get(position).getTitle());
-            home_ssd.setText(weather_data.get(position).getTemperature());
+               if(weather_data!=null&&weather_data.size()>0) {
+                   yzq.setText(weather_data.get(position).getWeather());
+                   home_ssd.setText(weather_data.get(position).getTemperature());
+               }
+
+            if(index!=null&&index.size()>0) {
+                home_byxc.setText(index.get(position).getTitle());
+            }
+
+
+
 
 
             container.addView(image);
@@ -500,9 +511,14 @@ public class HomeFragment extends MTFBaseFragment {
             String aa = "http://192.168.0.119";
             tv1.setText("青木年华");
             /*tv2.setText("青木");*/
-            utils2.display(image2,aa+list2.get(position));
-           // Picasso.with(context).load(aa+s).into(tuanti);
-         //   Log.e("测试",aa+list2.get(position));
+
+                utils2.display(image2, aa + list2.get(position));
+                // Picasso.with(context).load(aa+s).into(tuanti);
+                //   Log.e("测试",aa+list2.get(position));
+
+
+
+
 
             return view;
 
@@ -618,9 +634,10 @@ public class HomeFragment extends MTFBaseFragment {
 
             String aa = "http://192.168.0.119";
             tv1.setText(vc_name.get(position));
-
-            utils2.display(image2,aa+vc_url.get(position));
-            // Picasso.with(context).load(aa+s).into(tuanti);
+            if(vc_url!=null&&vc_url.size()>0) {
+                utils2.display(image2, aa + vc_url.get(position));
+                // Picasso.with(context).load(aa+s).into(tuanti);
+            }
 
 
             return view;
@@ -675,10 +692,14 @@ public class HomeFragment extends MTFBaseFragment {
     //解析
     public void htpjiexi(String data)
     {
-        Home_Weather  o = new Gson().fromJson(data, new TypeToken<Home_Weather>() {
-        }.getType());
-        weather_data = o.getResults().get(0).getWeather_data();
-        index = o.getResults().get(0).getIndex();
+        if(!TextUtils.isEmpty(data)) {
+
+            Home_Weather o = new Gson().fromJson(data, new TypeToken<Home_Weather>() {
+            }.getType());
+            weather_data = o.getResults().get(0).getWeather_data();
+            index = o.getResults().get(0).getIndex();
+        }
+
 
     }
 
@@ -721,23 +742,27 @@ public class HomeFragment extends MTFBaseFragment {
     //解析价格从低搞到数据
     public void price(String data)
     {
-        JSONObject obj = null;
-        try {
-            obj = new JSONObject(data);
-            String strJsonArray = obj.getString("data");
-            JSONArray jsonArray = new JSONArray(strJsonArray);
-            List<home_yj>   commodityList = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<home_yj>>() {}.getType());
-            String showapi_res_body = commodityList.get(0).getShowapi_res_body();
-            String strJsonArray1 = obj.getString("showapi_res_body");
-            JSONArray jsonArray1 = new JSONArray(strJsonArray1);
-            List<readd>   list = new Gson().fromJson(jsonArray1.get(0).toString(), new TypeToken<List<readd>>() {}.getType());
-            List<readd.ListBean> list1 = list.get(0).getList();
 
-            Toast.makeText(getActivity(),list1.get(0).getP90(),Toast.LENGTH_LONG).show();
+            JSONObject obj = null;
+            try {
+                obj = new JSONObject(data);
+                String strJsonArray = obj.getString("data");
+                JSONArray jsonArray = new JSONArray(strJsonArray);
+                List<home_yj> commodityList = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<home_yj>>() {
+                }.getType());
+                String showapi_res_body = commodityList.get(0).getShowapi_res_body();
+                String strJsonArray1 = obj.getString("showapi_res_body");
+                JSONArray jsonArray1 = new JSONArray(strJsonArray1);
+                List<readd> list = new Gson().fromJson(jsonArray1.get(0).toString(), new TypeToken<List<readd>>() {
+                }.getType());
+                List<readd.ListBean> list1 = list.get(0).getList();
+
+                Toast.makeText(getActivity(), list1.get(0).getP90(), Toast.LENGTH_LONG).show();
 
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -757,7 +782,7 @@ public class HomeFragment extends MTFBaseFragment {
 
 
 
-}
+
 
 
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -212,8 +213,25 @@ public class App extends MTFBaseActivity {
         shopdetailed_address=(EditText)findViewById(R.id.shop_detailed_address);
         //设置为默认地址
         shopmoren=(ImageView)findViewById(R.id.shop_moren);
+
+        RelativeLayout   shopmoren2=(RelativeLayout)findViewById(R.id.shop_moren2);
         //确认
         affirm=(Button)findViewById(R.id.affirm);
+
+        shopmoren2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fla==false) {
+                    mark = "1";
+                    shopmoren.setImageResource(R.mipmap.icon_mai_select);
+                    fla=true;
+                }else {
+                    mark = "0";
+                    shopmoren.setImageResource(R.mipmap.icon_mai_disabled);
+                    fla=false;
+                }
+            }
+        });
     }
 
     public void Listener()

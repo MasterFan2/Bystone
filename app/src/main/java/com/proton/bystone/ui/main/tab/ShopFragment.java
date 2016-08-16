@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,7 +87,7 @@ public class ShopFragment extends MTFBaseFragment {
    /* ArrayList<TextView>  list3;*/
 
     @Bind(R.id.shop_listview)
-    RefreshListView listview;
+    ListView listview;
 
     @Bind(R.id.home_btn)
     Button home_btn;//黄泥磅
@@ -135,7 +137,6 @@ public class ShopFragment extends MTFBaseFragment {
         // 加载头布局
         View headerView = View.inflate(ShopFragment.this.getActivity(), R.layout.first_layout2,
                 null);
-
         viewpager = (ViewPager) headerView.findViewById(R.id.shop_vPager);
         //横向gridView
         gridView=(GridView)headerView.findViewById(R.id.shop_gridView);
@@ -155,13 +156,15 @@ public class ShopFragment extends MTFBaseFragment {
        Listener();
         //listview刷新的监听
 
-        listview.setOnRefreshListener(new RefreshListView.OnRefreshListener() {
+        viewpa();
+/*
+      listview.setOnRefreshListener(new RefreshListView.OnRefreshListener() {
 
             @Override
             public void onRefresh() {
                 // TODO Auto-generated method stub
-                viewpa();
-                //收起下拉刷新
+
+                *//**//*//**//*//*收起下拉刷新
                 new Handler().postDelayed(new Runnable(){
 
                             public void run() {
@@ -183,13 +186,13 @@ public class ShopFragment extends MTFBaseFragment {
                         public void run() {
 
                             viewpa();
-                            listview.onRefreshComplete(true);
+                          //  listview.onRefreshComplete(true);
 
                         }
 
                     }, 3000);// 收起加载更多的布局
                 }
-          });
+          });*/
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
@@ -333,7 +336,7 @@ public class ShopFragment extends MTFBaseFragment {
             public void onSuccess(ResponseInfo<String> arg0) {
                 // scb.onSuccess(arg0.result);
                 String result = arg0.result;
-                listview.onRefreshComplete(true);
+              //  listview.onRefreshComplete(true);
                 jiexi(result);
 
 
@@ -343,63 +346,63 @@ public class ShopFragment extends MTFBaseFragment {
     }
 
     public void jiexi(String result) {
-        Gson json = new Gson();
-    //    Log.e("o", "OK" + result);
-        Fist fi = json.fromJson(result, Fist.class);
-    //    Log.e("o", "jiexi++++" + fi.getData());
+        if(!TextUtils.isEmpty(result)) {
+            Gson json = new Gson();
+            //    Log.e("o", "OK" + result);
+            Fist fi = json.fromJson(result, Fist.class);
+            //    Log.e("o", "jiexi++++" + fi.getData());
 
 
-        try {
-            //ConstantMy.MJSON为dota对应的字符串。就是那3个数组类型的数组
-            JSONArray jsonArray = new JSONArray(fi.getData());
-            JSONArray jsonArray1 = jsonArray.getJSONArray(0);
-            JSONArray jsonArray2 = jsonArray.getJSONArray(1);
-            JSONArray jsonArray3 = jsonArray.getJSONArray(2);
+            try {
+                //ConstantMy.MJSON为dota对应的字符串。就是那3个数组类型的数组
+                JSONArray jsonArray = new JSONArray(fi.getData());
+                JSONArray jsonArray1 = jsonArray.getJSONArray(0);
+                JSONArray jsonArray2 = jsonArray.getJSONArray(1);
+                JSONArray jsonArray3 = jsonArray.getJSONArray(2);
 
-            Bean_a bean_a; //第一个实体
-            for (int i = 0; i < jsonArray1.length(); i++) {
-                bean_a = new Bean_a();
-                JSONObject jsonObject = jsonArray1.getJSONObject(i);
-                bean_a.setAdvPath((String) jsonObject.get("AdvPath"));
-                String advPath =(String) jsonObject.get("AdvPath");
+                Bean_a bean_a; //第一个实体
+                for (int i = 0; i < jsonArray1.length(); i++) {
+                    bean_a = new Bean_a();
+                    JSONObject jsonObject = jsonArray1.getJSONObject(i);
+                    bean_a.setAdvPath((String) jsonObject.get("AdvPath"));
+                    String advPath = (String) jsonObject.get("AdvPath");
 
-                list.add(advPath);
-                list_a.add(bean_a);
+                    list.add(advPath);
+                    list_a.add(bean_a);
 
 
+                }
+
+                for (int i = 0; i < jsonArray2.length(); i++) {
+                    Bean_b bean_b = new Bean_b();
+                    JSONObject jsonObject = jsonArray2.getJSONObject(i);
+                    String VC_Url = (String) jsonObject.get("VC_Url");
+                    list2.add(VC_Url);
+                }
+
+                for (int i = 0; i < jsonArray2.length(); i++) {
+                    Bean_b bean_b = new Bean_b();
+                    JSONObject jsonObject = jsonArray2.getJSONObject(i);
+                    String VC_Code = (String) jsonObject.get("VC_Code");
+                    String VC_Name = (String) jsonObject.get("VC_Name");
+                    String VC_Url = (String) jsonObject.get("VC_Url");
+
+                    one.add(VC_Code);
+                    two.add(VC_Name);
+                    three.add(VC_Url);
+
+                    //         Log.e("多少个",three+"");
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            for (int i = 0; i < jsonArray2.length(); i++) {
-                Bean_b  bean_b = new Bean_b();
-                JSONObject jsonObject = jsonArray2.getJSONObject(i);
-                String VC_Url =(String) jsonObject.get("VC_Url");
-                list2.add(VC_Url);
-            }
 
-            for (int i = 0; i < jsonArray2.length(); i++) {
-                Bean_b bean_b = new Bean_b();
-                JSONObject jsonObject = jsonArray2.getJSONObject(i);
-                String VC_Code =(String) jsonObject.get("VC_Code");
-                String VC_Name =(String) jsonObject.get("VC_Name");
-                String VC_Url =(String) jsonObject.get("VC_Url");
-
-                one.add(VC_Code);
-                two.add(VC_Name);
-                three.add(VC_Url);
-
-       //         Log.e("多少个",three+"");
-
-            }
-
-
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+            viewpager.setAdapter(new MyPagerAdapter());
         }
-
-
-       viewpager.setAdapter(new MyPagerAdapter());
 
 
     }
@@ -568,27 +571,28 @@ public class ShopFragment extends MTFBaseFragment {
 //解析
   public void htpjiexi(String data)
     {
-        listfor=new Gson().fromJson(data, new TypeToken<List<Category_nameResp>>() {}.getType());
+        if(!TextUtils.isEmpty(data)) {
+            listfor = new Gson().fromJson(data, new TypeToken<List<Category_nameResp>>() {
+            }.getType());
 
-        lis=new ArrayList<String>();
-        //标题
-        lis2=new ArrayList<String>();
-      for(int i=0;i<listfor.size();i++)
-        {
-            String ll=listfor.get(i).getImg_Pic();
+            lis = new ArrayList<String>();
+            //标题
+            lis2 = new ArrayList<String>();
+            for (int i = 0; i < listfor.size(); i++) {
+                String ll = listfor.get(i).getImg_Pic();
 
-            lis.add(ll);
+                lis.add(ll);
 
+            }
+
+            for (int i = 0; i < listfor.size(); i++) {
+
+                String l2 = listfor.get(i).getPs_NAME();
+
+                lis2.add(l2);
+            }
+            //   Log.e("aa",listfor+"");
         }
-
-        for(int i=0;i<listfor.size();i++)
-        {
-
-            String l2=listfor.get(i).getPs_NAME();
-
-            lis2.add(l2);
-        }
-     //   Log.e("aa",listfor+"");
 
 
     }
@@ -633,8 +637,11 @@ public class ShopFragment extends MTFBaseFragment {
     //解析
     public void eventjiexi(String data)
     {
-        listevent=new Gson().fromJson(data, new TypeToken<List<EventResp>>() {}.getType());
-        database = listevent.get(0).getData();
+        if(!TextUtils.isEmpty(data)) {
+            listevent = new Gson().fromJson(data, new TypeToken<List<EventResp>>() {
+            }.getType());
+            database = listevent.get(0).getData();
+        }
 
 
 

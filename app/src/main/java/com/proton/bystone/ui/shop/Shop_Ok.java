@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +49,8 @@ import retrofit2.Response;
  */
 @MTFActivityFeature(layout = R.layout.ok_arayacak)
 public class Shop_Ok extends MTFBaseActivity {
-    @Bind(R.id.Home_car)
-    ImageView Home_car;
+    @Bind(R.id.shop_kcbz)
+    TextView shop_kcbz;
     String  order;
     String aa="http://192.168.0.119";
     TextView shop_address;
@@ -160,6 +161,24 @@ public class Shop_Ok extends MTFBaseActivity {
             }
         });
 
+        TextView   m_title_left_btn=(TextView) findViewById(R.id.m_title_left_btn);
+        m_title_left_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animFinish();
+            }
+        });
+
+
+        TextView   m_title_right_btn=(TextView) findViewById(R.id.m_title_right_btn);
+        m_title_right_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent t = new Intent(Shop_Ok.this, ShopCarActivity.class);
+                startActivity(t);
+            }
+        });
+
 
         TextView shop_shr  = (TextView) findViewById(R.id.shop_shr);
         TextView shop_adname  = (TextView) findViewById(R.id.shop_adname);
@@ -207,8 +226,6 @@ public class Shop_Ok extends MTFBaseActivity {
                     Intent t = new Intent(Shop_Ok.this, App.class);
                     t.putExtra("bj", "add");
                     startActivity(t);
-
-
                 }
             });
 
@@ -257,17 +274,8 @@ public class Shop_Ok extends MTFBaseActivity {
 
             }
         });
-//跳转购物车
-        Home_car.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent t= new Intent(Shop_Ok.this,ShopCarActivity.class);
-                startActivity(t);
-            }
-        });
 
-
-   s = viewById.getText().toString().trim();//暂时拿到会员价
+        s = viewById.getText().toString().trim();//暂时拿到会员价
       Double  dv = Double.parseDouble(s);
         shop_heji.setText(dv+"");
         shop_mane.setText(dv+"");
@@ -304,10 +312,6 @@ public class Shop_Ok extends MTFBaseActivity {
 
     }
 
-    @OnClick(R.id.Home_fh)
-    public void back(View view) {
-        animFinish();
-    }
 
 
     //生成订单
@@ -325,8 +329,7 @@ public class Shop_Ok extends MTFBaseActivity {
 
         Main_Order loginParams = new Main_Order("",mb_code,shop_mone,shop_member,dikou,3,v,"");
 
-       /* Log.e("dikou ",dikou+"");
-        Log.e("v2",v+"");*/
+
 
       ArrayList<E_Order>  list=new ArrayList<E_Order>();
       E_Order e_Order = new E_Order(I_Company,mb_code,getVC_Code,shop_mone,VC_XH,getVC_Name,"",i+1+"" ,v,
@@ -359,7 +362,7 @@ public class Shop_Ok extends MTFBaseActivity {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 String data = response.body().getData();
-               // Log.e("订单生成提交",data+"");
+                Log.e("订单生成提交",data+"");
 
                  jiexi(data);
             }
@@ -376,17 +379,32 @@ public class Shop_Ok extends MTFBaseActivity {
     //解析
     public void jiexi(String data)
     {
+        if(!TextUtils.isEmpty(data))
+        {
+            Gson gson = new Gson();
+            com.proton.bystone.bean.shop_Order shop = gson.fromJson(data, shop_Order.class);
+            int code = shop.getCode();
+            /*if(code==3)
+            {
+                Toast.makeText(Shop_Ok.this,"该商品库存不足",Toast.LENGTH_SHORT).show();
+                shop_kcbz.setVisibility(View.VISIBLE);
+            }else if(code==1)
+            {
+                //orderCode = shop.getOrderCode(); //拿到订单编号
+                Intent t = new Intent(Shop_Ok.this, My_Shop_Pay.class);
+                t.putExtra("orderNum", order);//订单编号*//**//*
+                t.putExtra("money", v);
+                startActivity(t);
+            }*/
+
+            Intent t = new Intent(Shop_Ok.this, My_Shop_Pay.class);
+            t.putExtra("orderNum", order);//订单编号*//*
+            t.putExtra("money", v);
+            startActivity(t);
+        }
 
 
-        Gson gson=new Gson();
-        com.proton.bystone.bean.shop_Order shop = gson.fromJson(data, shop_Order.class);
-        //拿到订单编号
-       //orderCode = shop.getOrderCode();
-       Intent t = new Intent(Shop_Ok.this, My_Shop_Pay.class);
-       t.putExtra("orderNum",order);//订单编号*/
-       t.putExtra("money",v);
 
-       startActivity(t);
     }
 
 

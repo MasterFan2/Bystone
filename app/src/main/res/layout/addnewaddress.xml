@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-
+            android:maxLength="10"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
             android:textColor="#292929"
@@ -59,6 +59,7 @@
             android:textSize="18sp"
             android:textColor="#292929"
 
+
             />
         <EditText
             android:id="@+id/shop_phone"
@@ -69,6 +70,8 @@
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:textColor="#292929"
+            android:phoneNumber="true"
+            android:maxLength="12"
 
             />
         <TextView
@@ -104,6 +107,7 @@
         android:layout_marginTop="20dp"
         android:textSize="16sp"
         android:textColor="#292929"
+        android:maxLength="20"
 
         />
 
@@ -140,6 +144,7 @@
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:textColor="#292929"
+            android:maxLength="20"
 
             />
 
@@ -157,6 +162,7 @@
         android:src="@mipmap/icon_mai_line"
         />
     <RelativeLayout
+        android:id="@+id/shop_moren2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

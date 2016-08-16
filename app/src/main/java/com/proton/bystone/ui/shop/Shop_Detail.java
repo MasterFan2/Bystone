@@ -14,6 +14,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -146,8 +147,7 @@ public class Shop_Detail extends MTFBaseActivity {
     @Bind(R.id.shop_shopping_cart)
     Button bt;
 
-    @Bind(R.id.shop_gwu)
-    ImageView img;
+
 
     RelativeLayout shop_dian;
 
@@ -164,10 +164,7 @@ public class Shop_Detail extends MTFBaseActivity {
 //    }
 
 
-    @OnClick(R.id.Home_fh)
-    public void back(View view) {
-        animFinish();
-    }
+
 
     @Override
     public void backPressed() {
@@ -239,6 +236,32 @@ public class Shop_Detail extends MTFBaseActivity {
         m_Modem=(GridView)findViewById(R.id.M_Model);
      //   m_Modem.setAdapter(new JuleBuhomeadapter89());
         Listener();
+
+
+        TextView   m_title_left_btn=(TextView) findViewById(R.id.m_title_left_btn);
+        m_title_left_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animFinish();
+            }
+        });
+
+
+        TextView   m_title_right_btn=(TextView) findViewById(R.id.m_title_right_btn);
+        m_title_right_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent t = new Intent(Shop_Detail.this, ShopCarActivity.class);
+                startActivity(t);
+            }
+        });
+
+
+
+
+
+
+
 
 
     }
@@ -335,10 +358,11 @@ public class Shop_Detail extends MTFBaseActivity {
             public void onClick(View v) {
 
                 MyShoppingCar.getShoppingCar().add(commodityList.get(0));
+                Toast.makeText(context,"已加入购物车",Toast.LENGTH_SHORT).show();
 
             }
         });
-//跳转购物车
+/*//跳转购物车
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -349,7 +373,9 @@ public class Shop_Detail extends MTFBaseActivity {
                 Intent t= new Intent(Shop_Detail.this,ShopCarActivity.class);
                 startActivity(t);
             }
-        });
+        });*/
+
+
 
 
         shop_cs.setOnClickListener(new View.OnClickListener() {
@@ -437,7 +463,6 @@ public class Shop_Detail extends MTFBaseActivity {
                 }
             }
         });
-
 
     }
 
@@ -672,11 +697,11 @@ public class Shop_Detail extends MTFBaseActivity {
         }
 
     }
-    class MyPagerAdapter extends PagerAdapter
-    {
+    class MyPagerAdapter extends PagerAdapter {
         public MyPagerAdapter() {
             utils = new BitmapUtils(Shop_Detail.this);
         }
+
         @Override
         public int getCount() {
             return list.size();
@@ -693,7 +718,7 @@ public class Shop_Detail extends MTFBaseActivity {
             //image.setImageResource(R.mipmap.icon_pwd);
             image.setScaleType(ImageView.ScaleType.FIT_XY);
 
-            utils.display(image, aa  + list.get(position));
+            utils.display(image, aa + list.get(position));
 
             container.addView(image);
             return image;
@@ -705,62 +730,40 @@ public class Shop_Detail extends MTFBaseActivity {
             container.removeView((View) object);
         }
 
-        @OnClick(R.id.Home_fh)
-        public void back(View view) {
-            animFinish();
+
+        class JuleBuhomeadapter89 extends BaseAdapter {
+
+            @Override
+            public int getCount() {
+                // TODO Auto-generated method stub
+                return M_Model == null ? 0 : M_Model.size();
+            }
+
+            @Override
+            public Object getItem(int position) {
+                // TODO Auto-generated method stub
+                return M_Model.get(position);
+            }
+
+            @Override
+            public long getItemId(int position) {
+                // TODO Auto-generated method stub
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // TODO Auto-generated method stub
+                TextView tv = new TextView(Shop_Detail.this);
+                tv.setText(M_Model.get(position));
+                return tv;
+
+
+            }
         }
 
 
     }
-
-
-class JuleBuhomeadapter89 extends BaseAdapter {
-
-    @Override
-    public int getCount() {
-        // TODO Auto-generated method stub
-        return M_Model == null ? 0 : M_Model.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return M_Model.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        TextView tv = new TextView(Shop_Detail.this);
-        tv.setText(M_Model.get(position));
-        return tv;
-
-
-    }
-
-    @OnClick(R.id.Home_fh)
-    public void back(View view) {
-        animFinish();
-    }
-
-
-}
-
-
-
-
-
-
-
-
-
-
 
 }
 

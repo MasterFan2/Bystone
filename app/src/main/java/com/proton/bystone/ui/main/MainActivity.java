@@ -1,6 +1,7 @@
 package com.proton.bystone.ui.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -175,4 +176,11 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     public void onClick(MTDialog dialog, View view) {
 
     }
+
+
+/*    public void tiao()
+    {
+        Intent t=new Intent(context,MeFragment.class);
+        startActivity(t);
+    }*/
 }

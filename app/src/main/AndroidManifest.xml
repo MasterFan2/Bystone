@@ -95,7 +95,7 @@
         <activity
             android:name=".ui.shop.Shop_Detail"
             android:screenOrientation="portrait" />
-        D
+
         <activity
             android:name=".ui.shop.Shop_Ok"
             android:screenOrientation="portrait" />
@@ -124,7 +124,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.shop.My_Indext"
-            android:screenOrientation="portrait" />
+             />
         <activity
             android:name=".ui.shop.My_Privilege"
             android:screenOrientation="portrait" />
@@ -195,6 +195,40 @@
             android:name=".ui.shop.shop_Sh"
             android:exported="true"
             android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".ui.shop.Shop_Catalogue"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+
+
+        <activity
+        android:name=".ui.shop.phone.MainActivity2"
+        android:exported="true"
+        android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".ui.shop.WebActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".pay.yinlian.APKActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".pay.yinlian.JARActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".pay.yinlian.EntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+
+
+
 
 
 

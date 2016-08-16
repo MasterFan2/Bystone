@@ -69,37 +69,37 @@ public class RefreshListView extends ListView implements OnScrollListener,
 	 */
 	private void initHeaderView() {
 		mHeaderView = View.inflate(getContext(), R.layout.refresh_header, null);
-		this.addHeaderView(mHeaderView);
+		//this.addHeaderView(mHeaderView);
 
 		tvTitle = (TextView) mHeaderView.findViewById(R.id.tv_title);
 		tvTime = (TextView) mHeaderView.findViewById(R.id.tv_time);
 		ivArrow = (ImageView) mHeaderView.findViewById(R.id.iv_arr);
 		pbProgress = (ProgressBar) mHeaderView.findViewById(R.id.pb_progress);
 
-		mHeaderView.measure(0, 0);
-		mHeaderViewHeight = mHeaderView.getMeasuredHeight();
+		/*mHeaderView.measure(0, 0);
+		mHeaderViewHeight = mHeaderView.getMeasuredHeight();*/
 
-		mHeaderView.setPadding(0, -mHeaderViewHeight, 0, 0);// 隐藏头布局
+	//	mHeaderView.setPadding(0, 0, 0, 0);// 隐藏头布局
 
-		initArrowAnim();
+		//initArrowAnim();
 
-		tvTime.setText("最后刷新时间:" + getCurrentTime());
+		//tvTime.setText("最后刷新时间:" + getCurrentTime());
 	}
 
 	/*
 	 * 初始化脚布局
 	 */
 	private void initFooterView() {
-		mFooterView = View.inflate(getContext(),
-				R.layout.refresh_listview_footer, null);
-		this.addFooterView(mFooterView);
+		///mFooterView = View.inflate(getContext(),
+		/*		R.layout.refresh_listview_footer, null);
+		this.addFooterView(mFooterView);*/
 
-		mFooterView.measure(0, 0);
-		mFooterViewHeight = mFooterView.getMeasuredHeight();
+		/*mFooterView.measure(0, 0);
+		mFooterViewHeight = mFooterView.getMeasuredHeight();*/
 
-		mFooterView.setPadding(0, -mFooterViewHeight, 0, 0);// 隐藏
+		//mFooterView.setPadding(0, 0, 0, 0);// 隐藏
 
-		this.setOnScrollListener(this);
+		//this.setOnScrollListener(this);
 	}
 
 	@Override

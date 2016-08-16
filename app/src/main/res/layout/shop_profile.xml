@@ -77,14 +77,17 @@
         android:layout_height="44dp"
         android:background="@color/gray">
         <ImageView
+            android:visibility="gone"
             android:id="@+id/shop_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_mai_disabled"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+
             />
         <TextView
+            android:visibility="gone"
             android:id="@+id/shop_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -143,6 +146,16 @@
 
 
             />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择"
+            android:id="@+id/checkBox"
+            android:layout_alignTop="@+id/shop_delo"
+            android:layout_marginTop="10dp"
+            />
+
     </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
