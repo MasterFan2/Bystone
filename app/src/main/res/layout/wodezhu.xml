@@ -1,38 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:textSize="16sp"
-            android:textColor="#292929"
-            android:layout_centerHorizontal="true"
-            />
-        <ImageView
-            android:id="@+id/my_gwc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mine_cart"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentRight="true"
-            />
+        android:layout_height="?attr/actionBarSize"
+        app:leftButtonHide="true"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="我的"
+        app:rightButtonIcon="@mipmap/icon_mine_cart"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#ebebeb"
-            android:layout_marginTop="55dp"
-            />
-    </RelativeLayout>
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -151,6 +132,31 @@
             android:layout_marginLeft="24dp"
 
             />
+
+        <ImageView
+             android:visibility="gone"
+            android:id="@+id/icon_mine_reddian"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_mine_reddian"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="28dp"
+
+
+            />
+
+        <TextView
+            android:id="@+id/shop_wd"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="11dp"
+            android:textSize="8sp"
+
+
+            />
         <TextView
 
             android:layout_width="wrap_content"
@@ -162,6 +168,32 @@
             android:textColor="#292929"
             android:layout_below="@id/my_minefor"
             />
+
+        <ImageView
+            android:id="@+id/icon_by"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_mine_reddian"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="90dp"
+            android:visibility="gone"
+
+            />
+
+        <TextView
+            android:id="@+id/shop_wby"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="114dp"
+            android:layout_marginTop="11dp"
+            android:textSize="8sp"
+
+
+            />
+
+
 
         <ImageView
             android:id="@+id/my_minefor2"
@@ -183,6 +215,31 @@
             android:layout_below="@id/my_minefor2"
             />
 
+
+        <ImageView
+            android:id="@+id/shop_dsh"
+            android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_mine_reddian"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="165dp"
+
+            />
+
+        <TextView
+            android:id="@+id/shop_ye"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="190dp"
+            android:layout_marginTop="11dp"
+            android:textSize="8sp"
+
+
+            />
+
         <ImageView
             android:id="@+id/my_minefor3"
             android:layout_width="wrap_content"
@@ -202,6 +259,32 @@
             android:textColor="#292929"
             android:layout_below="@id/my_minefor3"
             />
+
+
+        <ImageView
+            android:id="@+id/shop_dfk"
+            android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_mine_reddian"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="230dp"
+
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/shop_fk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="255dp"
+            android:layout_marginTop="11dp"
+            android:textSize="8sp"
+
+
+            />
+
         <ImageView
             android:id="@+id/my_minefor4"
             android:layout_width="wrap_content"
@@ -223,6 +306,31 @@
             />
 
         <ImageView
+            android:id="@+id/shop_pj"
+            android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_mine_reddian"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="300dp"
+
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/shop_fg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="325dp"
+            android:layout_marginTop="11dp"
+            android:textSize="8sp"
+
+
+            />
+
+        <ImageView
+
             android:id="@+id/my_minefor5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -338,6 +446,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/my_car"
         android:layout_width="match_parent"
         android:layout_height="44dp">
 
@@ -364,7 +473,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="爱车需要保养了"
+
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:textSize="13sp"

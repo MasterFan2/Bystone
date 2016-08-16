@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
     <ScrollView
@@ -12,43 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <RelativeLayout
+        <com.proton.library.widget.MTFTitleView
+            android:id="@+id/titleView"
             android:layout_width="match_parent"
-            android:layout_height="59dp">
-            <ImageView
-                android:id="@+id/Home_fh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_return"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单详情"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="16sp"
-                android:textColor="#292929"
-                android:layout_centerHorizontal="true"
-                />
-            <ImageView
-                android:id="@+id/Home_car"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_mine_cart"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentRight="true"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#ebebeb"
-                android:layout_marginTop="55dp"
-                />
-        </RelativeLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:titleBackground="@color/mtf_gray_900"
+            app:titleText="订单详情"
+            app:rightButtonIcon="@mipmap/icon_mine_cart"
+            />
 
         <RelativeLayout
         android:layout_width="match_parent"

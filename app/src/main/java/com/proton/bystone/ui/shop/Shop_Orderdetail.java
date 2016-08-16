@@ -51,12 +51,11 @@ public class Shop_Orderdetail extends MTFBaseActivity {
     TextView shop_phone;
     Button shop_th;
 
-    @Bind(R.id.Home_car)
-    ImageView Home_car;
+ /*   @Bind(R.id.Home_car)
+    ImageView Home_car;*/
     BitmapUtils    utils;
 
-    @Bind(R.id.Home_fh)
-    ImageView Home_fh;
+
 
     @Override
     public void initialize(Bundle savedInstanceState) {
@@ -80,7 +79,7 @@ public class Shop_Orderdetail extends MTFBaseActivity {
 
         getData();
 
-        Home_car.setOnClickListener(new View.OnClickListener() {
+    /*    Home_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent t= new Intent(Shop_Orderdetail.this,ShopCarActivity.class);
@@ -93,9 +92,26 @@ public class Shop_Orderdetail extends MTFBaseActivity {
             public void onClick(View v) {
                 finish();
             }
+        });*/
+
+
+        TextView   m_title_left_btn=(TextView) findViewById(R.id.m_title_left_btn);
+        m_title_left_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animFinish();
+            }
         });
 
 
+        TextView   m_title_right_btn=(TextView) findViewById(R.id.m_title_right_btn);
+        m_title_right_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent t = new Intent(Shop_Orderdetail.this, ShopCarActivity.class);
+                startActivity(t);
+            }
+        });
     }
 
     public void getData() {
@@ -124,7 +140,7 @@ public class Shop_Orderdetail extends MTFBaseActivity {
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 data = response.body().getData();
                 Log.e("订单详情数据", data + "");
-               jiexi(data);
+              // jiexi(data);
 
             }
 
@@ -140,23 +156,24 @@ public class Shop_Orderdetail extends MTFBaseActivity {
     //解析
     public void jiexi(String data) {
 
-        shop_pay_cs = new Gson().fromJson(data, new TypeToken <List<Ddxq>>() {
-        }.getType());
 
-        listview.setAdapter(new JuleBuhomeadapter2());
-        shop_yf.setText(shop_pay_cs.get(0).getLogisticsPrice());//总运费
-        shop_zje.setText(shop_pay_cs.get(0).getOSfJe());//总运费
-        dikou.setText(shop_pay_cs.get(0).getOJbDk());//抵扣金币
+            shop_pay_cs = new Gson().fromJson(data, new TypeToken<List<Ddxq>>() {
+            }.getType());
 
-        String address = shop_pay_cs.get(0).getAddress();
+            listview.setAdapter(new JuleBuhomeadapter2());
+            shop_yf.setText(shop_pay_cs.get(0).getLogisticsPrice());//总运费
+            shop_zje.setText(shop_pay_cs.get(0).getOSfJe());//总运费
+            dikou.setText(shop_pay_cs.get(0).getOJbDk());//抵扣金币
+
+            String address = shop_pay_cs.get(0).getAddress();
 
 
+            shop_pay = new Gson().fromJson(address, new TypeToken<AddressMTF>() {
+            }.getType());
+            shop_shr.setText(shop_pay.getAd_Name());//收货人
+            shop_addr.setText(shop_pay.getAd_Address());//地址
+            shop_phone.setText(shop_pay.getAd_ContactNumber());
 
-        shop_pay = new Gson().fromJson(address, new TypeToken<AddressMTF>() {
-        }.getType());
-        shop_shr.setText(shop_pay.getAd_Name());//收货人
-        shop_addr.setText(shop_pay.getAd_Address());//地址
-        shop_phone.setText(shop_pay.getAd_ContactNumber());
 
 
     }

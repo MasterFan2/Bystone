@@ -163,6 +163,14 @@ public class Shop_Commodity extends MTFBaseActivity {
 
             }
         });
+
+        TextView   m_title_left_btn=(TextView) findViewById(R.id.m_title_left_btn);
+        m_title_left_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animFinish();
+            }
+        });
     }
 
     //解析人气从低搞到数据
@@ -653,6 +661,7 @@ public class Shop_Commodity extends MTFBaseActivity {
         ImageView image2;
 
     }
+
 
 
 

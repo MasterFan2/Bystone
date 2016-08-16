@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import com.proton.bystone.bean.Shop_All_Order;
 import com.proton.bystone.bean.Shop_List;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
+import com.proton.bystone.ui.login.LoginActivity;
+import com.proton.bystone.ui.main.tab.MeFragment;
 import com.proton.bystone.ui.maintenance.OrderStateActivity;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
@@ -70,6 +73,11 @@ public class My_Indext extends MTFBaseActivity {
     String mb_code;
     BitmapUtils   utils2;
     String bookCode;
+    SharedPreferences settings;
+    SharedPreferences.Editor editor;
+
+
+
 
 
     @Override
@@ -107,9 +115,8 @@ public class My_Indext extends MTFBaseActivity {
         Listener();
 
 
-
-
-
+        settings = getSharedPreferences("hhp", 0);
+        editor = settings.edit();
 
     }
 
@@ -134,9 +141,6 @@ public class My_Indext extends MTFBaseActivity {
             public void onClick(View v) {
 
                 maintain();
-
-
-
 
             }
         });
@@ -217,6 +221,7 @@ public class My_Indext extends MTFBaseActivity {
     {
         pj=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy5());
+        editor.putString("pj",pj.size()+"");
 
     }
     //查询待评价订单
@@ -231,13 +236,13 @@ public class My_Indext extends MTFBaseActivity {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return shouhuo.size();
+            return pj.size();
         }
 
         @Override
         public Object getItem(int position) {
             // TODO Auto-generated method stub
-            return shouhuo.get(position);
+            return pj.get(position);
         }
 
         @Override
@@ -316,6 +321,8 @@ public class My_Indext extends MTFBaseActivity {
     {
         shouhuo=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy4());
+        editor.putString("shouhuo",shouhuo.size()+"");
+        Log.e("shouhuo",shouhuo+"");
 
     }
     //查询待收货订单
@@ -383,7 +390,7 @@ public class My_Indext extends MTFBaseActivity {
                 .gson(new Gson())
                 /*.noParams()*/
                 // .object(loginParams)
-                .typeValue("string", mb_code)
+                .typeValue("string", "201605261656057265")
                 .typeValue("int", 1)
 
                 .build();
@@ -414,7 +421,7 @@ public class My_Indext extends MTFBaseActivity {
     {
         httq=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy2());
-
+        editor.putString("httq",httq.size()+"");
 
 
     }
@@ -516,6 +523,8 @@ public class My_Indext extends MTFBaseActivity {
         htt=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy());
 
+        editor.putString("htt",htt.size()+"");
+
 
 
 
@@ -588,7 +597,7 @@ public class My_Indext extends MTFBaseActivity {
                 .gson(new Gson())
                 /*.noParams()*/
                 // .object(loginParams)
-                .typeValue("string", mb_code)
+                .typeValue("string", "201605261656057265")
                 .typeValue("int", 0)
 
                 .build();
@@ -601,7 +610,6 @@ public class My_Indext extends MTFBaseActivity {
         call.enqueue(new Callback<BaseResp>() {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
-
 
                 String data = response.body().getData();
             Log.e("全部订单",data);
@@ -619,7 +627,12 @@ public class My_Indext extends MTFBaseActivity {
     public void renqi(String data)
     {
         hp=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
-        lv.setAdapter(new goodrq());
+
+        if(hp!=null) {
+            lv.setAdapter(new goodrq());
+        }
+
+        editor.putString("hp",hp.size()+"");
 
     }
 
@@ -680,6 +693,13 @@ public class My_Indext extends MTFBaseActivity {
         TextView my_by;
         TextView my_car_number;
 
+
+    }
+
+    @butterknife.OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        editor.commit();
+        finish();
 
     }
 

@@ -2,43 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-     <RelativeLayout
-           android:layout_width="match_parent"
-            android:layout_height="59dp"
-         >
-          <ImageView
-                android:id="@+id/Home_fh"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_return"
 
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="商品详情页"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:textSize="18sp"
-                android:textColor="#292929"
-                android:layout_centerHorizontal="true"
-                />
+    <com.proton.library.widget.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleBackground="@color/mtf_gray_900"
+        app:titleText="商品详情页"
+        app:rightButtonIcon="@mipmap/icon_mine_cart"
+        />
 
-            <ImageView
-                android:id="@+id/shop_gwu"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_mine_cart"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentRight="true"
-                />
-
-        </RelativeLayout>
-
-        <TextView
+    <TextView
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#ebebeb"
@@ -47,7 +24,7 @@
 
    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="510dp"
+            android:layout_height="460dp"
             >
         <LinearLayout
             android:layout_width="match_parent"
@@ -601,7 +578,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -653,7 +631,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
     <ImageView
         android:id="@+id/shop_pingjiaimage1"

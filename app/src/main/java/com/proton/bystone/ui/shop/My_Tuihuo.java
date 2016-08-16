@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
 import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.Category_nameResp;
-import com.proton.bystone.bean.Cbms;
+import com.proton.bystone.bean.cbms;
 import com.proton.bystone.bean.JsonResp;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
@@ -79,7 +79,7 @@ public class My_Tuihuo extends MTFBaseActivity {
     public void Category_name()
     {
         // LoginParams loginParams = new LoginParams(ed.getText().toString().trim(), "666888", "xxaabbc085412556sxxx", 1);
-        Cbms cbms=new Cbms(childOrderNumber,VCCode,UserCode,BsCode,trim,"");
+        cbms cbms=new cbms(childOrderNumber,VCCode,UserCode,BsCode,trim,"");
         RequestBody requestBody = new ParamsBuilder<>()
                 .key("pbevyvHkf1sFtyGL35gFfQ==")
                 .methodName("SetReturnRequest")

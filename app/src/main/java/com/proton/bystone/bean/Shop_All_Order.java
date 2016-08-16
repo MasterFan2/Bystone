@@ -23,6 +23,9 @@ public class Shop_All_Order {
     private Object PadctBrief;
     private String BookCarNum;
 
+    public Shop_All_Order() {
+    }
+
     public String getOConsumerName() {
         return OConsumerName;
     }
