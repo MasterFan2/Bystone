@@ -351,6 +351,7 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
             switch (msg.what) {
                 // 定位完成
                 case 1:
+                    LocationManager.getInstance().stopLocation();
                     AMapLocation loc = (AMapLocation) msg.obj;
                     if (loc != null) {
                         addrEdit.setText(loc.getAddress());

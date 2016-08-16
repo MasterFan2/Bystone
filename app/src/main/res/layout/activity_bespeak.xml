@@ -219,6 +219,7 @@
                         android:hint="请输入电话"
                         android:text="13512365892"
                         android:imeOptions="actionNext"
+                        android:inputType="phone"
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textSize="14sp" />

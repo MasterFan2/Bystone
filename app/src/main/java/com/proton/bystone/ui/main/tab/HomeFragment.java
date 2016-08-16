@@ -41,7 +41,7 @@ import com.proton.bystone.bean.Commodity;
 import com.proton.bystone.bean.Fist;
 import com.proton.bystone.bean.Home_Weather;
 import com.proton.bystone.bean.NewRecommendResp;
-import com.proton.bystone.bean.Readd;
+import com.proton.bystone.bean.readd;
 import com.proton.bystone.bean.Shop_Fenlei;
 import com.proton.bystone.bean.Shop_List;
 import com.proton.bystone.bean.home_yj;
@@ -730,8 +730,8 @@ public class HomeFragment extends MTFBaseFragment {
             String showapi_res_body = commodityList.get(0).getShowapi_res_body();
             String strJsonArray1 = obj.getString("showapi_res_body");
             JSONArray jsonArray1 = new JSONArray(strJsonArray1);
-            List<Readd>   list = new Gson().fromJson(jsonArray1.get(0).toString(), new TypeToken<List<Readd>>() {}.getType());
-            List<Readd.ListBean> list1 = list.get(0).getList();
+            List<readd>   list = new Gson().fromJson(jsonArray1.get(0).toString(), new TypeToken<List<readd>>() {}.getType());
+            List<readd.ListBean> list1 = list.get(0).getList();
 
             Toast.makeText(getActivity(),list1.get(0).getP90(),Toast.LENGTH_LONG).show();
 

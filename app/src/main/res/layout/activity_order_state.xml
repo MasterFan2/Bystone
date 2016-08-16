@@ -42,6 +42,7 @@
                 android:id="@+id/order_state_service_detail_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:text="服务详情" />
         </LinearLayout>
         <ScrollView
@@ -54,6 +55,7 @@
                 android:id="@+id/order_state_content_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingTop="5dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -107,10 +109,10 @@
                         android:text="爱车检测单" />
 
                     <TextView
+                        android:id="@+id/order_state_test_list_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-
                         android:text="暂无 > " />
                 </RelativeLayout>
 
@@ -129,6 +131,7 @@
                         android:text="爱车保养图片" />
 
                     <TextView
+                        android:id="@+id/order_state_maintenance_picture_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -146,14 +149,14 @@
                         style="@style/TextHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
                         android:text="当前状态:" />
 
                     <com.proton.library.widget.MyListView
                         android:id="@+id/order_state_list_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:divider="@color/mtf_gray_400"
-                        android:dividerHeight="0.15dp"
+                        android:divider="@null"
                         />
                 </LinearLayout>
             </LinearLayout>

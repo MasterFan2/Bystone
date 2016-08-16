@@ -36,6 +36,11 @@ import retrofit2.http.PartMap;
  */
 public class HttpClients {
 
+    //外网
+//    private static final String BASE_URL = "http://15x33718o5.iask.in:34440/api/";
+//    public static  final String PIC_URL  = "http://15x33718o5.iask.in:34440";
+
+    //内网
     private static final String BASE_URL = "http://192.168.0.119:8081/api/";//开发服务器
     public static  final String PIC_URL  = "http://192.168.0.119";
 

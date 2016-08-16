@@ -16,7 +16,7 @@ import com.proton.bystone.bean.Category_nameResp;
 import com.proton.bystone.bean.Duanxin;
 import com.proton.bystone.bean.Jbnum;
 import com.proton.bystone.bean.JsonResp;
-import com.proton.bystone.bean.Mb_Code;
+import com.proton.bystone.bean.Mb_code;
 import com.proton.bystone.bean.Modified_Pwd;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;

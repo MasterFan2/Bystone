@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.proton.bystone.R;
 import com.proton.bystone.bean.BaseResp;
-import com.proton.bystone.bean.Fankui;
+import com.proton.bystone.bean.fankui;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.shopcar.ShopCarActivity;
@@ -62,7 +62,7 @@ animFinish();
 
         mbcode = getIntent().getStringExtra("mbcode");
         Log.e("mbcode",mbcode);
-        Fankui  fk=new Fankui(mbcode,shop_code.getText().toString().trim(),2);
+        fankui  fk=new fankui(mbcode,shop_code.getText().toString().trim(),2);
 
         RequestBody requestBody = new ParamsBuilder<>()
                 .key("pbevyvHkf1sFtyGL35gFfQ==")

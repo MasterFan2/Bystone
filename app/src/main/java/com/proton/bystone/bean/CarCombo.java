@@ -26,10 +26,20 @@ public class CarCombo {
     private String VC_Params;
     private String PadctBrief;
     private ArrayList<CarCombo> Data;
-    private int    GongShiFei;//工时费
-    private boolean disable;//是否禁用
-    private boolean checked;//是否选中
+
+    private int    GongShiFei;  //工时费
+    private boolean disable;    //是否禁用
+    private boolean checked;    //是否选中
+    private int selected;       //默认选中项
     private boolean canCanceled;
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int selected) {
+        this.selected = selected;
+    }
 
     public String getPt_Code() {
         return Pt_Code;

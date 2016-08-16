@@ -134,7 +134,8 @@ public class ParamsBuilder<E> {
             if (typeValues != null && typeValues.size() > 0 ){
                 String para = gson.toJson(typeValues);
                 base.setPara(para);
-                return RequestBody.create(MediaType.parse("application/json;charset=utf-8"), gson.toJson(base));
+                String result = gson.toJson(base);
+                return RequestBody.create(MediaType.parse("application/json;charset=utf-8"), result);
             } else {
                 throw new BuildException("typeValues not set!");
             }

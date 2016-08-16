@@ -42,6 +42,42 @@
                     android:layout_height="wrap_content"
                     android:childDivider="@color/blue" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingRight="8dp"
+                        >
+                        <TextView
+                            android:id="@+id/test_list_suggest_gsf_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="工时费\t\t￥0.0"
+                            />
+                        <TextView
+                            android:id="@+id/test_list_suggest_discount_price_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="优惠活动\t\t￥50.00"
+                            />
+                        <TextView
+                            android:id="@+id/test_list_suggest_maint_price_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="保养小计\t\t￥0.0"
+                            style="@style/TextBlue"
+                            />
+                    </LinearLayout>
+                </RelativeLayout>
+
                 <View style="@style/DivideLine_B" />
 
                 <TextView
@@ -56,19 +92,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <View style="@style/DivideLine_B" />
-
-                <TextView
-                    style="@style/TextHeader"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="其它" />
+                    android:paddingBottom="8dp"
+                    android:paddingRight="8dp"
+                    >
+                        <TextView
+                            android:id="@+id/test_list_suggest_fee_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="10dp"
+                            android:text="更换小计\t\t￥150.0"
+                            style="@style/TextBlue"
+                            />
+                </RelativeLayout>
 
-                <com.proton.library.widget.MyListView
-                    android:id="@+id/test_list_other_list_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
 
