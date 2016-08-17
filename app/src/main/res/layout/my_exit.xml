@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <com.proton.library.widget.MTFTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:rightButtonHide="true"
+        app:rightButtonText="完成"
+        app:rightButtonTextColor="@color/blue"
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="退出"
-        app:titleTxtColor="@android:color/white" />
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -166,9 +168,35 @@
         android:background="#3c85ee"
         android:textColor="#ffff"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="20dp"
         />
 
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/add_my_car_copy_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/add_my_car_front_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/ic_launcher"
+        />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/shs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/ic_launcher"
+        />
 
 
 </LinearLayout>

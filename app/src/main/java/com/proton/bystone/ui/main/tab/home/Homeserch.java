@@ -50,13 +50,11 @@ import retrofit2.Response;
  */
 @MTFActivityFeature(layout = R.layout.homeserch)
 public class Homeserch  extends MTFBaseActivity {
-
-
-
     Button viewById;
     String s;
     List<Region> region;
     GridView gridView;
+    GridView   Shop_Xian;
    /* @OnClick(R.id.Home_fh)
     public void back(View view) {
         animFinish();
@@ -94,12 +92,20 @@ public class Homeserch  extends MTFBaseActivity {
         Category_name();
 
         gridView=(GridView)findViewById(R.id.shop_gridView);
+        Shop_Xian=(GridView)findViewById(R.id.Shop_Xian);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final Button  home_bt=(Button)findViewById(R.id.home_bt);
+        home_bt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context,position,Toast.LENGTH_LONG).show();
-                /*dingwei();*/
+            public void onClick(View v) {
+                //定位
+                dingwei();
+                Toast.makeText(context,"已定位成功",Toast.LENGTH_SHORT).show();
+                SharedPreferences sh=getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+                SharedPreferences.Editor editor=sh.edit();//会创建一个editor对象，要注意。
+                editor.putString("s", home_bt.getText().toString());
+                editor.commit();
+                finish();
             }
         });
 
@@ -123,7 +129,7 @@ public class Homeserch  extends MTFBaseActivity {
             @Override
             public void onLocationChanged(AMapLocation location) {
                 LocationManager.getInstance().stopLocation();
-               /* Toast.makeText(context,"地址定位中",Toast.LENGTH_SHORT).show();*/
+                Log.e("定位",location+"");
 
             }
         });
@@ -172,11 +178,13 @@ public class Homeserch  extends MTFBaseActivity {
        region=new Gson().fromJson(data, new TypeToken<List<Region>>() {}.getType());
 
         gridView.setAdapter(new GridViewadapter2());
+        Shop_Xian.setAdapter(new Gridxian());
+
 
 
     }
 
-
+//区
     class GridViewadapter2 extends BaseAdapter
     {
 
@@ -185,7 +193,7 @@ public class Homeserch  extends MTFBaseActivity {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return  region == null ? 0 : region.size();
+            return  region.size()-28;
         }
 
         @Override
@@ -201,7 +209,7 @@ public class Homeserch  extends MTFBaseActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             // TODO Auto-generated method stub
             viewHolder1 holder;
             if (convertView == null) {
@@ -213,7 +221,79 @@ public class Homeserch  extends MTFBaseActivity {
                 holder = (viewHolder1) convertView.getTag();
             }
 
-            holder.headline.setText(region.get(position).getNAME());
+            holder.headline.setText(region.get(position+3).getNAME());
+
+            holder.headline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    SharedPreferences sh=getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+                    SharedPreferences.Editor editor=sh.edit();//会创建一个editor对象，要注意。
+                    editor.putString("s", region.get(position+3).getNAME());
+                    editor.commit();
+                    finish();
+
+                }
+            });
+
+
+            return convertView;
+        }
+    }
+//县
+    class Gridxian extends BaseAdapter
+    {
+
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+
+            return  region.size()-18;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return region.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            viewHolder1 holder;
+            if (convertView == null) {
+                convertView = View.inflate(context, R.layout.home_serrce, null);
+                holder = new viewHolder1();
+                holder.headline = (TextView) convertView.findViewById(R.id.home_bt);
+                convertView.setTag(holder);
+            }else{
+                holder = (viewHolder1) convertView.getTag();
+            }
+
+            holder.headline.setText(region.get(position+18).getNAME());
+
+            holder.headline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Log.e("posistener",region.get(position+18).getNAME())  ;
+                    SharedPreferences sh=getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+                    SharedPreferences.Editor editor=sh.edit();//会创建一个editor对象，要注意。
+                    editor.putString("s", region.get(position+18).getNAME());
+                    editor.commit();
+                    finish();
+
+                }
+            });
+
 
 
 

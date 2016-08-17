@@ -1,6 +1,8 @@
 package com.proton.bystone.ui.main.tab;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -16,10 +18,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -39,6 +44,7 @@ import com.proton.bystone.bean.DataBean;
 import com.proton.bystone.bean.JsonResp;
 import com.proton.bystone.bean.EventResp;
 import com.proton.bystone.bean.Fist;
+import com.proton.bystone.location.LocationManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.SendCallBack;
@@ -50,6 +56,7 @@ import com.proton.bystone.ui.shop.Shop_Sort;
 import com.proton.bystone.ui.view.RefreshListView;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
+import com.proton.library.zxing.activity.CaptureActivity;
 
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
@@ -62,6 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,7 +102,7 @@ public class ShopFragment extends MTFBaseFragment {
 
     @Bind(R.id.home_search)
     EditText home_search;//搜索
-
+    String s;
     ViewPager  viewpager;
     String data;
     String productId;
@@ -123,6 +131,13 @@ public class ShopFragment extends MTFBaseFragment {
 
     String ps_code;
     Intent t;
+    @Bind(R.id.search_header_search_layout)
+    LinearLayout searchLayout;
+    @Bind(R.id.search_header_scan_img)
+    ImageView scanImg;
+    @Bind(R.id.search_header_city_txt)
+    TextView cityTxt;
+
 
 
     public static ShopFragment newInstance(Bundle args) {
@@ -214,7 +229,7 @@ public class ShopFragment extends MTFBaseFragment {
 
 
 
-        //黄泥磅
+/*        //黄泥磅
         home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,6 +242,26 @@ public class ShopFragment extends MTFBaseFragment {
             public void onClick(View v) {
 
                 animStartForResult(1000,Search_service.class);
+            }
+        });*/
+
+
+        //黄泥磅
+        cityTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animStartForResult(1000,Homeserch.class);
+                dingwei();
+
+            }
+        });
+
+        searchLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                animStartForResult(1000,Search_service.class);
+
             }
         });
 
@@ -277,8 +312,6 @@ public class ShopFragment extends MTFBaseFragment {
             }
         });
     }
-
-
 
     public void viewpa()
     {
@@ -682,7 +715,9 @@ public class ShopFragment extends MTFBaseFragment {
              //更多
             TextView headline= (TextView) view.findViewById(R.id.label );
 
-            headline.setText(lis2.get(position));
+            if(lis2!=null&&lis2.size()>0) {
+                headline.setText(lis2.get(position));
+            }
             //拿到每个商品编号
 
             ImageView image2=(ImageView) view.findViewById(R.id.shop_image);
@@ -749,8 +784,10 @@ public class ShopFragment extends MTFBaseFragment {
             holder.headline.setText(database.get(position).getTitle());
             holder.print.setText(database.get(position).getN_HYJ());
            /* holder.prompt.setText("你的爱车.....");*/
-            utils2.display(holder.image2,aa+list2.get(position));
-            // Picasso.with(context).load(aa+s).into(tuanti);
+            if(list2!=null&&list2.size()>0) {
+                utils2.display(holder.image2, aa + list2.get(position));
+                // Picasso.with(context).load(aa+s).into(tuanti);
+            }
 
 
             return convertView;
@@ -758,6 +795,40 @@ public class ShopFragment extends MTFBaseFragment {
     }
 
 
+    //定位
+    public void dingwei()
+    {
+        //定位
+        LocationManager.getInstance().init(context);
+        LocationManager.getInstance().setAMapLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation location) {
+                LocationManager.getInstance().stopLocation();
+
+
+            }
+        });
+        LocationManager.getInstance().startLocation();
+    }
+
+    @OnClick(R.id.search_header_scan_img)
+    public void goScan(View view) {
+        animStart(CaptureActivity.class);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SharedPreferences sp = context.getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+        s = sp.getString("s","");
+        if(!TextUtils.isEmpty(s))
+        {
+            cityTxt.setText(s);
+        }
+        Log.e("sssss",s);
+    }
 
 }
 
