@@ -129,7 +129,7 @@ public class Shop_Orderdetail extends MTFBaseActivity {
                 .gson(new Gson())
                 /*.noParams()*/
                 //.object(loginParams)
-                .typeValue("string", "201605091528083056")//订单编号
+                .typeValue("string", "201608081802521687")//订单编号
                 .build();
 //
 
@@ -140,7 +140,7 @@ public class Shop_Orderdetail extends MTFBaseActivity {
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 data = response.body().getData();
                 Log.e("订单详情数据", data + "");
-              // jiexi(data);
+              jiexi(data);
 
             }
 
@@ -226,49 +226,51 @@ public class Shop_Orderdetail extends MTFBaseActivity {
                 holder = (viewHolder1) convertView.getTag();
             }
 
-            holder.shop_Nid.setText(shop_pay_cs.get(0).getChildOrderNumber());
-            holder.headline.setText(shop_pay_cs.get(0).getVC_Name());
-            holder.prompt.setText(shop_pay_cs.get(0).getPadctBrief());
-            holder.money.setText(shop_pay_cs.get(0).getOSpHyJ());
-            holder.shop_data.setText(shop_pay_cs.get(0).getLogisticsTime());
-            String aa = "http://192.168.0.119";
-            utils.display( holder.img, aa  + shop_pay_cs.get(0).getVC_Url());
+            if(shop_pay_cs!=null&&shop_pay_cs.size()>0) {
+                holder.shop_Nid.setText(shop_pay_cs.get(0).getChildOrderNumber());
+                holder.headline.setText(shop_pay_cs.get(0).getVC_Name());
+                holder.prompt.setText(shop_pay_cs.get(0).getPadctBrief());
+                holder.money.setText(shop_pay_cs.get(0).getOSpHyJ());
+                holder.shop_data.setText(shop_pay_cs.get(0).getLogisticsTime());
+                String aa = "http://192.168.0.119";
+                utils.display(holder.img, aa + shop_pay_cs.get(0).getVC_Url());
 
-            //退货
-            holder.shop_th.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent t = new Intent(Shop_Orderdetail.this, My_Tuihuo.class);
-                    t.putExtra("childOrderNumber", shop_pay_cs.get(0).getChildOrderNumber());
-                    t.putExtra("UserCode", shop_pay_cs.get(0).getUserCode());
-                    t.putExtra("VCCode", shop_pay_cs.get(0).getVCCode());
-                    t.putExtra("BsCode", shop_pay_cs.get(0).getBsCode());
-                    startActivity(t);
-                }
-            });
-            //查看物流
-            holder.ckwl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent t = new Intent(Shop_Orderdetail.this, Shop_Ckwu.class);
+                //退货
+                holder.shop_th.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent t = new Intent(Shop_Orderdetail.this, My_Tuihuo.class);
+                        t.putExtra("childOrderNumber", shop_pay_cs.get(0).getChildOrderNumber());
+                        t.putExtra("UserCode", shop_pay_cs.get(0).getUserCode());
+                        t.putExtra("VCCode", shop_pay_cs.get(0).getVCCode());
+                        t.putExtra("BsCode", shop_pay_cs.get(0).getBsCode());
+                        startActivity(t);
+                    }
+                });
+                //查看物流
+                holder.ckwl.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent t = new Intent(Shop_Orderdetail.this, Shop_Ckwu.class);
 
-                    t.putExtra("ExpressId", shop_pay_cs.get(0).getExpressId());//物流单号
-                    t.putExtra("ExpressSimple", shop_pay_cs.get(0).getExpressSimple());//快递公司编号
+                        t.putExtra("ExpressId", shop_pay_cs.get(0).getExpressId());//物流单号
+                        t.putExtra("ExpressSimple", shop_pay_cs.get(0).getExpressSimple());//快递公司编号
 
 
-                    startActivity(t);
-                }
-            });
+                        startActivity(t);
+                    }
+                });
 
-            //确认收货
-            holder.shop_shuijing.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                //确认收货
+                holder.shop_shuijing.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                    qrsh();
+                        qrsh();
 
-                }
-            });
+                    }
+                });
+            }
 
 
             // Picasso.with(context).load(aa+s).into(tuanti);

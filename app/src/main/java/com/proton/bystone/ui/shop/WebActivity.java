@@ -18,13 +18,12 @@ import com.proton.library.ui.annotation.MTFActivityFeature;
 public class WebActivity extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
-      WebView webView=(WebView) findViewById(R.id.webView);
+        WebView webView=(WebView) findViewById(R.id.webView);
         String url = getIntent().getStringExtra("url");
         Log.e("url",url);
         webView.loadUrl(url);
-     /*   Intent t=new Intent(WebActivity.this,BBaseActivity.class);
-        startActivity(t);*/
-    }
+
+}
 
     @Override
     public void backPressed() {

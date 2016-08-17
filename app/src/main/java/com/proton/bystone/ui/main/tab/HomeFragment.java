@@ -272,7 +272,7 @@ public class HomeFragment extends MTFBaseFragment {
             @Override
             public void onLocationChanged(AMapLocation location) {
                 LocationManager.getInstance().stopLocation();
-                Toast.makeText(context,"地址定位中",Toast.LENGTH_SHORT).show();
+
 
             }
         });

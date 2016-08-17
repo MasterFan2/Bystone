@@ -493,9 +493,12 @@ public class MeFragment extends MTFBaseFragment {
 
     public void placelogin()
     {
-        Toast.makeText(context,"请登陆",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"请登陆!",Toast.LENGTH_LONG).show();
     }
 
 
-
+/*  public void setdata(String data)
+  {
+      Log.e("data65544554",data);
+  }*/
 }

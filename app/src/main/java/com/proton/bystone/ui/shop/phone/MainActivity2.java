@@ -12,6 +12,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,8 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.proton.bystone.R;
+import com.proton.bystone.ui.main.tab.MeFragment;
+import com.proton.bystone.ui.shop.My_Exit;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity2 extends Activity  {
 	/* 头像文件 */
@@ -157,6 +163,11 @@ public class MainActivity2 extends Activity  {
 		if (extras != null) {
 			Bitmap photo = extras.getParcelable("data");
 			headImage.setImageBitmap(photo);
+
+			Intent t=new Intent(this,My_Exit.class);
+			t.putExtra("bitmap", photo);
+			t.putExtra("xy","xy");
+			startActivity(t);
 		}
 	}
 
@@ -172,4 +183,7 @@ public class MainActivity2 extends Activity  {
 			return false;
 		}
 	}
+
+
+
 }
