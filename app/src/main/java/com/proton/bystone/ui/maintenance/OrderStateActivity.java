@@ -2,12 +2,14 @@ package com.proton.bystone.ui.maintenance;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -16,6 +18,7 @@ import com.proton.bystone.R;
 import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.OrderBaseInfo;
 import com.proton.bystone.bean.OrderStateInfo;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.utils.L;
@@ -55,6 +58,18 @@ public class OrderStateActivity extends MTFBaseActivity {
     @Bind(R.id.order_state_service_detail_btn)
     Button   serviceDetailBtn;
 
+    @Bind(R.id.order_state_test_list_layout)
+    RelativeLayout testListLayout;
+
+    @Bind(R.id.order_state_maintenance_picture_layout)
+    RelativeLayout picLayout;
+
+    @Bind(R.id.order_state_test_list_txt)
+    TextView testListTxt;
+
+    @Bind(R.id.order_state_maintenance_picture_txt)
+    TextView picTxt;
+
     @Bind(R.id.order_state_list_view)
     MyListView listView;
     private MyAdapter adapter;
@@ -72,12 +87,15 @@ public class OrderStateActivity extends MTFBaseActivity {
         adapter = new MyAdapter();
         listView.setAdapter(adapter);
 
+//        if (TextUtils.isEmpty(code)) {
+//            return;
+//        }
         //提交预定信息
         final RequestBody requestBody = new ParamsBuilder<>()
                 .key("pbevyvHkf1sFtyGL35gFfQ==")
                 .methodName("MaintenanceStatus")
                 .gson(new Gson())
-                .typeValue("string", code)
+                .typeValue("string", "201608091423285485")//code)
                 .build();
         Call<BaseResp> call = HttpClients.getInstance().maintenance(requestBody);
         call.enqueue(new Callback<BaseResp>() {
@@ -149,18 +167,43 @@ public class OrderStateActivity extends MTFBaseActivity {
             }
 
             holder.dateTxt.setText(orderStateInfo.getCreateTime());
-            //0:已提交，
-            // 1：已受理,
-            // 5:已出门，
-            // 7：保养完成（待付款）)
+            //0：已提交
+            //1：已指派
+            //2：企业已确认（维保企业已确认）
+            //3：已派工
+            //4：技师已确认
+            //5：已出门
+            //6：已抵达
+            //7：已检测
+            //8：已确认(可看服务详情s)
+            //9：保养已完成（所有保养项目完成）
+            //10：已付款
+            //11：已回访（回访完毕流程结束）
+
             if (orderStateInfo.getBookStaus() == 0){
                 holder.descTxt.setText("已提交");
             } else if (orderStateInfo.getBookStaus() == 1) {
-                holder.descTxt.setText("已受理");
+                holder.descTxt.setText("已指派");
+            }else if (orderStateInfo.getBookStaus() == 2) {
+                holder.descTxt.setText("企业已确认");
+            }else if (orderStateInfo.getBookStaus() == 3) {
+                holder.descTxt.setText("已派工");
+            }else if (orderStateInfo.getBookStaus() == 4) {
+                holder.descTxt.setText("技师已确认");
             }else if (orderStateInfo.getBookStaus() == 5) {
                 holder.descTxt.setText("已出门");
+            }else if (orderStateInfo.getBookStaus() == 6) {
+                holder.descTxt.setText("已抵达");
             }else if (orderStateInfo.getBookStaus() == 7) {
-                holder.descTxt.setText("保养完成(待付款)");
+                holder.descTxt.setText("已检测");
+            }else if (orderStateInfo.getBookStaus() == 8) {
+                holder.descTxt.setText("已确认");
+            }else if (orderStateInfo.getBookStaus() == 9) {
+                holder.descTxt.setText("保养已完成");
+            }else if (orderStateInfo.getBookStaus() == 10) {
+                holder.descTxt.setText("已付款");
+            }else if (orderStateInfo.getBookStaus() == 11) {
+                holder.descTxt.setText("已回访");
             }
             //
             return convertView;
@@ -190,29 +233,54 @@ public class OrderStateActivity extends MTFBaseActivity {
      */
     private void bindData() {
         if (orderBaseInfos != null && orderBaseInfos.size() > 0) {
-            OrderBaseInfo baseInfo = orderBaseInfos.get(0);
+            final OrderBaseInfo baseInfo = orderBaseInfos.get(0);
             idNumTxt.setText("保养ID号:" + baseInfo.getBookCode());
             String strAllTxt = "姓名：" + baseInfo.getUserName() + "\n电话："+baseInfo.getMobile() +
                     "\n地址：" + baseInfo.getAddress() + "\n时间：" + baseInfo.getBookBeginTime();
             allTxt.setText(strAllTxt);
+
+            if (baseInfo.getBookStaus() >= 7) {
+                testListTxt.setText("详情 > ");
+                testListLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, TestListActivity.class);
+                        intent.putExtra("status", baseInfo.getBookStaus());
+                        intent.putExtra("code", code);
+                        animStart(intent);
+                    }
+                });
+            }
+
+            if (baseInfo.getBookStaus() >= 8) {
+                serviceDetailBtn.setEnabled(true);
+            }
+
+            if (baseInfo.getBookStaus() >= 9) {
+                picTxt.setText("详情 > ");
+                picLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MaintenancePictureActivity.class);
+                        intent.putExtra("code", code);
+                        animStart(intent);
+                    }
+                });
+            }
         }
     }
 
 
 
-    @OnClick(R.id.order_state_test_list_layout)
-    public void testListClick(View view) {
-        Intent intent = new Intent(context, TestListActivity.class);
-        intent.putExtra("code", code);
-        animStart(intent);
-    }
-
-    @OnClick(R.id.order_state_maintenance_picture_layout)
-    public void maintenanceClick(View view) {
-        Intent intent = new Intent(context, MaintenancePictureActivity.class);
-        intent.putExtra("code", code);
-        animStart(intent);
-    }
+//    @OnClick(R.id.order_state_test_list_layout)
+//    public void testListClick(View view) {
+//
+//    }
+//
+//    @OnClick(R.id.order_state_maintenance_picture_layout)
+//    public void maintenanceClick(View view) {
+//
+//    }
 
     @OnClick(R.id.order_state_service_detail_btn)
     public void detailClick(View view)  {

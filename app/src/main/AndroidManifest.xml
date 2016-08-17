@@ -59,7 +59,8 @@
         <activity android:name=".ui.maintenance.BespeakActivity" />
         <activity
             android:name=".ui.maintenance.OrderStateActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            </activity>
         <activity android:name=".ui.maintenance.ServiceDetailActivity" />
         <activity android:name=".ui.maintenance.TestListActivity" />
         <activity android:name=".ui.maintenance.MaintenancePictureActivity" />

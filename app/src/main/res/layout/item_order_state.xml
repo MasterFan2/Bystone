@@ -2,63 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:background="@android:color/white"
     android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:orientation="vertical"
-        android:weightSum="3"
-        >
+        android:weightSum="3">
+
         <View
             android:id="@+id/item_order_state_line_1_view"
-            android:layout_above="@+id/item_order_state_icon"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/mtf_gray_400"
-            android:layout_centerVertical="true"
-            />
+            android:layout_above="@+id/item_order_state_icon"
+            android:layout_centerHorizontal="true"
+            android:background="@color/mtf_gray_400" />
+
         <View
             android:id="@+id/item_order_state_line_2_view"
-            android:layout_below="@+id/item_order_state_icon"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/mtf_gray_400"
+            android:layout_below="@+id/item_order_state_icon"
             android:layout_centerHorizontal="true"
-            />
+            android:background="@color/mtf_gray_400" />
+
         <ImageView
             android:id="@+id/item_order_state_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_order_state_blue"
             android:layout_centerInParent="true"
-            />
+            android:src="@mipmap/icon_order_state_blue" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:layout_marginLeft="20dp"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/item_order_state_desc_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="@color/mtf_gray_600"
-            android:text="已完成"
             android:layout_centerVertical="true"
-            />
+            android:singleLine="true"
+            android:text="已完成"
+            android:textColor="@color/mtf_gray_600" />
+
         <TextView
             android:id="@+id/item_order_state_date_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="@color/mtf_gray_600"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2016.5.29"
             android:paddingRight="10dp"
-            />
+            android:singleLine="true"
+            android:text="2016.5.29"
+            android:textColor="@color/mtf_gray_600" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/mtf_gray_400" />
     </RelativeLayout>
 </LinearLayout>
