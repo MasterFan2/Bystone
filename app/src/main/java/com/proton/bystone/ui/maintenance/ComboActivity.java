@@ -33,6 +33,7 @@ import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.utils.ActivityManager;
+import com.proton.library.widget.dialog.KProgressHUD;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -83,10 +84,23 @@ public class ComboActivity extends MTFBaseActivity {
     ArrayList<ComboKey> keys = new ArrayList<>();
     HashMap<ComboKey, ArrayList<CarCombo>> maps = new HashMap<>();
 
+    private boolean isBespeak = false; //是否是预约
+    private KProgressHUD progressHUD;              //等待窗口
+
     @Override
     public void initialize(Bundle savedInstanceState) {
+        ActivityManager.getInstance().addActivity(this);//预约成功时， 关闭Activity
 
         carInfo = getIntent().getParcelableExtra("carInfo");
+
+        ///
+        initDialog();
+
+        isBespeak = getIntent().getBooleanExtra("bespeak", false);
+
+        //
+        if (isBespeak) progressHUD.show();
+
         ///
         adapter = new MyAdapter();
         expandableListView.setAdapter(adapter);
@@ -96,12 +110,25 @@ public class ComboActivity extends MTFBaseActivity {
                 return true;
             }
         });
+
         ///
         getData();
-
-        ActivityManager.getInstance().addActivity(this);//预约成功时， 关闭Activity
     }
 
+    /**
+     * init  dialog
+     */
+    private void initDialog() {
+        progressHUD = KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("请稍后...")
+                .setDimAmount(0.4f)
+                .setCancellable(false);
+    }
+
+    /**
+     * get car info
+     */
     private void getData() {
         if (carInfo == null) {
             T.s(context, "无法获取车辆信息");
@@ -157,6 +184,8 @@ public class ComboActivity extends MTFBaseActivity {
                     calculateHourCharge();         //计算工时费
                     hourChargeTxt.setText("工时费:￥" + hourCharge);
                     calculateTotalPrice();         //计算价钱
+
+                    if (isBespeak) confirmClick(null);
                 } else {
                     L.e("解析上门保养套餐>>>没有数据");
                 }
@@ -410,6 +439,7 @@ public class ComboActivity extends MTFBaseActivity {
 
         ArrayList<ReservationParams2> params2List = new ArrayList<>();
 
+        //维保提交参数2
         for (Map.Entry<ComboKey, ArrayList<CarCombo>> entry : maps.entrySet()) {
             ArrayList<CarCombo> vList = entry.getValue();
             for (CarCombo combo : vList) {
@@ -419,17 +449,14 @@ public class ComboActivity extends MTFBaseActivity {
                 }
             }
         }
+
+        if (progressHUD.isShowing()) progressHUD.dismiss();
+
         Intent intent = new Intent(context, BespeakActivity.class);
         intent.putExtra("carInfo", carInfo);
+        if (isBespeak) intent.putExtra("bespeak", true);
         intent.putParcelableArrayListExtra("params2", params2List);
         animStart(intent);
-//        if (LoginUtil.checkLogin(context)) {
-//            animStart(BespeakActivity.class);
-//        }else {
-//            Intent intent = new Intent(context, LoginActivity.class);
-//            intent.putExtra("needResult", true);
-//            animStartForResult(9527, intent);
-//        }
     }
 
     @Override

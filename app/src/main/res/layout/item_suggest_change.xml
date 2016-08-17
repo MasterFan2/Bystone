@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
+    android:background="@android:color/white"
     android:id="@+id/item_suggest_change_root_view"
     >
     <View

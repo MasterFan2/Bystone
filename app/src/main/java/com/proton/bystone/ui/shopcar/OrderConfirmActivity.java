@@ -115,16 +115,19 @@ public class OrderConfirmActivity extends MTFBaseActivity {
      */
     private void calculateTotalPrice() {
         if (datas == null || datas.size() <= 0) return;
-        if (iGoldCoinAll >= 10) {//
+        BigDecimal totalBigDecimal = new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP);
             for (Commodity temp : datas) {
-                temp.setCanUseGoldCoin(true);   //设置是否能使用金币
-                temp.setUsedGoldCoin(-1);       //设置使用了多少金币 -1 默认值
+                if (iGoldCoinAll >= 10) {//
+                    temp.setCanUseGoldCoin(true);   //设置是否能使用金币
+                    temp.setUsedGoldCoin(-1);       //设置使用了多少金币 -1 默认值
+                }
                 //
                 BigDecimal tempDecimal = new BigDecimal(temp.getN_HYJ()).multiply(new BigDecimal(temp.getCount()));
+                totalBigDecimal = totalBigDecimal.add(tempDecimal).add(new BigDecimal(temp.getPostagePrice()));
                 temp.setNeedGoldCoin(tempDecimal.intValue() * 10);//设置需要花费的金币
             }
-        }
 
+        totalPriceTxt.setText("￥" + totalBigDecimal.toString());
         adapter.notifyDataSetChanged();
     }
 
@@ -461,11 +464,12 @@ public class OrderConfirmActivity extends MTFBaseActivity {
         ArrayList<OrderSubmitMinorParams> minorsList = new ArrayList<>();
         OrderSubmitMinorParams tempMinors = null;
 
+        //生成子订单
         for (Commodity commodity : datas) {
             tempMinors = new OrderSubmitMinorParams(commodity.getI_Company(), LoginManager.getInstance().getLoginInfo().getMb_Code()
             , commodity.getVC_Code(), commodity.getN_FHYJ(), commodity.getPacking(), commodity.getVC_Name(), new Gson().toJson(address),
                     new BigDecimal(commodity.getN_HYJ()).multiply(new BigDecimal(commodity.getCount())).toString(), "0", commodity.getCount()+"",
-                    commodity.getN_HYJ(), "1", "023-48901105", "3", commodity.getRemark());
+                    commodity.getN_HYJ(), "1", "023-48901105", "3", commodity.getRemark());//服务电话暂时未知 "023-48901105"
             minorsList.add(tempMinors);
         }
 
@@ -496,7 +500,8 @@ public class OrderConfirmActivity extends MTFBaseActivity {
                     intent.putExtra("orderNum", orderSubmitResp.getOrderCode());
                     animStart(intent);
 
-                    ActivityManager.getInstance().finishAllActivity();
+                    MyShoppingCar.getShoppingCar().clear();//清除所有的商品信息
+                    ActivityManager.getInstance().finishAllActivity();//订单已经确认，结束之前的Activity
                 } else {
                     T.s(context, "submit order failure!!!");
                 }

@@ -107,7 +107,7 @@ public class TestListActivity extends MTFBaseActivity {
         //
         status = getIntent().getIntExtra("status", 0);
         if (status >= 9) {
-            confirmBtn.setVisibility(View.INVISIBLE);
+            confirmBtn.setVisibility(View.GONE);
         }
         //
         adapter = new MyAdapter();

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:id="@+id/item_test_list_expand_parent_root"
-    android:background="@color/mtf_gray_200"
+    android:background="@color/mtf_gray_100"
     >
     <LinearLayout
         android:layout_width="match_parent"

@@ -34,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:background="@android:color/white"
                     android:text="维保确认" />
 
                 <com.proton.library.widget.MyExpandListView
@@ -44,7 +45,9 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    >
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -85,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:background="@android:color/white"
                     android:text="建议更换" />
 
                 <com.proton.library.widget.MyListView
@@ -97,6 +101,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:paddingRight="8dp"
+                    android:background="@android:color/white"
                     >
                         <TextView
                             android:id="@+id/test_list_suggest_fee_txt"

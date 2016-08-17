@@ -10,9 +10,7 @@
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:rightButtonText="添加"
-        app:rightButtonTextColor="@color/blue"
-        app:titleBackground="@color/mtf_gray_900"
+        app:rightButtonIcon="@mipmap/icon_mine_pluscar"
         app:titleText="我的爱车"
         />
 
@@ -24,8 +22,11 @@
             android:id="@+id/my_car_verify_tips_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="XX"
-            android:textColor="@color/mtf_gray_800"
+            android:text="-"
+            android:drawableLeft="@mipmap/icon_lamp"
+            android:textColor="@color/red_error"
+            android:gravity="center_vertical"
+            android:drawablePadding="8dp"
             android:padding="10dp"
             />
         <LinearLayout

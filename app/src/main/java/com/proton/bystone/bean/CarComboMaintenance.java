@@ -9,17 +9,26 @@ import java.util.List;
 public class CarComboMaintenance {
     private String name;
     private String code;
+    private int    isDefault;
     private CarInfo carInfo;
     private List<CarCombo> combos;
 
-    public CarComboMaintenance(String name, String code, List<CarCombo> combos) {
+    public CarComboMaintenance(String name, String code, int isDefault, List<CarCombo> combos) {
         this.name = name;
         this.code = code;
+        this.isDefault = isDefault;
         this.combos = combos;
     }
 
-    public String getName() {
+    public int getIsDefault() {
+        return isDefault;
+    }
 
+    public void setIsDefault(int isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public String getName() {
         return name;
     }
 

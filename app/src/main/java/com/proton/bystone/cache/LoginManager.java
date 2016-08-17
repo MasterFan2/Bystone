@@ -50,6 +50,7 @@ public class LoginManager {
      * @return
      */
     public boolean cacheLogin(LoginResp loginInfo) {
+        if (loginInfo == null) return false;
         this.loginInfo = loginInfo;
         try {
             db.save(loginInfo);

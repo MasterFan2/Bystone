@@ -113,10 +113,14 @@ public class LoginActivity extends MTFBaseActivity {
 
                 if (response.body().getCode() == 1) {///登录成功
                     LoginResp loginResp = new Gson().fromJson(response.body().getData(), new TypeToken<LoginResp>() {}.getType());
-                    LoginManager.getInstance().cacheLogin(loginResp);
-                    T.s(context, "登录成功");
-                    setResult(RESULT_OK);
-                    animFinish();
+                    if (loginResp == null) {
+                        T.s(context, "用户名或密码错误！");
+                    }else {
+                        LoginManager.getInstance().cacheLogin(loginResp);
+                        T.s(context, "登录成功");
+                        setResult(RESULT_OK);
+                        animFinish();
+                    }
                 } else {
                     L.e("登录失败");
                 }

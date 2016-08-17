@@ -7,12 +7,8 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,13 +24,11 @@ import com.proton.bystone.bean.OrderStateCodeResp;
 import com.proton.bystone.bean.ReservationParam;
 import com.proton.bystone.bean.ReservationParams2;
 import com.proton.bystone.cache.LoginManager;
-import com.proton.bystone.config.Config;
 import com.proton.bystone.location.LocationManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.shopcar.ShopCarActivity;
 import com.proton.bystone.utils.L;
-import com.proton.bystone.utils.MDbUtils;
 import com.proton.bystone.utils.PrefUtils;
 import com.proton.bystone.utils.T;
 import com.proton.bystone.utils.TimeUtil;
@@ -62,9 +56,6 @@ import retrofit2.Response;
  */
 @MTFActivityFeature(layout = R.layout.activity_bespeak)
 public class BespeakActivity extends MTFBaseActivity implements AMapLocationListener {
-
-    @Bind(R.id.bespeak_progressbar)
-    ProgressBar progressBar;
 
     @Bind(R.id.bespeak_year_month_day_txt)
     TextView yearMonthDayTxt;
@@ -130,6 +121,7 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
     private ArrayList<ReservationParams2> params2List = null;
 
+    private boolean isBespeak = false;
     /**
      * init
      *
@@ -140,6 +132,8 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
         carInfo = getIntent().getParcelableExtra("carInfo");
         params2List = getIntent().getParcelableArrayListExtra("params2");
+
+        isBespeak = getIntent().getBooleanExtra("bespeak", false);
 
         startStr = TimeUtil.getStringByIntIfNumLessThanTen(startHour) + ":" + TimeUtil.getStringByIntIfNumLessThanTen(startMinute);
         endStr = TimeUtil.getStringByIntIfNumLessThanTen(endHour) + ":" + TimeUtil.getStringByIntIfNumLessThanTen(endMinute);
@@ -185,15 +179,15 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
      * 获取位置信息
      */
     private void getLocation() {
-        if (!isGetting) {
-            isGetting = true;
-            progressBar.setVisibility(View.VISIBLE);
-            LocationManager.getInstance().init(context);
-            LocationManager.getInstance().setAMapLocationListener(this);
-            LocationManager.getInstance().startLocation(); //开始定位
-        } else {
-            L.e(">>>正在获取位置信息.本次路过...");
-        }
+//        if (!isGetting) {
+//            isGetting = true;
+//            progressBar.setVisibility(View.VISIBLE);
+//            LocationManager.getInstance().init(context);
+//            LocationManager.getInstance().setAMapLocationListener(this);
+//            LocationManager.getInstance().startLocation(); //开始定位
+//        } else {
+//            L.e(">>>正在获取位置信息.本次路过...");
+//        }
     }
 
     /**
@@ -363,7 +357,7 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
                     }
 
 
-                    progressBar.setVisibility(View.INVISIBLE);
+//                    progressBar.setVisibility(View.INVISIBLE);
                     isGetting = false;//重置标识位, 可以进行下一次获取
                     break;
             }
@@ -421,12 +415,14 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
     @Override
     public void backPressed() {
         ActivityManager.getInstance().delActivity(this);//预约成功时， 关闭Activity
+        if (isBespeak) ActivityManager.getInstance().finishAllActivity();
         animFinish();
     }
 
     @OnClick(R.id.m_title_left_btn)
     public void back(View view) {
         ActivityManager.getInstance().delActivity(this);//预约成功时， 关闭Activity
+        if (isBespeak) ActivityManager.getInstance().finishAllActivity();
         animFinish();
     }
 

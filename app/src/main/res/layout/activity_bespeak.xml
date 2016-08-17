@@ -11,17 +11,18 @@
         android:layout_height="?attr/actionBarSize"
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
-        app:titleText="上门保养"
-        />
+        app:titleText="上门保养" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
         <ScrollView
             android:id="@+id/bespeak_scroll_view"
-            android:layout_above="@+id/bespeak_done_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/bespeak_done_btn"
             android:scrollbars="none">
 
             <LinearLayout
@@ -45,11 +46,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    >
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <TextView
                         android:id="@+id/bespeak_year_month_day_txt"
@@ -95,22 +95,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp"
-                    >
+                    android:padding="10dp">
+
                     <View
                         android:id="@+id/bespeak_input_previous_view"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:background="@drawable/icon_radio_sel"
-                        />
+                        android:background="@drawable/icon_radio_sel" />
+
                     <TextView
                         android:id="@+id/bespeak_previous_addr_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
                         android:button="@drawable/radio_btn"
                         android:checked="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center_vertical"
                         android:text="上次地址:重庆市江北区五里店" />
                 </LinearLayout>
 
@@ -124,40 +124,66 @@
                     android:id="@+id/bespeak_input_addr_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    >
-                    <View
-                        android:id="@+id/bespeak_input_addr_view"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/icon_radio_nor"
-                        />
-                    <EditText
-                        android:id="@+id/bespeak_input_addr_edit"
-                        android:layout_toRightOf="@id/bespeak_input_addr_view"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="输入地址"
-                        android:layout_marginLeft="10dp"
-                        android:layout_centerVertical="true"
-                        android:enabled="false"
-                        android:padding="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:background="@null"
-                        />
-                    <ProgressBar
-                        android:id="@+id/bespeak_progressbar"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:visibility="invisible"
-                        />
+                        android:orientation="horizontal"
+                        >
+                        <View
+                            android:id="@+id/bespeak_input_addr_view"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/icon_radio_nor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="输入地址:"
+                                android:padding="8dp"
+                                />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="请选择地区"
+                                    android:padding="8dp"
+                                    android:background="@drawable/white_gray_selector"
+                                    android:drawableRight="@mipmap/icon_right"
+                                    />
+                                <View style="@style/DivideLine"/>
+                                <EditText
+                                    android:id="@+id/bespeak_input_addr_edit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@null"
+                                    android:enabled="false"
+                                    android:hint="输入详细地址......"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:paddingRight="10dp"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <View style="@style/DivideLine_B" />
@@ -166,7 +192,7 @@
                     style="@style/TextHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/icon_remark"
+                    android:drawableLeft="@mipmap/icon_user"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:padding="10dp"
@@ -192,10 +218,10 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="方便服务人员与您联系"
+                        android:imeOptions="actionNext"
+                        android:padding="10dp"
                         android:singleLine="true"
                         android:text="张三"
-                        android:padding="10dp"
-                        android:imeOptions="actionNext"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -217,11 +243,11 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="请输入电话"
-                        android:text="13512365892"
                         android:imeOptions="actionNext"
                         android:inputType="phone"
                         android:padding="10dp"
                         android:singleLine="true"
+                        android:text="13512365892"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -256,6 +282,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="完成" />
+            android:background="@drawable/btn_blue_selector"
+            android:text="选择完成"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 </LinearLayout>

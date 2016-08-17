@@ -33,6 +33,7 @@ import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.utils.ActivityManager;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,18 +123,18 @@ public class ShopCarActivity extends MTFBaseActivity {
      */
     private void calculateTotal() {
         if (allData == null) return;
-
-        int total = 0;       //总价
+        BigDecimal totalBigDecimal = new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP);
         int checkedCount = 0;//选中的数量
 
         for (Commodity commodity : allData) {
             if (commodity.isChecked()) {//计算选中的价格
-                total += commodity.getPostagePrice() * commodity.getCount();
+                totalBigDecimal = totalBigDecimal.add(new BigDecimal(commodity.getN_HYJ()).multiply(new BigDecimal(commodity.getCount()))).add(new BigDecimal(commodity.getPostagePrice()));
+//                total += commodity.getPostagePrice() * commodity.getCount();
                 checkedCount = checkedCount + 1;
             }
         }
 
-        allPriceTxt.setText("￥" + total);
+        allPriceTxt.setText("￥" + totalBigDecimal.toString());
         payBtn.setText("结算("+ checkedCount +")");
     }
 
@@ -143,9 +144,13 @@ public class ShopCarActivity extends MTFBaseActivity {
     private void getData() {
         allData = MyShoppingCar.getShoppingCar().getCommodities();
         adapter = new ShopCarAdapter();
+        listView.setAdapter(adapter);
+
+        if (allData == null || allData.size() <= 0){
+            allCkbView.setEnabled(false);
+        }
 
         calculateTotal();//计算价钱
-        listView.setAdapter(adapter);
     }
 
     class ShopCarAdapter extends BaseAdapter {
@@ -189,7 +194,7 @@ public class ShopCarActivity extends MTFBaseActivity {
             holder.headTxt.setText(commodity.getVC_Params());
             holder.descTxt.setText(commodity.getPadctBrief());
             holder.countTxt.setText("" + commodity.getCount());
-            holder.priceTxt.setText("￥ " + commodity.getPostagePrice());
+            holder.priceTxt.setText("￥ " + commodity.getN_HYJ());
 
             if (commodity.isChecked()) {
                 holder.chkView.setBackgroundResource(R.mipmap.icon_checkbox_sel);

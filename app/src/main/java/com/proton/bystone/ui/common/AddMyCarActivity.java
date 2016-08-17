@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,6 +71,12 @@ public class AddMyCarActivity extends MTFBaseActivity {
 
     @Bind(R.id.add_my_car_copy_img)
     ImageView copyImg;
+
+    @Bind(R.id.add_my_car_front_layout)
+    RelativeLayout frontLayout;
+
+    @Bind(R.id.add_my_car_copy_layout)
+    RelativeLayout copyLayout;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
@@ -257,6 +264,7 @@ public class AddMyCarActivity extends MTFBaseActivity {
 
             if (photos != null) {
                 frontList.addAll(photos);
+                frontLayout.setVisibility(View.GONE);
                 Picasso.with(context).load(new File(frontList.get(0))).placeholder(R.mipmap.ic_launcher).into(frontImg);
             }
 
@@ -268,6 +276,7 @@ public class AddMyCarActivity extends MTFBaseActivity {
 
             if (photos != null) {
                 copyList.addAll(photos);
+                copyLayout.setVisibility(View.GONE);
                 Picasso.with(context).load(new File(copyList.get(0))).placeholder(R.mipmap.ic_launcher).into(copyImg);
             }
         }

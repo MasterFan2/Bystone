@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,12 @@ import com.proton.bystone.bean.CarComboMaintenance;
 import com.proton.bystone.bean.CarInfo;
 import com.proton.bystone.bean.LoginParams;
 import com.proton.bystone.bean.ReservationParam;
+import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.config.Config;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.common.MyCarActivity;
+import com.proton.bystone.ui.login.LoginActivity;
 import com.proton.bystone.ui.maintenance.BespeakActivity;
 import com.proton.bystone.ui.maintenance.ComboActivity;
 import com.proton.bystone.utils.L;
@@ -74,11 +77,11 @@ public class MaintenanceFragment extends MTFBaseFragment {
 
 //    private final String[] tabs = {"上门保养", "维修保养"};
 
-    private final static int GET_DATA = 0x01 >> 1;//获取数据
+    private final static int GET_DATA                 = 0x01 >> 1;//获取数据
     private final static int REQUEST_EXTERNAL_STORAGE = 0x01 >> 2;//请求
 
-    private int previousPosition = -1;//上一个选择的tab position
-    private boolean loading = false;//标识是否正在读取数据， 正在读取的时候不能切换tab
+    private int previousPosition = -1;  //上一个选择的tab position
+    private boolean loading = false;    //标识是否正在读取数据， 正在读取的时候不能切换tab
 
     @Bind(R.id.home_maintain_listview)
     MyListView listView;
@@ -230,10 +233,10 @@ public class MaintenanceFragment extends MTFBaseFragment {
                             List<CarCombo> carCombos = new Gson().fromJson(jsonArray.get(0).toString(), new TypeToken<List<CarCombo>>() {}.getType());
                             CarComboMaintenance comboMaintenance = null;
                             if (isDefault) {//保存默认套餐
-                                comboMaintenance = new CarComboMaintenance(defaultCarInfo.getB_Name(), defaultCarInfo.getI_CarDetail(), carCombos);
+                                comboMaintenance = new CarComboMaintenance(defaultCarInfo.getB_Name(), defaultCarInfo.getI_CarDetail(), 1, carCombos);
                                 comboMaintenance.setCarInfo(defaultCarInfo);
                             } else {
-                                comboMaintenance = new CarComboMaintenance(chooseCarInfo.getB_Name(), chooseCarInfo.getI_CarDetail(), carCombos);
+                                comboMaintenance = new CarComboMaintenance(chooseCarInfo.getB_Name(), chooseCarInfo.getI_CarDetail(), 0, carCombos);
                                 comboMaintenance.setCarInfo(chooseCarInfo);
                             }
 
@@ -269,15 +272,20 @@ public class MaintenanceFragment extends MTFBaseFragment {
      */
     @OnClick(R.id.home_maintain_input_txt)
     public void inputTextClick(View view) {
-        Intent intent = new Intent(context, MyCarActivity.class);
-        intent.putExtra("where", MyCarActivity.WHERE_FRAGMENT_MAINTENANCE_HOME);
-        animStartForResult(intent, 9527);
+        if (LoginManager.getInstance().isLogin()){
+            Intent intent = new Intent(context, MyCarActivity.class);
+            intent.putExtra("where", MyCarActivity.WHERE_FRAGMENT_MAINTENANCE_HOME);
+            animStartForResult(intent, 9527);
+        } else {
+            Intent intent = new Intent(context, LoginActivity.class);
+            animStartForResult(intent, 9528);
+        }
     }
 
     @Override
     public void load() {
-        getAdList();
-        getCarList();
+        getAdList();    //获取广告
+        if (LoginManager.getInstance().isLogin()) getCarList();//获取洗车列表
     }
 
     /**
@@ -332,7 +340,7 @@ public class MaintenanceFragment extends MTFBaseFragment {
                 .key("pbevyvHkf1sFtyGL35gFfQ==")
                 .methodName("MyCarList")
                 .gson(new Gson())
-                .typeValue("string", Config.USER_CODE)
+                .typeValue("string", LoginManager.getInstance().getLoginInfo().getMb_Code())
                 .build();
         Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
         call.enqueue(new Callback<BaseResp>() {
@@ -341,8 +349,7 @@ public class MaintenanceFragment extends MTFBaseFragment {
                 if (response.body().getCode() == 1) {
                     try {
                         JSONArray jsonArr = new JSONArray(response.body().getData());
-                        List<CarInfo> carInfos = new Gson().fromJson(jsonArr.get(0).toString(), new TypeToken<List<CarInfo>>() {
-                        }.getType());
+                        List<CarInfo> carInfos = new Gson().fromJson(jsonArr.get(0).toString(), new TypeToken<List<CarInfo>>() {}.getType());
                         for (CarInfo carInfo : carInfos) {
                             if (carInfo.getIsDefault() == 1) {
                                 defaultCarInfo = carInfo;
@@ -385,8 +392,7 @@ public class MaintenanceFragment extends MTFBaseFragment {
 
         private ArrayList<Advert> adverts;
 
-        public MPagerAdapter() {
-        }
+        public MPagerAdapter() {}
 
         public MPagerAdapter(ArrayList<Advert> mAdverts) {
             this.adverts = mAdverts;
@@ -424,9 +430,29 @@ public class MaintenanceFragment extends MTFBaseFragment {
         if (requestCode == 9527) {//选择车辆返回
             if (data != null) {
                 chooseCarInfo = data.getParcelableExtra("carInfo");
-                if (chooseCarInfo != null) {
-                    getData(chooseCarInfo.getI_CarDetail(), false);
+                if (chooseCarInfo != null) {//选择了有用的车辆信息
+                    CarInfo carInfo = null;
+                    for (CarComboMaintenance combo: comboLists) {//如果选择了已经存在的车辆则不进行数据访问
+                        CarInfo tempCarInfo = combo.getCarInfo();
+                        if (tempCarInfo.getI_CarDetail().equals(chooseCarInfo.getI_CarDetail())){
+                            carInfo = tempCarInfo;
+                            break;
+                        }
+                    }
+
+                    if (carInfo == null)//选择则的车辆没有读取过套餐信息
+                        getData(chooseCarInfo.getI_CarDetail(), false);
+                    else
+                        T.s(context, "已有该车的套餐信息");
                 }
+            }
+        } else if (requestCode == 9528) {
+            if (LoginManager.getInstance().isLogin()) {
+                Intent intent = new Intent(context, MyCarActivity.class);
+                intent.putExtra("where", MyCarActivity.WHERE_FRAGMENT_MAINTENANCE_HOME);
+                animStartForResult(intent, 9527);
+            } else {
+                T.s(context, "登录失败");
             }
         }
     }
@@ -473,20 +499,27 @@ public class MaintenanceFragment extends MTFBaseFragment {
             float price = Float.parseFloat(carCombo1.getN_HYJ()) + Float.parseFloat(carCombo2.getN_HYJ()) + Float.parseFloat(carCombo3.getN_HYJ());
             float oldPrice = Float.parseFloat(carCombo1.getN_FHYJ()) + Float.parseFloat(carCombo2.getN_FHYJ()) + Float.parseFloat(carCombo3.getN_FHYJ());
 
-            holder.priceTxt.setText("会员价:" + price);
-            holder.oldPriceTxt.setText("原价:" + oldPrice);
+            holder.priceTxt.setText("会员价:￥" + price);
+            holder.oldPriceTxt.setText("原价:￥" + oldPrice);
 
             Picasso.with(context).load(HttpClients.PIC_URL + carCombo1.getVC_Url()).placeholder(R.mipmap.ic_launcher).into(holder.contentOneImg);
-            holder.contentOneTxt.setText(carCombo1.getPs_NAME());
-            holder.priceOneTxt.setText(carCombo1.getN_HYJ());
+            holder.contentOneTxt.setText("￥" + carCombo1.getPs_NAME());
+            holder.priceOneTxt.setText("￥" + carCombo1.getN_HYJ());
 
             Picasso.with(context).load(HttpClients.PIC_URL + carCombo2.getVC_Url()).placeholder(R.mipmap.ic_launcher).into(holder.contentTwoImg);
-            holder.contentTwoTxt.setText(carCombo2.getPs_NAME());
-            holder.priceTwoTxt.setText(carCombo2.getN_HYJ());
+            holder.contentTwoTxt.setText("￥" + carCombo2.getPs_NAME());
+            holder.priceTwoTxt.setText("￥" + carCombo2.getN_HYJ());
 
             Picasso.with(context).load(HttpClients.PIC_URL + carCombo3.getVC_Url()).placeholder(R.mipmap.ic_launcher).into(holder.contentThreeImg);
-            holder.contentThreeTxt.setText(carCombo3.getPs_NAME());
-            holder.priceThreeTxt.setText(carCombo3.getN_HYJ());
+            holder.contentThreeTxt.setText("￥" + carCombo3.getPs_NAME());
+            holder.priceThreeTxt.setText("￥" + carCombo3.getN_HYJ());
+
+            //默认车辆不显示删除套餐按钮
+            if (carComboMaintenance.getIsDefault() == 1) {
+                holder.delBtn.setVisibility(View.INVISIBLE);
+            }else {
+                holder.delBtn.setVisibility(View.VISIBLE);
+            }
 
             //查看更多
             holder.chooseMoreTxt.setOnClickListener(new View.OnClickListener() {
@@ -517,7 +550,7 @@ public class MaintenanceFragment extends MTFBaseFragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ComboActivity.class);
-                    intent.putExtra("carInfo", defaultCarInfo == null ? chooseCarInfo : defaultCarInfo);
+                    intent.putExtra("carInfo", carComboMaintenance.getCarInfo());
                     animStart(intent);
                 }
             });
@@ -526,8 +559,12 @@ public class MaintenanceFragment extends MTFBaseFragment {
             holder.bespeakBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, BespeakActivity.class);
+//                    Intent intent = new Intent(context, BespeakActivity.class);
+//                    intent.putExtra("carInfo", carComboMaintenance.getCarInfo());
+//                    animStart(intent);
+                    Intent intent = new Intent(context, ComboActivity.class);
                     intent.putExtra("carInfo", carComboMaintenance.getCarInfo());
+                    intent.putExtra("bespeak", true);
                     animStart(intent);
                 }
             });

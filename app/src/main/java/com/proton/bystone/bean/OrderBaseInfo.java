@@ -1,10 +1,13 @@
 package com.proton.bystone.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 订单状态的基础数据
  * Created by MasterFan on 2016/7/23.
  */
-public class OrderBaseInfo {
+public class OrderBaseInfo implements Parcelable {
 
     /**
      * BookCode : 201607231653584604
@@ -69,4 +72,43 @@ public class OrderBaseInfo {
     public void setBookStaus(int BookStaus) {
         this.BookStaus = BookStaus;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.BookCode);
+        dest.writeString(this.UserName);
+        dest.writeString(this.Mobile);
+        dest.writeString(this.Address);
+        dest.writeString(this.BookBeginTime);
+        dest.writeInt(this.BookStaus);
+    }
+
+    public OrderBaseInfo() {
+    }
+
+    protected OrderBaseInfo(Parcel in) {
+        this.BookCode = in.readString();
+        this.UserName = in.readString();
+        this.Mobile = in.readString();
+        this.Address = in.readString();
+        this.BookBeginTime = in.readString();
+        this.BookStaus = in.readInt();
+    }
+
+    public static final Parcelable.Creator<OrderBaseInfo> CREATOR = new Parcelable.Creator<OrderBaseInfo>() {
+        @Override
+        public OrderBaseInfo createFromParcel(Parcel source) {
+            return new OrderBaseInfo(source);
+        }
+
+        @Override
+        public OrderBaseInfo[] newArray(int size) {
+            return new OrderBaseInfo[size];
+        }
+    };
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        >
+        <TextView
+            android:id="@+id/item_service_add_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextHeader"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="刹车片"
+            />
+        <TextView
+            android:id="@+id/item_service_add_id_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="@style/TextHeader"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="出厂编号X"
+        />
+    </RelativeLayout>
+
+    <View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        >
+        <TextView
+            android:id="@+id/item_service_add_sub_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="刹车片"
+            />
+        <TextView
+            android:id="@+id/item_service_add_price_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="5dp"
+            android:text="￥0.00"
+            />
+    </RelativeLayout>
+
+    <View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="工时费"
+            />
+        <TextView
+            android:id="@+id/item_service_add_hourlywage_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"
+            android:text="￥0.00"
+            />
+    </RelativeLayout>
+
+    <View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        >
+        <TextView
+            android:id="@+id/item_service_add_total_price_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:text="小计：￥0.00"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

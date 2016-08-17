@@ -75,6 +75,7 @@ public class OrderStateActivity extends MTFBaseActivity {
     private MyAdapter adapter;
 
     private List<OrderBaseInfo> orderBaseInfos   = null;
+    private OrderBaseInfo orderBaseInfo          = null;
     private List<OrderStateInfo> orderStateInfos = null;
 
     private String code ;
@@ -119,7 +120,7 @@ public class OrderStateActivity extends MTFBaseActivity {
 
             @Override
             public void onFailure(Call<BaseResp> call, Throwable t) {
-                L.e("getThirdLevelYear::" + t.getMessage());
+                L.e("getMaintenanceStatus::" + t.getMessage());
             }
         });
     }
@@ -182,7 +183,7 @@ public class OrderStateActivity extends MTFBaseActivity {
 
             if (orderStateInfo.getBookStaus() == 0){
                 holder.descTxt.setText("已提交");
-            } else if (orderStateInfo.getBookStaus() == 1) {
+            }else if (orderStateInfo.getBookStaus() == 1) {
                 holder.descTxt.setText("已指派");
             }else if (orderStateInfo.getBookStaus() == 2) {
                 holder.descTxt.setText("企业已确认");
@@ -233,30 +234,30 @@ public class OrderStateActivity extends MTFBaseActivity {
      */
     private void bindData() {
         if (orderBaseInfos != null && orderBaseInfos.size() > 0) {
-            final OrderBaseInfo baseInfo = orderBaseInfos.get(0);
-            idNumTxt.setText("保养ID号:" + baseInfo.getBookCode());
-            String strAllTxt = "姓名：" + baseInfo.getUserName() + "\n电话："+baseInfo.getMobile() +
-                    "\n地址：" + baseInfo.getAddress() + "\n时间：" + baseInfo.getBookBeginTime();
+            orderBaseInfo = orderBaseInfos.get(0);
+            idNumTxt.setText("保养ID号:" + orderBaseInfo.getBookCode());
+            String strAllTxt = "姓名：" + orderBaseInfo.getUserName() + "\n电话："+orderBaseInfo.getMobile() +
+                    "\n地址：" + orderBaseInfo.getAddress() + "\n时间：" + orderBaseInfo.getBookBeginTime();
             allTxt.setText(strAllTxt);
 
-            if (baseInfo.getBookStaus() >= 7) {
+            if (orderBaseInfo.getBookStaus() >= 7) {
                 testListTxt.setText("详情 > ");
                 testListLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, TestListActivity.class);
-                        intent.putExtra("status", baseInfo.getBookStaus());
+                        intent.putExtra("status", orderBaseInfo.getBookStaus());
                         intent.putExtra("code", code);
                         animStart(intent);
                     }
                 });
             }
 
-            if (baseInfo.getBookStaus() >= 8) {
+            if (orderBaseInfo.getBookStaus() >= 8) {
                 serviceDetailBtn.setEnabled(true);
             }
 
-            if (baseInfo.getBookStaus() >= 9) {
+            if (orderBaseInfo.getBookStaus() >= 9) {
                 picTxt.setText("详情 > ");
                 picLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -284,7 +285,10 @@ public class OrderStateActivity extends MTFBaseActivity {
 
     @OnClick(R.id.order_state_service_detail_btn)
     public void detailClick(View view)  {
-        animStart(ServiceDetailActivity.class);
+        Intent intent = new Intent(context, ServiceDetailActivity.class);
+        intent.putExtra("status", orderBaseInfo);
+        intent.putExtra("code", code);
+        animStart(intent);
     }
 
     @Override

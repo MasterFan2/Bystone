@@ -69,7 +69,9 @@
                     android:id="@+id/item_my_car_do_maintenance_btn"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_blue_border_selector_round_corner"
+                    android:textColor="@color/blue"
                     android:text="去保养" />
             </RelativeLayout>
         </LinearLayout>
@@ -80,6 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:layout_marginTop="3dp"
         >
         <View
             android:id="@+id/item_my_car_rb_view"
@@ -102,7 +105,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:drawableLeft="@mipmap/icon_mine_delete"
             android:text="删除"
+            android:background="@drawable/white_gray_selector"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
             />
     </RelativeLayout>
 </LinearLayout>
