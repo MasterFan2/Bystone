@@ -27,7 +27,7 @@ import butterknife.Bind;
  * create by masterfan
  */
 @MTFActivityFeature(layout = R.layout.activity_main)
-public class MainActivity extends MTFBaseActivity implements OnClickListener {
+public class MainActivity extends MTFBaseActivity implements OnClickListener, TabSelectedDelegate {
 
     private int index = -1;       //touched index
     private int currentIndex = 0;//current selected
@@ -175,10 +175,34 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
 
     }
 
+    private TabSelectedDelegate tabSelectedDelegate;
+    public void setTabSelectedDelegate(TabSelectedDelegate tabSelectedDelegate) {
+        this.tabSelectedDelegate = tabSelectedDelegate;
+    }
 
-/*    public void tiao()
-    {
-        Intent t=new Intent(context,MeFragment.class);
-        startActivity(t);
-    }*/
+    @Override
+    public void check(int tab) {
+        switch (tab) {
+            case 1:
+                index = 1;
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_sel);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
+                break;
+            case 2:
+                index = 2;
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_sel);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
+                break;
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .hide(fragments[currentIndex])
+                .show(fragments[index]).commit();
+        fragments[index].load();//加载数据
+        currentIndex = index;
+    }
 }

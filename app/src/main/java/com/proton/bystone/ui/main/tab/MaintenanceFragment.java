@@ -39,6 +39,7 @@ import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.common.MyCarActivity;
 import com.proton.bystone.ui.login.LoginActivity;
+import com.proton.bystone.ui.main.TabSelectedDelegate;
 import com.proton.bystone.ui.maintenance.BespeakActivity;
 import com.proton.bystone.ui.maintenance.ComboActivity;
 import com.proton.bystone.utils.L;
@@ -125,20 +126,6 @@ public class MaintenanceFragment extends MTFBaseFragment {
     public void scanClick(View view) {
         animStart(CaptureActivity.class);
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        switch (requestCode) {
-//            case  CarBrandActivity.GET_CAR_BRAND_REQUEST:
-//            {
-//                CarModel carModel = data.getParcelableExtra("brandModel");
-//                if (carModel != null) {
-//                    getData(carModel.getM_Code());
-//                }
-//            }
-//                break;
-//        }
-//    }
 
     /**
      * Use this factory method to create a new instance of
@@ -559,9 +546,6 @@ public class MaintenanceFragment extends MTFBaseFragment {
             holder.bespeakBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(context, BespeakActivity.class);
-//                    intent.putExtra("carInfo", carComboMaintenance.getCarInfo());
-//                    animStart(intent);
                     Intent intent = new Intent(context, ComboActivity.class);
                     intent.putExtra("carInfo", carComboMaintenance.getCarInfo());
                     intent.putExtra("bespeak", true);

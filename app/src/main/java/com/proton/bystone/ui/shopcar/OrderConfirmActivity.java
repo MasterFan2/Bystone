@@ -32,6 +32,7 @@ import com.proton.bystone.bean.ReservationParam;
 import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
+import com.proton.bystone.ui.payment.ChoosePaymentActivity;
 import com.proton.bystone.ui.shop.My_Shop_Pay;
 import com.proton.bystone.ui.shop.Shop_Select_Address;
 import com.proton.bystone.utils.L;
@@ -454,8 +455,8 @@ public class OrderConfirmActivity extends MTFBaseActivity {
         BigDecimal newDecimal = new BigDecimal("0.00");//会员价
 
         for (Commodity temp : datas) {
-            oldDecimal.add(new BigDecimal(temp.getN_FHYJ()));
-            newDecimal.add(new BigDecimal(temp.getN_HYJ()));
+            oldDecimal = oldDecimal.add(new BigDecimal(temp.getN_FHYJ()));
+            newDecimal = newDecimal.add(new BigDecimal(temp.getN_HYJ()));
         }
 
         //主订单
@@ -496,7 +497,7 @@ public class OrderConfirmActivity extends MTFBaseActivity {
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
                 if (response.body().getCode() == 1) {
                     OrderSubmitResp orderSubmitResp = new Gson().fromJson(response.body().getData(), new TypeToken<OrderSubmitResp>() {}.getType());
-                    Intent intent = new Intent(context, My_Shop_Pay.class);
+                    Intent intent = new Intent(context, ChoosePaymentActivity.class);
                     intent.putExtra("orderNum", orderSubmitResp.getOrderCode());
                     animStart(intent);
 

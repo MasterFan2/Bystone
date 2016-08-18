@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.proton.library.widget.MTFTitleView
         android:id="@+id/titleView"
@@ -12,298 +13,293 @@
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="反馈"
         app:titleTxtColor="@android:color/white" />
-   <ScrollView
+
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="470dp"
-        >
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ebebeb"
+        android:layout_height="470dp">
 
-        />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        >
-
-        <TextView
-            android:layout_width="2dp"
-            android:layout_height="20dp"
-            android:background="#EB4F38"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:id="@+id/textView" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="快捷支付"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/textView2" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#ebebeb"
+
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="#EB4F38" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="快捷支付"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
-        <ImageView
-            android:id="@+id/shop_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mai_disabled"
-           android:layout_marginTop="80dp"
-            android:layout_marginLeft="10dp"
-            />
+                <ImageView
+                    android:id="@+id/shop_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="80dp"
+                    android:src="@mipmap/icon_mai_disabled" />
 
-        <TextView
-            android:id="@+id/shop_yhkzf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="70dp"
-            android:text="银行卡支付"
+                <TextView
+                    android:id="@+id/shop_yhkzf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="70dp"
+                    android:text="银行卡支付"
 
-             />
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="90dp"
-            android:text="银行卡用户使用"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="90dp"
+                    android:text="银行卡用户使用"
 
-            />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_merchant_bankpay"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="50dp"
+                    />
 
 
-            />
-
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ebebeb"
-
-        />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-        <TextView
-            android:layout_width="2dp"
-            android:layout_height="20dp"
-            android:background="#EB4F38"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-           />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="其他支付"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-             />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="70dp"
+                    android:src="@mipmap/icon_merchant_bankpay"
 
 
-        <ImageView
-            android:id="@+id/shop_zhifu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mai_disabled"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="10dp"
-            />
+                    />
 
-        <TextView
-            android:id="@+id/shop_py"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="70dp"
-            android:text="支付宝客户端支付"
+            </RelativeLayout>
 
-            />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#ebebeb"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="90dp"
-            android:text="推荐安装支付宝客户端的用户使用"
+                />
 
-            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:background="#EB4F38" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_merchant_alpay"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="50dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="其他支付"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
-            />
+                <ImageView
+                    android:id="@+id/shop_zhifu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="80dp"
+                    android:src="@mipmap/icon_mai_disabled" />
 
-        <ImageView
-            android:id="@+id/shop_weixin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mai_disabled"
-            android:layout_marginTop="130dp"
-            android:layout_marginLeft="10dp"
-            />
+                <TextView
+                    android:id="@+id/shop_py"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="70dp"
+                    android:text="支付宝客户端支付"
 
-        <TextView
-            android:id="@+id/shop_wxzf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="120dp"
-            android:text="微信支付"
+                    />
 
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="90dp"
+                    android:text="推荐安装支付宝客户端的用户使用"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="140dp"
-            android:text="推荐安装微信的用户使用"
-
-            />
+                    />
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_merchant_wxpay"
-            android:layout_marginTop="120dp"
-            android:layout_marginLeft="50dp"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="70dp"
+                    android:src="@mipmap/icon_merchant_alpay"
 
 
-            />
+                    />
 
-        <ImageView
+                <ImageView
+                    android:id="@+id/shop_weixin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="130dp"
+                    android:src="@mipmap/icon_mai_disabled" />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mai_disabled"
-            android:layout_marginTop="190dp"
-            android:layout_marginLeft="10dp"
-            />
+                <TextView
+                    android:id="@+id/shop_wxzf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="120dp"
+                    android:text="微信支付"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="180dp"
-            android:text="现金支付"
+                    />
 
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="140dp"
+                    android:text="推荐安装微信的用户使用"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="200dp"
-            android:text="现金用户使用"
-
-            />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_merchant_cashpay"
-            android:layout_marginTop="180dp"
-            android:layout_marginLeft="50dp"
+                    />
 
 
-            />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="120dp"
+                    android:src="@mipmap/icon_merchant_wxpay"
 
 
-    </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ebebeb"
+                    />
 
-        />
+                <ImageView
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="190dp"
+                    android:src="@mipmap/icon_mai_disabled" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:text="需付款"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="180dp"
+                    android:text="现金支付"
 
-            />
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="50dp"
-            android:text="￥"
-            android:id="@+id/shop_rmb"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="200dp"
+                    android:text="现金用户使用"
 
-            />
-        <TextView
-            android:id="@+id/shop_hj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="50dp"
-            android:text="230.00"
-            android:layout_toRightOf="@id/rmb"
+                    />
 
-            />
-    </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="180dp"
+                    android:src="@mipmap/icon_merchant_cashpay"
+
+
+                    />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#ebebeb"
+
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:text="需付款"
+
+                    />
+
+                <TextView
+                    android:id="@+id/shop_rmb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginTop="50dp"
+                    android:text="￥"
+
+                    />
+
+                <TextView
+                    android:id="@+id/shop_hj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_toRightOf="@id/rmb"
+                    android:text="230.00"
+
+                    />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#ebebeb"
-        />
+        android:background="#ebebeb" />
 
     <Button
+        android:id="@+id/shop_pay"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="确认付款"
-        android:id="@+id/shop_pay"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textColor="#fdfcfb"
-        android:background="@drawable/yuanjiao2"/>
+        android:background="@drawable/yuanjiao2"
+        android:text="确认付款"
+        android:textColor="#fdfcfb" />
 
 
 </LinearLayout>
