@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2016/8/9.
+ * 物流
  */
 @MTFActivityFeature(layout = R.layout.shop_ck)
 public class Shop_Ckwu extends MTFBaseActivity {
@@ -145,5 +146,10 @@ public class Shop_Ckwu extends MTFBaseActivity {
     {
         TextView AcceptTime;
         TextView AcceptStation;
+    }
+
+    @butterknife.OnClick(R.id.m_title_left_btn)
+    public void back(View view) {
+        animFinish();
     }
 }

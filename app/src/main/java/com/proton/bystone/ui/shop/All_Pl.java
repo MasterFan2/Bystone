@@ -3,6 +3,7 @@ package com.proton.bystone.ui.shop;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,8 +89,11 @@ public class All_Pl extends MTFBaseActivity {
             @Override
             public void onResponse(Call<JsonResp> call, Response<JsonResp> response) {
                 String data = response.body().getData();
-               // Log.e("1312323",data+"");
-                eventjiexi(data);
+                Log.e("1312323",data+"");
+
+
+                    eventjiexi(data);
+
             }
 
             @Override
@@ -104,16 +108,19 @@ public class All_Pl extends MTFBaseActivity {
     //解析
     public void eventjiexi(String data)
     {
-       shop_list=new Gson().fromJson(data, new TypeToken<List<Shop_Pl>>() {}.getType());
 
-        String path = shop_list.get(0).getPath();
-        ary = path.split(",");
-        for (int i = 0; i < ary.length; i++) {
-          //  Log.e("111111111111",ary[i]+"");
-        }
+            shop_list = new Gson().fromJson(data, new TypeToken<List<Shop_Pl>>() {
+            }.getType());
+
+            String path = shop_list.get(0).getPath();
+            ary = path.split(",");
+            for (int i = 0; i < ary.length; i++) {
+                //  Log.e("111111111111",ary[i]+"");
+            }
 
 
-        listview.setAdapter(new  JuleBuhomeadapter2());
+            listview.setAdapter(new JuleBuhomeadapter2());
+
     }
 
 
@@ -123,7 +130,7 @@ public class All_Pl extends MTFBaseActivity {
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return shop_list.size();
+            return shop_list == null ? 0 : shop_list.size();
         }
 
         @Override

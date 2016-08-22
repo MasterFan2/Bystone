@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,7 @@ import retrofit2.Response;
 public class My_Indext extends MTFBaseActivity {
     @Bind(R.id.shop_frame)
     ListView lv;
+
 
     @Bind(R.id.my_all3)
     TextView my_all3;//待保养
@@ -92,24 +95,54 @@ public class My_Indext extends MTFBaseActivity {
 
         if(number.equals("0"))
         {
-            rq();
+            rq();//全部订单
+            //my_all.setTextColor(Color.parseColor("3c85ee"));
+            my_all.setTextColor(Color.BLUE);
+            my_all3.setTextColor(Color.GRAY);
+            my_all4.setTextColor(Color.GRAY);
+            my_all2.setTextColor(Color.GRAY);
+            my_all5.setTextColor(Color.GRAY);
 
         }else if(number.equals("1"))
         {
-            maintain();
+
+            maintain2();
+            my_all3.setTextColor(Color.BLUE);
+            my_all.setTextColor(Color.GRAY);
+            my_all4.setTextColor(Color.GRAY);
+            my_all2.setTextColor(Color.GRAY);
+            my_all5.setTextColor(Color.GRAY);
 
         }else if(number.equals("2"))
         {
-            maintain4();
+            maintain4();//收货
+            my_all3.setTextColor(Color.GRAY);
+            my_all.setTextColor(Color.GRAY);
+            my_all4.setTextColor(Color.GRAY);
+            my_all2.setTextColor(Color.BLUE);
+            my_all5.setTextColor(Color.GRAY);
+
         }else if(number.equals("3"))
         {
-            maintain2();
+            maintain5();
 
+            my_all3.setTextColor(Color.GRAY);
+            my_all.setTextColor(Color.GRAY);
+            my_all4.setTextColor(Color.BLUE);
+            my_all2.setTextColor(Color.GRAY);
+            my_all5.setTextColor(Color.GRAY);
 
 
         }else if(number.equals("4"))
         {
-            maintain5();
+
+            maintain();//查询保养
+            my_all3.setTextColor(Color.GRAY);
+            my_all.setTextColor(Color.GRAY);
+            my_all4.setTextColor(Color.GRAY);
+            my_all2.setTextColor(Color.GRAY);
+            my_all5.setTextColor(Color.BLUE);
+
         }
 
         Listener();
@@ -117,6 +150,7 @@ public class My_Indext extends MTFBaseActivity {
 
         settings = getSharedPreferences("hhp", 0);
         editor = settings.edit();
+
 
     }
 
@@ -127,56 +161,118 @@ public class My_Indext extends MTFBaseActivity {
 
     public void Listener() {
 
+
        //全部订单
         my_all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rq();
+                my_all.setTextColor(Color.BLUE);
+                my_all3.setTextColor(Color.GRAY);
+                my_all4.setTextColor(Color.GRAY);
+                my_all2.setTextColor(Color.GRAY);
+                my_all5.setTextColor(Color.GRAY);
             }
         });
 
         //待保养
-        my_all3.setOnClickListener(new View.OnClickListener() {
+        my_all5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                maintain();
+                maintain();//查询保养
+                my_all3.setTextColor(Color.GRAY);
+                my_all.setTextColor(Color.GRAY);
+                my_all4.setTextColor(Color.GRAY);
+                my_all2.setTextColor(Color.GRAY);
+                my_all5.setTextColor(Color.BLUE);
 
-            }
-        });
 
-       //待收货
-        my_all4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                maintain4();
+
             }
         });
 
         //待付款
-        my_all2.setOnClickListener(new View.OnClickListener() {
+        my_all3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 maintain2();
+                my_all3.setTextColor(Color.BLUE);
+                my_all.setTextColor(Color.GRAY);
+                my_all4.setTextColor(Color.GRAY);
+                my_all2.setTextColor(Color.GRAY);
+                my_all5.setTextColor(Color.GRAY);
             }
         });
 
        //待评价
-        my_all5.setOnClickListener(new View.OnClickListener() {
+        my_all4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 maintain5();
+
+                my_all3.setTextColor(Color.GRAY);
+                my_all.setTextColor(Color.GRAY);
+                my_all4.setTextColor(Color.BLUE);
+                my_all2.setTextColor(Color.GRAY);
+                my_all5.setTextColor(Color.GRAY);
             }
         });
+
+
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent t=new Intent(My_Indext.this,OrderStateActivity.class);
-                    t.putExtra("code",htt.get(position).getBookCode());
+
+                if(hp!=null&&hp.size()>0) {
+                    int orderType = hp.get(position).getOrderType();
+                    if (1 == orderType) {
+                        Intent t = new Intent(My_Indext.this, OrderStateActivity.class);
+                        t.putExtra("code", hp.get(position).getBookCode());
+                        startActivity(t);
+                    }
+                }else if(httq!=null&&httq.size()>0) {
+                    int orderType2= httq.get(position).getOrderType();
+                    if(1==orderType2) {
+                        Intent t = new Intent(My_Indext.this, OrderStateActivity.class);
+                        t.putExtra("code", httq.get(position).getBookCode());
+                        startActivity(t);
+                    }
+                }else if(htt!=null&&htt.size()>0)
+                {
+                    int orderType3=htt.get(position).getOrderType();
+                  if(1==orderType3) {
+                    Intent t = new Intent(My_Indext.this, OrderStateActivity.class);
+                    t.putExtra("code", htt.get(position).getBookCode());
                     startActivity(t);
+                }
+                }
+
+
+
+
+
 
             }
         });
+
+        //待收货
+        my_all2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               maintain4();//收货
+                my_all3.setTextColor(Color.GRAY);
+                my_all.setTextColor(Color.GRAY);
+                my_all4.setTextColor(Color.GRAY);
+                my_all2.setTextColor(Color.BLUE);
+                my_all5.setTextColor(Color.GRAY);
+            Log.e("111","111");
+
+            }
+        });
+
+
 
 
     }
@@ -206,8 +302,9 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-         //      Log.e("待评价",data);
-                maintain2(data);
+              Log.e("待评价",data);
+                lv.setAdapter(new Nul());
+              //  maintain5(data);
             }
 
             @Override
@@ -259,18 +356,113 @@ public class My_Indext extends MTFBaseActivity {
                 convertView = View.inflate(My_Indext.this, R.layout.shop_qborder, null);//标题
                 holder = new viewHolder1();
                 holder.my_by = (TextView) convertView.findViewById(R.id.my_by);//上门保养
-                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待
+                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待保养
                 holder.my_minefor = (TextView) convertView.findViewById(R.id.my_minefor);//DATA
                 holder.my_car_number = (TextView) convertView.findViewById(R.id.my_car_number);//渝A888
+                holder.day = (TextView) convertView.findViewById(R.id.shop_day);//时间
+                holder.OrderStatus = (TextView) convertView.findViewById(R.id.wait);//代付款等
+                holder.icon_right = (ImageView) convertView.findViewById(R.id.shop_jt);//箭头向下
+                holder.shop_listview_item = (ImageView) convertView.findViewById(R.id.shop_listview_item);//图
+                holder.shop_map = (RelativeLayout) convertView.findViewById(R.id.shop_map);//是否显示图
+                holder.headline = (TextView) convertView.findViewById(R.id.headline);//标题
+                holder.money = (TextView) convertView.findViewById(R.id.money);//总价
+                holder.member = (TextView) convertView.findViewById(R.id.member);//个数
+                holder.shop_sfk = (TextView) convertView.findViewById(R.id.shop_sfk);//个数
+
+                holder.shop_kf = (TextView) convertView.findViewById(R.id.shop_kf);
+                holder.my_cancel = (TextView) convertView.findViewById(R.id.my_cancel);
+                holder.shop_ok = (TextView) convertView.findViewById(R.id.shop_ok);
+                holder.shop_sfko = (RelativeLayout) convertView.findViewById(R.id.shop_sfko);
+
                 convertView.setTag(holder);
             }else{
                 holder = (viewHolder1) convertView.getTag();
             }
 
-            holder.my_by.setText(pj.get(position).getOConsumerName());
-            holder.wait.setText(pj.get(position).getOrderType()+"");
+ /*           holder.my_by.setText(httq.get(position).getOConsumerName());
+            holder.wait.setText(httq.get(position).getOrderType()+"");
+
 //            holder.my_minefor.setText(yj);
-            holder.my_car_number.setText(pj.get(position).getBookCode());
+
+            holder.my_car_number.setText(httq.get(position).getBookCode());
+            holder.shop_map.setVisibility(View.GONE);*/
+
+
+
+
+            int orderType = httq.get(position).getOrderType();//订单类型
+            switch (orderType)
+            {
+                case 1:
+                    holder.my_by.setText("上门保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    holder.shop_sfko.setVisibility(View.GONE);
+                    holder.shop_kf .setVisibility(View.INVISIBLE);
+                    holder.shop_ok .setVisibility(View.VISIBLE);
+
+                    holder.my_cancel .setText("取消预约");
+
+                    holder.shop_ok .setText("联系客服");
+                    holder.my_car_number.setText(View.VISIBLE);
+                    holder.my_car_number.setText(hp.get(position).getBookCarNum());
+                    break;
+                case 2:
+                    holder.my_by.setText("到店保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    break;
+                case 3:
+
+                    String aa = "http://192.168.0.119";
+                    holder.my_by.setText("商城购物");
+                    holder.my_car_number.setVisibility(View.GONE);
+                    holder.icon_right.setImageResource(R.mipmap.icon_mai_bottom_1);
+                    utils2.display(holder.shop_listview_item,aa+shouhuo.get(position).getVC_Url());
+                    holder.headline.setText(pj.get(position).getVC_Name());
+                    holder.money.setText(pj.get(position).getOSfJe());//总价
+                    holder.member.setText(pj.get(position).getCmtyNumber()+"");//个数
+                    holder.shop_sfk.setText(pj.get(position).getOSfJe());//实付款
+                    if(3==orderType)
+                    {
+                        holder.shop_kf .setText("退货");
+                        holder.my_cancel .setText("联系客服");
+                        holder.shop_ok.setText("评价");
+                    }
+                    break;
+            }
+
+            int OrderStatus = shouhuo.get(position).getOrderStatus();
+            switch (OrderStatus)
+            {
+                case 0:
+                    holder.OrderStatus.setText("取消");
+                    break;
+                case 1:
+                    holder.OrderStatus.setText("待付款");
+                    break;
+                case 2:
+                    holder.OrderStatus.setText("待收货");
+                    break;
+                case 3:
+                    holder.OrderStatus.setText("待评价");
+                    break;
+                case 4:
+                    holder.OrderStatus.setText("退货审核中");
+                    break;
+                case 5:
+                    holder.OrderStatus.setText("退货结束");
+                    break;
+                case 6:
+                    holder.OrderStatus.setText("完成");
+                    break;
+
+                case 100:
+                    holder.OrderStatus.setText("待保养");
+                    break;
+            }
+
+
+
+
 
             return convertView;
         }
@@ -307,7 +499,7 @@ public class My_Indext extends MTFBaseActivity {
 
                 String data = response.body().getData();
              //   Log.e("待收货",data);
-                maintain2(data);
+                maintain4(data);
             }
 
             @Override
@@ -319,6 +511,8 @@ public class My_Indext extends MTFBaseActivity {
     //查询待收货订单
     public void maintain4(String data)
     {
+
+
         shouhuo=new Gson().fromJson(data, new TypeToken<List<Shop_All_Order>>() {}.getType());
         lv.setAdapter(new maintainmy4());
         editor.putString("shouhuo",shouhuo.size()+"");
@@ -360,18 +554,124 @@ public class My_Indext extends MTFBaseActivity {
                 convertView = View.inflate(My_Indext.this, R.layout.shop_qborder, null);//标题
                 holder = new viewHolder1();
                 holder.my_by = (TextView) convertView.findViewById(R.id.my_by);//上门保养
-                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待
+                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待保养
                 holder.my_minefor = (TextView) convertView.findViewById(R.id.my_minefor);//DATA
                 holder.my_car_number = (TextView) convertView.findViewById(R.id.my_car_number);//渝A888
+                holder.day = (TextView) convertView.findViewById(R.id.shop_day);//时间
+                holder.OrderStatus = (TextView) convertView.findViewById(R.id.wait);//代付款等
+                holder.icon_right = (ImageView) convertView.findViewById(R.id.shop_jt);//箭头向下
+                holder.shop_listview_item = (ImageView) convertView.findViewById(R.id.shop_listview_item);//图
+                holder.shop_map = (RelativeLayout) convertView.findViewById(R.id.shop_map);//是否显示图
+                holder.headline = (TextView) convertView.findViewById(R.id.headline);//标题
+                holder.money = (TextView) convertView.findViewById(R.id.money);//总价
+                holder.member = (TextView) convertView.findViewById(R.id.member);//个数
+                holder.shop_sfk = (TextView) convertView.findViewById(R.id.shop_sfk);//个数
+
+                holder.shop_kf = (TextView) convertView.findViewById(R.id.shop_kf);
+                holder.my_cancel = (TextView) convertView.findViewById(R.id.my_cancel);
+                holder.shop_ok = (TextView) convertView.findViewById(R.id.shop_ok);
+                holder.shop_sfko = (RelativeLayout) convertView.findViewById(R.id.shop_sfko);
+
                 convertView.setTag(holder);
             }else{
                 holder = (viewHolder1) convertView.getTag();
             }
 
-            holder.my_by.setText(shouhuo.get(position).getOConsumerName());
-            holder.wait.setText(shouhuo.get(position).getOrderType()+"");
-//            holder.my_minefor.setText(yj);
-            holder.my_car_number.setText(shouhuo.get(position).getBookCode());
+            int orderType = shouhuo.get(position).getOrderType();//订单类型
+            switch (orderType)
+            {
+                case 1:
+                    holder.my_by.setText("上门保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    holder.shop_sfko.setVisibility(View.GONE);
+                    holder.shop_kf .setVisibility(View.VISIBLE);
+                    holder.shop_kf .setText("取消预约");
+                    holder.my_cancel .setText("联系客服");
+                    holder.shop_ok.setText("确认付款");
+                   /* holder.my_car_number.setText(View.VISIBLE);
+                   holder.my_car_number.setText(hp.get(position).getBookCarNum());*/
+                    break;
+                case 2:
+                    holder.my_by.setText("到店保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    break;
+                case 3:
+
+                    String aa = "http://192.168.0.119";
+                    holder.my_by.setText("商城购物");
+                    holder.my_car_number.setVisibility(View.GONE);
+                    holder.icon_right.setImageResource(R.mipmap.icon_mai_bottom_1);
+                    utils2.display(holder.shop_listview_item,aa+shouhuo.get(position).getVC_Url());
+                    holder.headline.setText(shouhuo.get(position).getVC_Name());
+                    holder.money.setText(shouhuo.get(position).getOSfJe());//总价
+                    holder.member.setText(shouhuo.get(position).getCmtyNumber()+"");//个数
+                    holder.shop_sfk.setText(shouhuo.get(position).getOSfJe());//实付款
+
+                        holder.shop_kf .setText("联系物流");
+                        holder.my_cancel .setText("查看客服");
+                        holder.shop_ok.setText("确认收货");
+
+                    //确认收货
+                    holder.shop_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent t=new Intent(My_Indext.this,shop_Sh.class);
+                            startActivity(t);
+                        }
+                    });
+
+                    //联系物流
+                    holder.shop_kf.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent t=new Intent(My_Indext.this,Shop_Ckwu.class);
+                            startActivity(t);
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+                    break;
+            }
+
+            int OrderStatus = shouhuo.get(position).getOrderStatus();
+            switch (OrderStatus)
+            {
+                case 0:
+                    holder.OrderStatus.setText("取消");
+                    break;
+                case 1:
+                    holder.OrderStatus.setText("待付款");
+                    break;
+                case 2:
+                    holder.OrderStatus.setText("待收货");
+                    break;
+                case 3:
+                    holder.OrderStatus.setText("待评价");
+                    break;
+                case 4:
+                    holder.OrderStatus.setText("退货审核中");
+                    break;
+                case 5:
+                    holder.OrderStatus.setText("退货结束");
+                    break;
+                case 6:
+                    holder.OrderStatus.setText("完成");
+                    break;
+
+                case 100:
+                    holder.OrderStatus.setText("待保养");
+                    break;
+            }
+
+
+
 
             return convertView;
         }
@@ -406,7 +706,7 @@ public class My_Indext extends MTFBaseActivity {
 
 
                 String data = response.body().getData();
-              //  Log.e("待付款",data);
+               Log.e("待付款",data);
                 maintain2(data);
             }
 
@@ -437,7 +737,7 @@ public class My_Indext extends MTFBaseActivity {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return httq.size();
+            return httq == null ? 0 : httq.size();
         }
 
         @Override
@@ -460,18 +760,131 @@ public class My_Indext extends MTFBaseActivity {
                 convertView = View.inflate(My_Indext.this, R.layout.shop_qborder, null);//标题
                 holder = new viewHolder1();
                 holder.my_by = (TextView) convertView.findViewById(R.id.my_by);//上门保养
-                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待
+                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待保养
                 holder.my_minefor = (TextView) convertView.findViewById(R.id.my_minefor);//DATA
                 holder.my_car_number = (TextView) convertView.findViewById(R.id.my_car_number);//渝A888
+                holder.day = (TextView) convertView.findViewById(R.id.shop_day);//时间
+                holder.OrderStatus = (TextView) convertView.findViewById(R.id.wait);//代付款等
+                holder.icon_right = (ImageView) convertView.findViewById(R.id.shop_jt);//箭头向下
+                holder.shop_listview_item = (ImageView) convertView.findViewById(R.id.shop_listview_item);//图
+                holder.shop_map = (RelativeLayout) convertView.findViewById(R.id.shop_map);//是否显示图
+                holder.headline = (TextView) convertView.findViewById(R.id.headline);//标题
+                holder.money = (TextView) convertView.findViewById(R.id.money);//总价
+                holder.member = (TextView) convertView.findViewById(R.id.member);//个数
+                holder.shop_sfk = (TextView) convertView.findViewById(R.id.shop_sfk);//个数
+
+                holder.shop_kf = (TextView) convertView.findViewById(R.id.shop_kf);
+                holder.my_cancel = (TextView) convertView.findViewById(R.id.my_cancel);
+                holder.shop_ok = (TextView) convertView.findViewById(R.id.shop_ok);
+                holder.shop_sfko = (RelativeLayout) convertView.findViewById(R.id.shop_sfko);
+
                 convertView.setTag(holder);
             }else{
                 holder = (viewHolder1) convertView.getTag();
             }
 
-            holder.my_by.setText(httq.get(position).getOConsumerName());
+ /*           holder.my_by.setText(httq.get(position).getOConsumerName());
             holder.wait.setText(httq.get(position).getOrderType()+"");
+
 //            holder.my_minefor.setText(yj);
+
             holder.my_car_number.setText(httq.get(position).getBookCode());
+            holder.shop_map.setVisibility(View.GONE);*/
+
+
+
+
+            int orderType = httq.get(position).getOrderType();//订单类型
+            switch (orderType)
+            {
+                case 1:
+                    holder.my_by.setText("上门保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    holder.shop_sfko.setVisibility(View.GONE);
+                    holder.shop_kf .setVisibility(View.INVISIBLE);
+
+                    //holder.shop_kf .setText("取消预约");
+                    holder.my_cancel .setText("联系客服");
+                    holder.shop_ok.setText("确认付款");
+                   /* holder.my_car_number.setText(View.VISIBLE);
+                   holder.my_car_number.setText(hp.get(position).getBookCarNum());*/
+                    //确认付款
+                    holder.shop_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent t=new Intent(My_Indext.this,My_Shop_Pay.class);
+                            startActivity(t);
+                        }
+                    });
+                    break;
+                case 2:
+                    holder.my_by.setText("到店保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    break;
+                case 3:
+
+                    String aa = "http://192.168.0.119";
+                    holder.my_by.setText("商城购物");
+                    holder.my_car_number.setVisibility(View.GONE);
+                    holder.icon_right.setImageResource(R.mipmap.icon_mai_bottom_1);
+                    utils2.display(holder.shop_listview_item,aa+httq.get(position).getVC_Url());
+                    holder.headline.setText(httq.get(position).getVC_Name());
+                    holder.money.setText(httq.get(position).getOSfJe());//总价
+                    holder.member.setText(httq.get(position).getCmtyNumber()+"");//个数
+                    holder.shop_sfk.setText(httq.get(position).getOSfJe());//实付款
+                    if(3==orderType)
+                    {
+                        holder.shop_kf .setText("取消");
+                        holder.my_cancel .setText("联系客服");
+                        holder.shop_ok.setText("确认付款");
+                        //确认付款
+                        holder.shop_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent t=new Intent(My_Indext.this,My_Shop_Pay.class);
+                                startActivity(t);
+                            }
+                        });
+                    }
+                    break;
+            }
+
+            int OrderStatus = httq.get(position).getOrderStatus();
+            switch (OrderStatus)
+            {
+                case 0:
+                    holder.OrderStatus.setText("取消");
+                    break;
+                case 1:
+                    holder.OrderStatus.setText("待付款");
+                    break;
+                case 2:
+                    holder.OrderStatus.setText("待收货");
+                    break;
+                case 3:
+                    holder.OrderStatus.setText("待评价");
+                    break;
+                case 4:
+                    holder.OrderStatus.setText("退货审核中");
+                    break;
+                case 5:
+                    holder.OrderStatus.setText("退货结束");
+                    break;
+                case 6:
+                    holder.OrderStatus.setText("完成");
+                    break;
+
+                case 100:
+                    holder.OrderStatus.setText("待保养");
+                    break;
+            }
+
+
+
+
+
+
+
 
             return convertView;
         }
@@ -541,7 +954,7 @@ public class My_Indext extends MTFBaseActivity {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return htt.size();
+            return htt == null ? 0 : htt.size();
         }
 
         @Override
@@ -564,19 +977,81 @@ public class My_Indext extends MTFBaseActivity {
                 convertView = View.inflate(My_Indext.this, R.layout.shop_qborder, null);//标题
                 holder = new viewHolder1();
                 holder.my_by = (TextView) convertView.findViewById(R.id.my_by);//上门保养
-                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待
+                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待保养
                 holder.my_minefor = (TextView) convertView.findViewById(R.id.my_minefor);//DATA
                 holder.my_car_number = (TextView) convertView.findViewById(R.id.my_car_number);//渝A888
+                holder.day = (TextView) convertView.findViewById(R.id.shop_day);//时间
+                holder.OrderStatus = (TextView) convertView.findViewById(R.id.wait);//代付款等
+                holder.icon_right = (ImageView) convertView.findViewById(R.id.shop_jt);//箭头向下
+                holder.shop_listview_item = (ImageView) convertView.findViewById(R.id.shop_listview_item);//图
+                holder.shop_map = (RelativeLayout) convertView.findViewById(R.id.shop_map);//是否显示图
+                holder.headline = (TextView) convertView.findViewById(R.id.headline);//标题
+                holder.money = (TextView) convertView.findViewById(R.id.money);//总价
+                holder.member = (TextView) convertView.findViewById(R.id.member);//个数
+                holder.shop_sfk = (TextView) convertView.findViewById(R.id.shop_sfk);//个数
+
+                holder.shop_kf = (TextView) convertView.findViewById(R.id.shop_kf);
+                holder.my_cancel = (TextView) convertView.findViewById(R.id.my_cancel);
+                holder.shop_ok = (TextView) convertView.findViewById(R.id.shop_ok);
+                holder.shop_sfko = (RelativeLayout) convertView.findViewById(R.id.shop_sfko);
+
                 convertView.setTag(holder);
             }else{
                 holder = (viewHolder1) convertView.getTag();
             }
 
-            holder.my_by.setText(htt.get(position).getOConsumerName());
-            holder.wait.setText(htt.get(position).getOrderType()+"");
-//            holder.my_minefor.setText(yj);
-            holder.my_car_number.setText(htt.get(position).getBookCode());
+            int orderType = htt.get(position).getOrderType();
+            switch (orderType)
+            {
+                case 1:
+                    holder.my_by.setText("上门保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    holder.shop_sfko.setVisibility(View.GONE);
+                    holder.shop_kf .setVisibility(View.INVISIBLE);
+                    holder.shop_ok .setVisibility(View.VISIBLE);
 
+                    holder.my_cancel .setText("取消预约");
+
+                    holder.shop_ok .setText("联系客服");
+                  /*  holder.my_car_number.setText(View.VISIBLE);
+                   holder.my_car_number.setText(hp.get(position).getBookCarNum());*/
+                    break;
+
+            }
+
+            int OrderStatus = htt.get(position).getOrderStatus();
+            switch (OrderStatus)
+            {
+                case 0:
+                    holder.OrderStatus.setText("取消");
+                    break;
+                case 1:
+                    holder.OrderStatus.setText("待付款");
+                    break;
+                case 2:
+                    holder.OrderStatus.setText("待收货");
+                    break;
+                case 3:
+                    holder.OrderStatus.setText("待评价");
+                    break;
+                case 4:
+                    holder.OrderStatus.setText("退货审核中");
+                    break;
+                case 5:
+                    holder.OrderStatus.setText("退货结束");
+                    break;
+                case 6:
+                    holder.OrderStatus.setText("完成");
+                    break;
+
+                case 100:
+                    holder.OrderStatus.setText("待保养");
+                    break;
+            }
+
+
+
+            holder.day.setText(htt.get(position).getCreationTime());
 
 
 
@@ -636,6 +1111,42 @@ public class My_Indext extends MTFBaseActivity {
 
     }
 
+    class Nul extends BaseAdapter
+    {
+
+        public Nul()
+        {
+            utils2 = new BitmapUtils(My_Indext.this);
+        }
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return hp.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+
+            return convertView;
+        }
+    }
+
+
+
     class goodrq extends BaseAdapter
     {
 
@@ -647,7 +1158,7 @@ public class My_Indext extends MTFBaseActivity {
         public int getCount() {
             // TODO Auto-generated method stub
 
-            return hp.size();
+            return hp == null ? 0 : hp.size();
         }
 
         @Override
@@ -670,18 +1181,138 @@ public class My_Indext extends MTFBaseActivity {
                 convertView = View.inflate(My_Indext.this, R.layout.shop_qborder, null);//标题
                 holder = new viewHolder1();
                 holder.my_by = (TextView) convertView.findViewById(R.id.my_by);//上门保养
-                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待
+                holder.wait = (TextView) convertView.findViewById(R.id.wait);//等待保养
                 holder.my_minefor = (TextView) convertView.findViewById(R.id.my_minefor);//DATA
                 holder.my_car_number = (TextView) convertView.findViewById(R.id.my_car_number);//渝A888
+                holder.day = (TextView) convertView.findViewById(R.id.shop_day);//时间
+                holder.OrderStatus = (TextView) convertView.findViewById(R.id.wait);//代付款等
+                holder.icon_right = (ImageView) convertView.findViewById(R.id.shop_jt);//箭头向下
+                holder.shop_listview_item = (ImageView) convertView.findViewById(R.id.shop_listview_item);//图
+                holder.shop_map = (RelativeLayout) convertView.findViewById(R.id.shop_map);//是否显示图
+                holder.headline = (TextView) convertView.findViewById(R.id.headline);//标题
+                holder.money = (TextView) convertView.findViewById(R.id.money);//总价
+                holder.member = (TextView) convertView.findViewById(R.id.member);//个数
+                holder.shop_sfk = (TextView) convertView.findViewById(R.id.shop_sfk);//个数
+
+                holder.shop_kf = (TextView) convertView.findViewById(R.id.shop_kf);
+                holder.my_cancel = (TextView) convertView.findViewById(R.id.my_cancel);
+                holder.shop_ok = (TextView) convertView.findViewById(R.id.shop_ok);
+                holder.shop_sfko = (RelativeLayout) convertView.findViewById(R.id.shop_sfko);
+             //   holder.ycx = (TextView) convertView.findViewById(R.id.ycx);
                 convertView.setTag(holder);
             }else{
                 holder = (viewHolder1) convertView.getTag();
             }
-            holder.my_by.setText(hp.get(position).getOConsumerName());
-            holder.wait.setText(hp.get(position).getOrderType()+"");
-          //  holder.my_minefor.setText(yj);
-            holder.my_car_number.setText(hp.get(position).getBookCode());
 
+         int    orderType = hp.get(position).getOrderType();
+            switch (orderType)
+            {
+                case 1:
+                    holder.my_by.setText("上门保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    holder.shop_sfko.setVisibility(View.GONE);
+                    holder.shop_kf .setVisibility(View.VISIBLE);
+                    holder.shop_kf .setText("取消预约");
+                    holder.my_cancel .setText("联系客服");
+                    holder.shop_ok.setText("确认付款");
+                   /* holder.my_car_number.setText(View.VISIBLE);
+                   holder.my_car_number.setText(hp.get(position).getBookCarNum());*/
+                    //取消预约
+                    holder.shop_kf.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(My_Indext.this,"暂时无法取消预约",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+//确认付款
+                    holder.shop_ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent t=new Intent(My_Indext.this,My_Shop_Pay.class);
+                            startActivity(t);
+                        }
+                    });
+                    break;
+                case 2:
+                    holder.my_by.setText("到店保养");
+                    holder.shop_map.setVisibility(View.GONE);
+                    break;
+                case 3:
+
+                    String aa = "http://192.168.0.119";
+                    holder.my_by.setText("商城购物");
+                    holder.my_car_number.setVisibility(View.GONE);
+                    holder.icon_right.setImageResource(R.mipmap.icon_mai_bottom_1);
+                    utils2.display(holder.shop_listview_item,aa+hp.get(position).getVC_Url());
+                    holder.headline.setText(hp.get(position).getVC_Name());
+                    holder.money.setText(hp.get(position).getOSfJe());//总价
+                    holder.member.setText(hp.get(position).getCmtyNumber()+"");//个数
+                    holder.shop_sfk.setText(hp.get(position).getOSfJe());//实付款
+                   // holder.ycx.setVisibility(View.VISIBLE);//线显现
+                    if(3==orderType)
+                    {
+                        holder.shop_kf .setText("退货");
+                        holder.my_cancel .setText("联系客服");
+                        holder.shop_ok.setText("评价");
+
+                        //退货
+                        holder.shop_kf.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent t=new Intent(My_Indext.this,My_Tuihuo.class);
+                                startActivity(t);
+                            }
+                        });
+//评价
+                        holder.shop_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent t=new Intent(My_Indext.this,shop_Sh.class);
+                                startActivity(t);
+                            }
+                        });
+                    }
+                    break;
+            }
+
+            int OrderStatus = hp.get(position).getOrderStatus();
+            switch (orderType)
+            {
+                case 0:
+                    holder.OrderStatus.setText("取消");
+                    break;
+                case 1:
+                    holder.OrderStatus.setText("待付款");
+                    break;
+                case 2:
+                    holder.OrderStatus.setText("待收货");
+                    break;
+                case 3:
+                    holder.OrderStatus.setText("待评价");
+                    break;
+                case 4:
+                    holder.OrderStatus.setText("退货审核中");
+                    break;
+                case 5:
+                    holder.OrderStatus.setText("退货结束");
+                    break;
+                case 6:
+                    holder.OrderStatus.setText("完成");
+                    break;
+
+                case 100:
+                    holder.OrderStatus.setText("待保养");
+                    break;
+            }
+
+
+
+
+   /*        if("1".equals(orderType)) {
+                holder.wait.setText("");
+            }*/
+
+            holder.day.setText(hp.get(position).getCreationTime());
             return convertView;
         }
     }
@@ -692,6 +1323,25 @@ public class My_Indext extends MTFBaseActivity {
         TextView wait;
         TextView my_by;
         TextView my_car_number;
+        TextView day;
+        TextView OrderStatus;
+        ImageView icon_right;
+        RelativeLayout shop_map;
+        RelativeLayout shop_sfko;
+        ImageView shop_listview_item;
+        TextView headline;
+        TextView money;
+        TextView member;
+        TextView shop_sfk;
+
+        TextView shop_kf;
+        TextView my_cancel;
+        TextView shop_ok;
+        //TextView ycx;
+
+
+
+
 
 
     }

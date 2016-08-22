@@ -27,6 +27,7 @@
         android:layout_height="80dp">
 
         <ImageView
+            android:id="@+id/shop_rentou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_mine_user2"
@@ -99,7 +100,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mine_editor"
+            android:src="@mipmap/icon_mai_order"
             android:layout_marginTop="10dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
@@ -110,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的订单"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
             android:textColor="#292929"
@@ -128,6 +129,7 @@
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/my_md"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
 
@@ -142,35 +144,34 @@
             android:layout_centerHorizontal="true"
             />
 
-        <ImageView
+<!--        <ImageView
 
             android:id="@+id/icon_mine_reddian"
-            android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@mipmap/icon_mine_reddian"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:visibility="gone"
-            />
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="40dp"
 
-        <TextView
+            />-->
+
+       <!-- <TextView
             android:id="@+id/shop_wd"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:layout_marginLeft="45dp"
-            android:layout_marginTop="11dp"
-            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:textSize="10sp"
             android:textColor="#ffffff"
 
 
-            />
+            />-->
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的订单"
+            android:text="全部"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="4dp"
             android:textSize="11sp"
@@ -181,19 +182,187 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/my_dfk"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/my_minefor4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_mine_topay"
+                android:layout_marginTop="17dp"
+                android:layout_centerHorizontal="true"
+
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待付款"
+
+                android:layout_marginTop="4dp"
+                android:textSize="11sp"
+                android:textColor="#292929"
+                android:layout_below="@id/my_minefor4"
+                android:layout_centerHorizontal="true"
+                />
+
+           <!-- <ImageView
+                android:id="@+id/shop_pj"
+
+                android:layout_width="100dp"
+                android:layout_height="22dp"
+                android:src="@mipmap/icon_mine_reddian"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+
+                />-->
+
+            <!--<TextView
+                android:id="@+id/shop_fg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginLeft="42dp"
+                android:layout_marginTop="15dp"
+                android:textSize="10sp"
+                android:textColor="#ffffff"
+
+
+
+                />-->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/my_dsh"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+
+            >
+            <ImageView
+                android:id="@+id/my_minefor3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_mine_togoods"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待收货"
+
+                android:layout_marginTop="5dp"
+                android:textSize="11sp"
+                android:textColor="#292929"
+                android:layout_below="@id/my_minefor3"
+                android:layout_centerHorizontal="true"
+                />
+
+
+           <!-- <ImageView
+                android:id="@+id/shop_dfk"
+
+                android:layout_width="100dp"
+                android:layout_height="22dp"
+                android:src="@mipmap/icon_mine_reddian"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+
+                />
+
+            <TextView
+
+                android:id="@+id/shop_fk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="15dp"
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+
+                />-->
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/my_pingjia"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            >
+
+            <!--<ImageView
+                android:id="@+id/shop_dsh"
+
+                android:layout_width="100dp"
+                android:layout_height="22dp"
+                android:src="@mipmap/icon_mine_reddian"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="30dp"
+
+                />
+
+            <TextView
+                android:id="@+id/shop_ye"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginLeft="42dp"
+                android:layout_marginTop="16dp"
+                android:textSize="10sp"
+                android:textColor="#FFFFFF"
+
+
+                />
+-->
+            <ImageView
+
+                android:id="@+id/my_minefor5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_mine_toeva"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待评价"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:textSize="11sp"
+                android:textColor="#292929"
+                android:layout_below="@id/my_minefor5"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/my_aichezi"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
 
             >
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/icon_by"
             android:layout_width="100dp"
-            android:layout_height="20dp"
+            android:layout_height="22dp"
             android:src="@mipmap/icon_mine_reddian"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:visibility="gone"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="35dp"
+
             />
 
         <TextView
@@ -202,15 +371,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="12dp"
+            android:textSize="10sp"
             android:textColor="#ffffff"
-
-
-
             />
-
+-->
 
 
         <ImageView
@@ -226,7 +392,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="待保养"
+            android:text="爱车保养"
             android:layout_marginTop="4dp"
             android:textSize="11sp"
             android:textColor="#292929"
@@ -236,168 +402,10 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-
-            >
-        <ImageView
-            android:id="@+id/my_minefor3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mine_togoods"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"
-
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="待收货"
-
-            android:layout_marginTop="5dp"
-            android:textSize="11sp"
-            android:textColor="#292929"
-            android:layout_below="@id/my_minefor3"
-            android:layout_centerHorizontal="true"
-            />
-
-
-        <ImageView
-            android:id="@+id/shop_dfk"
-
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:src="@mipmap/icon_mine_reddian"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:visibility="gone"
-            />
-
-        <TextView
-
-            android:id="@+id/shop_fk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="11dp"
-            android:textSize="15sp"
-            android:textColor="#FFFFFF"
-
-            />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-
-            >
-
-        <ImageView
-            android:id="@+id/my_minefor4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mine_topay"
-            android:layout_marginTop="17dp"
-            android:layout_centerHorizontal="true"
-
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="待付款"
-
-            android:layout_marginTop="4dp"
-            android:textSize="11sp"
-            android:textColor="#292929"
-            android:layout_below="@id/my_minefor4"
-            android:layout_centerHorizontal="true"
-            />
-
-        <ImageView
-            android:id="@+id/shop_pj"
-
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:src="@mipmap/icon_mine_reddian"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:visibility="gone"
-            />
-
-        <TextView
-            android:id="@+id/shop_fg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:layout_marginLeft="46dp"
-            android:layout_marginTop="11dp"
-            android:textSize="15sp"
-            android:textColor="#ffffff"
 
 
 
-            />
 
-          </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            >
-
-            <ImageView
-                android:id="@+id/shop_dsh"
-                android:visibility="gone"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/icon_mine_reddian"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="30dp"
-
-                />
-
-            <TextView
-                android:id="@+id/shop_ye"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:layout_marginLeft="47dp"
-                android:layout_marginTop="11dp"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
-
-
-                />
-
-        <ImageView
-
-            android:id="@+id/my_minefor5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_mine_toeva"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-
-
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="待评价"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="4dp"
-            android:textSize="11sp"
-            android:textColor="#292929"
-            android:layout_below="@id/my_minefor5"
-            />
-        </RelativeLayout>
 
     </LinearLayout>
     <ImageView
@@ -434,7 +442,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="五月优惠"
+            android:text="暂无"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:textSize="13sp"

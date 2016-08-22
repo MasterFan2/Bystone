@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -23,7 +24,9 @@ import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
+import com.proton.library.widget.MTFTitleView;
 
+import butterknife.Bind;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +38,13 @@ import retrofit2.Response;
  */
 @MTFActivityFeature(layout = R.layout.addnewaddress)
 public class App extends MTFBaseActivity {
+    @Bind(R.id.titleView)
+    MTFTitleView titleView;
+    @Bind(R.id.shop_moren2)
+    RelativeLayout shop_moren2;
+    @Bind(R.id.shop_deladdress)
+    RelativeLayout shop_deladdress;
+
 
     EditText shopshouhuoren;
     EditText shopphone;
@@ -75,6 +85,9 @@ public class App extends MTFBaseActivity {
 
         if(bj.equals("bj"))//编辑收货地址
         {
+            titleView.setTitleText("编辑地址");
+            shop_moren2.setVisibility(View.GONE);
+            shop_deladdress.setVisibility(View.VISIBLE);
             shopshouhuoren.setText(Ad_Name);
             shopphone.setText(phone);
             shopregion.setText(Ad_Address);

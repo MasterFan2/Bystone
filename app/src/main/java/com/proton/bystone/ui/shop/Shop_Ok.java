@@ -3,7 +3,9 @@ package com.proton.bystone.ui.shop;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -55,14 +57,14 @@ public class Shop_Ok extends MTFBaseActivity {
     String aa="http://192.168.0.119";
     TextView shop_address;
     Button  shop_pay;
-    Button  byn;
-    Button  byt;
+    ImageView  byn;
+    ImageView  byt;
 
     EditText   nb;
     TextView  shop_money;
     TextView viewById;
     TextView shop_mane;
-    Switch   shop_switch;
+    SwitchCompat shop_switch;
     double dv;
     String s;
     TextView shop_jinbi;
@@ -128,13 +130,15 @@ public class Shop_Ok extends MTFBaseActivity {
         shop_tv.setText(vcparams);//头
         shop_by.setText(shop_prompt);//让你的爱车
         member2.setText(shop_mone);//原价
+        member2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //删除线
         shop_money2.setText(shop_member);//会员
         BitmapUtils  bit=new BitmapUtils(Shop_Ok.this);
         bit.display(shop_listview_item,aa+img);
 
+
        shop_beizhu  =(EditText)findViewById(R.id.shop_beizhu);//订单备注
-        byn=(Button)findViewById(R.id.shop_jian);//监听减号
-        byt=(Button)findViewById(R.id.shop_jia);//监听加号
+        byn=(ImageView)findViewById(R.id.shop_jian);//监听减号
+        byt=(ImageView)findViewById(R.id.shop_jia);//监听加号
         nb=(EditText)findViewById(R.id.shop_nb);
 
         shop_money=(TextView)findViewById(R.id.shop_nb);
@@ -144,7 +148,7 @@ public class Shop_Ok extends MTFBaseActivity {
 
         shop_mane= (TextView) findViewById(R.id.shop_money7788);//付款
 
-        shop_switch= (Switch) findViewById(R.id.shop_switch);//shop_switch
+        shop_switch= (SwitchCompat) findViewById(R.id.shop_switch);//shop_switch
 
         shop_heji  = (TextView) findViewById(R.id.shop_heji);//合计
 

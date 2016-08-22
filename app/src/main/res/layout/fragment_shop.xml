@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.proton.bystone.ui.main.tab.ShopFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.proton.bystone.ui.main.tab.ShopFragment"
+    android:background="#ffffff">
 
     <!-- TODO: Update blank fragment layout -->
    <LinearLayout
@@ -73,11 +75,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/search_header" />
+        <com.proton.library.widget.MTFTitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:leftButtonHide="true"
+            app:titleBackground="@color/mtf_gray_900"
+            app:titleText="商城"
+            app:rightButtonHide="true"
+            app:rightButtonIcon="@mipmap/icon_mine_cart"
+
+            />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="#ebebeb" />
 
         <ListView

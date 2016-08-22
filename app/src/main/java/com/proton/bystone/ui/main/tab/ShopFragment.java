@@ -3,6 +3,7 @@ package com.proton.bystone.ui.main.tab;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -56,6 +57,7 @@ import com.proton.bystone.ui.shop.Shop_Sort;
 import com.proton.bystone.ui.view.RefreshListView;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
+import com.proton.library.widget.CircleIndicator;
 import com.proton.library.zxing.activity.CaptureActivity;
 
 import org.apache.http.entity.StringEntity;
@@ -100,6 +102,8 @@ public class ShopFragment extends MTFBaseFragment {
     @Bind(R.id.home_btn)
     Button home_btn;//黄泥磅
 
+    Handler   handler;
+
     @Bind(R.id.home_search)
     EditText home_search;//搜索
     String s;
@@ -131,12 +135,13 @@ public class ShopFragment extends MTFBaseFragment {
 
     String ps_code;
     Intent t;
-    @Bind(R.id.search_header_search_layout)
-    LinearLayout searchLayout;
-    @Bind(R.id.search_header_scan_img)
+    CircleIndicator   view_pager_indicator;
+ /*   @Bind(R.id.search_header_search_layout)
+    LinearLayout searchLayout;*/
+/*    @Bind(R.id.search_header_scan_img)
     ImageView scanImg;
     @Bind(R.id.search_header_city_txt)
-    TextView cityTxt;
+    TextView cityTxt;*/
 
 
 
@@ -153,10 +158,12 @@ public class ShopFragment extends MTFBaseFragment {
         View headerView = View.inflate(ShopFragment.this.getActivity(), R.layout.first_layout2,
                 null);
         viewpager = (ViewPager) headerView.findViewById(R.id.shop_vPager);
+        view_pager_indicator=(CircleIndicator) headerView.findViewById(R.id.view_pager_indicator);
         //横向gridView
         gridView=(GridView)headerView.findViewById(R.id.shop_gridView);
         //纵向gridView
         gridView2=(GridView)headerView.findViewById(R.id.shop_gridView2);
+
 
 
         viewpa();
@@ -212,15 +219,17 @@ public class ShopFragment extends MTFBaseFragment {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position,
                                     long arg3) {
                 // TODO Auto-generated method stub
-                vccode = database.get(position).getVC_Code();
-                Intent t= new Intent(getActivity(),Shop_Detail.class);
+                if(database!=null&&database.size()>0) {
+                    vccode = database.get(position).getVC_Code();
+                    Intent t = new Intent(getActivity(), Shop_Detail.class);
 
 //                Bundle mBundle = new Bundle();
 //                mBundle.putString("list",listevent+"");
-               t.putExtra("vccode",vccode);//商品编号
+                    t.putExtra("vccode", vccode);//商品编号
 //                mBundle.putString("vccode",vccode);
 //                t.putExtras(mBundle);
-                startActivity(t);
+                    startActivity(t);
+                }
 
             }
 
@@ -245,7 +254,7 @@ public class ShopFragment extends MTFBaseFragment {
             }
         });*/
 
-
+/*
         //黄泥磅
         cityTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +272,7 @@ public class ShopFragment extends MTFBaseFragment {
                 animStartForResult(1000,Search_service.class);
 
             }
-        });
+        });*/
 
 
 
@@ -428,13 +437,41 @@ public class ShopFragment extends MTFBaseFragment {
 
                 }
 
+                viewpager.setAdapter(new MyPagerAdapter());
+                view_pager_indicator.setViewPager(viewpager);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
 
-            viewpager.setAdapter(new MyPagerAdapter());
+
+
+            view_pager_indicator.onPageSelected(0);// 让指示器重新定位到第一个点
+
+            // 自动轮播条显示
+            if (handler == null) {
+                handler = new Handler() {
+                    public void handleMessage(android.os.Message msg) {
+                        int currentItem = viewpager.getCurrentItem();
+
+                        if (currentItem < list.size()-1) {
+                            currentItem++;
+                        } else {
+                            currentItem = 0;
+                        }
+
+                        viewpager.setCurrentItem(currentItem);// 切换到下一个页面
+                        handler.sendEmptyMessageDelayed(0, 4000);// 继续延时3秒发消息,
+                        // 形成循环
+                    };
+                };
+
+                handler.sendEmptyMessageDelayed(0, 4000);// 延时3秒后发消息
+            }
+
+
         }
 
 
@@ -535,9 +572,11 @@ public class ShopFragment extends MTFBaseFragment {
                 holder.print.setText("1024");
                 //员价
                 holder.member.setText(database.get(position).getN_FHYJ());
+
                 //会员价
                 holder.money.setText(database.get(position).getN_HYJ());
-/* holder.prompt.setText(database.get(position).getVC_Rule());*/
+                holder.money.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //删除线
+
 
                 utils3.display(holder.image2,aa+database.get(position).getVC_Url());
                 // Picasso.with(context).load(aa+s).into(tuanti);
@@ -589,7 +628,7 @@ public class ShopFragment extends MTFBaseFragment {
 
                 String content = response.body().getContent();
 
-              //  Log.e("能否32222332获取......",data+"");
+
                 htpjiexi(data);
             }
 
@@ -743,7 +782,7 @@ public class ShopFragment extends MTFBaseFragment {
         public int getCount() {
             // TODO Auto-generated method stub
 
-           return  lis == null ? 0 : lis.size();
+           return  3;
         }
 
         @Override
@@ -780,15 +819,16 @@ public class ShopFragment extends MTFBaseFragment {
             }
             //动态java代码设置图片
 
-            String aa = "http://192.168.0.119";
-            holder.headline.setText(database.get(position).getTitle());
-            holder.print.setText(database.get(position).getN_HYJ());
+            if(database!=null&&database.size()>0) {
+                String aa = "http://192.168.0.119";
+                /*holder.headline.setText(database.get(position).getTitle());
+                holder.print.setText(database.get(position).getN_HYJ());*/
            /* holder.prompt.setText("你的爱车.....");*/
-            if(list2!=null&&list2.size()>0) {
-                utils2.display(holder.image2, aa + list2.get(position));
-                // Picasso.with(context).load(aa+s).into(tuanti);
+                if (list2 != null && list2.size() > 0) {
+                    utils2.display(holder.image2, aa + list2.get(position));
+                    // Picasso.with(context).load(aa+s).into(tuanti);
+                }
             }
-
 
             return convertView;
         }
@@ -811,23 +851,23 @@ public class ShopFragment extends MTFBaseFragment {
         LocationManager.getInstance().startLocation();
     }
 
-    @OnClick(R.id.search_header_scan_img)
+  /*  @OnClick(R.id.search_header_scan_img)
     public void goScan(View view) {
         animStart(CaptureActivity.class);
-    }
+    }*/
 
 
     @Override
     public void onResume() {
         super.onResume();
 
-        SharedPreferences sp = context.getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
+       /* SharedPreferences sp = context.getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
         s = sp.getString("s","");
         if(!TextUtils.isEmpty(s))
         {
             cityTxt.setText(s);
         }
-        Log.e("sssss",s);
+        Log.e("sssss",s);*/
     }
 
 }

@@ -37,7 +37,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:background="#ebebeb" />
 
                 <RelativeLayout
@@ -55,6 +55,7 @@
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         android:textStyle="bold"
+                        android:maxLines="1"
 
 
                         />
@@ -64,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="60dp"
                         android:text="已售出"
                         android:textColor="@color/somber"
                         android:textSize="14sp"
@@ -75,7 +76,7 @@
                         android:id="@+id/shop_print"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="60dp"
                         android:layout_toRightOf="@id/been_sold"
                         android:text="2330件"
                         android:textColor="@color/somber"
@@ -98,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="130dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="40dp"
                         android:text="原价￥"
                         android:textColor="@color/zift"
                         android:textSize="13sp" />
@@ -107,7 +108,7 @@
                         android:id="@+id/shop_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="40dp"
                         android:layout_toRightOf="@id/rmb"
                         android:text="430.00"
                         android:textColor="@color/zift"
@@ -119,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="40dp"
                         android:text="会员价￥"
                         android:textColor="#77a6f2"
                         android:textSize="13sp"
@@ -131,7 +132,7 @@
                         android:id="@+id/shop_member"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="40dp"
                         android:layout_toRightOf="@id/membership"
                         android:text="330.00"
                         android:textColor="#77a6f2"
@@ -142,12 +143,7 @@
 
                 </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_mai_line"
-
-                    />
+                <include layout="@layout/tendp" />-->
 
 
                 <RelativeLayout
@@ -164,7 +160,7 @@
                         android:text="基本参数"
                         android:textColor="#292929"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -174,26 +170,26 @@
 
                     <ImageView
                         android:id="@+id/shop_cs"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:src="@mipmap/icon_right"
+                        android:src="@mipmap/icon_menu"
 
                         />
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:background="#ebebeb" />
 
                 <RelativeLayout
                     android:id="@+id/shop_canshu"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:visibility="gone">
+                    >
 
                     <TextView
                         android:id="@+id/shop_model"
@@ -346,10 +342,7 @@
                         android:textSize="12sp" />
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#ebebeb" />
+                <include layout="@layout/tendp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -414,10 +407,7 @@
                 </RelativeLayout>
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#ebebeb" />
+
 
                 <RelativeLayout
                     android:id="@+id/shop_js"
@@ -444,8 +434,8 @@
 
                     <ImageView
                         android:id="@+id/shop_jj"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
@@ -472,10 +462,7 @@
 
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#ebebeb" />
+                <include layout="@layout/tendp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -524,7 +511,7 @@
                         android:src="@mipmap/icon_mai_star_1" />
 
 
-                    <TextView
+<!--                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -534,7 +521,7 @@
                         android:textColor="#292929"
                         android:textSize="15sp"
 
-                        />
+                        />-->
 
                     <TextView
                         android:layout_width="match_parent"
@@ -563,10 +550,10 @@
 
                 </RelativeLayout>
 
-                <ImageView
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/icon_mai_line" />
+                    android:layout_height="1dp"
+                    android:background="#ebebeb" />
 
 
                 <RelativeLayout
@@ -661,11 +648,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#ebebeb" />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp">
@@ -719,6 +701,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#ff7043"
+                android:textColor="#ffffff"
                 android:text="加入购物车" />
 
             <Button
@@ -726,8 +709,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="5dp"
+
                 android:background="#ff4343"
+                android:textColor="#ffffff"
                 android:text="立即购买" />
         </LinearLayout>
     </RelativeLayout>

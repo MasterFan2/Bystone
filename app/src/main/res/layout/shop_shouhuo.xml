@@ -39,7 +39,7 @@
         </RelativeLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="@color/somber"
 
         />
@@ -54,7 +54,7 @@
             android:text="一般"
             android:background="@drawable/yuanjiao3"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             />
 
         <Button
@@ -63,7 +63,7 @@
             android:text="满意"
             android:background="@drawable/yuanjiao4"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:textColor="#ffff"
 
             />
@@ -74,44 +74,63 @@
             android:text="不满意"
             android:background="@drawable/yuanjiao3"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             />
 
 
         </LinearLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icon_mai_line"
-        android:layout_marginTop="20dp"
-        />
+        <include layout="@layout/tendp" />
 
-    <EditText
+<!--    <EditText
         android:layout_width="350dp"
         android:layout_height="125dp"
         android:background="@color/somber"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
-        />
+        />-->
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/icon_mai_line"
-        android:layout_marginTop="20dp"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退货原因"
+            android:textColor="#272727"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <EditText
+            android:id="@+id/shop_code"
+            android:layout_width="330dp"
+            android:layout_height="100dp"
+            android:enabled="true"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:minLines="8"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:background="@android:drawable/edit_text"
+            android:hint="你想说点什么？"
+            android:textSize="15sp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+
+            />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/icon_mine_pluspic"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
 
             />
         <TextView

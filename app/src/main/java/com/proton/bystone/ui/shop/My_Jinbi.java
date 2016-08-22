@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
@@ -23,6 +24,7 @@ import com.proton.bystone.net.ParamsBuilder;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -52,10 +54,15 @@ public class My_Jinbi extends MTFBaseActivity {
     @Bind(R.id.my_tc)
     TextView my_tc;
 
+
     String mb_code;
     @Override
     public void initialize(Bundle savedInstanceState) {
          data2();
+        graph();
+
+
+
     }
 
     @Override
@@ -124,6 +131,48 @@ public class My_Jinbi extends MTFBaseActivity {
     @butterknife.OnClick(R.id.m_title_left_btn)
     public void back(View view) {
         animFinish();
+    }
+
+
+    //获取曲线图数据
+
+    public void graph()
+    {
+        String mbcode = getIntent().getStringExtra("mbcode");
+
+        // Modified_Pwd pwd=new Modified_Pwd(et2.getText().toString().trim(),et3.getText().toString().trim());
+        // Mb_Code  mb=new Mb_Code(mb_code);
+        RequestBody requestBody = new ParamsBuilder<>()
+                .key("pbevyvHkf1sFtyGL35gFfQ==")
+                .methodName("GetPointsBalance")
+                .gson(new Gson())
+                /*.noParams()*/
+                //.object(pwd)
+                .typeValue("string",/*mb_code*/"201605261656057265")//曲线图
+               /* .typeValue("string","958496")
+                .typeValue("int",2)*/
+                .build();
+//        ParamsBuilder<LoginParams> builder = new ParamsBuilder<LoginParams>().
+//                .key("")
+//                .build();
+
+        Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
+
+        call.enqueue(new Callback<BaseResp>() {
+            @Override
+            public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
+                String data = response.body().getData();
+                Log.e("曲线图",data);
+               /* jiexi2(data);*/
+            }
+
+            @Override
+            public void onFailure(Call<BaseResp> call, Throwable t) {
+                Log.e("111","失败");
+            }
+        });
+
+
     }
 
 }

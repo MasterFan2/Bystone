@@ -288,7 +288,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
                 @Override
                 public void onClick(View v) {
 
-                    new AlertDialog.Builder(Shop_Select_Address.this).setTitle("系统提示")
+                   /* new AlertDialog.Builder(Shop_Select_Address.this).setTitle("系统提示")
                             .setMessage("确定要重新编辑该地址嘛？")
                             .setPositiveButton("返回",new DialogInterface.OnClickListener() {//添加确定按钮
 
@@ -313,7 +313,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
                         public void onClick(DialogInterface dialog, int which) {//响应事件
 
                             // TODO Auto-generated method stub
-
+*/
 
                             id=list.get(position).getID();
 
@@ -340,11 +340,11 @@ public class Shop_Select_Address extends MTFBaseActivity {
 
                         }
 
-                    }).show();
+                 /*   }).show();*/
 
 
 
-                }
+               // }
             });
 
 
@@ -353,7 +353,7 @@ public class Shop_Select_Address extends MTFBaseActivity {
                 @Override
                 public void onClick(View v) {
 
-                    new AlertDialog.Builder(Shop_Select_Address.this).setTitle("系统提示")
+                    new AlertDialog.Builder(Shop_Select_Address.this).setTitle("温馨提示")
                             .setMessage("确定要删除该地址嘛？")
                             .setPositiveButton("返回",new DialogInterface.OnClickListener() {//添加确定按钮
                                 @Override

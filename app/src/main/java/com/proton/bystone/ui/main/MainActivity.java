@@ -1,8 +1,10 @@
 package com.proton.bystone.ui.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -176,9 +178,38 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
     }
 
 
-/*    public void tiao()
+    public void shopping()
     {
-        Intent t=new Intent(context,MeFragment.class);
-        startActivity(t);
-    }*/
+        index = 2;
+        imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+        imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
+        imageViews[2].setImageResource(R.mipmap.icon_tab_shop_sel);
+        imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
+        if (index != currentIndex) {
+            getSupportFragmentManager().beginTransaction()
+                    .hide(fragments[currentIndex])
+                    .show(fragments[index]).commit();
+            fragments[index].load();//加载数据
+            currentIndex = index;
+        }
+    }
+
+    public void baoyang()
+    {
+        index = 1;
+        imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+        imageViews[1].setImageResource(R.mipmap.icon_tab_maint_sel);
+        imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
+        imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
+        if (index != currentIndex) {
+            getSupportFragmentManager().beginTransaction()
+                    .hide(fragments[currentIndex])
+                    .show(fragments[index]).commit();
+            fragments[index].load();//加载数据
+            currentIndex = index;
+        }
+
+    }
+
+
 }

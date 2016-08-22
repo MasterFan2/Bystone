@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
     <com.proton.library.widget.MTFTitleView
         android:id="@+id/titleView"
@@ -24,8 +25,8 @@
             android:text="全部"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
-            android:textColor="#878787"
+            android:textSize="12sp"
+            android:textColor="#3c85ee"
             android:layout_centerVertical="true"
 
             />
@@ -42,13 +43,12 @@
             android:id="@+id/my_all2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="待付款"
+            android:text="待收货"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#878787"
             android:layout_centerVertical="true"
-
             />
         <TextView
             android:layout_width="1dp"
@@ -63,10 +63,10 @@
             android:id="@+id/my_all3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="待保养"
+            android:text="待付款"
             android:layout_marginLeft="75dp"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#878787"
             android:layout_centerVertical="true"
 
@@ -84,10 +84,10 @@
             android:id="@+id/my_all4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="待收货"
+            android:text="待评价"
             android:layout_marginLeft="230dp"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#878787"
             android:layout_centerVertical="true"
 
@@ -105,10 +105,10 @@
             android:id="@+id/my_all5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="待评价"
-            android:layout_marginLeft="310dp"
+            android:text="爱车保养"
+            android:layout_marginLeft="300dp"
             android:layout_marginTop="20dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="#878787"
             android:layout_centerVertical="true"
             />

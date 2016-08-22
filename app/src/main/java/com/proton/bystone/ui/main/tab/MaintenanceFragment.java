@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -97,6 +98,8 @@ public class MaintenanceFragment extends MTFBaseFragment {
 
     @Bind(R.id.home_maintain_img_txt_layout)
     LinearLayout imgTxtLayout;
+
+    Handler handler;
 
     //总套餐数据
 //    private ArrayList<List<CarCombo>> data = null;
@@ -316,6 +319,29 @@ public class MaintenanceFragment extends MTFBaseFragment {
                         }
                         viewPager.setAdapter(new MPagerAdapter(adverts));
                         indicator.setViewPager(viewPager);
+
+
+                        // 自动轮播条显示
+                        if (handler == null) {
+                            handler = new Handler() {
+                                public void handleMessage(android.os.Message msg) {
+                                    int currentItem = viewPager.getCurrentItem();
+
+                                    if (currentItem < 4) {
+                                        currentItem++;
+                                    } else {
+                                        currentItem = 0;
+                                    }
+
+                                    viewPager.setCurrentItem(currentItem);// 切换到下一个页面
+                                    handler.sendEmptyMessageDelayed(0, 4000);// 继续延时3秒发消息,
+                                    // 形成循环
+                                };
+                            };
+
+                            handler.sendEmptyMessageDelayed(0, 4000);// 延时3秒后发消息
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         L.e("JSONException>>>");

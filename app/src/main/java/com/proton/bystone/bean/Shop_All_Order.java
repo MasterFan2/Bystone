@@ -22,8 +22,48 @@ public class Shop_All_Order {
     private int OrderType;
     private Object PadctBrief;
     private String BookCarNum;
+    private String CreationTime;
+    private String VC_Url;
+    private String VC_Name;
+    private int OrderStatus;
+    private String OSfJe;
+    private int CmtyNumber;
+
+
 
     public Shop_All_Order() {
+    }
+
+    public String getOSfJe() {
+        return OSfJe;
+    }
+
+    public void setOSfJe(String OSfJe) {
+        this.OSfJe = OSfJe;
+    }
+
+    public int getCmtyNumber() {
+        return CmtyNumber;
+    }
+
+    public void setCmtyNumber(int cmtyNumber) {
+        CmtyNumber = cmtyNumber;
+    }
+
+    public String getVC_Name() {
+        return VC_Name;
+    }
+
+    public void setVC_Name(String VC_Name) {
+        this.VC_Name = VC_Name;
+    }
+
+    public int getOrderStatus() {
+        return OrderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        OrderStatus = orderStatus;
     }
 
     public String getOConsumerName() {
@@ -80,5 +120,21 @@ public class Shop_All_Order {
 
     public void setBookCarNum(String BookCarNum) {
         this.BookCarNum = BookCarNum;
+    }
+
+    public String getCreationTime() {
+        return CreationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        CreationTime = creationTime;
+    }
+
+    public String getVC_Url() {
+        return VC_Url;
+    }
+
+    public void setVC_Url(String VC_Url) {
+        this.VC_Url = VC_Url;
     }
 }

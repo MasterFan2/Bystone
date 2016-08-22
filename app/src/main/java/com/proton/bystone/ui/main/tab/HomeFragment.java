@@ -1,8 +1,11 @@
 package com.proton.bystone.ui.main.tab;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -13,11 +16,13 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,13 +55,16 @@ import com.proton.bystone.location.LocationManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.SendCallBack;
+import com.proton.bystone.ui.main.MainActivity;
 import com.proton.bystone.ui.main.tab.home.Homeserch;
 import com.proton.bystone.ui.main.tab.home.Search_service;
 import com.proton.bystone.ui.shop.Shop_Commodity;
 import com.proton.bystone.ui.shop.Shop_Detail;
 import com.proton.bystone.ui.shop.Shop_Sort;
+import com.proton.bystone.utils.L;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
+import com.proton.library.widget.CircleIndicator;
 import com.proton.library.zxing.activity.CaptureActivity;
 
 /*import org.apache.http.entity.StringEntity;*/
@@ -103,6 +111,8 @@ public class HomeFragment extends MTFBaseFragment {
     @Bind(R.id.lv)
     ListView listview;
     Shop_Fenlei tq;
+
+
 //    //搜索
 //    @Bind(R.id.search)
 //    EditText search;
@@ -138,6 +148,8 @@ public class HomeFragment extends MTFBaseFragment {
     TextView  home_ssd;
     TextView   home_byxc;
     ArrayList  <TextView>list3;
+    Handler   handler;
+    CircleIndicator   view_pager_indicator;
     List<Home_Weather.ResultsBean.WeatherDataBean> weather_data;
 
     /**
@@ -163,12 +175,35 @@ public class HomeFragment extends MTFBaseFragment {
         View headerView = View.inflate(HomeFragment.this.getActivity(), R.layout.first_layout,
                 null);
         vp = (ViewPager) headerView.findViewById(R.id.vPager);
+        view_pager_indicator=(CircleIndicator) headerView.findViewById(R.id.view_pager_indicator);
+
         but = (Button) headerView.findViewById(R.id.but);
         gridView = (GridView) headerView.findViewById(R.id.home_gridView);
         gridView2 = (GridView) headerView.findViewById(R.id.home_gridView2);
        yzq = (TextView) headerView.findViewById(R.id.home_yzq);//阴转晴
        home_byxc = (TextView) headerView.findViewById(R.id.home_byxc);//不易洗车
         home_ssd = (TextView) headerView.findViewById(R.id.home_ssd);//摄氏度
+
+        RelativeLayout   smby = (RelativeLayout) headerView.findViewById(R.id.home_smb);//上门保养
+        RelativeLayout   home_scgw = (RelativeLayout) headerView.findViewById(R.id.home_scgw);//商城购物
+        FrameLayout frage = (FrameLayout) headerView.findViewById(R.id.home_frage);//商城购物
+
+
+        smby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity  m=(MainActivity) context;
+                m.baoyang();
+            }
+        });
+//商城购物
+        home_scgw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity  m=(MainActivity) context;
+                m.shopping();
+            }
+        });
 
 
         list3=new ArrayList<TextView>();
@@ -214,7 +249,7 @@ public class HomeFragment extends MTFBaseFragment {
 
         Listener();
 
-        Category_name();//天气
+     Category_name();//天气
         price();
 
 
@@ -259,7 +294,12 @@ public class HomeFragment extends MTFBaseFragment {
         s = sp.getString("s","");
         if(!TextUtils.isEmpty(s))
         {
-            cityTxt.setText(s);
+            if(s.length()>3) {
+                String s2=s.substring(0,3);
+                cityTxt.setText(s2+"...");
+            }else{
+                cityTxt.setText(s);
+            }
         }
         Log.e("sssss",s);
     }
@@ -416,6 +456,32 @@ public class HomeFragment extends MTFBaseFragment {
 
                   // Log.e("123","list:"+list_a);
                   vp.setAdapter(new MyPagerAdapter());
+                  view_pager_indicator.setViewPager(vp);
+
+                  view_pager_indicator.onPageSelected(0);// 让指示器重新定位到第一个点
+
+                  // 自动轮播条显示
+                  if (handler == null) {
+                      handler = new Handler() {
+                          public void handleMessage(android.os.Message msg) {
+                              int currentItem = vp.getCurrentItem();
+
+                              if (currentItem < 3) {
+                                  currentItem++;
+                              } else {
+                                  currentItem = 0;
+                              }
+
+                              vp.setCurrentItem(currentItem);// 切换到下一个页面
+                              handler.sendEmptyMessageDelayed(0, 4000);// 继续延时3秒发消息,
+                              // 形成循环
+                          };
+                      };
+
+                      handler.sendEmptyMessageDelayed(0, 4000);// 延时3秒后发消息
+                  }
+
+
 
               }
     }
@@ -428,7 +494,8 @@ public class HomeFragment extends MTFBaseFragment {
         }
         @Override
         public int getCount() {
-            return list == null ? 0 : list.size();
+          //  return list == null ? 0 : list.size();
+            return 4;
         }
 
         @Override

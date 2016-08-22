@@ -3,6 +3,7 @@ package com.proton.bystone.ui.main.tab.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -222,6 +223,8 @@ public class Homeserch  extends MTFBaseActivity {
             }
 
             holder.headline.setText(region.get(position+3).getNAME());
+            holder.headline.setTextSize(14);
+            holder.headline.setBackground(Homeserch.this.getResources().getDrawable(R.drawable.btn_selector));
 
             holder.headline.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -279,6 +282,8 @@ public class Homeserch  extends MTFBaseActivity {
             }
 
             holder.headline.setText(region.get(position+18).getNAME());
+            holder.headline.setTextSize(14);
+            holder.headline.setBackground(Homeserch.this.getResources().getDrawable(R.drawable.btn_selector));
 
             holder.headline.setOnClickListener(new View.OnClickListener() {
                 @Override

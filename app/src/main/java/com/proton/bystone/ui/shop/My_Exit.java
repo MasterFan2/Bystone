@@ -1,8 +1,10 @@
 package com.proton.bystone.ui.shop;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.proton.bystone.R;
 import com.proton.bystone.bean.BaseResp;
+import com.proton.bystone.bean.ChuanZhi;
 import com.proton.bystone.bean.RecognizeCardsinfoItem;
 import com.proton.bystone.bean.RecognizeResp;
 import com.proton.bystone.bean.UploadResp;
@@ -71,6 +74,7 @@ public class My_Exit extends MTFBaseActivity {
     Button my_exit;
     @Bind(R.id.shs)
     ImageView shs;
+    String data;
 
 
     @Bind(R.id.my_picture)
@@ -168,7 +172,6 @@ public class My_Exit extends MTFBaseActivity {
 
     @butterknife.OnClick(R.id.m_title_left_btn)
     public void back(View view) {
-
         animFinish();
     }
 
@@ -335,12 +338,16 @@ public class My_Exit extends MTFBaseActivity {
                     frontServerUrl = uploadRespList.get(0).getOriginalUrl();
 
                     Toast.makeText(My_Exit.this,"上传成功",Toast.LENGTH_SHORT).show();
-                    String data=response.body().getData();
+                    data=response.body().getData();
 
-                    //拿到fragement
-/*                    FragmentManager fm = getSupportFragmentManager();
-                    MeFragment me =(MeFragment) fm.findFragmentByTag("me");
-                    me.setdata(data);*/
+                    SharedPreferences sp = context.getSharedPreferences("shangchuan",
+                            Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+
+                    editor.putString("shangchuan", data);
+                    editor.putString("jiance", "jc");
+                    editor.commit();
+                    Log.e("上传",data);
 
                 } else {
                     T.s(context, "上传失败");
@@ -357,5 +364,4 @@ public class My_Exit extends MTFBaseActivity {
             }
         });
     }
-
 }

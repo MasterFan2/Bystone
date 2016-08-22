@@ -10,28 +10,23 @@
         android:layout_height="?attr/actionBarSize"
         app:rightButtonHide="true"
         app:titleBackground="@color/mtf_gray_900"
-        app:titleText="反馈"
-                                                      />
+        app:titleText="反馈建议"
+                                            />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/somber"
         />
 
-<!--    <EditText
-        android:id="@+id/shop_code"
-        android:layout_width="320dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/somber"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp"
-        android:inputType="textMultiLine"
-        android:minLines="17"
-        />-->
+        android:background="#ebebeb"
+        >
 
     <EditText
         android:id="@+id/shop_code"
-        android:layout_width="fill_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:enabled="true"
         android:gravity="top"
@@ -40,8 +35,13 @@
         android:maxLines="10"
         android:scrollbars="vertical"
         android:background="@android:drawable/edit_text"
+        android:hint="你的意见是我们前进的动力"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+
         />
 
+    </LinearLayout>
     <Button
         android:layout_width="337dp"
         android:layout_height="48dp"
@@ -50,6 +50,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:textColor="#ffff"
+        android:background="@color/blue"
         />
 
 </LinearLayout>

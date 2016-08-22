@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/shop_xm">
 
     <com.proton.library.widget.MTFTitleView
         android:id="@+id/titleView"
@@ -13,20 +13,24 @@
         app:titleBackground="@color/mtf_gray_900"
         app:titleText="选择收货地址"
         app:titleTxtColor="@android:color/white" />
+
+
     <ListView
         android:id="@+id/shop_lv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="470dp"
 
         />
 
     <Button
         android:id="@+id/shop_newaddress"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="添加新地址"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="270dp"
+        android:background="@color/blue"
+
         />
+
 
 </LinearLayout>
