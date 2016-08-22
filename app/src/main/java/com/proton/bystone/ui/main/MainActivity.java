@@ -27,7 +27,7 @@ import butterknife.Bind;
  * create by masterfan
  */
 @MTFActivityFeature(layout = R.layout.activity_main)
-public class MainActivity extends MTFBaseActivity implements OnClickListener {
+public class MainActivity extends MTFBaseActivity implements OnClickListener{
 
     private int index = -1;       //touched index
     private int currentIndex = 0;//current selected

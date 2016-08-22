@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_merchant_evaluation"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="购物车空空如也"
+            style="@style/TextHeader"
+            />
+        <Button
+            android:id="@+id/empty_shop_car_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="随便逛逛"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/blue"
+            android:background="@drawable/btn_blue_border_selector_round_corner"
+            />
+    </LinearLayout>
+</RelativeLayout>

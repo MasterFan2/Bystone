@@ -240,10 +240,10 @@ public class AddMyCarActivity extends MTFBaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
+                        progressHUD.setLabel("正在上传...");
+                        progressHUD.show();
                         upload();
-//                        Intent intent = new Intent(context, AddCarConfirmActivity.class);
-//                        intent.putParcelableArrayListExtra("items", null);
-//                        animStart(intent);
                     }
                 })
                 .create().show();

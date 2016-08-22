@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -65,13 +66,27 @@ public class ShopCarActivity extends MTFBaseActivity {
     @Bind(R.id.shopping_car_all_price_txt)
     TextView allPriceTxt;
 
+    @Bind(R.id.shop_car_empty_view)
+    View emptyView;
+
+    @Bind(R.id.empty_shop_car_btn)
+    Button emptyBtn;
+
+    @Bind(R.id.shop_car_content_view)
+    RelativeLayout contentLayout;
+
     private ArrayList<Commodity> allData = null;//购物车中的数据
 
     private boolean allChecked = true;
 
+    @OnClick(R.id.empty_shop_car_btn)
+    public void showGoods() {//随便逛逛
+        animFinish();
+    }
 
     @Override
     public void initialize(Bundle savedInstanceState) {
+
         ActivityManager.getInstance().addActivity(this);
         getData();
     }
@@ -147,10 +162,13 @@ public class ShopCarActivity extends MTFBaseActivity {
         listView.setAdapter(adapter);
 
         if (allData == null || allData.size() <= 0){
-            allCkbView.setEnabled(false);
+            contentLayout.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            contentLayout.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            calculateTotal();//计算价钱
         }
-
-        calculateTotal();//计算价钱
     }
 
     class ShopCarAdapter extends BaseAdapter {
@@ -302,10 +320,10 @@ public class ShopCarActivity extends MTFBaseActivity {
             EditText countTxt;
 
             @Bind(R.id.item_shop_car_subtract_img)
-            ImageView subtractImg;
+            RelativeLayout subtractImg;
 
             @Bind(R.id.item_shop_car_plus_img)
-            ImageView plusImg;
+            RelativeLayout plusImg;
 
             public ViewHolder(View view) {
                 ButterKnife.bind(this, view);
