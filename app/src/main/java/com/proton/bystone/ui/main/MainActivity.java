@@ -1,10 +1,8 @@
 package com.proton.bystone.ui.main;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -177,39 +175,34 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener {
 
     }
 
-
-    public void shopping()
-    {
-        index = 2;
-        imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
-        imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
-        imageViews[2].setImageResource(R.mipmap.icon_tab_shop_sel);
-        imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
-        if (index != currentIndex) {
-            getSupportFragmentManager().beginTransaction()
-                    .hide(fragments[currentIndex])
-                    .show(fragments[index]).commit();
-            fragments[index].load();//加载数据
-            currentIndex = index;
-        }
+    private TabSelectedDelegate tabSelectedDelegate;
+    public void setTabSelectedDelegate(TabSelectedDelegate tabSelectedDelegate) {
+        this.tabSelectedDelegate = tabSelectedDelegate;
     }
 
-    public void baoyang()
-    {
-        index = 1;
-        imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
-        imageViews[1].setImageResource(R.mipmap.icon_tab_maint_sel);
-        imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
-        imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
-        if (index != currentIndex) {
-            getSupportFragmentManager().beginTransaction()
-                    .hide(fragments[currentIndex])
-                    .show(fragments[index]).commit();
-            fragments[index].load();//加载数据
-            currentIndex = index;
+    @Override
+    public void check(int tab) {
+        switch (tab) {
+            case 1:
+                index = 1;
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_sel);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_nor);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
+                break;
+            case 2:
+                index = 2;
+                imageViews[0].setImageResource(R.mipmap.icon_tab_home_nor);
+                imageViews[1].setImageResource(R.mipmap.icon_tab_maint_nor);
+                imageViews[2].setImageResource(R.mipmap.icon_tab_shop_sel);
+                imageViews[3].setImageResource(R.mipmap.icon_tab_min_nor);
+                break;
         }
 
+        getSupportFragmentManager().beginTransaction()
+                .hide(fragments[currentIndex])
+                .show(fragments[index]).commit();
+        fragments[index].load();//加载数据
+        currentIndex = index;
     }
-
-
 }
