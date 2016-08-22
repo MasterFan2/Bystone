@@ -32,4 +32,6 @@ dependencies {
     compile files('libs/libammsdk.jar')
     compile files('libs/libammsdk.jar')
     compile files('libs/alipaySdk-20160516.jar')
+    compile files('libs/UPPayAssistEx.jar')
+    compile files('libs/badgeview.jar')
 }

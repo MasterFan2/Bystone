@@ -56,6 +56,7 @@ import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.login.SendCallBack;
 import com.proton.bystone.ui.main.MainActivity;
+import com.proton.bystone.ui.main.TabSelectedDelegate;
 import com.proton.bystone.ui.main.tab.home.Homeserch;
 import com.proton.bystone.ui.main.tab.home.Search_service;
 import com.proton.bystone.ui.shop.Shop_Commodity;
@@ -189,19 +190,25 @@ public class HomeFragment extends MTFBaseFragment {
         FrameLayout frage = (FrameLayout) headerView.findViewById(R.id.home_frage);//商城购物
 
 
-        smby.setOnClickListener(new View.OnClickListener() {
+       smby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity  m=(MainActivity) context;
-                m.baoyang();
+          /*      MainActivity  m=(MainActivity) context;
+                m.baoyang();*/
+
+                TabSelectedDelegate tabSelectedDelegate = (TabSelectedDelegate) getActivity();
+                tabSelectedDelegate.check(1);//1;维保     2商城
             }
         });
 //商城购物
-        home_scgw.setOnClickListener(new View.OnClickListener() {
+      home_scgw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity  m=(MainActivity) context;
-                m.shopping();
+             /*   MainActivity  m=(MainActivity) context;
+                m.shopping();*/
+
+                TabSelectedDelegate tabSelectedDelegate = (TabSelectedDelegate) getActivity();
+                tabSelectedDelegate.check(2);//1;维保     2商城
             }
         });
 
