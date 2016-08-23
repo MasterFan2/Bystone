@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/title_root_view"
     android:layout_width="match_parent"
+    android:background="@android:color/white"
     android:layout_height="55dp">
 
     <com.proton.library.widget.MaterialRippleLayout

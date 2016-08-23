@@ -63,6 +63,7 @@ public class PhotoPickerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_photo_picker);
 
     Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+    mToolbar.setBackgroundColor(getResources().getColor(R.color.blue));
     setSupportActionBar(mToolbar);
     setTitle("图片选择");
 

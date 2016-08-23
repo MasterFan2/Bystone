@@ -29,7 +29,7 @@ import com.proton.library.R;
 import com.proton.library.widget.round.common.BaseRoundCornerProgressBar;
 
 /**
- * Created by Akexorcist on 9/14/15 AD.
+ * Created by MasterFan on 9/14/15 AD.
  */
 public class RoundCornerProgressBar extends BaseRoundCornerProgressBar {
 

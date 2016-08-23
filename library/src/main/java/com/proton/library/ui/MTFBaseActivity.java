@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.proton.library.R;
 import com.proton.library.ui.annotation.MTFActivityFeature;
@@ -70,6 +71,13 @@ public abstract class MTFBaseActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    /**
+     * 提示
+     */
+    public void serverBusy() {
+        Toast.makeText(context, "服务器繁忙,请稍后再试...", Toast.LENGTH_SHORT).show();
     }
 
     /**
