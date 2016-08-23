@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,10 +80,16 @@ public class Shop_Select_Address extends MTFBaseActivity {
 
     Boolean flag=false;
 
+    ///masterFan added
+    private String tag = null;
+
     @Override
     public void initialize(Bundle savedInstanceState) {
-        initview();
 
+        ///masterFan added
+        tag = getIntent().getStringExtra("where");
+
+        initview();
     }
 
     @Override
@@ -92,6 +100,21 @@ public class Shop_Select_Address extends MTFBaseActivity {
     public void initview()
     {
         lv=(ListView)findViewById(R.id.shop_lv);
+
+        ///masterFan added
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //orderConfirm
+                if (!TextUtils.isEmpty(tag) && tag.equals("orderConfirm")) {
+                    Intent data = new Intent();
+                    data.putExtra("addr", list.get(position));
+                    setResult(RESULT_OK, data);
+                    animFinish();
+                }
+            }
+        });
+
         shop_newaddress= (Button)findViewById(R.id.shop_newaddress );
         SharedPreferences share=getSharedPreferences("info",Activity.MODE_WORLD_READABLE);
         str=share.getString("mb_code","");
@@ -244,6 +267,21 @@ public class Shop_Select_Address extends MTFBaseActivity {
             TextView shop_shouhuoren= (TextView) view.findViewById(R.id.shop_shouhuoren );
             TextView shop_dizhi= (TextView) view.findViewById(R.id.shop_dizhi );
             TextView shop_phone= (TextView) view.findViewById(R.id.shop_phone );
+            RelativeLayout addrLayout = (RelativeLayout) view.findViewById(R.id.shop_profile_addr_layout);
+
+            addrLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //orderConfirm
+                    if (!TextUtils.isEmpty(tag) && tag.equals("orderConfirm")) {
+                        Intent data = new Intent();
+                        data.putExtra("addr", list.get(position));
+                        setResult(RESULT_OK, data);
+                        animFinish();
+                    }
+                }
+            });
+
             shop_delo= (TextView) view.findViewById(R.id.shop_delo );
             shop_compile= (TextView) view.findViewById(R.id.shop_compile );
             shop_select= (TextView) view.findViewById(R.id.shop_select );

@@ -235,7 +235,7 @@ public class MyCarDetailActivity extends MTFBaseActivity {
 
         class ViewHolder {
 
-            @Bind(R.id.item_my_car_name_txt)
+            @Bind(R.id.item_maintenance_record_txt)
             TextView recordTxt;
 
             public ViewHolder(View view) {

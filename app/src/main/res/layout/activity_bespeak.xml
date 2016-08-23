@@ -111,6 +111,7 @@
                         android:layout_marginLeft="10dp"
                         android:button="@drawable/radio_btn"
                         android:checked="true"
+                        style="@style/TextHeader"
                         android:text="上次地址:重庆市江北区五里店" />
                 </LinearLayout>
 
@@ -159,6 +160,7 @@
                                 android:orientation="vertical"
                                 >
                                 <TextView
+                                    android:id="@+id/bespeak_choose_district_txt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="请选择地区"
@@ -221,7 +223,7 @@
                         android:imeOptions="actionNext"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="张三"
+                        android:text="张小二"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -247,7 +249,7 @@
                         android:inputType="phone"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="13512365892"
+                        android:text="13512365877"
                         android:textSize="14sp" />
                 </LinearLayout>
 

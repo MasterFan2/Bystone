@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/order_confirm_bottom_layout"
-            android:divider="@color/mtf_gray_100"
+            android:divider="@color/mtf_gray_200"
             android:dividerHeight="8dp"
             />
         <RelativeLayout

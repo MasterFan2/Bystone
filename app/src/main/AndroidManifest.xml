@@ -37,6 +37,7 @@
         android:name="android.hardware.camera.flash"
         android:required="false" />
     <uses-feature android:name="android.hardware.screen.landscape" />
+
     <!-- end camera -->
     <application
         android:name=".BystoneApplication"
@@ -297,7 +298,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- end pay -->
-        <activity android:name=".ui.payment.ChoosePaymentActivity"></activity>
+        <activity android:name=".ui.payment.ChoosePaymentActivity" />
+        <activity android:name=".ui.maintenance.MaintenanceCommentActivity"></activity>
     </application>
 
 </manifest>

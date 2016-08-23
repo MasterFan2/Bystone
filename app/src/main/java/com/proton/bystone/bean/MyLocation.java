@@ -13,7 +13,10 @@ public class MyLocation {
     private int location_id;
 
     @Column(name = "addr")
-    private String addr;
+    private String addr;//详细地址
+
+    @Column(name = "district")
+    private String district;//区
 
     @Column(name = "latitude")
     private double latitude;
@@ -26,6 +29,23 @@ public class MyLocation {
 
     public String getAddr() {
         return addr;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public int getLocation_id() {
+
+        return location_id;
+    }
+
+    public void setLocation_id(int location_id) {
+        this.location_id = location_id;
     }
 
     public void setAddr(String addr) {

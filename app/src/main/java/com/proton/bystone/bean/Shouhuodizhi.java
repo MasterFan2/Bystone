@@ -1,10 +1,13 @@
 package com.proton.bystone.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2016/7/22.
  * 收货地址
  */
-public class Shouhuodizhi {
+public class Shouhuodizhi implements Parcelable {
 
     /**
      * ID : 1
@@ -79,4 +82,45 @@ public class Shouhuodizhi {
     public void setAddressDetaile(String AddressDetaile) {
         this.AddressDetaile = AddressDetaile;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.ID);
+        dest.writeString(this.User_Code);
+        dest.writeString(this.Ad_ContactNumber);
+        dest.writeString(this.Ad_Name);
+        dest.writeString(this.Ad_Address);
+        dest.writeInt(this.IsDefault);
+        dest.writeString(this.AddressDetaile);
+    }
+
+    public Shouhuodizhi() {
+    }
+
+    protected Shouhuodizhi(Parcel in) {
+        this.ID = in.readInt();
+        this.User_Code = in.readString();
+        this.Ad_ContactNumber = in.readString();
+        this.Ad_Name = in.readString();
+        this.Ad_Address = in.readString();
+        this.IsDefault = in.readInt();
+        this.AddressDetaile = in.readString();
+    }
+
+    public static final Parcelable.Creator<Shouhuodizhi> CREATOR = new Parcelable.Creator<Shouhuodizhi>() {
+        @Override
+        public Shouhuodizhi createFromParcel(Parcel source) {
+            return new Shouhuodizhi(source);
+        }
+
+        @Override
+        public Shouhuodizhi[] newArray(int size) {
+            return new Shouhuodizhi[size];
+        }
+    };
 }

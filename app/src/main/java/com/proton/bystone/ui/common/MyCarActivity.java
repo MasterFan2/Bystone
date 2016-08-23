@@ -1,9 +1,9 @@
 package com.proton.bystone.ui.common;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -295,6 +295,7 @@ public class MyCarActivity extends MTFBaseActivity {
             holder.delTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     new AlertDialog.Builder(context)
                             .setTitle("提示您")
                             .setMessage("车辆信息删除后不能恢复, 确认删除？")

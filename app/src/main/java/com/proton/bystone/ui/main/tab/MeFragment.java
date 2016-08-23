@@ -21,12 +21,18 @@ import com.google.gson.reflect.TypeToken;
 import com.jauker.widget.BadgeView;
 import com.lidroid.xutils.BitmapUtils;
 import com.proton.bystone.R;
+import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.ChuanZhi;
 import com.proton.bystone.bean.Commodity;
 import com.proton.bystone.bean.LoginResp;
+import com.proton.bystone.bean.ReservationParam;
 import com.proton.bystone.bean.ShChuan;
+import com.proton.bystone.bean.Version;
 import com.proton.bystone.cache.LoginManager;
+import com.proton.bystone.net.HttpClients;
+import com.proton.bystone.net.ParamsBuilder;
 import com.proton.bystone.ui.common.MyCarActivity;
+import com.proton.bystone.ui.common.UpVersionActivity;
 import com.proton.bystone.ui.login.LoginActivity;
 
 
@@ -37,8 +43,13 @@ import com.proton.bystone.ui.shop.My_Jinbi;
 import com.proton.bystone.ui.shop.My_Privilege;
 import com.proton.bystone.ui.shop.My_fk;
 import com.proton.bystone.ui.shopcar.ShopCarActivity;
+import com.proton.bystone.utils.L;
+import com.proton.bystone.utils.PackageUtil;
+import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFFragmentFeature;
+import com.proton.library.utils.PackageUtils;
+import com.proton.library.widget.dialog.KProgressHUD;
 
 /*import org.apache.http.entity.StringEntity;*/
 
@@ -50,6 +61,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -120,6 +136,8 @@ public class MeFragment extends MTFBaseFragment {
     @Bind(R.id.my_aichezi)
     RelativeLayout my_aichezi;
 
+    @Bind(R.id.my_version_txt)
+    TextView versionTxt;
 
     /*@Bind(R.id.shop_wby)
     TextView shop_wby;
@@ -139,6 +157,11 @@ public class MeFragment extends MTFBaseFragment {
     @Bind(R.id.shop_fg)
     TextView shop_fg;*/
 
+    private KProgressHUD progressHUD;
+
+    @Bind(R.id.my_upgrade_layout)
+    RelativeLayout versionLayout;
+
     @Bind(R.id.my_exite)
     RelativeLayout my_exite;//点此可退出
     LoginResp loginInfo;
@@ -154,7 +177,6 @@ public class MeFragment extends MTFBaseFragment {
         // Required empty public constructor
 
     }
-
 
     @Override
     public void onResume() {
@@ -297,13 +319,77 @@ public class MeFragment extends MTFBaseFragment {
 
     }
 
+    private void checkVersion() {
+//        animStart(MainActivity.class);
+//        finish();
 
+        //-------------------split line---------------------
+        progressHUD.show();
+
+        final RequestBody requestBody = new ParamsBuilder<ReservationParam>()
+                .key("pbevyvHkf1sFtyGL35gFfQ==")
+                .methodName("GetAppTheLatestVersion")
+                .gson(new Gson())
+                .typeValue("int", 1)
+                .typeValue("string", PackageUtil.getVersionName(context))
+                .typeValue("string", "车事通用户版")
+                .build();
+        Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
+        call.enqueue(new Callback<BaseResp>() {
+            @Override
+            public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
+                if (progressHUD.isShowing()) progressHUD.dismiss();
+                if (response.body().getCode() == 1) {
+                    Version versionInfo = new Gson().fromJson(response.body().getData(), new TypeToken<Version>() {}.getType());
+                    if (versionInfo == null) {
+                        T.s(context, "最新版本");
+                    } else {
+                        showDialog(versionInfo);
+                    }
+                } else {
+                    T.s(context, "服务器繁忙，请稍后重试...");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResp> call, Throwable t) {
+                if (progressHUD.isShowing()) progressHUD.dismiss();
+                T.s(context, "服务器繁忙，请稍后重试...");
+                L.e("checkVersion::" + t.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 显示升级提示框
+     * @param version
+     */
+    private void showDialog(Version version) {
+        Intent intent = new Intent(context, UpVersionActivity.class);
+        intent.putExtra("version", version);
+        animStartForResult(intent, 9527);
+    }
 
 
     @Override
     public void initialize() {
 
+        progressHUD = KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("检查版本中...")
+                .setDimAmount(0.4f)
+                .setCancellable(false);
 
+        versionTxt.setText("(当前版本号"+ PackageUtils.getVersion(context)+")");
+
+        versionLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkVersion();
+//                Intent intent = new Intent(context, UpVersionActivity.class);
+//                animStart(intent);
+            }
+        });
         Refresh();
          login = LoginManager.getInstance().isLogin();
         loginInfo = LoginManager.getInstance().getLoginInfo();

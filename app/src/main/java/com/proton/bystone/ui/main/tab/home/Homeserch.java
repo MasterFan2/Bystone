@@ -61,8 +61,14 @@ public class Homeserch  extends MTFBaseActivity {
         animFinish();
     }*/
 
+    //跳转标识
+    private String tag = null;
+
     @Override
     public void initialize(Bundle savedInstanceState) {
+
+        tag = getIntent().getStringExtra("where");
+
            Listener();
     }
 
@@ -230,12 +236,17 @@ public class Homeserch  extends MTFBaseActivity {
                 @Override
                 public void onClick(View v) {
 
+                    if (tag != null && "bespeak".equals(tag)) {//预约调用选择地区
+                        Intent intent = new Intent();
+                        intent.putExtra("region", region.get(position+3));
+                        setResult(RESULT_OK, intent);
+                    }
 
                     SharedPreferences sh=getSharedPreferences("chongqing", Activity.MODE_WORLD_READABLE);
                     SharedPreferences.Editor editor=sh.edit();//会创建一个editor对象，要注意。
                     editor.putString("s", region.get(position+3).getNAME());
                     editor.commit();
-                    finish();
+                    animFinish();
 
                 }
             });

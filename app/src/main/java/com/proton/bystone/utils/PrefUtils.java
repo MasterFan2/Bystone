@@ -23,6 +23,7 @@ public class PrefUtils {
         editor.putFloat("latitude", (float) location.getLatitude());
         editor.putFloat("longitude", (float) location.getLongitude());
         editor.putString("cityCode", location.getCityCode());
+        editor.putString("district", location.getDistrict());
         editor.commit();//提交修改
     }
 
@@ -37,7 +38,9 @@ public class PrefUtils {
         double latitude  = sharedPreferences.getFloat("latitude", 0f);
         double longitude = sharedPreferences.getFloat("longitude", 0f);
         String cityCode  = sharedPreferences.getString("cityCode", null);
+        String district  = sharedPreferences.getString("district", null);
         MyLocation location = new MyLocation(address, latitude, longitude, cityCode);
+        location.setDistrict(district);
 //        sharedPreferences.edit().clear().commit();//删除
         return location;
     }

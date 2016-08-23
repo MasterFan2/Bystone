@@ -10,12 +10,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+
+        <!--app:rightButtonIcon="@mipmap/icon_tracing"-->
         <com.proton.library.widget.MTFTitleView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:titleBackground="@color/mtf_gray_900"
-            app:rightButtonIcon="@mipmap/icon_tracing"
             app:titleText="上门保养"
             app:leftButtonHide="true"
             />

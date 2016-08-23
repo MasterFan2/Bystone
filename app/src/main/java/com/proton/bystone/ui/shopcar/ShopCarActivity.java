@@ -2,6 +2,7 @@ package com.proton.bystone.ui.shopcar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,13 @@ import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.utils.ActivityManager;
+import com.proton.library.utils.DimenUtils;
+import com.proton.library.widget.shadow.ShadowProperty;
+import com.proton.library.widget.shadow.ShadowViewHelper;
 import com.squareup.picasso.Picasso;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,9 +80,14 @@ public class ShopCarActivity extends MTFBaseActivity {
     @Bind(R.id.shop_car_content_view)
     RelativeLayout contentLayout;
 
+    @Bind(R.id.shop_car_bottom_layout)
+    RelativeLayout bottomLayout;//底部
+
     private ArrayList<Commodity> allData = null;//购物车中的数据
 
-    private boolean allChecked = true;
+    private boolean allChecked = false;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @OnClick(R.id.empty_shop_car_btn)
     public void showGoods() {//随便逛逛
@@ -87,8 +97,26 @@ public class ShopCarActivity extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
 
+        addShadowToBottom();
+
         ActivityManager.getInstance().addActivity(this);
         getData();
+    }
+
+    /**
+     * 添加底部阴影效果
+     */
+    private void addShadowToBottom() {
+        ShadowProperty shadowProperty = new ShadowProperty()
+                .setShadowColor(0x77000000)
+                .setShadowRadius(DimenUtils.dip2px(context, 2));
+
+        ShadowViewHelper.bindShadowHelper(shadowProperty, bottomLayout);
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) bottomLayout.getLayoutParams();
+        lp.leftMargin   = -shadowProperty.getShadowOffset();
+        lp.rightMargin  = -shadowProperty.getShadowOffset();
+        lp.bottomMargin = -shadowProperty.getShadowOffset();
+        bottomLayout.setLayoutParams(lp);
     }
 
     @OnClick(R.id.shop_car_ckb_layout)
@@ -138,18 +166,19 @@ public class ShopCarActivity extends MTFBaseActivity {
      */
     private void calculateTotal() {
         if (allData == null) return;
-        BigDecimal totalBigDecimal = new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal totalBigDecimal = new BigDecimal(0);
         int checkedCount = 0;//选中的数量
 
         for (Commodity commodity : allData) {
             if (commodity.isChecked()) {//计算选中的价格
-                totalBigDecimal = totalBigDecimal.add(new BigDecimal(commodity.getN_HYJ()).multiply(new BigDecimal(commodity.getCount()))).add(new BigDecimal(commodity.getPostagePrice()));
+                totalBigDecimal = totalBigDecimal.add(new BigDecimal(commodity.getN_HYJ()).multiply(new BigDecimal(commodity.getCount())));
 //                total += commodity.getPostagePrice() * commodity.getCount();
                 checkedCount = checkedCount + 1;
             }
         }
 
-        allPriceTxt.setText("￥" + totalBigDecimal.toString());
+        totalBigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+        allPriceTxt.setText("￥" + (df.format(totalBigDecimal.doubleValue())));
         payBtn.setText("结算("+ checkedCount +")");
     }
 
@@ -210,9 +239,10 @@ public class ShopCarActivity extends MTFBaseActivity {
             Picasso.with(context).load(HttpClients.PIC_URL + commodity.getVC_Url()).placeholder(R.mipmap.ic_launcher).into(holder.logoImg);
             holder.titleTxt.setText(commodity.getPs_Name());
             holder.headTxt.setText(commodity.getVC_Params());
-            holder.descTxt.setText(commodity.getPadctBrief());
+            holder.descTxt.setText(TextUtils.isEmpty(commodity.getPadctBrief()) ? "保养必备" : commodity.getPadctBrief());
             holder.countTxt.setText("" + commodity.getCount());
-            holder.priceTxt.setText("￥ " + commodity.getN_HYJ());
+            BigDecimal itemPrice = new BigDecimal(commodity.getN_HYJ()).setScale(2, BigDecimal.ROUND_HALF_UP);
+            holder.priceTxt.setText("￥ " + itemPrice.toString());
 
             if (commodity.isChecked()) {
                 holder.chkView.setBackgroundResource(R.mipmap.icon_checkbox_sel);

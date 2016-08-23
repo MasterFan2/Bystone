@@ -16,6 +16,19 @@ public class OrderBaseInfo implements Parcelable {
      * AddressMTF : 重庆市江北区
      * BookBeginTime : 2016-07-23 08:54:00至2016-07-23 09:54:00
      * BookStaus : 0
+
+     //0：已提交
+     //1：已指派
+     //2：企业已确认（维保企业已确认）
+     //3：已派工
+     //4：技师已确认
+     //5：已出门
+     //6：已抵达
+     //7：已检测
+     //8：已确认(可看服务详情s)
+     //9：保养已完成（所有保养项目完成）
+     //10：已付款
+     //11：已回访（回访完毕流程结束）
      */
 
     private String BookCode;

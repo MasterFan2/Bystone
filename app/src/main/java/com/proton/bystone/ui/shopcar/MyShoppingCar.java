@@ -35,7 +35,7 @@ public class MyShoppingCar {
 
         if (commodity == null) return;//数据为空直接结束
 
-        commodity.setChecked(true);//设置默认选中状态
+//        commodity.setChecked(true);//设置默认选中状态
 
         if (commodities .size() == 0) {//第一次向购物车添加数据
             commodity.increment();

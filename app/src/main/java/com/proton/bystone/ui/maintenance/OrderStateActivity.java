@@ -26,6 +26,7 @@ import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.widget.MyListView;
+import com.proton.library.widget.dialog.KProgressHUD;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,6 +81,7 @@ public class OrderStateActivity extends MTFBaseActivity {
 
     private String code ;
 
+    private KProgressHUD progressHUD;
 
     @Override
     public void initialize(Bundle savedInstanceState) {

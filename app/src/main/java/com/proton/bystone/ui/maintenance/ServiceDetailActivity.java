@@ -69,8 +69,8 @@ public class ServiceDetailActivity extends MTFBaseActivity {
     @Bind(R.id.service_detail_pay_layout)
     RelativeLayout payLayout;//付款布局
 
-    @Bind(R.id.service_detail_comment_btn)
-    Button commentBtn;//评论
+//    @Bind(R.id.service_detail_comment_btn)
+//    Button commentBtn;//评论
 
     @Bind(R.id.service_detail_switch)
     SwitchCompat switchCompat;//switch widget
@@ -155,10 +155,10 @@ public class ServiceDetailActivity extends MTFBaseActivity {
 
         if (orderInfo.getBookStaus() < 10) {//未付款
             payLayout.setVisibility(View.VISIBLE);
-            commentBtn.setVisibility(View.GONE);
+//            commentBtn.setVisibility(View.GONE);
         }else {//已付款
             payLayout.setVisibility(View.GONE);
-            commentBtn.setVisibility(View.VISIBLE);
+//            commentBtn.setVisibility(View.VISIBLE);
         }
 
         maintAdapter = new MaintAdapter();
@@ -255,7 +255,10 @@ public class ServiceDetailActivity extends MTFBaseActivity {
                             if (iGoldCoin > 10) {
                                 iCanUseGoldCoin = iGoldCoin / 10 * 10;//转换为整10的金币数
                                 exchangeTxt.setText("可用" + iCanUseGoldCoin + "金币抵扣" + (iCanUseGoldCoin / 10) + "元");
-                                switchCompat.setEnabled(true);
+                                if (orderInfo.getBookStaus() >= 10) {
+                                    switchCompat.setEnabled(false);
+                                }else
+                                    switchCompat.setEnabled(true);
                             } else {
                                 exchangeTxt.setText("金币太少, 无法使用金币抵扣");
                                 switchCompat.setEnabled(false);

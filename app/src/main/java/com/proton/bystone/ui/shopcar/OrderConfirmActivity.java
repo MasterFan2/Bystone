@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ import com.proton.bystone.bean.OrderSubmitMajorParams;
 import com.proton.bystone.bean.OrderSubmitMinorParams;
 import com.proton.bystone.bean.OrderSubmitResp;
 import com.proton.bystone.bean.ReservationParam;
+import com.proton.bystone.bean.Shouhuodizhi;
 import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
@@ -40,6 +42,9 @@ import com.proton.bystone.utils.T;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.annotation.MTFActivityFeature;
 import com.proton.library.utils.ActivityManager;
+import com.proton.library.utils.DimenUtils;
+import com.proton.library.widget.shadow.ShadowProperty;
+import com.proton.library.widget.shadow.ShadowViewHelper;
 import com.squareup.picasso.Picasso;
 
 import java.math.BigDecimal;
@@ -93,8 +98,13 @@ public class OrderConfirmActivity extends MTFBaseActivity {
     private AlertDialog inputDialog;
     private EditText inputEdit;
 
+    @Bind(R.id.order_confirm_bottom_layout)
+    RelativeLayout bottomLayout;
+
     @Override
     public void initialize(Bundle savedInstanceState) {
+
+        addShadowToBottom();
 
         ActivityManager.getInstance().addActivity(this);
 
@@ -109,6 +119,22 @@ public class OrderConfirmActivity extends MTFBaseActivity {
         initDialog();
         getGoldCoin();
         getDefaultAddress();
+    }
+
+    /**
+     * 添加底部阴影效果
+     */
+    private void addShadowToBottom() {
+        ShadowProperty shadowProperty = new ShadowProperty()
+                .setShadowColor(0x77000000)
+                .setShadowRadius(DimenUtils.dip2px(context, 2));
+
+        ShadowViewHelper.bindShadowHelper(shadowProperty, bottomLayout);
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) bottomLayout.getLayoutParams();
+        lp.leftMargin   = -shadowProperty.getShadowOffset();
+        lp.rightMargin  = -shadowProperty.getShadowOffset();
+        lp.bottomMargin = -shadowProperty.getShadowOffset();
+        bottomLayout.setLayoutParams(lp);
     }
 
     /**
@@ -144,6 +170,19 @@ public class OrderConfirmActivity extends MTFBaseActivity {
         headerGoldCoinTxt = (TextView) headerView.findViewById(R.id.header_order_confirm_goldcoin_txt);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9527 && resultCode == RESULT_OK) {
+            Shouhuodizhi addr = data.getParcelableExtra("addr");
+            if (addr != null) {
+                address = new AddressMTF(addr.getID(), addr.getUser_Code(), addr.getAd_ContactNumber(), addr.getAd_Name(), addr.getAd_Address(), addr.getIsDefault(), addr.getAddressDetaile());
+                headerAddrTxt.setText("收货地址：" + address.getAddressDetaile());
+                headerNameTxt.setText("收货人：" + address.getAd_Name());
+                headerPhoneTxt.setText(address.getAd_ContactNumber());
+            }
+        }
+    }
+
     /**
      * 获取默认收货地址
      */
@@ -167,14 +206,16 @@ public class OrderConfirmActivity extends MTFBaseActivity {
                             headerAddrTxt.setText("收货地址：" + address.getAddressDetaile());
                             headerNameTxt.setText("收货人：" + address.getAd_Name());
                             headerPhoneTxt.setText(address.getAd_ContactNumber());
-                        } else {
-                            headerRightLayout.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    animStart(Shop_Select_Address.class);
-                                }
-                            });
                         }
+
+                        headerRightLayout.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(context, Shop_Select_Address.class);
+                                intent.putExtra("where", "orderConfirm");
+                                animStartForResult(9527, intent);
+                            }
+                        });
                     }
                 } else {
                     T.s(context, "无法获取地址");
@@ -450,6 +491,11 @@ public class OrderConfirmActivity extends MTFBaseActivity {
      */
     @OnClick(R.id.order_confirm_submit_btn)
     public void generateOrder(View view) {
+
+        if (address == null) {
+            T.s(context, "请添加收货地址");
+            return;
+        }
 
         BigDecimal oldDecimal = new BigDecimal("0.00");//原价
         BigDecimal newDecimal = new BigDecimal("0.00");//会员价

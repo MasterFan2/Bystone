@@ -34,7 +34,7 @@
         />
     </RelativeLayout>
 
-    <View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
+    <!--<View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             />
     </RelativeLayout>
 
-    <View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
+    <!--<View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             />
     </RelativeLayout>
 
-    <View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>
+    <!--<View style="@style/DivideLine" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -23,6 +23,16 @@ public class AddressMTF {
     private int IsDefault;
     private String AddressDetaile;
 
+    public AddressMTF(int ID, String user_Code, String ad_ContactNumber, String ad_Name, String ad_Address, int isDefault, String addressDetaile) {
+        this.ID = ID;
+        User_Code = user_Code;
+        Ad_ContactNumber = ad_ContactNumber;
+        Ad_Name = ad_Name;
+        Ad_Address = ad_Address;
+        IsDefault = isDefault;
+        AddressDetaile = addressDetaile;
+    }
+
     public int getID() {
         return ID;
     }

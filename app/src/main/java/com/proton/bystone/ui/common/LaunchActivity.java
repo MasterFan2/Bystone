@@ -82,12 +82,16 @@ public class LaunchActivity extends MTFBaseActivity {
     private void checkVersion() {
         animStart(MainActivity.class);
         finish();
+
+        //-------------------split line---------------------
+
 //        final RequestBody requestBody = new ParamsBuilder<ReservationParam>()
 //                .key("pbevyvHkf1sFtyGL35gFfQ==")
 //                .methodName("GetAppTheLatestVersion")
 //                .gson(new Gson())
 //                .typeValue("int", 1)
 //                .typeValue("string", PackageUtil.getVersionName(context))
+//                .typeValue("string", "车事通用户版")
 //                .build();
 //        Call<BaseResp> call = HttpClients.getInstance().memberInfo(requestBody);
 //        call.enqueue(new Callback<BaseResp>() {

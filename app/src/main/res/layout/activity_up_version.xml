@@ -90,6 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:onClick="startDownload"
+            android:background="@drawable/btn_orange_selector_round_corner"
+            android:textColor="@android:color/black"
             android:layout_margin="26dp"
             android:text="更新"
             />

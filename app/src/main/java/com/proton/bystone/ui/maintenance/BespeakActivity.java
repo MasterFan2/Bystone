@@ -21,14 +21,17 @@ import com.proton.bystone.bean.BaseResp;
 import com.proton.bystone.bean.CarInfo;
 import com.proton.bystone.bean.MyLocation;
 import com.proton.bystone.bean.OrderStateCodeResp;
+import com.proton.bystone.bean.Region;
 import com.proton.bystone.bean.ReservationParam;
 import com.proton.bystone.bean.ReservationParams2;
 import com.proton.bystone.cache.LoginManager;
 import com.proton.bystone.location.LocationManager;
 import com.proton.bystone.net.HttpClients;
 import com.proton.bystone.net.ParamsBuilder;
+import com.proton.bystone.ui.main.tab.home.Homeserch;
 import com.proton.bystone.ui.shopcar.ShopCarActivity;
 import com.proton.bystone.utils.L;
+import com.proton.bystone.utils.MatcherUtil;
 import com.proton.bystone.utils.PrefUtils;
 import com.proton.bystone.utils.T;
 import com.proton.bystone.utils.TimeUtil;
@@ -55,7 +58,7 @@ import retrofit2.Response;
  * 预约时间
  */
 @MTFActivityFeature(layout = R.layout.activity_bespeak)
-public class BespeakActivity extends MTFBaseActivity implements AMapLocationListener {
+public class BespeakActivity extends MTFBaseActivity {
 
     @Bind(R.id.bespeak_year_month_day_txt)
     TextView yearMonthDayTxt;
@@ -93,6 +96,9 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
     @Bind(R.id.bespeak_done_btn)
     Button doneBtn;
 
+    @Bind(R.id.bespeak_choose_district_txt)
+    TextView chooseDistrictTxt;//选择区
+
     String startStr = null;
     String endStr = null;
 
@@ -122,6 +128,30 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
     private ArrayList<ReservationParams2> params2List = null;
 
     private boolean isBespeak = false;
+    private Region region;//选择区返回结果
+
+    private KProgressHUD progressHUD;
+
+    @OnClick(R.id.bespeak_choose_district_txt)
+    public void chooseDistrict() {
+        Intent intent = new Intent(context, Homeserch.class);
+        intent.putExtra("where", "bespeak");
+        animStartForResult(9527, intent);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9527 && resultCode == RESULT_OK) {
+            if (data != null) {
+                region = data.getParcelableExtra("region");
+                if (region != null) {
+                    chooseDistrictTxt.setText(region.getNAME());
+                }
+            }
+        }
+    }
+
     /**
      * init
      *
@@ -129,6 +159,12 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
      */
     @Override
     public void initialize(Bundle savedInstanceState) {
+
+        progressHUD = KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("正在识别,请稍后...")
+                .setDimAmount(0.4f)
+                .setCancellable(false);
 
         carInfo = getIntent().getParcelableExtra("carInfo");
         params2List = getIntent().getParcelableArrayListExtra("params2");
@@ -146,14 +182,11 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
             inputAddrView.setBackgroundResource(R.drawable.icon_radio_sel);
             previousAddrView.setBackgroundResource(R.drawable.icon_radio_nor);
             previousAddrTxt.setText("上次地址:无");
-
             currentSelected = 2;
-
-            addrEdit.setHint("正在获取位置...");
-            addrEdit.setHintTextColor(getResources().getColor(R.color.red_error));
-            getLocation();
+            addrEdit.setEnabled(true);
         } else {
-            previousAddrTxt.setText("上次地址:" + previousLoc.getAddr());
+            previousAddrTxt.setText("上次地址:" + previousLoc.getDistrict() + " " + previousLoc.getAddr());
+            addrEdit.setEnabled(false);
         }
 
         ActivityManager.getInstance().addActivity(this);//预约成功时， 关闭Activity
@@ -165,7 +198,7 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
     @OnClick(R.id.bespeak_input_previous_layout)
     public void previousClick(View view) {
-        if (previousLoc != null) {
+        if (previousLoc != null && !TextUtils.isEmpty(previousLoc.getAddr())) {
             check(1);
         }
     }
@@ -179,15 +212,6 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
      * 获取位置信息
      */
     private void getLocation() {
-//        if (!isGetting) {
-//            isGetting = true;
-//            progressBar.setVisibility(View.VISIBLE);
-//            LocationManager.getInstance().init(context);
-//            LocationManager.getInstance().setAMapLocationListener(this);
-//            LocationManager.getInstance().startLocation(); //开始定位
-//        } else {
-//            L.e(">>>正在获取位置信息.本次路过...");
-//        }
     }
 
     /**
@@ -270,9 +294,6 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
         timePickerDialog24h.show(getFragmentManager(), "Time");
     }
 
-
-    private KProgressHUD hud;
-
     @OnClick(R.id.bespeak_done_btn)
     public void doneClick(View view) {
         checkNull();
@@ -284,12 +305,33 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
         String remark = remarkEdit.getText().toString();
         final String addr = addrEdit.getText().toString();
 
+        if (currentSelected == 2 && region == null) {
+            T.s(context, "请选择区");
+            return;
+        }
+
+        if ((previousLoc == null || TextUtils.isEmpty(previousLoc.getAddr()) && TextUtils.isEmpty(addr))) {
+            T.s(context, "请输入详细地址");
+            return;
+        }
+
         if (TextUtils.isEmpty(name)) {
             T.s(context, "请输入联系人姓名");
             return;
         }
+
         if (TextUtils.isEmpty(phone)) {
             T.s(context, "请输入联系人电话");
+            return;
+        }
+
+        if (TextUtils.isEmpty(name)) {
+            T.s(context, "请输入联系人姓名");
+            return;
+        }
+
+        if (!MatcherUtil.isPhone(phone)) {
+            T.s(context, "电话号码有误，请检查");
             return;
         }
 
@@ -298,7 +340,10 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
 
         MyLocation temp = null;
         if (currentSelected == 2) {
+            newLoc = new MyLocation(addr, 29.02, 36.21, region.getCODE());
+            newLoc.setDistrict(region.getNAME());
             temp = newLoc;
+            PrefUtils.save(context, newLoc);
         } else if (currentSelected == 1) {
             temp = previousLoc;
         }
@@ -307,6 +352,8 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
         ReservationParam param = new ReservationParam("", temp.getAddr(), temp.getLongitude() + "", temp.getLatitude() + "", "1", remark,
                 LoginManager.getInstance().getLoginInfo().getMb_Code(), carInfo.getM_Model(),  LoginManager.getInstance().getLoginInfo().getMb_Name(),
                 LoginManager.getInstance().getLoginInfo().getMb_LoginName(), "1", phone, carInfo.getVC_CarNO(), startTime, endTime);
+
+        progressHUD.show();
 
         //提交预定信息
         final RequestBody requestBody = new ParamsBuilder<ReservationParam>()
@@ -320,96 +367,26 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
         call.enqueue(new Callback<BaseResp>() {
             @Override
             public void onResponse(Call<BaseResp> call, Response<BaseResp> response) {
+                if (progressHUD.isShowing()) progressHUD.dismiss();
                 if (response.body().getCode() == 1) {
                     List<OrderStateCodeResp> orderStateResps = new Gson().fromJson(response.body().getData(), new TypeToken<List<OrderStateCodeResp>>(){}.getType());
                     T.s(context, "预约成功");
                     Intent intent = new Intent(context, OrderStateActivity.class);
                     intent.putExtra("code", orderStateResps.get(0).getCode());//orderStateResps.get(0).getCode()201605091528083056
                     animStart(intent);
-
                     ActivityManager.getInstance().finishAllActivity();//预约成功， 结束 之前 的activity
                 } else {
-                    T.s(context, "预约失败");
+                    serverBusy();
                 }
             }
 
             @Override
             public void onFailure(Call<BaseResp> call, Throwable t) {
+                if (progressHUD.isShowing()) progressHUD.dismiss();
+                serverBusy();
                 L.e("getThirdLevelYear::" + t.getMessage());
             }
         });
-    }
-
-    Handler mHandler = new Handler() {
-        public void dispatchMessage(android.os.Message msg) {
-            switch (msg.what) {
-                // 定位完成
-                case 1:
-                    LocationManager.getInstance().stopLocation();
-                    AMapLocation loc = (AMapLocation) msg.obj;
-                    if (loc != null) {
-                        addrEdit.setText(loc.getAddress());
-                        MyLocation location = new MyLocation(loc.getAddress(), loc.getLatitude(), loc.getLongitude(), loc.getCityCode());
-                        newLoc = location;
-                        PrefUtils.save(context, location);//保存位置信息到本地
-                    } else {
-                        T.s(context, "定位失败, 请手动输入地址");
-                    }
-
-
-//                    progressBar.setVisibility(View.INVISIBLE);
-                    isGetting = false;//重置标识位, 可以进行下一次获取
-                    break;
-            }
-        }
-
-        ;
-    };
-
-    public String getLocationStr(AMapLocation location) {
-        if (null == location) {
-            return null;
-        }
-        StringBuffer sb = new StringBuffer();
-        //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
-        if (location.getErrorCode() == 0) {
-            sb.append("定位成功" + "\n");
-            sb.append("定位类型: " + location.getLocationType() + "\n");
-            sb.append("经    度    : " + location.getLongitude() + "\n");
-            sb.append("纬    度    : " + location.getLatitude() + "\n");
-            sb.append("精    度    : " + location.getAccuracy() + "米" + "\n");
-            sb.append("提供者    : " + location.getProvider() + "\n");
-
-            if (location.getProvider().equalsIgnoreCase(android.location.LocationManager.GPS_PROVIDER)) {
-                // 以下信息只有提供者是GPS时才会有
-                sb.append("速    度    : " + location.getSpeed() + "米/秒" + "\n");
-                sb.append("角    度    : " + location.getBearing() + "\n");
-                // 获取当前提供定位服务的卫星个数
-                sb.append("星    数    : "
-                        + location.getSatellites() + "\n");
-            } else {
-                // 提供者是GPS时是没有以下信息的
-                sb.append("国    家    : " + location.getCountry() + "\n");
-                sb.append("省            : " + location.getProvince() + "\n");
-                sb.append("市            : " + location.getCity() + "\n");
-                sb.append("城市编码 : " + location.getCityCode() + "\n");
-                sb.append("区            : " + location.getDistrict() + "\n");
-                sb.append("区域 码   : " + location.getAdCode() + "\n");
-                sb.append("地    址    : " + location.getAddress() + "\n");
-                sb.append("兴趣点    : " + location.getPoiName() + "\n");
-                //定位完成的时间
-                sb.append("定位时间: " + location.getTime() + "\n");
-            }
-        } else {
-            //定位失败
-            sb.append("定位失败" + "\n");
-            sb.append("错误码:" + location.getErrorCode() + "\n");
-            sb.append("错误信息:" + location.getErrorInfo() + "\n");
-            sb.append("错误描述:" + location.getLocationDetail() + "\n");
-        }
-        //定位之后的回调时间
-        sb.append("回调时间: " + System.currentTimeMillis() + "\n");
-        return sb.toString();
     }
 
     @Override
@@ -427,18 +404,7 @@ public class BespeakActivity extends MTFBaseActivity implements AMapLocationList
     }
 
     @Override
-    public void onLocationChanged(AMapLocation loc) {
-        if (null != loc) {
-            Message msg = mHandler.obtainMessage();
-            msg.obj = loc;
-            msg.what = 1;
-            mHandler.sendMessage(msg);
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        LocationManager.getInstance().destroy();
     }
 }

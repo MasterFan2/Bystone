@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.proton.bystone.R;
@@ -17,8 +18,11 @@ import com.proton.bystone.utils.L;
 import com.proton.library.ui.MTFBaseActivity;
 import com.proton.library.ui.MTFBaseFragment;
 import com.proton.library.ui.annotation.MTFActivityFeature;
+import com.proton.library.utils.DimenUtils;
 import com.proton.library.widget.mtfdialog.MTDialog;
 import com.proton.library.widget.mtfdialog.OnClickListener;
+import com.proton.library.widget.shadow.ShadowProperty;
+import com.proton.library.widget.shadow.ShadowViewHelper;
 
 import butterknife.Bind;
 
@@ -54,6 +58,9 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener,Tab
     @Bind(R.id.tab_mine_img)
     ImageView mineImg;
 
+    @Bind(R.id.main_botton_layout)
+    LinearLayout bottomLayout;
+
     Activity mActivity;
 
     /**
@@ -71,13 +78,26 @@ public class MainActivity extends MTFBaseActivity implements OnClickListener,Tab
 
     @Override
     public void initialize(Bundle savedInstanceState) {
+//
+//        ShadowViewHelper.bindShadowHelper(
+//                new ShadowProperty()
+//                        .setShadowColor(0x77000000)
+//                        .setShadowDy(DimenUtils.dip2px(context, 0.5f))
+//                        .setShadowRadius(DimenUtils.dip2px(context, 3))
+//                , bottomLayout);
 
-        if (savedInstanceState != null) {
-            L.e("<<<X>>>MainActivity>>>>savedInstanceState != null");
-        } else {
-            L.e(">>>X<<<MainActivity>>>>savedInstanceState is null");
+        ///底部的渐变效果
+        ShadowProperty shadowProperty = new ShadowProperty()
+                .setShadowColor(0x4C000000)
+                .setShadowRadius(DimenUtils.dip2px(context, 2));
 
-        }
+        ShadowViewHelper.bindShadowHelper(shadowProperty, bottomLayout);
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
+        lp.leftMargin   = -shadowProperty.getShadowOffset();
+        lp.rightMargin  = -shadowProperty.getShadowOffset();
+        lp.bottomMargin = -shadowProperty.getShadowOffset();
+        bottomLayout.setLayoutParams(lp);
+
         //fragment init
         homeFragment = new HomeFragment();
         maintainFragment = new MaintenanceFragment();

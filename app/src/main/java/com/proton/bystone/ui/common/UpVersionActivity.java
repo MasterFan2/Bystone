@@ -145,13 +145,7 @@ public class UpVersionActivity extends MTFBaseActivity {
                             animFinish();
                         }
                     })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            animStart(MainActivity.class);
-                            finish();
-                        }
-                    })
+                    .setNegativeButton("取消", null)
                     .create()
                     .show();
         } else {//可选更新
